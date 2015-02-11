@@ -1,0 +1,12 @@
+  <div id="site">
+     <div class="wrapper clear">
+     	      
+	    <div id="content">
+	    	<div class="wrapper clear" data-content-field="main-content">
+      		{squarespace.main-content}
+	    	</div>
+	    </div>
+	  	    
+		</div>
+  </div> 
+	    
