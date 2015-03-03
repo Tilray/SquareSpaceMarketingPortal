@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Windows image file caches
 Thumbs.db
 ehthumbs.db
@@ -41,3 +42,7 @@ $RECYCLE.BIN/
 Network Trash Folder
 Temporary Items
 .apdisk
+=======
+sftp-config.json
+scripts/adirondack-site-ie10-touch.js
+>>>>>>> 29023ed3251a21e3d6d640994354a1625c15451c
