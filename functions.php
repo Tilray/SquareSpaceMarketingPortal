@@ -36,5 +36,6 @@ add_action('init', 'theme_enqueue_styles');
 
 function theme_enqueue_styles() {
 	wp_enqueue_style('theme-main', get_stylesheet_directory_uri().'/assets/styles/style.less');
-//	wp_enqueue_style('theme-extra', get_stylesheet_directory_uri().'/stylesheets/theme-extra.less');
+	//wp_enqueue_style('editor-main', get_stylesheet_directory_uri().'/assets/styles/editor-style.less');
 }
+
