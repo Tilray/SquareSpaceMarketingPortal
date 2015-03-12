@@ -1,0 +1,51 @@
+{.section items}
+<div class="show-nav"></div>
+
+<ul class="nav clear" data-content-field="navigation">
+
+	{.repeated section @}
+
+		{.folder?}
+
+		<li class="folder-wrapper">
+			<a class="{.if folderActive} active{.end}">{collection.navigationTitle}</a>
+
+			<ul class="folder-links-wrapper">
+			  {.repeated section items}
+
+			    {.collection?}
+			    <li class="{collection.typeLabel}-collection">
+						<a href="{collection.fullUrl}" class="{.section active} active{.end}">{collection.navigationTitle}</a>
+					</li>
+					{.end}
+
+					{.section externalLink}
+					<li class="external-link">
+						<a href="{url}"{.section newWindow} target="_blank"{.end}>{title}</a>
+					</li>
+					{.end}
+
+			  {.end}
+		  </ul>
+	  </li>
+
+		{.or}
+
+		{.collection?}
+		<li class="{collection.typeLabel}-collection">
+			<a href="{collection.fullUrl}" class="{.section active}active{.end}">{collection.navigationTitle}</a>
+		</li>
+		{.end}
+
+		{.section externalLink}
+		<li class="external-link">
+			<a href="{url}"{.section newWindow} target="_blank"{.end}>{title}</a>
+		</li>
+		{.end}
+
+		{.end}
+
+	{.end}
+
+</ul>
+{.end}

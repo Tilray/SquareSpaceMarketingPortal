@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+  <!-- rev.{squarespace.template-revision} -->
+  {squarespace-headers}
+
+  {.if template.mobileStylesEnabled}
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+	{.end}
+
+  <squarespace:script src="site.js" combo="true" />
+
+</head>
+
+<body id="{squarespace.page-id}" class="{squarespace.page-classes}">
+
+	<div class="mobile-nav clear">
+		<squarespace:navigation navigationId="navigation" title="Navigation" description="Mobile Site Links" template="nav" />
+	</div>
+
+	<header id="header"{.section website}{.end}>
+		<div class="wrapper clear" data-content-field="page-settings">
+
+	    {.section collection}
+
+				{.section mainImage}
+				<div class="primary-image content-fill"><img {@|image-meta}></div>
+				{.or}
+				<div class="primary-image default"></div>
+				{.end}
+
+	    {.or}
+      	<div class="primary-image default"></div>
+	    {.end}
+
+			<div class="primary-nav">
+				<squarespace:navigation navigationId="navigation" title="Navigation" description="Primary Site Links" template="nav" />
+			</div>
+
+			{.section website}
+			<div id="logo" class="{.if logoImageUrl}logo-image{.or}logo-site-title{.end}">
+
+			  <h1 class="site-title" data-content-field="site-title">
+			  	<div class="site-title-border"></div>
+			  	<a href="/">
+			  		{.if logoImageUrl}<img src="{logoImageUrl}?format=1500w" alt="{siteTitle}" />{.end}
+			  		<span class="site-title-span">{siteTitle}</span>
+			  	</a>
+			  </h1>
+
+        <script>
+          Y.use('squarespace-ui-base', function(Y) {
+            Y.one(".site-title-span").plug(Y.Squarespace.TextShrink, {
+              parentEl: Y.one('#logo')
+            });
+          });
+        </script>
+
+
+				{.if siteTagLine}
+				<div class="site-tagline">
+					<div class="spacer"></div>
+					<h2>{siteTagLine}</h2>
+				</div>
+				{.end}
+
+			</div>
+			{.end}
+
+			<div class="folder-nav">
+				<squarespace:folder-navigation template="nav" />
+			</div>
+
+			{.section collection}
+	      {.if categories}
+        <div class="category-nav">
+          <ul class="nav category-nav-links">
+            <li class="All-link"><a href="{fullUrl}"{.if categoryFilter}{.or} class="active"{.end}>All</a></li>
+          {.repeated section categories}
+            <li class="{@|url-encode}-link"><a href="{fullUrl}?category={@|url-encode}"{.equal? categoryFilter @} class="active"{.end}>{@}</a></li>
+          {.end}
+          </ul>
+        </div>
+	      {.end}
+			{.end}
+
+		</div>
+  </header>

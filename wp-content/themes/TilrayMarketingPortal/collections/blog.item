@@ -1,0 +1,46 @@
+<section role="main" class="item clear">
+
+	{.section item}
+	<article class="entry {@|item-classes} clear" id="article-{id}" data-item-id="{id}">
+	
+    <h1 data-content-field="title" class="post-title">
+		{.passthrough?}
+      <a href="{sourceUrl}" target="_blank">{title} <span></span></a>
+    {.or}
+      {title}
+    {.end}
+		</h1>
+		
+		<div class="entry-content">
+			{.section body}{@}{.end}
+		</div>
+		
+		{.if postItemInjectCode}
+		<div class="entry-injection">
+			{postItemInjectCode}
+		</div>
+		{.end}
+		
+		 <div class="details">
+    	
+    	<div class="meta">Posted on {addedOn|date %B %e, %Y} {.section author} <span class="post-author">by <a href="{collection.fullUrl}?author={author.id}">{displayName}</a></span>{.end}{.section categories}<span class="post-categories"> and filed under {.repeated section @}<a href="{collection.fullUrl}?category={@|url-encode}">{@}</a>{.alternates with}, {.end}</span>{.end}{.section tags}<span class="post-tags"> and tagged {.repeated section @}<a href="{collection.fullUrl}?tag={@|url-encode}">{@}</a>{.alternates with} {.end}</span>{.end}.</div>
+			
+			<div class="social">{@|like-button}{@|social-button-inline}{.section sourceUrl}<a href="{sourceUrl}" target="_blank" class="credit">Source</a>{.end}</div>
+			
+    </div>
+    
+	</article>
+	{.end}
+
+  {.if pagination}
+	<nav class="pagination">
+		{.if pagination.prevItem}<a href="{pagination.prevItem.fullUrl}">Newer</a>{.or}Newer{.end}<span> / </span>{.if pagination.nextItem}<a href="{pagination.nextItem.fullUrl}">Older</a>{.or}Older{.end}
+  </nav>
+  {.end}
+        
+  {.section item}{.comments?}{@|comments}{.end}{.end}	
+
+</section>    
+
+  
+  
