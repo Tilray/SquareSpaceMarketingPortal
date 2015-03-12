@@ -7,6 +7,7 @@
 Thumbs.db
 
 # wordpress specific
+production.wp-config.php
 wp-config.php
 wp-contentuploads
 wp-contentblogs.dir
