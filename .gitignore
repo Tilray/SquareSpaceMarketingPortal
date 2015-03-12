@@ -17,6 +17,7 @@ wp-contentadvanced-cache.php
 wp-contentwp-cache-config.php
 wp-contentcache
 wp-contentcachesupercache
+mysql.sql
 
 # wpengine specific
 .smushit-status
