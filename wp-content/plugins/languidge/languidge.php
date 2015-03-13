@@ -8,7 +8,8 @@ Version: 1.0
 */
 
 function add_language_meta() {
-    add_meta_box( 'language_meta_language', 'Language Settings', 'add_language_callback', array( 'post', 'page' ) );
+    add_meta_box( 'language_meta_language', 'Language Settings', 'add_language_callback', 'post' );
+    add_meta_box( 'language_meta_language', 'Language Settings', 'add_language_callback', 'page' );
 }
 
 function add_language_callback( $post ) {
@@ -39,11 +40,11 @@ function add_language_callback( $post ) {
 function create_associated_page_selector($lang_name){
 ?>
 	<p>
-		<label for="meta-associated-page-<?= $lang_name?>" class="prfx-row-title">Associated <?= $lang_name?> Page</label>
+		<label for="meta-associated-page-<?= $lang_name?>" class="prfx-row-title">Associated <?= $lang_name?> <?=get_post_type(get_the_ID())?></label>
 		<select name="meta-select-associated-page-<?= $lang_name?>" id="meta-select-associated-page-<?= $lang_name?>">
 		<?php 
 			// The Query
-			$queryLanguage = new WP_Query( "post_type=page&meta_key=meta-language&meta_value=" . $lang_name . "&order=ASC" );
+			$queryLanguage = new WP_Query( "post_type=" . get_post_type(get_the_ID()) . "&meta_key=meta-language&meta_value=" . $lang_name . "&order=ASC" );
 
 			// The Loop
 			while ( $queryLanguage->have_posts() ) {
