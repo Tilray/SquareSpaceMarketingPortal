@@ -8,7 +8,7 @@ Version: 1.0
 */
 
 function add_language_meta() {
-    add_meta_box( 'language_meta_language', 'Language Settings', 'add_language_callback', 'page,post' );
+    add_meta_box( 'language_meta_language', 'Language Settings', 'add_language_callback', array( 'post', 'page' ) );
 }
 
 function add_language_callback( $post ) {
