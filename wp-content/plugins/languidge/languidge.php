@@ -15,43 +15,28 @@ function add_language_meta() {
 function add_language_callback( $post ) {
     wp_nonce_field( basename( __FILE__ ), 'languidge_nonce' );
     $prfx_stored_meta = get_post_meta( $post->ID );
-    ?>
-	<p>
-		<span class="prfx-row-title">Language</span>
-		<div class="prfx-row-content">
-			<label for="meta-language-english">
-				<input type="radio" name="meta-language" id="meta-language-english" value="english" <?php if ( isset ( $prfx_stored_meta['meta-language'] ) ) checked( $prfx_stored_meta['meta-language'][0], 'english' ); ?>>
-				English
-			</label>
-			<label for="meta-language-french">
-				<input type="radio" name="meta-language" id="meta-language-french" value="french" <?php if ( isset ( $prfx_stored_meta['meta-language'] ) ) checked( $prfx_stored_meta['meta-language'][0], 'french' ); ?>>
-				French
-			</label>
-		</div>
-	</p> 
-	
-    <?php
-	
-	create_associated_page_selector('english');
-	create_associated_page_selector('french');
+
+	$lang = getLanguage($post->ID);
+	if ($lang == 'en'){
+		create_associated_page_selector($prfx_stored_meta, 'french', 'fr');
+	}
+	else if ($lang == 'fr'){
+		create_associated_page_selector($prfx_stored_meta, 'english', 'en');
+	}
 	
 }
 
-function create_associated_page_selector($lang_name){
+function create_associated_page_selector($post_meta, $lang_name, $parent_slug){
 ?>
 	<p>
 		<label for="meta-associated-page-<?= $lang_name?>" class="prfx-row-title">Associated <?= $lang_name?> <?=get_post_type(get_the_ID())?></label>
-		<select name="meta-select-associated-page-<?= $lang_name?>" id="meta-select-associated-page-<?= $lang_name?>">
-		<?php 
-			// The Query
-			$queryLanguage = new WP_Query( "post_type=" . get_post_type(get_the_ID()) . "&meta_key=meta-language&meta_value=" . $lang_name . "&order=ASC" );
-
-			// The Loop
-			while ( $queryLanguage->have_posts() ) {
-				$queryLanguage->the_post();
-				$theID = get_the_ID();
+		<select name="meta-associated-page" id="meta-associated-page">
+		<?php
+			$parentPage = get_page_by_path($parent_slug);
+			$childPages = get_pages(array('child_of' => $parentPage->ID));
+			foreach ( $childPages as $childPage ) {
 				?>
-			<option value="<?php echo $theID;?>" <?php if ( isset ( $prfx_stored_meta['meta-associated-page-'.$lang_name] ) ) selected( $prfx_stored_meta['meta-associated-page-'.$lang_name][0], $theID ); ?>><?php echo get_the_title() ?></option>';
+			<option value="<?php echo $childPage->ID;?>" <?php if ( isset ( $post_meta['meta-associated-page'] ) ) selected( $post_meta['meta-associated-page'][0], $childPage->ID ); ?>><?php echo $childPage->post_title ?></option>';
 				<?php
 			}
 
@@ -77,8 +62,8 @@ function language_save( $post_id ) {
         return;
     }
  
-	if( isset( $_POST[ 'meta-language' ] ) ) {
-		update_post_meta( $post_id, 'meta-language', $_POST[ 'meta-language' ] );
+	if( isset( $_POST[ 'meta-associated-page' ] ) ) {
+		update_post_meta( $post_id, 'meta-associated-page', $_POST[ 'meta-associated-page' ] );
 	} 
 }
 add_action( 'save_post', 'language_save' );
