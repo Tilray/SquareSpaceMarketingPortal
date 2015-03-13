@@ -84,3 +84,17 @@ function language_save( $post_id ) {
 add_action( 'save_post', 'language_save' );
 
 add_action( 'add_meta_boxes', 'add_language_meta' );
+
+function getLanguage($postID)
+{
+	$thisPost = get_post($postID);
+	if ($thisPost->post_parent)
+	{
+		$parentPost = get_post($thisPost->post_parent);
+		return $parentPost->post_name;
+	}
+	
+	return "none set";
+}
+
+
