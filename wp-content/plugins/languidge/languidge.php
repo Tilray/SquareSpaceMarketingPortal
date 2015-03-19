@@ -36,7 +36,6 @@ function create_associated_page_selector($post_type, $post_meta, $lang_name, $la
 			if ($post_type == 'post')
 			{
 				$childPages = get_posts(array('category_name' => $lang_slug));
-				echo "found this many posts for " . $lang_slug . "   " . sizeof($childPages);
 			}
 			else {
 				$parentPage = get_page_by_path($lang_slug);
@@ -105,4 +104,13 @@ function getLanguage($postID)
 	return "none set";
 }
 
+function get_translated_page($post_id)
+{
+    $stored_meta = get_post_meta( $post->ID );
+	if ( isset ( $post_meta['meta-associated-page'] ) )
+	{
+		$other_post_id = $post_meta['meta-associated-page'][0];
+		return $other_post_id;
+	}
+}
 
