@@ -23,7 +23,18 @@
 	<?php do_action( 'before' ); ?>
 	<header id="masthead" class="site-header container" role="banner">
 		<div class="row">
-				<?php wp_nav_menu( array( 'container_id' => 'submenu', 'theme_location' => 'login','container_class' => 'topmenu','menu_id'=>'loginmenu' ,'menu_class'=>'sfmenu' ) ); ?>
+			<?php 
+			if (function_exists("get_current_language_name")){
+				echo get_current_language_name();
+			}
+			
+			if (function_exists("render_language_chooser")){
+				render_language_chooser("langChooser");
+			}
+//				$allTheLangs = icl_get_languages('skip_missing=0&orderby=id&order=asc');
+//				var_dump($allTheLangs);
+			?>
+			<?php wp_nav_menu( array( 'container_id' => 'submenu', 'theme_location' => 'login','container_class' => 'topmenu','menu_id'=>'loginmenu' ,'menu_class'=>'sfmenu' ) ); ?>
 		</div>
 		<div class="row">
 		<div class="site-branding col-sm-4">
