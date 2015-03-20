@@ -20,6 +20,8 @@ function create_posttype() {
       'public' => true,
       'has_archive' => true,
       'rewrite' => array('slug' => 'products'),
+	  'capability_type' => 'post',
+	  'taxonomies' => array('post_tag')
     )
   );
 }
