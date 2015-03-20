@@ -23,6 +23,9 @@
 	<?php do_action( 'before' ); ?>
 	<header id="masthead" class="site-header container" role="banner">
 		<div class="row">
+				<?php wp_nav_menu( array( 'container_id' => 'submenu', 'theme_location' => 'login','container_class' => 'topmenu','menu_id'=>'loginmenu' ,'menu_class'=>'sfmenu' ) ); ?>
+		</div>
+		<div class="row">
 		<div class="site-branding col-sm-4">
 			
 	<?php if (get_theme_mod(FT_scope::tool()->optionsName . '_logo', '') != '') { ?>
