@@ -93,17 +93,8 @@ function web2feel_widgets_init() {
 	));
 	
 	register_sidebar(array(
-		'name' => 'FooterEN',
+		'name' => 'Footer',
 		'id' => 'sidebar-2',
-		'before_widget' => '<div class="botwid col-6 col-lg-3 %2$s">',
-		'after_widget' => '</div>',
-		'before_title' => '<h3 class="bothead">',
-		'after_title' => '</h3>',
-	));	
-
-	register_sidebar(array(
-		'name' => 'FooterFR',
-		'id' => 'sidebar-3',
 		'before_widget' => '<div class="botwid col-6 col-lg-3 %2$s">',
 		'after_widget' => '</div>',
 		'before_title' => '<h3 class="bothead">',
