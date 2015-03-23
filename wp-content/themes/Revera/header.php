@@ -25,14 +25,14 @@
 		<div class="row">
 			<?php 
 			if (function_exists("get_current_language_name")){
-				echo get_current_language_name();
+				?><ul class="lang-chooser"><li><a><?php 
+					echo get_current_language_name();
+					?></a><?php
+					if (function_exists("render_language_chooser")){
+						render_language_chooser("lang-chooser-dropdown");
+					}
+				?></li></ul><?php
 			}
-			
-			if (function_exists("render_language_chooser")){
-				render_language_chooser("langChooser");
-			}
-//				$allTheLangs = icl_get_languages('skip_missing=0&orderby=id&order=asc');
-//				var_dump($allTheLangs);
 			?>
 			<?php wp_nav_menu( array( 'container_id' => 'submenu', 'theme_location' => 'login','container_class' => 'topmenu','menu_id'=>'loginmenu' ,'menu_class'=>'sfmenu' ) ); ?>
 		</div>

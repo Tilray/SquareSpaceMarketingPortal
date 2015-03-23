@@ -599,3 +599,8 @@ object {
 .infinity-end.neverending .site-footer {
 	display: block;
 }
+
+
+ul.lang-chooser{
+	z-index: 100;
+}
