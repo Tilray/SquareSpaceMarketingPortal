@@ -6,6 +6,8 @@
 .swp
 Thumbs.db
 
+wp-content/uploads/**
+
 # wordpress specific
 production.wp-config.php
 wp-config.php
