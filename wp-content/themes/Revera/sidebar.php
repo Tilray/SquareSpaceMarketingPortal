@@ -11,5 +11,4 @@
 
 			
 		<?php endif; // end sidebar widget area ?>
-		<?php get_template_part( 'sponsors' ); ?>
 	</div><!-- #secondary -->
