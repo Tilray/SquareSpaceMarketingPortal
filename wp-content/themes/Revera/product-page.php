@@ -53,7 +53,7 @@ get_header(); ?>
 				$all_the_tags = wp_get_post_tags( get_the_ID() );
 				$combined_tags = "";
 				foreach($all_the_tags as $this_tag){
-					$combined_tags = $combined_tags . " category-" . $this_tag->slug;
+					$combined_tags = $combined_tags . " category-" . strtolower($this_tag->slug);
 				}
 		?>
 		 <div class="col-sm-3 col-6 portbox post product-item <?= $combined_tags?>">
@@ -86,7 +86,6 @@ get_header(); ?>
 <script>
 	function filterProducts(filter)
 	{
-		console.log("Filter? " + filter);
 		jQuery('#primary').isotope({ filter: filter });
 	}
 	
