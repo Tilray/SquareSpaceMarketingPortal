@@ -600,11 +600,3 @@ object {
 	display: block;
 }
 
-
-ul.lang-chooser{
-	z-index: 100;
-}
-
-ul.lang-chooser-dropdown{
-	display: none;
-}

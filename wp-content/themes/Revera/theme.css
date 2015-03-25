@@ -87,7 +87,7 @@ nav.main-navigation{
 	margin: 15px 0px;
 	height:60px;
 	border-bottom: none;
-	float: left;
+	//float: left;
 
 
 	}
@@ -194,9 +194,165 @@ nav.main-navigation{
 	}
 
 
+#loginmenucontainer{
+	width: 100%;
+	background-color: #000;
+}
 
+.login-nav-wrapper{
+	height:30px;
+	padding-top:4px;
+}
 
+.language-chooser{
+	position: relative;
+	display: inline;
+}
 
+.language-chooser a,
+.language-chooser a:visited
+{
+	position: relative;
+	display: inline;
+	color: #999;
+	text-transform: uppercase;
+}
+
+.language-chooser a:hover
+{
+	color: #fff
+}
+
+.caret{
+  display: inline-block;
+  width: 0;
+  height: 0;
+  margin-left: 2px;
+  vertical-align: middle;
+  border-top: 4px solid;
+  border-right: 4px solid transparent;
+  border-left: 4px solid transparent;
+}
+
+#languagechooserbutton{
+	cursor: pointer;
+}	
+
+#languagedropdown{
+	position: absolute;
+	left: 0px;
+	z-index: 3;
+	width: 110px;
+	box-shadow: 0 6px 12px rgba(0,0,0,.175);
+	border: 1px solid rgba(0,0,0,.15);
+	border-radius: 4px;
+	background: #fff;
+}	
+#languagedropdown.closed{
+	display: none;
+}	
+
+#languagedropdownwrapper{
+	height: 0;
+	position: relative;
+}
+
+ul.lang-chooser-dropdown{
+	list-style: none;
+	margin: 10px 0 10px 0;
+}
+
+ul.lang-chooser-dropdown li{
+	margin: 5px 20px 5px;
+}
+
+ul.lang-chooser-dropdown li a,
+ul.lang-chooser-dropdown li a:visited{
+	color: #333;
+	text-transform: uppercase;
+}
+	
+.loginmenubackground{
+	background-color: #222;
+	height: 30px;
+	border-radius: 4px;
+}
+	
+#loginmenu {
+	padding:0px 0px;
+	margin: 0px 0px;
+	height:30px;
+	float: right;
+	display: inline;
+	}
+	
+#loginmenu ul {
+	width: auto;
+	float:right;
+	list-style: none;
+	margin: 0;
+	padding: 0 0px;
+	}
+	
+#loginmenu li {
+	float: left;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	color: #fff;
+	font-weight:400;
+	}
+	
+#loginmenu li a {
+	display: block;
+    margin: 0;
+	padding: 0 10px 0 10px;
+	text-decoration: none;
+	position: relative;
+	}
+	
+.social-icon{
+	width: 60;
+	height: 30;
+	margin: 0;
+	overflow: hidden;
+	text-indent: -9999px;
+	display:block;
+}
+
+.social-icon a{
+	display:block;
+}	
+
+#loginmenu li a:not([href*="tilray"]) {
+	width: 40;
+	height: 30;
+	margin: 0;
+	overflow: hidden;
+	text-indent: -9999px;
+	display:block;
+}
+
+a[href*="facebook"]{
+	background-image: url('images/icon-facebook.png');
+}
+a[href*="twitter"]{
+	background-image: url('images/icon-twitter.png');
+}
+a[href*="instagram"]{
+	background-image: url('images/icon-instagram.png');
+}
+li[navtype="Sign In"]{
+	vertical-align: top;
+	margin: 0 0 0 10px;
+	padding: 0 25px;
+	background-color: #0c4a71;
+}
+	
+	
+header{
+	width: 100%;
+}
 
 /* Layout */
 

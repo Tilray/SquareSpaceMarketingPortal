@@ -25,6 +25,20 @@ jQuery(window).load(function() {
 		cssArrows: false
 	});	  
     
+	
+	jQuery(document).click(function(event) { 
+		if(jQuery(event.target).attr('id') === 'languagechooserbutton' && jQuery('#languagedropdown').hasClass('closed')) {
+			console.log("Clicked lang chooser");
+			jQuery('#languagedropdown').removeClass('closed');
+		}
+		else{
+			console.log("Clicked something " + jQuery(event.target).attr('id') + "   " + jQuery('#languagedropdown').hasClass('closed'));
+			if(!jQuery('#languagedropdown').hasClass('closed')) {
+				console.log("Hiding the menu");
+				jQuery('#languagedropdown').addClass('closed');
+			}
+		}        
+	});
 });
 
 

@@ -21,39 +21,49 @@
 <body <?php body_class(); ?>>
 <div id="page" class="hfeed site">
 	<?php do_action( 'before' ); ?>
-	<header id="masthead" class="site-header container" role="banner">
-		<div class="row">
-			<?php 
-			if (function_exists("get_current_language_name")){
-				?><ul class="lang-chooser"><li><a><?php 
-					echo get_current_language_name();
-					?></a><?php
-					if (function_exists("render_language_chooser")){
-						render_language_chooser("lang-chooser-dropdown");
+	<header id="masthead" class="site-header" role="banner">
+		<nav class="loginmenubackground">
+			<div class="container">
+				<div class="login-nav-wrapper">
+					<div class="language-chooser">
+					<?php 
+					if (function_exists("get_current_language_name")){
+						?><a id="languagechooserbutton"><?php 
+							echo get_current_language_name();
+							?><span class="caret"></span></a>
+					</div><?php
 					}
-				?></li></ul><?php
-			}
-			?>
-			<?php wp_nav_menu( array( 'container_id' => 'submenu', 'theme_location' => 'login','container_class' => 'topmenu','menu_id'=>'loginmenu' ,'menu_class'=>'sfmenu' ) ); ?>
-		</div>
-		<div class="row">
-		<div class="site-branding col-sm-4">
+					?>
+					<?php wp_nav_menu( array( 'theme_location' => 'login','container_class' => '', 'container'=>false, 'menu_id'=>'loginmenu' ,'menu_class'=>'sfmenu' ) ); ?>
+				</div>
+				<div id="languagedropdownwrapper">
+					<div id="languagedropdown" class="closed"><?php
+									if (function_exists("render_language_chooser")){
+										render_language_chooser("lang-chooser-dropdown");
+									}
+					?></div>				
+				</div>
+			</div>
+			
+		</nav>
+		<nav class="container">
+			<div class="row">
+				<div class="site-branding col-sm-4">
 			
 	<?php if (get_theme_mod(FT_scope::tool()->optionsName . '_logo', '') != '') { ?>
 				<h1 class="site-title logo"><a class="mylogo" rel="home" href="<?php bloginfo('siteurl');?>/" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>"><img relWidth="<?php echo intval(get_theme_mod(FT_scope::tool()->optionsName . '_maxWidth', 0)); ?>" relHeight="<?php echo intval(get_theme_mod(FT_scope::tool()->optionsName . '_maxHeight', 0)); ?>" id="ft_logo" src="<?php echo get_theme_mod(FT_scope::tool()->optionsName . '_logo', ''); ?>" alt="" /></a></h1>
 	<?php } else { ?>
 				<h1 class="site-title logo"><a id="blogname" rel="home" href="<?php bloginfo('siteurl');?>/" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>"><?php bloginfo( 'name' ); ?></a></h1>
 	<?php } ?>
-
-			
-		</div>
+				</div>
+			</div>
+			<div class="col-sm-8 mainmenu">
+			<div class="mobilenavi"></div>
+					<?php wp_nav_menu( array( 'container_id' => 'submenu', 'theme_location' => 'primary','container_class' => 'topmenu','menu_id'=>'topmenu' ,'menu_class'=>'sfmenu' ) ); ?>
+			</div>
 		
-		<div class="col-sm-8 mainmenu">
-		<div class="mobilenavi"></div>
-				<?php wp_nav_menu( array( 'container_id' => 'submenu', 'theme_location' => 'primary','container_class' => 'topmenu','menu_id'=>'topmenu' ,'menu_class'=>'sfmenu' ) ); ?>
-		</div>
-		
-		</div> <!-- end row -->
+			</div> <!-- end row -->
+		</nav>	
 	</header><!-- #masthead -->
 	
 	

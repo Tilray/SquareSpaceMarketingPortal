@@ -111,6 +111,7 @@ function web2feel_scripts() {
 	wp_enqueue_style( 'bootstrap', get_template_directory_uri() . '/bootstrap/bootstrap.min.css');
 	wp_enqueue_style( 'flexslider', get_template_directory_uri() . '/css/flexslider.css');
 	wp_enqueue_style( 'glyphicons', get_template_directory_uri() . '/css/bootstrap-glyphicons.css');
+	wp_enqueue_style( 'fontawesome', '//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css');
 
 	wp_enqueue_style( 'theme', get_template_directory_uri() . '/theme.css');
 
