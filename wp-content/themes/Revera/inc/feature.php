@@ -16,7 +16,7 @@
 					?>
 					
 					<?php if($image) : ?>
-						<a href="<?php the_permalink(); ?>"><img class="grayscale"  src="<?php echo $image ?>"/></a>
+						<a href="<?php the_permalink(); ?>"><img src="<?php echo $image ?>"/></a>
 					<?php endif; ?>
 	
 					<div class="flex-caption">
