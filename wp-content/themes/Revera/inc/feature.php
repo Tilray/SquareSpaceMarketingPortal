@@ -31,29 +31,3 @@
 <div class="doverlay"></div>
 </div>
 
-<div class="fwidgets">
-	<div class="container">
-		<div class="row">
-			
-			<div class="col-sm-4 homewidget">
-				
-				<span><i class="glyphicon <?php echo ft_of_get_option('fabthemes_left_icon'); ?>"></i></span>
-				<h3> <?php echo ft_of_get_option('fabthemes_left_title'); ?></h3>
-				<p> <?php echo ft_of_get_option('fabthemes_left_text'); ?> </p>
-			</div>	
-			
-			<div class="col-sm-4 homewidget">
-				<span><i class="glyphicon <?php echo ft_of_get_option('fabthemes_middle_icon'); ?>"></i></span>
-				<h3>  <?php echo ft_of_get_option('fabthemes_middle_title'); ?></h3>
-				<p> <?php echo ft_of_get_option('fabthemes_middle_text'); ?> </p>
-			</div>	
-			
-			<div class="col-sm-4 homewidget">
-				<span><i class="glyphicon <?php echo ft_of_get_option('fabthemes_right_icon'); ?>"></i></span>
-				<h3> <?php echo ft_of_get_option('fabthemes_right_title'); ?></h3>
-				<p> <?php echo ft_of_get_option('fabthemes_right_text'); ?> </p>
-			</div>	
-			
-		</div>
-	</div>
-</div>
