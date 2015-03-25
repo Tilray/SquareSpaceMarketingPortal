@@ -57,7 +57,6 @@
 	<?php } ?>
 				</div>
 				<div class="col-sm-8 mainmenu">
-				<div class="mobilenavi"></div>
 						<?php wp_nav_menu( array( 'container_id' => 'primary-menu-container', 'theme_location' => 'primary','container_class' => 'topmenu','menu_id'=>'primary-menu' ,'menu_class'=>'sfmenu' ) ); ?>
 				</div>
 		
