@@ -21,7 +21,10 @@ function create_posttype() {
       'has_archive' => true,
       'rewrite' => array('slug' => 'tilray-products'),
 	  'capability_type' => 'post',
-	  'taxonomies' => array('post_tag')
+	  'taxonomies' => array('post_tag'),
+	  'supports' => array('title', 'editor', 'thumbnail', 'excerpt')
     )
   );
 }
+
+add_image_size( 'product-thumb', 270, 240, true );

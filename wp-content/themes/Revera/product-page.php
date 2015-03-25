@@ -56,26 +56,27 @@ get_header(); ?>
 					$combined_tags = $combined_tags . " category-" . strtolower($this_tag->slug);
 				}
 		?>
-		 <div class="col-sm-3 col-6 portbox post product-item <?= $combined_tags?>">
+			<div class="col-sm-3 col-6 portbox post product-item <?= $combined_tags?>">
 					
-		 <?php
-			$thumb = get_post_thumbnail_id();
-			$img_url = wp_get_attachment_url( $thumb,'full' ); //get full URL to image (use "large" or "medium" if the images too big)
-			$image = aq_resize( $img_url, 750, 500, true ); //resize & crop the image
-		 ?>
-					
-		 <?php if($image) : ?>
-			<div class="hthumb">
-			 	<a href="<?php the_permalink(); ?>"><img class="img-responsive" src="<?php echo $image ?>"/></a>
-		 	</div>
-		 <?php endif; ?>
+			 <?php
+				$thumb = get_post_thumbnail_id();
+				$img_attrs = wp_get_attachment_image_src( $thumb,'product-thumb' ); //get full URL to image (use "large" or "medium" if the images too big)
+				$image = $img_attrs[0];
+			 ?>
+						
+				<div class="hthumb">
+					<?php if($image) : ?>
+					<a href="<?php the_permalink(); ?>"><img class="img-responsive" src="<?php echo $image ?>"/></a>
+					<?php endif; ?>
+					<h3><a href="<?php the_permalink(); ?>"><p class="title"><?php the_title(); ?></p></a></h3>
+					<p><?php the_excerpt(); ?></p>
+				</div>
 
-		 <h3><a href="<?php the_permalink(); ?>"><p class="title"><?php the_title(); ?></p></a></h3>
-		 
-		 </div>
+			 
+			 </div>
 			
 
-				<?php endwhile; ?>
+		<?php endwhile; ?>
 </div>
 
 
