@@ -1025,4 +1025,7 @@ h3.bothead{
 		margin-bottom: 30px;
 	}
 
+	#bottom .col-6 {
+		width: 100%;
+	}
 }
