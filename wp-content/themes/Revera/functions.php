@@ -212,3 +212,7 @@ else $fflink = '';
 echo $fflink;
 }
 
+function get_child_pages($postId)
+{
+  return get_pages( array('parent' => $postId, 'hierarchical' => 0, 'sort_column' => 'menu_order',) );  
+}
