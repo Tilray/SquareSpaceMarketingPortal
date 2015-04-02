@@ -48,7 +48,7 @@ get_header(); ?>
 			<div id="center-nav" class="col-sm-4">
 			</div>
 			<div class="col-sm-8">
-				<?php the_content();//get_template_part( 'content', 'page' ); ?>
+				<?php the_content(); ?>
 			</div>
 		</div><!-- #primary -->
 		<script>
@@ -56,7 +56,6 @@ get_header(); ?>
 			var centerNavItemSelector = 'span.center-nav-item';
 			
 			function SelectPane(index){
-				console.log("index? " + index);
 				jQuery(allPanes).removeClass('active');
 				jQuery(allPanes[index]).addClass('active');
 				jQuery(allCenterNavItems).removeClass('active');
@@ -72,7 +71,6 @@ get_header(); ?>
 				var allCenterNavItems = jQuery(centerNavItemSelector);
 				allCenterNavItems.click(function() {
 					var $this = jQuery(this);
-					console.log("Clicked " + jQuery(this));
 					var thisIndex = $this.attr('data-index');
 					SelectPane(thisIndex);
 				});
