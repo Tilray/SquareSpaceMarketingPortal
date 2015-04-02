@@ -1029,3 +1029,7 @@ h3.bothead{
 		width: 100%;
 	}
 }
+
+.left-nav-selected-child a{
+	color: #000;
+}
