@@ -1033,3 +1033,17 @@ h3.bothead{
 .left-nav-selected-child a{
 	color: #000;
 }
+
+.switchpane
+{
+	display: none;
+}
+
+.switchpane.active{
+	display: block;
+}
+
+span.center-nav-item.active h3
+{
+	color: #000;
+}

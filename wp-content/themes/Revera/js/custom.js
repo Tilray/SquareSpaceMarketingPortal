@@ -32,7 +32,6 @@ jQuery(window).load(function() {
 			jQuery('#languagedropdown').removeClass('closed');
 		}
 		else{
-			console.log("Clicked something " + jQuery(event.target).attr('id') + "   " + jQuery('#languagedropdown').hasClass('closed'));
 			if(!jQuery('#languagedropdown').hasClass('closed')) {
 				console.log("Hiding the menu");
 				jQuery('#languagedropdown').addClass('closed');
