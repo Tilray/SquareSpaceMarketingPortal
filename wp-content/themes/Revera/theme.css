@@ -1047,3 +1047,14 @@ span.center-nav-item.active h3
 {
 	color: #000;
 }
+
+ul.product-filters input[type=radio] {
+   position: absolute;
+   left: -9999px;
+   /* For mobile, it's typically better to position checkbox on top of clickable
+      area and turn opacity to 0 instead. */
+}
+ul.product-filters input[type=radio]:checked ~ label {
+   color: red;
+   font-weight: bold;
+}

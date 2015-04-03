@@ -17,7 +17,7 @@ get_header(); ?>
 	<div class="container">
 		<div class="row">
 			<div class="col-12">
-				<h3> <?php the_title(); ?> </h3>
+				<h3> fdafdaf<?php the_title(); ?> </h3>
 				<p> </p>
 			</div>
 			
@@ -26,13 +26,23 @@ get_header(); ?>
 </div>
 
 <div class="container">	
-	<div class="row">
-		<ul>
-			<li class="product-filter-button" data-filter="*">Show All</li>
-			<li class="product-filter-button" data-filter=".category-indica">Indicas</li>
-			<li class="product-filter-button" data-filter=".category-sativa">Sativas</li>
-			<li class="product-filter-button" data-filter=".category-kush">Kushes</li>
-		</ul>
+	<div class="row filters">
+		<div class="product-filters-container">
+			<ul class="product-filters">
+				<li><input type="radio" name="status" id="status-show-all" data-filter="" checked><label for="status-show-all">Show All</label></li>
+				<li><input type="radio" name="status" id="status-available" data-filter="available" ><label for="status-available">Available</label></li>
+				<li><input type="radio" name="status" id="status-in-production" data-filter="coming-soon" ><label for="status-in-production">In Production</label></li>
+			</ul>
+		</div>
+		<div class="product-filters-container">
+			<ul class="product-filters">
+				<li><input type="radio" name="strain-types" id="strain-type-show-all" data-filter="" checked><label for="strain-type-show-all">Show All</label></li>
+				<li><input type="radio" name="strain-types" id="strain-type-indica" data-filter="indica" ><label for="strain-type-indica">Indica</label></li>
+				<li><input type="radio" name="strain-types" id="strain-type-sativa" data-filter="sativa" ><label for="strain-type-sativa">Sativa</label></li>
+				<li><input type="radio" name="strain-types" id="strain-type-hybrid" data-filter="hybrid" ><label for="strain-type-hybrid">Hybrid</label></li>
+				<li><input type="radio" name="strain-types" id="strain-type-high-cbd" data-filter="high-cbd" ><label for="strain-type-high-cbd">High CBD</label></li>
+			</ul>
+		</div>
 	</div>
 	<div class="row">
 	
@@ -85,14 +95,23 @@ get_header(); ?>
 </div>
 
 <script>
-	function filterProducts(filter)
+	function UpdateProducts()
 	{
+		var filter = "";
+		var allFilters = jQuery('ul.product-filters input[type=radio]:checked');
+		for (var i = 0; i < allFilters.length; i++)
+		{
+			filter += jQuery(allFilters[i]).attr('data-filter') + " ";
+		}
+		if (filter.trim() == '')
+			filter = '*';
+			
 		jQuery('#primary').isotope({ filter: filter });
 	}
 	
 	jQuery( document ).ready(function() {
-		jQuery('.product-filter-button').click(function() {
-			filterProducts(jQuery( this ).attr('data-filter'));
+		jQuery('ul.product-filters input[type=radio]').change(function() {
+			UpdateProducts();
 		});
 	});
 </script>
