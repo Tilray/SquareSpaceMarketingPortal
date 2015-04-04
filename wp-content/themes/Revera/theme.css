@@ -20,6 +20,10 @@ h4 { font-size: 18px; }
 h5 { font-size: 16px; }
 h6 { font-size: 14px; }
 
+h1, h2, h3, h4, h5, h6 {
+	color: #084875
+}
+
 code{
 	white-space: normal;
 }
@@ -27,11 +31,8 @@ code{
 
 /* Links */
 a {
-	color: #f4473a;
-
 }
 a:visited {
-	color: #f4473a;
 }
 a:hover,
 a:focus,
@@ -104,13 +105,11 @@ nav.main-navigation{
 	list-style: none;
 	margin: 0;
 	padding: 0;
-	color: #fff;
 	font-weight:400;
 
 	}
 	
 #primary-menu-container li a {
-	color: #777;
 	display: block;
     margin: 0;
 	padding: 19px 10px 19px 10px;
@@ -120,9 +119,7 @@ nav.main-navigation{
 	}
 
 #primary-menu-container li a:hover, #primary-menu-container li a:active, #primary-menu-container .current_page_item a  {
-	color: #ed564b;
-	
-	}
+}
 	
 #primary-menu-container li a.sf-with-ul {
 	padding-right: 10px;
