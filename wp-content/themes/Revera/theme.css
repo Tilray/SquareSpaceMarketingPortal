@@ -199,8 +199,27 @@ nav.main-navigation{
 }
 
 .login-nav-wrapper{
-	height:30px;
-	padding-top:4px;
+	height:25px;
+}
+
+#login-menu-register-button {
+	background-color: #ffb12f;
+	width: 150px;
+	float: right;
+	color: #fff;
+	text-align: center;
+	height: 100%;
+}
+
+#login-menu-sign-in-button, 
+#language-chooser {
+	background-color: #3caefb;
+	width: 100px;
+	float: right;
+	color: #fff;
+	text-align: center;
+	height: 100%;
+	margin-left: 5px;
 }
 
 .language-chooser{
@@ -213,7 +232,7 @@ nav.main-navigation{
 {
 	position: relative;
 	display: inline;
-	color: #999;
+	color: #fff;
 	text-transform: uppercase;
 }
 
@@ -270,13 +289,7 @@ ul.lang-chooser-dropdown li a:visited{
 	color: #333;
 	text-transform: uppercase;
 }
-	
-.loginmenubackground{
-	background-color: #222;
-	height: 30px;
-	border-radius: 4px;
-}
-	
+		
 #loginmenu {
 	padding:0px 0px;
 	margin: 0px 0px;
@@ -1058,3 +1071,4 @@ ul.product-filters input[type=radio]:checked ~ label {
    color: red;
    font-weight: bold;
 }
+

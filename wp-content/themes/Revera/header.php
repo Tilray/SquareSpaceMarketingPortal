@@ -22,28 +22,27 @@
 <div id="page" class="hfeed site">
 	<?php do_action( 'before' ); ?>
 	<header id="masthead" class="site-header" role="banner">
-		<nav class="loginmenubackground">
-			<div class="container">
-				<div class="login-nav-wrapper">
-					<div class="language-chooser">
-					<?php 
-					if (function_exists("get_current_language_name")){
-						?><a id="languagechooserbutton"><?php 
-							echo get_current_language_name();
-							?><span class="caret"></span></a>
-					</div><?php
-					}
-					?>
-					<?php wp_nav_menu( array( 'theme_location' => 'login','container_class' => '', 'container'=>false, 'menu_id'=>'loginmenu' ,'menu_class'=>'sfmenu' ) ); ?>
-				</div>
-				<div id="languagedropdownwrapper">
-					<div id="languagedropdown" class="closed"><?php
-									if (function_exists("render_language_chooser")){
-										render_language_chooser("lang-chooser-dropdown");
-									}
-					?></div>				
-				</div>
+		<div class="container">
+			<div class="login-nav-wrapper">
+				<?php 
+				if (function_exists("get_current_language_name")){
+					?><div id="language-chooser" class="language-chooser"><a id="languagechooserbutton"><?php 
+						echo get_current_language_name();
+						?><span class="caret"></span></a></div>
+				<?php
+				}
+				?>
+				<div id="login-menu-sign-in-button">Sign In</div>
+				<div id="login-menu-register-button">REGISTER</div>
 			</div>
+			<div id="languagedropdownwrapper">
+				<div id="languagedropdown" class="closed"><?php
+								if (function_exists("render_language_chooser")){
+									render_language_chooser("lang-chooser-dropdown");
+								}
+				?></div>				
+			</div>
+		</div>
 			
 		</nav>
 		<nav class="container">
