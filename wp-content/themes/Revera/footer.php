@@ -9,27 +9,11 @@
 ?>
 
 	</div><!-- #content -->
-	
-	<div id="bottom">
-		<div class="container">
-			<div class="row">
-			
-			<?php if ( !function_exists('dynamic_sidebar')
-			        || !dynamic_sidebar("Footer") ) : ?>  
-			<?php endif; ?>
-			
-			
-			</div>
-		</div>
-	</div>
-	
-	
 <footer id="colophon" class="site-footer" role="contentinfo">
 	<div class="container">
 		<div class="site-info wrap row">
-			<div class="fcred col-12">
-				Copyright &copy; <?php echo date('Y');?> <a href="<?php bloginfo('url'); ?>" title="<?php bloginfo('name'); ?>"><?php bloginfo('name'); ?></a> - <?php bloginfo('description'); ?>.<br />
-<?php fflink(); ?> | <a href="http://fabthemes.com/<?php echo FT_scope::tool()->themeName ?>/" ><?php echo FT_scope::tool()->themeName ?> WordPress Theme</a>
+			<div id="copyright-footer-container" class="fcred col-12">
+				Copyright &copy; Tilray, all rights reserved <?php wp_nav_menu( array( 'container' => '', 'theme_location' => 'copyright-footer','container_class' => 'copyright-footer','menu_id'=>'copyright-footer-menu' ,'menu_class'=>'copyright-footer' ) ); ?>
 			</div>		
 
 		</div><!-- .site-info -->

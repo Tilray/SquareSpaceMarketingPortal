@@ -58,6 +58,7 @@ function web2feel_setup() {
 	register_nav_menus( array(
 		'login' => 'Login Menu',
 		'primary' => __( 'Primary Menu', 'web2feel' ),
+		'copyright-footer' => 'Copyright Footer Menu'
 	) );
 
 	/**

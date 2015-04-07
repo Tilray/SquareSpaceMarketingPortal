@@ -1087,3 +1087,19 @@ ul.product-filters input[type=radio]:checked ~ label {
    font-weight: bold;
 }
 
+ul.copyright-footer{
+	display: inline;
+}
+
+ul.copyright-footer li {
+	list-style-type: none;
+	display: inline;
+}
+
+ul.copyright-footer li:before {
+	content: " | ";
+}
+
+ul.copyright-footer li:first-child:before {
+	content: none;
+}
