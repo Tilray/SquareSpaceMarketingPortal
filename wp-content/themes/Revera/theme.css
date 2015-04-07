@@ -990,7 +990,7 @@ h3.bothead{
 
 .site-footer{
 	padding: 10px 0px;
-	background:#292929;
+	background:#444444;
 	font-size: 12px;
 }
 
@@ -1098,8 +1098,11 @@ ul.copyright-footer li {
 
 ul.copyright-footer li:before {
 	content: " | ";
+	margin-left: 20px;
+	margin-right: 20px;
 }
 
 ul.copyright-footer li:first-child:before {
 	content: none;
+	margin-right: 20px;
 }
