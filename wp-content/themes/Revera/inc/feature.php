@@ -21,8 +21,6 @@
 	
 					<div class="flex-caption">
 						<h2><?php the_title(); ?></h2>
-						<?php the_excerpt(); ?>
-						<a class="frmore" href="<?php the_permalink(); ?>"> READ MORE </a>
 					</div>
 			<?php endwhile; endif; ?>
 					    		
