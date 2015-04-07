@@ -27,4 +27,4 @@ function create_posttype() {
   );
 }
 
-add_image_size( 'product-thumb', 270, 240, true );
+add_image_size( 'product-thumb', 270, 240, false );
