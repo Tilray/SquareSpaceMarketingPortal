@@ -28,6 +28,7 @@ get_header(); ?>
 <div class="container">	
 	<div class="row filters">
 		<div class="product-filters-container">
+			<h3 class="gray-underline">Status</h3>
 			<ul class="product-filters">
 				<li><input type="radio" name="status" id="status-show-all" data-filter="" checked><label for="status-show-all">Show All</label></li>
 				<li><input type="radio" name="status" id="status-available" data-filter=".category-available" ><label for="status-available">Available</label></li>
@@ -35,6 +36,7 @@ get_header(); ?>
 			</ul>
 		</div>
 		<div class="product-filters-container">
+			<h3 class="gray-underline">Strain Type</h3>
 			<ul class="product-filters">
 				<li><input type="radio" name="strain-types" id="strain-type-show-all" data-filter="" checked><label for="strain-type-show-all">Show All</label></li>
 				<li><input type="radio" name="strain-types" id="strain-type-indica" data-filter=".category-indica" ><label for="strain-type-indica">Indica</label></li>
