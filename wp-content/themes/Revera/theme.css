@@ -149,8 +149,7 @@ nav.main-navigation{
 	
 #primary-menu-container li ul li a:hover ,#primary-menu-container li ul li ul li a:hover ,#primary-menu-container li ul li ul li ul li a:hover {
 	color: #ed564b;
-
-		}
+}
 
 
 #primary-menu-container li ul {
@@ -1127,7 +1126,7 @@ ul.copyright-footer li:first-child:before {
 }
 
 .homepage-blog-list h3 {
-	color: #a7a9ac
+	color: #a7a9ac;
 	padding-top: 6px;
 	width: -moz-max-content;
 	width: -webkit-max-content;
