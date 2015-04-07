@@ -80,11 +80,11 @@ get_header(); ?>
 				 ?>
 							
 					<div class="hthumb">
-						<?php if($image) : ?>
-						<a href="<?php the_permalink(); ?>"><img class="img-responsive" src="<?php echo $image ?>"/></a>
-						<?php endif; ?>
-						<h3><a href="<?php the_permalink(); ?>"><p class="title"><?php the_title(); ?></p></a></h3>
-						<p><?php the_excerpt(); ?></p>
+						<?php if($image) { 
+							$productUrl = get_post_meta(get_the_ID(), 'shop_url', true);
+						?>
+						<a href="<?= $productUrl ?>"><img class="img-responsive" src="<?php echo $image ?>"/></a>
+						<?php } ?>
 					</div>
 
 				 
