@@ -1181,9 +1181,14 @@ ul.copyright-footer li:first-child:before {
 
 .page-template-leftandcenternav-page h2, 
 .page-template-leftandcenternav-page h3 {
-	font-size: 14px;
+	font-size: 16px;
+}
+
+.page-template-leftandcenternav-page h2 a, 
+.page-template-leftandcenternav-page h3 a {
 	color: #a7a9ac;
 }
+
 
 .page-template-leftandcenternav-page h2.left-nav-selected-child,
 .page-template-leftandcenternav-page h3.center-nav-item.active
