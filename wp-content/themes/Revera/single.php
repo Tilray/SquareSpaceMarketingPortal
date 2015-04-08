@@ -14,10 +14,10 @@ get_header(); ?>
 				<?php 
 				$port_cat =ft_of_get_option('fabthemes_portfolio');
 				if (in_category($port_cat)) { ?>
-				<h3> Portfolio item </h3> 
+				<h1> Portfolio item </h1> 
 				<p> Project item from your portfolio</p>
 				<?php } else { ?>
-				<h3> Blog post </h3> 
+				<h1> Blog post </h1> 
 				<p> Article from your blog</p>
 				<?php } ?>
 			</div>

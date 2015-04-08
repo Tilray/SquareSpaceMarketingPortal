@@ -17,7 +17,7 @@ get_header(); ?>
 	<div class="container">
 		<div class="row">
 			<div class="col-12">
-				<h3> Blog </h3>
+				<h1> Blog </h1>
 				<p> Articles from blog </p>
 			</div>
 			

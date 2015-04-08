@@ -36,6 +36,10 @@ h1, h2, h3, h4, h5, h6 {
 	color: #084875;
 }
 
+.page-head h1 {
+	font-size: 20px;
+}
+
 code{
 	white-space: normal;
 }
@@ -1095,6 +1099,11 @@ ul.product-filters{
 
 ul.product-filters li {
 	list-style-type: none;
+}
+
+ul.product-filters li, 
+ul.product-filters li label {
+	cursor: pointer;
 }
 
 ul.product-filters label {

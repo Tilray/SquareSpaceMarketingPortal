@@ -11,7 +11,7 @@ get_header(); ?>
 	<div class="container">
 		<div class="row">
 			<div class="col-12">
-				<h3> <?php printf( __( 'You searched for: %s', 'web2feel' ), '<span>' . get_search_query() . '</span>' ); ?> </h3>
+				<h1> <?php printf( __( 'You searched for: %s', 'web2feel' ), '<span>' . get_search_query() . '</span>' ); ?> </h1>
 				<p> Search results </p>
 			</div>
 			

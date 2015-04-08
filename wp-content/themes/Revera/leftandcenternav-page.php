@@ -10,7 +10,7 @@ get_header(); ?>
 	<div class="container">
 		<div class="row">
 			<div class="col-12">
-				<h3> <?php the_title(); ?> </h3>
+				<h1> <?php the_title(); ?> </h1>
 				<p> </p>
 			</div>
 			
