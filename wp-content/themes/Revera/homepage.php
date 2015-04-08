@@ -25,7 +25,7 @@ get_header(); ?>
 	<div class="row">
 		<div class="col-3"></div>
 		<div class="col-6 homepage-main-content">
-			<div class="home-register-button"><a>Register</a></div>
+			<div class="home-register-button"><a><h2>Register</h2></a></div>
 			<?php echo $postContent; ?>
 		</div>
 		<div class="col-3"></div>

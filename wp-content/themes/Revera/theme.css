@@ -1,3 +1,14 @@
+@font-face{
+font-family:"Univers LT W01_55 Roman";
+src:url("../fonts/723815/b5c30ea8-0700-4fd2-aa12-cc45074693a9.eot?#iefix");
+src:url("../fonts/723815/b5c30ea8-0700-4fd2-aa12-cc45074693a9.eot?#iefix") format("eot"),url("Fonts/723815/091fe5d9-1aaa-4f3c-9b94-c83bb7c362ab.woff2") format("woff2"),url("../fonts/723815/7b95cb9a-a288-4405-97a0-13095f56a903.woff") format("woff"),url("Fonts/723815/c7481806-4ea4-40db-a623-7bc352bbbe43.ttf") format("truetype"),url("../fonts/723815/ac8280da-3de5-456d-bd77-8f01665452a9.svg#ac8280da-3de5-456d-bd77-8f01665452a9") format("svg");
+}
+@font-face{
+font-family:"Univers LT W01_65 Bold";
+src:url("../fonts/723827/db1c462f-8890-4a11-9de5-36872279e20a.eot?#iefix");
+src:url("../fonts/723827/db1c462f-8890-4a11-9de5-36872279e20a.eot?#iefix") format("eot"),url("Fonts/723827/a88f6520-d0c2-4877-b792-cb77cca8e307.woff2") format("woff2"),url("../fonts/723827/b993da84-c1f6-474a-8f00-8aa797b3de8f.woff") format("woff"),url("Fonts/723827/58403ef6-4c15-4280-b4b6-9acf50804f4f.ttf") format("truetype"),url("../fonts/723827/9178e351-95c5-4913-9eeb-fd0645a18c2d.svg#9178e351-95c5-4913-9eeb-fd0645a18c2d") format("svg");
+}
+
 @import url(http://fonts.googleapis.com/css?family=Oxygen:400,300,700);
 
 body,
@@ -6,7 +17,7 @@ input,
 select,
 textarea {
 	color: #a7a9ac;
-	font-family: 'Oxygen',sans-serif;
+	font-family: 'Univers LT W01_55 Roman',sans-serif;
 	font-size: 14px;
 	font-size: 1.4rem;
 	line-height: 1.6;
@@ -21,6 +32,7 @@ h5 { font-size: 16px; }
 h6 { font-size: 14px; }
 
 h1, h2, h3, h4, h5, h6 {
+	font-family: 'Univers LT W01_65 Bold',sans-serif;
 	color: #084875;
 }
 
@@ -113,6 +125,7 @@ nav.main-navigation{
 }
 	
 #primary-menu-container li a {
+	font-family: 'Univers LT W01_65 Bold',sans-serif;
 	color: #084875;
 	display: block;
     margin: 0;
@@ -198,8 +211,18 @@ nav.main-navigation{
 	background-color: #000;
 }
 
+
+
 .login-nav-wrapper{
 	height:25px;
+	font-size: 12px;
+	line-height: 25px;
+}
+
+#login-menu-register-button,
+#login-menu-sign-in-button,
+#language-chooser {
+	font-family: 'Univers LT W01_65 Bold',sans-serif;
 }
 
 #login-menu-register-button {
@@ -210,6 +233,8 @@ nav.main-navigation{
 	text-align: center;
 	height: 100%;
 }
+
+
 
 #login-menu-sign-in-button, 
 #language-chooser {
@@ -222,24 +247,17 @@ nav.main-navigation{
 	margin-left: 5px;
 }
 
-.language-chooser{
-	position: relative;
-	display: inline;
-}
 
+.language-chooser,
 .language-chooser a,
-.language-chooser a:visited
+.language-chooser a:visited,
+.language-chooser a:hover
 {
 	position: relative;
 	display: inline;
 	color: #fff;
-	text-transform: uppercase;
 }
 
-.language-chooser a:hover
-{
-	color: #fff
-}
 
 .caret{
   display: inline-block;
@@ -1117,13 +1135,14 @@ ul.copyright-footer li:first-child:before {
 	border: solid 2px #ffb12f;
 	text-transform: uppercase;
 	text-align: center;
-	line-height: 50px;
 	margin: 10px auto 15px auto;
 }
 
-.home-register-button a {
+.home-register-button a h2{
 	color: #ffb12f;
+	line-height: 16px;
 }
+
 
 .homepage-main-content {
 	text-align: center;
