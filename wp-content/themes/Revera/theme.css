@@ -36,9 +36,6 @@ h1, h2, h3, h4, h5, h6 {
 	color: #084875;
 }
 
-.page-head h1 {
-	font-size: 20px;
-}
 
 code{
 	white-space: normal;
@@ -569,7 +566,7 @@ a.frmore{
 }
 
 
-.page-head h3{
+.page-head h1{
 	font-size: 24px;
 	text-transform: uppercase;
 	font-weight: bold;
