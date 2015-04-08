@@ -1097,6 +1097,10 @@ ul.product-filters li {
 	list-style-type: none;
 }
 
+ul.product-filters label {
+	font-size: 12px;
+}
+
 ul.product-filters input[type=radio] {
    position: absolute;
    left: -9999px;
@@ -1104,7 +1108,7 @@ ul.product-filters input[type=radio] {
       area and turn opacity to 0 instead. */
 }
 ul.product-filters input[type=radio]:checked ~ label {
-   color: red;
+	color: #084875;
    font-weight: bold;
 }
 
@@ -1167,4 +1171,16 @@ ul.copyright-footer li:first-child:before {
 	color: #a7a9ac;
 	padding-top: 5px;
 	padding-bottom: 15px;
+}
+
+.page-template-leftandcenternav-page h2, 
+.page-template-leftandcenternav-page h3 {
+	font-size: 14px;
+	color: #a7a9ac;
+}
+
+.page-template-leftandcenternav-page h2.left-nav-selected-child,
+.page-template-leftandcenternav-page h3.center-nav-item.active
+{
+	color: #084875;
 }
