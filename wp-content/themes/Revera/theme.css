@@ -1186,7 +1186,7 @@ ul.copyright-footer li:first-child:before {
 
 
 .page-template-leftandcenternav-page h2.left-nav-selected-child a,
-.page-template-leftandcenternav-page h3.center-nav-item.active a
+.page-template-leftandcenternav-page span.center-nav-item.active a h3
 {
 	color: #084875;
 }
