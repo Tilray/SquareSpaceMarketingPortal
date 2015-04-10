@@ -31,7 +31,7 @@ get_header(); ?>
 						$linkClass = "left-nav-selected-child";
 					}
 					?>
-					<p><a href="<?php echo get_permalink( $child->ID );?>"><h3 class="<?=$linkClass?>"><?php echo $child->post_title; ?></h3></a></p>
+					<p><a href="<?php echo get_permalink( $child->ID );?>"><h2 class="<?=$linkClass?>"><?php echo $child->post_title; ?></h2></a></p>
 					<?php
 				}
 			?>

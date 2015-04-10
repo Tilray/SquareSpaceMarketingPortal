@@ -1191,6 +1191,7 @@ ul.copyright-footer li:first-child:before {
 	padding-bottom: 15px;
 }
 
+.page-template-leftnavchildren-page h2, 
 .page-template-leftandcenternav-page h2, 
 .page-template-leftandcenternav-page h3 {
 	font-size: 16px;
