@@ -1211,6 +1211,7 @@ ul.copyright-footer li:first-child:before {
 }
 
 
+.page-template-leftnavchildren-page h2.left-nav-selected-child a, 
 .page-template-leftandcenternav-page h2.left-nav-selected-child a,
 .page-template-leftandcenternav-page span.center-nav-item.active a h3
 {
