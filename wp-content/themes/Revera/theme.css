@@ -1202,10 +1202,12 @@ ul.copyright-footer li:first-child:before {
 	font-size: 16px;
 }
 
+.page-template-leftnavchildren-page h2 a, 
 .page-template-leftandcenternav-page h2 a, 
 .page-template-leftandcenternav-page span.center-nav-item a h3
 {
 	color: #a7a9ac;
+	cursor: pointer;
 }
 
 
