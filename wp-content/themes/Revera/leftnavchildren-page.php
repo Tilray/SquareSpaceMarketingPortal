@@ -20,7 +20,7 @@ get_header(); ?>
 
 <div class="container">	
 	<div class="row">
-		<div id="secondary left-nav-menu" class="col-sm-3">
+		<div id="secondary" class="col-sm-3 left-nav-menu">
 			<?php
 				$childPages = get_child_pages(get_the_ID());
 				foreach ($childPages as $child)

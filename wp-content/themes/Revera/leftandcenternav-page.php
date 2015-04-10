@@ -20,7 +20,7 @@ get_header(); ?>
 
 <div class="container">	
 	<div class="row">
-		<div id="secondary left-nav-menu" class="col-sm-3">
+		<div id="secondary" class="col-sm-3 left-nav-menu">
 			<?php
 				$parID = wp_get_post_parent_id(get_the_ID());
 				if ($parID)
