@@ -22,7 +22,8 @@ get_header(); ?>
 	<div class="row">
 		<div id="secondary" class="col-sm-3">
 			<?php
-				$childPages = get_child_pages(get_the_ID());
+				$parID = wp_get_post_parent_id(get_the_ID());
+				$childPages = get_child_pages($parID);
 				foreach ($childPages as $child)
 				{
 					$linkClass = "none";
