@@ -59,4 +59,6 @@ get_header(); ?>
 	<?php get_sidebar(); ?>
 	</div>
 </div>
+</div> <!-- #page -->
+
 <?php get_footer(); ?>
