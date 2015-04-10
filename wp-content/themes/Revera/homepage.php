@@ -54,5 +54,6 @@ get_header(); ?>
 </div>
 
 </div>
+</div> <!-- #page -->
 
 <?php get_footer(); ?>

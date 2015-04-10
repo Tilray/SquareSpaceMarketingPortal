@@ -122,4 +122,6 @@ get_header(); ?>
 	});
 </script>
 
+</div> <!-- #page -->
+
 <?php get_footer(); ?>
