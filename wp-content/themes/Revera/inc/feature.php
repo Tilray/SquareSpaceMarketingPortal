@@ -1,10 +1,10 @@
 <div id="slidebox" class="flexslider">
 
 		<ul class="slides">
-		    <?php 	$count = ft_of_get_option('fabthemes_slide_number');
+		    <?php 	
 					$slidecat =ft_of_get_option('fabthemes_slide_categories');
 					
-					$query = new WP_Query( array( 'cat' =>$slidecat,'posts_per_page' =>$count ) );
+					$query = new WP_Query( array( 'cat' =>$slidecat,'posts_per_page' =>'100' ) );
 		           	if ($query->have_posts()) : while ($query->have_posts()) : $query->the_post();	?>
 		 	
 			 		<li>
