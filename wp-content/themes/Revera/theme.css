@@ -389,6 +389,15 @@ header{
 }
 
 /* Layout */
+html, body {
+	min-height: 100%;
+}
+
+#page{
+	min-height: 100%;
+	margin-bottom: -60px;
+	padding-bottom: 60px;
+}
 
 #primary {
 	min-height: 500px;
@@ -1020,6 +1029,7 @@ h3.bothead{
 	padding: 10px 0px;
 	background:#444444;
 	font-size: 12px;
+	height: 60px;
 }
 
 .fcred{
