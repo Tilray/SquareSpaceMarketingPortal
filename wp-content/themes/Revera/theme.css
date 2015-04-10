@@ -1196,14 +1196,12 @@ ul.copyright-footer li:first-child:before {
 	padding-bottom: 15px;
 }
 
-.page-template-leftnavchildren-page h2, 
-.page-template-leftandcenternav-page h2, 
+.left-nav-menu h2, 
 .page-template-leftandcenternav-page h3 {
 	font-size: 16px;
 }
 
-.page-template-leftnavchildren-page h2 a, 
-.page-template-leftandcenternav-page h2 a, 
+.left-nav-menu h2 a, 
 .page-template-leftandcenternav-page span.center-nav-item a h3
 {
 	color: #a7a9ac;
@@ -1211,8 +1209,7 @@ ul.copyright-footer li:first-child:before {
 }
 
 
-.page-template-leftnavchildren-page h2.left-nav-selected-child a, 
-.page-template-leftandcenternav-page h2.left-nav-selected-child a,
+.left-nav-menu h2.left-nav-selected-child a, 
 .page-template-leftandcenternav-page span.center-nav-item.active a h3
 {
 	color: #084875;
