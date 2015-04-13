@@ -1083,9 +1083,40 @@ h3.bothead{
 	}
 }
 
-.left-nav-selected-child a{
-	color: #000;
+span.center-nav-selected-child a,
+span.left-nav-selected-child a{
+	position: relative;	
 }
+
+span.center-nav-selected-child a h3,
+span.left-nav-selected-child a h2{
+	color: #084875;
+}
+
+span.center-nav-selected-child h3::after,
+span.left-nav-selected-child h2::after{
+	content: "";
+	color: #084875;
+	position: absolute;
+	display: list-item;
+	font-size: 30px;
+	top: -10px;
+	left: 10px;
+}
+
+.left-nav-menu a h2, 
+.center-nav-item a h3
+{
+	font-size: 16px;
+	color: #a7a9ac;
+	cursor: pointer;
+}
+
+
+
+
+
+
 
 .switchpane
 {
@@ -1196,24 +1227,4 @@ ul.copyright-footer li:first-child:before {
 	padding-top: 5px;
 	padding-bottom: 15px;
 }
-
-.left-nav-menu h2, 
-.page-template-leftandcenternav-page h3 {
-	font-size: 16px;
-}
-
-.left-nav-menu h2 a, 
-.page-template-leftandcenternav-page span.center-nav-item a h3
-{
-	color: #a7a9ac;
-	cursor: pointer;
-}
-
-
-.left-nav-menu h2.left-nav-selected-child a, 
-.page-template-leftandcenternav-page span.center-nav-item.active a h3
-{
-	color: #084875;
-}
-
 

@@ -34,7 +34,7 @@ get_header(); ?>
 							$linkClass = "left-nav-selected-child";
 						}
 						?>
-						<p><a href="<?php echo get_permalink( $child->ID );?>"><h2 class="<?=$linkClass?>"><?php echo $child->post_title; ?></h2></a></p>
+						<span class="<?=$linkClass?>"><a href="<?php echo get_permalink( $child->ID );?>"><span class="left-nav-bullet"></span><h2><?php echo $child->post_title; ?></h2></a></span>
 						<?php
 					}
 				}
@@ -54,8 +54,8 @@ get_header(); ?>
 			function SelectPane(index){
 				jQuery(allPanes).removeClass('active');
 				jQuery(allPanes[index]).addClass('active');
-				jQuery(allCenterNavItems).removeClass('active');
-				jQuery(allCenterNavItems[index]).addClass('active');
+				jQuery(allCenterNavItems).removeClass('center-nav-selected-child');
+				jQuery(allCenterNavItems[index]).addClass('center-nav-selected-child');
 			};
 		
 			for(var i = 0; i < allPanes.length; i++)
@@ -63,14 +63,15 @@ get_header(); ?>
 				var title = jQuery(allPanes[i]).attr('data-title');
 				var parentDiv = jQuery('#center-nav')[0];
 				
-				jQuery(parentDiv).append('<span data-index="'+ i +'" class="center-nav-item"><a><h3>' + title + '</h3></a></span>');
-				var allCenterNavItems = jQuery(centerNavItemSelector);
-				allCenterNavItems.click(function() {
-					var $this = jQuery(this);
-					var thisIndex = $this.attr('data-index');
-					SelectPane(thisIndex);
-				});
+				jQuery(parentDiv).append('<span data-index="'+ i +'" class="center-nav-item"><a><span class="left-nav-bullet"></span><h3>' + title + '</h3></a></span>');
 			}
+
+			var allCenterNavItems = jQuery(centerNavItemSelector);
+			allCenterNavItems.click(function() {
+				var $this = jQuery(this);
+				var thisIndex = $this.attr('data-index');
+				SelectPane(thisIndex);
+			});
 			
 			
 			SelectPane(0);
