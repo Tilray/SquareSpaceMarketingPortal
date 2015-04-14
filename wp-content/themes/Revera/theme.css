@@ -1083,7 +1083,7 @@ h3.bothead{
 	}
 }
 
-span.center-nav-selected-child a,
+.left-nav-menu span a,
 span.left-nav-selected-child a{
 	position: relative;	
 }
