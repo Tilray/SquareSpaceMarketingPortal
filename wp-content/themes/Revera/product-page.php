@@ -81,9 +81,12 @@ get_header(); ?>
 							
 					<div class="hthumb">
 						<?php if($image) { 
-							$productUrl = get_post_meta(get_the_ID(), 'shop_url', true);
-						?>
-						<a href="<?= $productUrl ?>"><img class="img-responsive" src="<?php echo $image ?>"/></a>
+							$productUrl = trim(get_post_meta(get_the_ID(), 'shop_url', true));
+							if ($productUrl == null || strlen($productUrl) == 0){
+								$productUrl = get_the_permalink();
+							}
+							?>
+							<a href="<?= $productUrl ?>"><img class="img-responsive" src="<?php echo $image ?>"/></a>
 						<?php } ?>
 					</div>
 
