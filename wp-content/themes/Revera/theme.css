@@ -1084,7 +1084,8 @@ h3.bothead{
 }
 
 .left-nav-menu span a,
-span.left-nav-selected-child a{
+span.left-nav-selected-child a,
+span.center-nav-selected-child a{
 	position: relative;	
 }
 
