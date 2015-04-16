@@ -33,7 +33,7 @@ get_header(); ?>
 				<ul class="product-filters">
 					<li><input type="radio" name="status" id="status-show-all" data-filter="" checked><label for="status-show-all">Show All</label></li>
 					<li><input type="radio" name="status" id="status-available" data-filter=".category-available" ><label for="status-available">Available</label></li>
-					<li><input type="radio" name="status" id="status-in-production" data-filter=".category-coming-soon" ><label for="status-in-production">In Production</label></li>
+					<li><input type="radio" name="status" id="status-in-production" data-filter=".category-in-production" ><label for="status-in-production">In Production</label></li>
 				</ul>
 			</div>
 			<div class="product-filters-container">
