@@ -114,7 +114,6 @@ get_header(); ?>
 		if (filter.trim() == '')
 			filter = '*';
 			
-		console.log("New filter: " + filter);
 		jQuery('#primary').isotope({ filter: filter });
 	}
 	
