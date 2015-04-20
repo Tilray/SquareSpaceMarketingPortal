@@ -53,7 +53,6 @@ get_header(); ?>
 		
 			<div id="primary" class="js-isotope" data-isotope-options='{ "columnWidth": 200, "itemSelector": ".product-item" }'>
 			<?php
-			$port_count = ft_of_get_option('fabthemes_port_number');
 			$port_cat =ft_of_get_option('fabthemes_portfolio');
 			
 			if ( get_query_var('paged') )
@@ -62,7 +61,7 @@ get_header(); ?>
 				$paged = get_query_var('page');
 			else
 				$paged = 1;
-			$wp_query = new WP_Query(array('post_type' => 'tilray_product', 'posts_per_page' => $port_count, 'paged' => $paged ));
+			$wp_query = new WP_Query(array('post_type' => 'tilray_product', 'posts_per_page' => '100', 'paged' => $paged ));
 			?>
 			<?php while ($wp_query->have_posts()) : $wp_query->the_post(); 
 					$all_the_tags = wp_get_post_tags( get_the_ID() );
