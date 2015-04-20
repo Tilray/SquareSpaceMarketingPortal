@@ -39,7 +39,20 @@ get_header(); ?>
 
 				<!-- the loop -->
 				<?php while ( $the_query->have_posts() ) : $the_query->the_post(); ?>
-					<h2><?php the_title(); ?></h2>
+					<div class="blog-post-preview">
+						<a href="<?php the_permalink(); ?>"><h2><?php the_title(); ?></h2></a>
+						<h3><?php the_time('F j, Y'); ?></h3>
+						<?php
+						$thumbID = get_post_thumbnail_id();
+						$img_attrs = wp_get_attachment_image_src( $thumbID,'product-thumb' ); //get full URL to image (use "large" or "medium" if the images too big)
+						$image = $img_attrs[0];
+						if($image) {?>
+							<a href="<?php the_permalink(); ?>"><img class="blog-featured-image" src="<?= $image ?>"/></a>
+						<?php }?>
+						<p>
+							<?php the_content(); ?>
+						</p>
+					</div>
 				<?php endwhile; ?>
 				<!-- end of the loop -->
 

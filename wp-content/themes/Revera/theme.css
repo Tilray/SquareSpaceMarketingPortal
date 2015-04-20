@@ -1230,3 +1230,21 @@ ul.copyright-footer li:first-child:before {
 	padding-bottom: 15px;
 }
 
+.page-template-blog-page h2{
+	font-size: 22px;
+}
+.page-template-blog-page h3{
+	margin-top: -10px;
+	margin-bottom: 12px;
+	color: #a7a9ac;
+	font-size: 12px;
+	text-transform: uppercase;
+}
+.page-template-blog-page img.blog-featured-image{
+	margin-bottom: 12px;
+}
+
+div.blog-post-preview:nth-child(n+2){
+	border-top: 1px solid #dfdfdf;
+	margin-top: 50px;
+}

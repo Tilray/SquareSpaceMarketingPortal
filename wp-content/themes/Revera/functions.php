@@ -220,3 +220,5 @@ function get_child_pages($postId)
 
 
 remove_filter( 'the_content', 'wpautop' );
+
+add_image_size( 'product-thumb', 616, 280, true );
