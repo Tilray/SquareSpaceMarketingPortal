@@ -539,6 +539,7 @@ a.frmore{
 
 }
 .hthumb a img{
+	margin: auto;
 	display: block;
 }
 .hthumb{
