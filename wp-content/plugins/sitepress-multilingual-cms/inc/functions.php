@@ -485,6 +485,18 @@ function get_current_language_name(){
 	return "-";
 }
 
+function get_current_language_code(){
+	$allTheLangs = icl_get_languages('skip_missing=0&orderby=id&order=asc');
+	foreach($allTheLangs as $lang){
+		if ($lang["active"] == "1"){
+			return $lang["language_code"];
+		}
+	}
+	
+	return "-";
+}
+
+
 function render_language_chooser($ul_class){
 	?><ul class="<?=$ul_class; ?>"><?php
 	$allTheLangs = icl_get_languages('skip_missing=0&orderby=id&order=asc');

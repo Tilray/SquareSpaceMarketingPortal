@@ -25,6 +25,15 @@ get_header(); ?>
 	</div>
 </div>
 
+<?php
+	$filterLangCode = "";
+	$currLangCode = get_current_language_code();
+	if ($currLangCode != "en")
+	{
+		$filterLangCode	= "-" . $currLangCode;
+	}
+?>
+
 <div class="container">	
 	<div class="row filters">
 		<div class="col-12">
@@ -32,18 +41,18 @@ get_header(); ?>
 				<h3 class="gray-underline">Status</h3>
 				<ul class="product-filters">
 					<li><input type="radio" name="status" id="status-show-all" data-filter="" checked><label for="status-show-all">Show All</label></li>
-					<li><input type="radio" name="status" id="status-available" data-filter=".category-available" ><label for="status-available">Available</label></li>
-					<li><input type="radio" name="status" id="status-in-production" data-filter=".category-in-production" ><label for="status-in-production">In Production</label></li>
+					<li><input type="radio" name="status" id="status-available" data-filter=".category-available<?=$filterLangCode?>" ><label for="status-available">Available</label></li>
+					<li><input type="radio" name="status" id="status-in-production" data-filter=".category-in-production<?=$filterLangCode?>" ><label for="status-in-production">In Production</label></li>
 				</ul>
 			</div>
 			<div class="product-filters-container">
 				<h3 class="gray-underline">Strain Type</h3>
 				<ul class="product-filters">
 					<li><input type="radio" name="strain-types" id="strain-type-show-all" data-filter="" checked><label for="strain-type-show-all">Show All</label></li>
-					<li><input type="radio" name="strain-types" id="strain-type-indica" data-filter=".category-indica" ><label for="strain-type-indica">Indica</label></li>
-					<li><input type="radio" name="strain-types" id="strain-type-sativa" data-filter=".category-sativa" ><label for="strain-type-sativa">Sativa</label></li>
-					<li><input type="radio" name="strain-types" id="strain-type-hybrid" data-filter=".category-hybrid" ><label for="strain-type-hybrid">Hybrid</label></li>
-					<li><input type="radio" name="strain-types" id="strain-type-high-cbd" data-filter=".category-high-cbd" ><label for="strain-type-high-cbd">High CBD</label></li>
+					<li><input type="radio" name="strain-types" id="strain-type-indica" data-filter=".category-indica<?=$filterLangCode?>" ><label for="strain-type-indica">Indica</label></li>
+					<li><input type="radio" name="strain-types" id="strain-type-sativa" data-filter=".category-sativa<?=$filterLangCode?>" ><label for="strain-type-sativa">Sativa</label></li>
+					<li><input type="radio" name="strain-types" id="strain-type-hybrid" data-filter=".category-hybrid<?=$filterLangCode?>" ><label for="strain-type-hybrid">Hybrid</label></li>
+					<li><input type="radio" name="strain-types" id="strain-type-high-cbd" data-filter=".category-high-cbd<?=$filterLangCode?>" ><label for="strain-type-high-cbd">High CBD</label></li>
 				</ul>
 			</div>
 		</div>
