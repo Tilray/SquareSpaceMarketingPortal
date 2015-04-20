@@ -70,7 +70,7 @@ get_header(); ?>
 						$combined_tags = $combined_tags . " category-" . strtolower($this_tag->slug);
 					}
 			?>
-				<div class="col-sm-3 col-6 portbox post product-item <?= $combined_tags?>" data-id="get_the_ID()">
+				<div class="col-sm-3 col-6 portbox post product-item <?= $combined_tags?>" data-id="<?=get_the_ID()?>">
 						
 				 <?php
 					$thumb = get_post_thumbnail_id();
