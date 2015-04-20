@@ -109,11 +109,12 @@ get_header(); ?>
 		var allFilters = jQuery('ul.product-filters input[type=radio]:checked');
 		for (var i = 0; i < allFilters.length; i++)
 		{
-			filter += jQuery(allFilters[i]).attr('data-filter') + " ";
+			filter += jQuery(allFilters[i]).attr('data-filter');
 		}
 		if (filter.trim() == '')
 			filter = '*';
 			
+		console.log("New filter: " + filter);
 		jQuery('#primary').isotope({ filter: filter });
 	}
 	
