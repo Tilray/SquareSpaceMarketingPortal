@@ -23,7 +23,6 @@ get_header(); ?>
 		</div>
 	</div>
 </div>
-STUFF HERE
 <div class="container">	
 	<div class="row">
 	<div id="primary" class="content-area col-sm-8">
