@@ -226,29 +226,44 @@ nav.main-navigation{
 	line-height: 25px;
 }
 
-#login-menu-register-button,
-#login-menu-sign-in-button,
+ul#login-menu li
+{
+	display: inline;
+	list-style-type: none;
+	float: right;
+	text-align: center;
+	height: 100%;
+}
+
+ul#login-menu {
+	height: 100%;
+}
+
+ul#login-menu li a {
+	color: #fff;
+}
+
+
+ul#login-menu li,
 #language-chooser {
 	font-family: 'Univers LT W01_65 Bold',sans-serif;
 }
 
-#login-menu-register-button {
+ul#login-menu li:last-child a{
 	background-color: #ffb12f;
 	width: 150px;
 	float: right;
-	color: #fff;
 	text-align: center;
 	height: 100%;
 }
 
 
 
-#login-menu-sign-in-button, 
+ul#login-menu li:first-child a,
 #language-chooser {
 	background-color: #3caefb;
 	width: 100px;
 	float: right;
-	color: #fff;
 	text-align: center;
 	height: 100%;
 	margin-left: 5px;

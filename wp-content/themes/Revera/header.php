@@ -32,8 +32,7 @@
 				<?php
 				}
 				?>
-				<div id="login-menu-sign-in-button">Sign In</div>
-				<div id="login-menu-register-button">REGISTER</div>
+				<?php wp_nav_menu( array( 'container' => '', 'theme_location' => 'login','container_class' => 'login-menu-container','menu_id'=>'login-menu' ,'menu_class'=>'login-menu' ) ); ?>
 			</div>
 			<div id="languagedropdownwrapper">
 				<div id="languagedropdown" class="closed"><?php
