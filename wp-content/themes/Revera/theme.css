@@ -1199,7 +1199,7 @@ ul.copyright-footer li:first-child:before {
 	margin: 10px auto 15px auto;
 }
 
-.home-register-button a h2{
+a div.home-register-button h2{
 	color: #ffb12f;
 	line-height: 16px;
 }
