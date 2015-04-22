@@ -43,14 +43,12 @@ code{
 
 
 /* Links */
-a {
-}
-a:visited {
-}
+a,
+a:visited,
 a:hover,
 a:focus,
 a:active {
-	color:#000;
+	color: #084875;
 	text-decoration: none;
 }
 
@@ -138,7 +136,7 @@ nav.main-navigation{
 
 #primary-menu-container li.current-page-ancestor a,
 #primary-menu-container li.current-menu-item a {
-    border-bottom: 4px solid #084875;
+    border-top: 4px solid #084875;
 }
 
 
@@ -544,7 +542,7 @@ a.frmore{
 
 .section-title p{
 	font-weight: bold;
-	border-bottom: 1px solid #dfdfdf;
+	border-bottom: 2px solid #cccccc;
 	color: #aaa;
 	padding-bottom: 20px;
 }
@@ -608,7 +606,7 @@ a.frmore{
 	font-size: 24px;
 	text-transform: uppercase;
 	font-weight: bold;
-	border-bottom:1px solid #cccccc;
+	border-bottom:2px solid #cccccc;
 }
 
 article.post, article.page, section.error-404{
@@ -1153,8 +1151,9 @@ div.product-filters-container{
 
 .gray-underline{
 	width: 100%;
-	border-bottom: 1px solid #dfdfdf;
+	border-bottom: 2px solid #cccccc;
 }
+
 
 ul.product-filters{
 	margin: 0;
@@ -1182,6 +1181,17 @@ ul.product-filters input[type=radio] {
 ul.product-filters input[type=radio]:checked ~ label {
 	color: #084875;
    font-weight: bold;
+}
+
+div.single-product-attributes {
+	margin-top: 20px;
+	border-top: 2px solid #cccccc;
+	padding-top: 7px;
+}
+
+div.single-product-attributes a {
+	font-family:"Univers LT W01_65 Bold";
+	margin-right: 20px;
 }
 
 ul.copyright-footer{
@@ -1229,7 +1239,7 @@ a div.home-register-button h2{
 	width: -moz-max-content;
 	width: -webkit-max-content;
 	width: max-content;	
-	border-top: 1px solid #dfdfdf;
+	border-top: 2px solid #cccccc;
 	margin: 0;
 }
 
@@ -1260,6 +1270,6 @@ a div.home-register-button h2{
 }
 
 div.blog-post-preview:nth-child(n+2){
-	border-top: 1px solid #dfdfdf;
+	border-top: 2px solid #cccccc;
 	margin-top: 50px;
 }

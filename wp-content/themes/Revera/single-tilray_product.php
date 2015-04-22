@@ -30,7 +30,7 @@ get_header(); ?>
 		<div class="col-sm-6">
 			<?php
 			$thumbid = get_post_thumbnail_id();
-			$img_attrs = wp_get_attachment_image_src( $thumbid,'product-thumb' ); //get full URL to image (use "large" or "medium" if the images too big)
+			$img_attrs = wp_get_attachment_image_src( $thumbid,'product-single' );
 			$image = $img_attrs[0];
 			?>
 			<img class="single-product-image" src="<?=$image?>"/>
