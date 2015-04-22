@@ -16,7 +16,7 @@ get_header(); ?>
 	<div class="container">
 		<div class="row">
 			<div class="col-12">
-				<h1><?php the_title(); ?></h1>
+				<h1>PRODUCTS</h1>
 				<p> </p>
 			</div>
 			
@@ -26,23 +26,26 @@ get_header(); ?>
 
 <div class="container">	
 	<div class="row">
-	<div id="primary" class="content-area col-sm-8">
-		<main id="main" class="site-main" role="main">
-
-			<?php while ( have_posts() ) : the_post(); ?>
-
-				<?php get_template_part( 'content', 'page' ); ?>
-
-				<?php
-					// If comments are open or we have at least one comment, load up the comment template
-					if ( comments_open() || '0' != get_comments_number() )
-						comments_template();
-				?>
-
-			<?php endwhile; // end of the loop. ?>
-
-		</main><!-- #main -->
+	<div id="primary" class="content-area col-12">
+		<div class="col-sm-6">
+			<?php
+			$thumbid = get_post_thumbnail_id();
+			$img_attrs = wp_get_attachment_image_src( $thumbid,'product-thumb' ); //get full URL to image (use "large" or "medium" if the images too big)
+			$image = $img_attrs[0];
+			?>
+			<img class="single-product-image" src="<?=$image?>"/>
+		</div>
+		<div class="col-sm-4">
+			<h2><?php the_title(); ?></h2>
+			<?php the_content(); ?>
+			<div class="single-product-attributes">
+				<a href="*">Available</a> <a href="*">Sativa</a>
+			</div>
+		</div>
+		<div class="col-sm-2">
+		</div>
 	</div><!-- #primary -->
+	
 	</div>
 </div>
 </div><!-- #page -->

@@ -40,17 +40,15 @@ get_header(); ?>
 	$qpStatus = 'status';
 	$status = "";
 	$strainType = "";
-	$statuses = array("", "available", "in-production");
-	$strainTypes = array("", "indica", "sativa", "hybrid", "high-cbd");
 	
 	$requestedStrainType = strtolower($_GET[$qpStrain]);
-	if (isset($requestedStrainType) && in_array($requestedStrainType, $strainTypes))
+	if (isset($requestedStrainType) && in_array($requestedStrainType, $allStrainTypes))
 	{
 		$strainType = $requestedStrainType;
 	}
 	
 	$requestedStatus = strtolower($_GET[$qpStatus]);
-	if (isset($requestedStatus) && in_array($requestedStatus, $statuses))
+	if (isset($requestedStatus) && in_array($requestedStatus, $allStatuses))
 	{
 		$status = $requestedStatus;
 	}
