@@ -219,6 +219,18 @@ function get_child_pages($postId)
 }
 
 
+function get_combined_category_ids($categoryNames)
+{
+	$categoryIDs = array();
+	foreach($categoryNames as $thisCategoryName)
+	{
+		$thisCatID = get_cat_ID( $thisCategoryName );
+		array_push($categoryIDs, $thisCatID);
+	}
+	
+	$allCatIDs = implode(",", $categoryIDs);
+}
+
 remove_filter( 'the_content', 'wpautop' );
 
 add_image_size( 'product-thumb', 616, 280, true );
