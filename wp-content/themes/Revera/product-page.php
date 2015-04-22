@@ -51,6 +51,20 @@ get_header(); ?>
 	//somehow hide all products and filters if noscript is rendered
 	//render filtered products in noscript block
 
+	$combinedFilter = "";
+	if ($status != "")
+	{
+		$combinedFilter = $combinedFilter . ".category-" . $status;
+	}
+	if ($strainType != "")
+	{
+		$combinedFilter = $combinedFilter . ".category-" . $strainType;
+	}
+	
+	if ($combinedFilter == "")
+	{
+		$combinedFilter = "*";
+	}
 ?>
 
 <div class="container">	
@@ -79,7 +93,7 @@ get_header(); ?>
 	<div class="row">
 		<div class="col-12">
 		
-			<div id="primary" class="js-isotope" data-isotope-options='{ "columnWidth": 200, "itemSelector": ".product-item" }'>
+			<div id="primary" class="js-isotope" data-isotope-options='{ "columnWidth": 200, "itemSelector": ".product-item", "filter": "<?= $combinedFilter ?>" }'>
 			<?php
 			$port_cat =ft_of_get_option('fabthemes_portfolio');
 			
@@ -130,22 +144,6 @@ get_header(); ?>
 	</div>
 </div>
 
-<?php
-	$combinedFilter = "";
-	if ($status != "")
-	{
-		$combinedFilter = $combinedFilter . ".category-" . $status;
-	}
-	if ($strainType != "")
-	{
-		$combinedFilter = $combinedFilter . ".category-" . $strainType;
-	}
-	
-	if ($combinedFilter == "")
-	{
-		$combinedFilter = "*";
-	}
-?>
 <script>
 	function UpdateProducts()
 	{
@@ -166,7 +164,7 @@ get_header(); ?>
 	var preselectedStrainType = "<?= $strainType ?>";
 	
 	jQuery( document ).ready(function() {
-		jQuery('#primary').isotope({ filter: preFilter });
+//		jQuery('#primary').isotope({ filter: preFilter });
 		if (preselectedStatus != "")
 		{
 			jQuery('input[data-filter=".category-' + preselectedStatus + '"]').prop('checked', true);
