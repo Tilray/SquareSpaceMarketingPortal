@@ -70,6 +70,12 @@ function FT_OP_options()
 						"std" => "",
 						"type" => "text");							
 										
+	$options[] = array( "name" => "Homepage Updates Category",
+						"desc" => "Select a category for the homepage updates sections",
+						"id" => "homepage_updates_category",
+						"type" => "select",
+						"options" => $options_categories);						
+						
 	$options[] = array( "name" => "Portfolio Category",
 						"desc" => "Select a category for the portfolio items",
 						"id" => "fabthemes_portfolio",

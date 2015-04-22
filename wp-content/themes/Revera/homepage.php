@@ -36,8 +36,8 @@ get_header(); ?>
 	<div class="boxitems col-12">
 		<h2>UPDATES</h2>
 		 <?php 	
-		 $port_cat =ft_of_get_option('fabthemes_portfolio');
-		 $query = new WP_Query( array( 'cat' => -$port_cat,'posts_per_page' =>4 ) );
+		 $updates_cat =ft_of_get_option('homepage_updates_category');
+		 $query = new WP_Query( array( 'cat' => $updates_cat,'posts_per_page' =>4 ) );
 		 if ($query->have_posts()) : while ($query->have_posts()) : $query->the_post();	?>
 		 	
 		 <div class="homepage-blog-list">

@@ -164,7 +164,6 @@ get_header(); ?>
 	var preselectedStrainType = "<?= $strainType ?>";
 	
 	jQuery( document ).ready(function() {
-//		jQuery('#primary').isotope({ filter: preFilter });
 		if (preselectedStatus != "")
 		{
 			jQuery('input[data-filter=".category-' + preselectedStatus + '"]').prop('checked', true);
