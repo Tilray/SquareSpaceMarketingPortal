@@ -38,10 +38,10 @@ get_header(); ?>
 	//get incoming status and straintype params
 	$qpStrain = 'straintype';
 	$qpStatus = 'status';
-	$strainType = "";
 	$status = "";
-	$strainTypes = array("", "available", "in-production");
-	$statuses = array("", "indica", "sativa", "hybrid", "high-cbd");
+	$strainType = "";
+	$statuses = array("", "available", "in-production");
+	$strainTypes = array("", "indica", "sativa", "hybrid", "high-cbd");
 	
 	$requestedStrainType = strtolower($_GET[$qpStrain]);
 	if (isset($requestedStrainType) && in_array($requestedStrainType, $strainTypes))
@@ -140,19 +140,19 @@ get_header(); ?>
 </div>
 
 <?php
-	$requestedFilter = "";
-	if ($requestedStatus != "")
+	$combinedFilter = "";
+	if ($status != "")
 	{
-		$requestedFilter = $requestedFilter . ".category-" . $requestedStatus . $filterLangCode;
+		$combinedFilter = $combinedFilter . ".category-" . $status . $filterLangCode;
 	}
-	if ($requestedStrainType != "")
+	if ($strainType != "")
 	{
-		$requestedFilter = $requestedFilter . ".category-" . $requestedStrainType . $filterLangCode;
+		$combinedFilter = $combinedFilter . ".category-" . $strainType . $filterLangCode;
 	}
 	
-	if ($requestedFilter == "")
+	if ($combinedFilter == "")
 	{
-		$requestedFilter = "*";
+		$combinedFilter = "*";
 	}
 ?>
 <script>
@@ -170,8 +170,8 @@ get_header(); ?>
 		jQuery('#primary').isotope({ filter: filter });
 	}
 
-	var preFilter = "<?= $requestedFilter?>";
-	var preselectedStatus = "<?= $strainType ?>";
+	var preFilter = "<?= $combinedFilter?>";
+	var preselectedStatus = "<?= $status ?>";
 	var preselectedStrainType = "<?= $strainType ?>";
 	
 	jQuery( document ).ready(function() {
