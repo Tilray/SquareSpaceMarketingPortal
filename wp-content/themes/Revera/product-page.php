@@ -25,6 +25,8 @@ get_header(); ?>
 	</div>
 </div>
 
+
+
 <?php
 	$filterLangCode = "";
 	$currLangCode = get_current_language_code();
@@ -32,6 +34,33 @@ get_header(); ?>
 	{
 		$filterLangCode	= "-" . $currLangCode;
 	}
+
+	//get incoming status and straintype params
+	$qpStrain = 'straintype';
+	$qpStatus = 'status';
+	$strainType = "";
+	$status = "";
+	$strainTypes = array("", "available", "in-production");
+	$statuses = array("", "indica", "sativa", "hybrid", "high-cbd");
+	
+	$requestedStrainType = strtolower($_GET[$qpStrain]);
+	if (isset($requestedStrainType) && in_array($requestedStrainType, $strainTypes))
+	{
+		$strainType = $requestedStrainType;
+	}
+	
+	$requestedStatus = strtolower($_GET[$qpStatus]);
+	if (isset($requestedStatus) && in_array($requestedStatus, $statuses))
+	{
+		$status = $requestedStatus;
+	}
+
+	//write noscript block with links to all straintypes, current status
+	//write noscript block wiht links to all statuses, current strain type
+	//set js filter based on querystring
+	//somehow hide all products and filters if noscript is rendered
+	//render filtered products in noscript block
+
 ?>
 
 <div class="container">	
@@ -111,6 +140,22 @@ get_header(); ?>
 	</div>
 </div>
 
+<?php
+	$requestedFilter = "";
+	if ($requestedStatus != "")
+	{
+		$requestedFilter = $requestedFilter . ".category-" . $requestedStatus . $filterLangCode;
+	}
+	if ($requestedStrainType != "")
+	{
+		$requestedFilter = $requestedFilter . ".category-" . $requestedStrainType . $filterLangCode;
+	}
+	
+	if ($requestedFilter == "")
+	{
+		$requestedFilter = "*";
+	}
+?>
 <script>
 	function UpdateProducts()
 	{
@@ -125,8 +170,24 @@ get_header(); ?>
 			
 		jQuery('#primary').isotope({ filter: filter });
 	}
+
+	var preFilter = "<?= $requestedFilter?>";
+	var preselectedStatus = "<?= $requestedStatus ?>";
+	var preselectedStrainType = "<?= $requestedStrainType ?>";
 	
 	jQuery( document ).ready(function() {
+		console.log("prefilter: " + preFilter);
+		//jQuery('#primary').isotope({ filter: preFilter });
+		if (preselectedStatus != "")
+		{
+			jQuery('input[data-filter=".category-' + preselectedStatus + '<?= $filterLangCode ?>"]').prop('checked', true);
+			console.log("Selected " + preselectedStatus);
+		}
+		if (preselectedStrainType != ""){
+			jQuery('input[data-filter=".category-' + preselectedStrainType + '<?= $filterLangCode ?>"]').prop('checked', true);
+			console.log("Selected " + preselectedStrainType + 'input[data-filter=".category-' + preselectedStrainType + '<?= $filterLangCode ?>"]');
+		}
+
 		jQuery('ul.product-filters input[type=radio]').change(function() {
 			UpdateProducts();
 		});
