@@ -32,3 +32,7 @@ add_image_size( 'product-single', 555, 2000, false );
 
 $allStatuses = array("", "available", "in-production");
 $allStrainTypes = array("", "indica", "sativa", "hybrid", "high-cbd");
+
+function get_products_page_link($status, $strainType){
+	return "/" . get_current_language_code() . "/products/?status=" . $status . "&straintype=" . $strainType;
+}

@@ -231,6 +231,23 @@ function get_combined_category_ids($categoryNames)
 	$allCatIDs = implode(",", $categoryIDs);
 }
 
+function get_all_categories_for_post_from_set($postID, $validValues){
+	$allCategories = get_the_terms($postID, 'post_tag');
+	$filteredCategories = array();
+	
+	if ($allCategories){
+		foreach($allCategories as $thisCat)
+		{
+			if (in_array(strtolower($thisCat->name), array_map('strtolower', $validValues)))
+			{
+				array_push($filteredCategories, $thisCat->name);
+			}
+		}
+	}
+		
+	return $filteredCategories;
+}
+
 remove_filter( 'the_content', 'wpautop' );
 
 add_image_size( 'blog-featured-image', 616, 280, true );

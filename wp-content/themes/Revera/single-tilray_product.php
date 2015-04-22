@@ -39,7 +39,24 @@ get_header(); ?>
 			<h2><?php the_title(); ?></h2>
 			<?php the_content(); ?>
 			<div class="single-product-attributes">
-				<a href="*">Available</a> <a href="*">Sativa</a>
+			<?php
+				$statusCats = get_all_categories_for_post_from_set($post->ID, $allStatuses);
+				$strainCats = get_all_categories_for_post_from_set($post->ID, $allStrainTypes);
+				
+				if ($statusCats){
+					foreach($statusCats as $status)
+					{
+						?><a href="<?= get_products_page_link($status, "") ?>"><?=$status?></a><?php
+					}
+				}
+				
+				if ($strainCats){
+					foreach($strainCats as $strain)
+					{
+						?><a href="<?= get_products_page_link("", $strain) ?>"><?=$strain?></a><?php
+					}
+				}				
+			?>
 			</div>
 		</div>
 		<div class="col-sm-2">
