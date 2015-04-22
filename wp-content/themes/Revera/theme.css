@@ -1183,6 +1183,10 @@ ul.product-filters input[type=radio]:checked ~ label {
    font-weight: bold;
 }
 
+img.single-product-image {
+	margin-left: -15px;
+}
+
 div.single-product-attributes {
 	margin-top: 20px;
 	border-top: 2px solid #cccccc;
