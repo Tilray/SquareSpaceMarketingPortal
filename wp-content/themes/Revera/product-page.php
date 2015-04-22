@@ -57,7 +57,6 @@ get_header(); ?>
 
 	//write noscript block with links to all straintypes, current status
 	//write noscript block wiht links to all statuses, current strain type
-	//set js filter based on querystring
 	//somehow hide all products and filters if noscript is rendered
 	//render filtered products in noscript block
 
@@ -172,20 +171,17 @@ get_header(); ?>
 	}
 
 	var preFilter = "<?= $requestedFilter?>";
-	var preselectedStatus = "<?= $requestedStatus ?>";
-	var preselectedStrainType = "<?= $requestedStrainType ?>";
+	var preselectedStatus = "<?= $strainType ?>";
+	var preselectedStrainType = "<?= $strainType ?>";
 	
 	jQuery( document ).ready(function() {
-		console.log("prefilter: " + preFilter);
-		//jQuery('#primary').isotope({ filter: preFilter });
+		jQuery('#primary').isotope({ filter: preFilter });
 		if (preselectedStatus != "")
 		{
 			jQuery('input[data-filter=".category-' + preselectedStatus + '<?= $filterLangCode ?>"]').prop('checked', true);
-			console.log("Selected " + preselectedStatus);
 		}
 		if (preselectedStrainType != ""){
 			jQuery('input[data-filter=".category-' + preselectedStrainType + '<?= $filterLangCode ?>"]').prop('checked', true);
-			console.log("Selected " + preselectedStrainType + 'input[data-filter=".category-' + preselectedStrainType + '<?= $filterLangCode ?>"]');
 		}
 
 		jQuery('ul.product-filters input[type=radio]').change(function() {
