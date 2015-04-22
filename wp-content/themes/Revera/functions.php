@@ -233,4 +233,4 @@ function get_combined_category_ids($categoryNames)
 
 remove_filter( 'the_content', 'wpautop' );
 
-add_image_size( 'product-thumb', 616, 280, true );
+add_image_size( 'blog-featured-image', 616, 280, true );

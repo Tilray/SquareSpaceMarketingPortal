@@ -109,7 +109,7 @@ get_header(); ?>
 						
 				 <?php
 					$thumb = get_post_thumbnail_id();
-					$img_attrs = wp_get_attachment_image_src( $thumb,'product-thumb' ); //get full URL to image (use "large" or "medium" if the images too big)
+					$img_attrs = wp_get_attachment_image_src( $thumb,'product-thumb' ); 
 					$image = $img_attrs[0];
 				 ?>
 							
