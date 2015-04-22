@@ -136,7 +136,7 @@ nav.main-navigation{
 
 #primary-menu-container li.current-page-ancestor a,
 #primary-menu-container li.current-menu-item a {
-    border-top: 4px solid #084875;
+    border-bottom: 4px solid #084875;
 }
 
 
