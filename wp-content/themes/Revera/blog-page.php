@@ -27,8 +27,9 @@ get_header(); ?>
 	<div class="row">
 		<div id="secondary" class="col-sm-8">
 			<?php 
+			$catName = 'blog-' . get_current_language_code();
 			$args = array(
-				'category_name' => 'blog,blogue',
+				'category_name' => $catName,
 				'posts_per_page' => '10'
 			);
 			$the_query = new WP_Query( $args ); ?>

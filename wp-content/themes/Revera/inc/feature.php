@@ -2,9 +2,9 @@
 
 		<ul class="slides">
 		    <?php 	
-					$slidecat =ft_of_get_option('fabthemes_slide_categories');
+					$catName = 'banners-' . get_current_language_code();
 
-					$query = new WP_Query( array( 'category_name' => 'banners,banners-fr,bannersfr','posts_per_page' =>'100' ) );
+					$query = new WP_Query( array( 'category_name' => $catName,'posts_per_page' =>'100' ) );
 		           	if ($query->have_posts()) : while ($query->have_posts()) : $query->the_post();	?>
 		 	
 			 		<li>
