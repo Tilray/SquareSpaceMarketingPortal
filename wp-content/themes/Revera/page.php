@@ -12,14 +12,23 @@
 
 get_header(); ?>
 
+<?php 
+/** 
+* so the wpml language plugin kills the 404 page and causes it to render out in the Page template. This is a hackaround, hopefully finding better way soon.
+**/
+if (is_404()){	
+	require get_template_directory() . '/inc/404body.php';
+}
+else
+{
+?>
 <div class="page-head">
 	<div class="container">
 		<div class="row">
-			<div class="col-12">
+			<div class="col-12 page-page">
 				<h1> <?php the_title(); ?> </h1>
 				<p> </p>
 			</div>
-			
 		</div>
 	</div>
 </div>
@@ -46,4 +55,5 @@ get_header(); ?>
 	</div>
 </div>
 </div><!-- #page -->
+<?php } //end giant if block for 404 hack-around ?>
 <?php get_footer(); ?>
