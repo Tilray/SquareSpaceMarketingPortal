@@ -34,9 +34,9 @@ get_header(); ?>
 <div class="section-wide">
 	<div class="row">
 	<div class="boxitems col-12">
-		<h2>UPDATES</h2>
+		<h2>BLOG</h2>
 		 <?php 	
-		 $updates_cat =ft_of_get_option('homepage_updates_category');
+		 $updates_cat = ft_of_get_option('homepage_updates_category');
 		 $query = new WP_Query( array( 'cat' => $updates_cat,'posts_per_page' =>4 ) );
 		 if ($query->have_posts()) : while ($query->have_posts()) : $query->the_post();	?>
 		 	
