@@ -45,13 +45,14 @@ get_header(); ?>
 						<h3><?php the_time('F j, Y'); ?></h3>
 						<?php
 						$thumbID = get_post_thumbnail_id();
-						$img_attrs = wp_get_attachment_image_src( $thumbID,'product-thumb' ); //get full URL to image (use "large" or "medium" if the images too big)
+						$img_attrs = wp_get_attachment_image_src( $thumbID,'blog-featured-image' ); //get full URL to image (use "large" or "medium" if the images too big)
 						$image = $img_attrs[0];
 						if($image) {?>
 							<a href="<?php the_permalink(); ?>"><img class="blog-featured-image" src="<?= $image ?>"/></a>
 						<?php }?>
 						<p>
-							<?php the_content(); ?>
+							<?php echo get_the_excerpt(); ?>
+							<a href="<?php the_permalink(); ?>">Read more &raquo;</a>
 						</p>
 					</div>
 				<?php endwhile; ?>
