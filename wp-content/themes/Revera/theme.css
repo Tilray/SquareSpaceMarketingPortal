@@ -552,13 +552,15 @@ a.frmore{
 	position: relative;
 
 }
+.product-item{
+	width: 280px;
+	height: 260px;
+}
 .hthumb a img{
 	margin: auto;
 	display: block;
 }
 .hthumb{
-	width: 280px;
-	height: 260px;
 }
 .overlay{
 	position: absolute;
