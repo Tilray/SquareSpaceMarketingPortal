@@ -238,9 +238,10 @@ function get_all_categories_for_post_from_set($postID, $validValues){
 	if ($allCategories){
 		foreach($allCategories as $thisCat)
 		{
-			if (in_array(strtolower($thisCat->name), array_map('strtolower', $validValues)))
+			$catName = str_replace(" ", "-", $thisCat->name);
+			if (in_array(strtolower($catName), array_map('strtolower', $validValues)))
 			{
-				array_push($filteredCategories, $thisCat->name);
+				array_push($filteredCategories, $catName);
 			}
 		}
 	}
