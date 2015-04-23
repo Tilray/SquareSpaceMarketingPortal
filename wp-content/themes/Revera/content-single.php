@@ -12,7 +12,7 @@
 		?>
 					
 		<?php if($image) : ?>
-		<img class="img-responsive" src="<?php echo $image ?>"/>
+		<img class="img-responsive single-post-featured-image" src="<?php echo $image ?>"/>
 		<?php endif; ?>		
 
 	<div class="entry-content">
