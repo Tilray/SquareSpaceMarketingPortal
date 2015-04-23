@@ -4,10 +4,10 @@
 		    <?php 	
 				function RenderBanner($postID, $textColor, $linkURL){
 					$thisPost = get_post($postID);
-					$imageurl = get_the_post_thumbnail($thisPost->ID, 'banner-image');
+					$imageurl = get_the_post_thumbnail($postID, 'banner-image');
 					?>
 						<li>
-							<a href="<?= $linkURL ?>"><img src="<?= $imageurl ?>"/></a>
+							<a href="<?= $linkURL ?>"><?= $imageurl ?></a>
 							<div class="flex-caption">
 								<h2 style="color:<?=$textColor?>"><?= $thisPost->post_title ?></h2>
 							</div>
