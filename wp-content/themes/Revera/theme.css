@@ -1277,3 +1277,8 @@ div.blog-post-preview:nth-child(n+2){
 	border-top: 2px solid #cccccc;
 	margin-top: 50px;
 }
+
+
+.single-post-featured-image {
+	margin-bottom: 20px;
+}
