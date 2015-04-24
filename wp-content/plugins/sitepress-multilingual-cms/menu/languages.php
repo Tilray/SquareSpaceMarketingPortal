@@ -33,6 +33,8 @@
 	$seo = $sitepress->get_setting( 'seo' );
 
 	$default_language = $sitepress->get_default_language();
+	
+	$all_languages = $sitepress->get_languages( $sitepress->get_admin_language() );
 
 	$sample_lang = false;
 	$default_language_details = false;
@@ -829,7 +831,7 @@ global $language_switcher_defaults, $language_switcher_defaults_alt;
             </div> <!-- .wpml-section -->
         <?php endif; ?>
 
-        <?php if(!empty( $setup_complete ) && count($active_languages) > 1): ?>
+        <?php if(!empty( $setup_complete ) && count($all_languages) > 1): ?>
             <div class="wpml-section wpml-section-admin-language" id="lang-sec-4">
                 <div class="wpml-section-header">
                     <h3><?php _e('Admin language', 'sitepress') ?></h3>
@@ -843,10 +845,10 @@ global $language_switcher_defaults, $language_switcher_defaults_alt;
                                 <?php _e('Default admin language: ', 'sitepress'); ?>
                                 <?php $default_language_details = $sitepress->get_language_details( $default_language ); ?>
                                 <select name="icl_admin_default_language">
-                                <option value="_default_"><?php printf(__('Default language (currently %s)', 'sitepress'),  $default_language_details['display_name']); ?></option>
-                                <?php foreach($active_languages as $al):?>
-                                <option value="<?php echo $al['code'] ?>"<?php if($sitepress->get_setting('admin_default_language')==$al['code']) echo ' selected="selected"'?>><?php echo $al['display_name']; if($sitepress->get_admin_language() != $al['code']) echo ' ('. $al['native_name'] .')' ?>&nbsp;</option>
-                                <?php endforeach; ?>
+	                                <option value="_default_"><?php printf(__('Default language (currently %s)', 'sitepress'),  $default_language_details['display_name']); ?></option>
+	                                <?php foreach($all_languages as $al):?>
+		                                <option value="<?php echo $al['code'] ?>"<?php if($sitepress->get_setting('admin_default_language')==$al['code']) echo ' selected="selected"'?>><?php echo $al['display_name']; if($sitepress->get_admin_language() != $al['code']) echo ' ('. $al['native_name'] .')' ?>&nbsp;</option>
+	                                <?php endforeach; ?>
                                 </select>
                             </label>
                         </p>

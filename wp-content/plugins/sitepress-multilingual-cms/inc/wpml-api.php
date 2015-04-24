@@ -132,6 +132,8 @@ function wpml_update_translatable_content($content_type, $content_id, $language_
  * Update translatable content in the WPML translations table
  *
  * @since      1.3
+ * @deprecated deprecated since 3.2
+ *             
  * @package    WPML
  * @subpackage WPML API
  *

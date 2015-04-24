@@ -1812,8 +1812,10 @@ class ICL_Pro_Translation{
 	                        $translated_id_query    = "
 	                        SELECT slug
 	                        FROM {$wpdb->terms} t
-	                            JOIN {$wpdb->term_taxonomy} x ON t.term_id=x.term_id
-	                        WHERE x.term_taxonomy_id=%d
+                            JOIN {$wpdb->term_taxonomy} x
+                              ON t.term_id = x.term_id
+	                        WHERE x.term_taxonomy_id = %d
+	                        LIMIT 1
 	                        ";
 	                        $translated_id_args = array($translated_id);
 	                        $translated_id_prepared = $wpdb->prepare($translated_id_query, $translated_id_args);

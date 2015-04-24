@@ -12,13 +12,10 @@ class iclNavMenu{
             // hooks for saving menus    
             add_action('wp_create_nav_menu', array($this, 'wp_update_nav_menu'), 10, 2);
             add_action('wp_update_nav_menu', array($this, 'wp_update_nav_menu'), 10, 2);
-        
             // hook for saving menu items
             add_action('wp_update_nav_menu_item', array($this, 'wp_update_nav_menu_item'), 10, 3);
-            
             // filter for nav_menu_options
             add_filter('option_nav_menu_options', array($this, 'option_nav_menu_options'));
-            
             add_action('wp_delete_nav_menu', array($this, 'wp_delete_nav_menu'));
             add_action('delete_post', array($this, 'wp_delete_nav_menu_item'));
                                     
@@ -38,10 +35,7 @@ class iclNavMenu{
         add_filter('pre_update_option_theme_mods_' . $theme_slug, array($this, 'pre_update_theme_mods_theme'));
         add_filter('wp_nav_menu_args', array($this, 'wp_nav_menu_args_filter'));
         add_filter('wp_nav_menu_items', array($this, 'wp_nav_menu_items_filter'));
-        
         add_filter('nav_menu_meta_box_object', array($this, '_enable_sitepress_query_filters'));
-        
-        
     }
     
     function init(){
@@ -298,7 +292,7 @@ class iclNavMenu{
         $language_code = $this->current_lang;
         $sitepress->set_element_language_details($menu_item_db_id, 'post_nav_menu_item', $trid, $language_code);
     }
-    
+
     function wp_delete_nav_menu_item($menu_item_id){
         global $wpdb;
         $post = get_post($menu_item_id);
@@ -306,9 +300,9 @@ class iclNavMenu{
 						$q = "DELETE FROM {$wpdb->prefix}icl_translations WHERE element_id=%d AND element_type='post_nav_menu_item' LIMIT 1";
 						$q_prepared = $wpdb->prepare($q, $menu_item_id);
             $wpdb->query($q_prepared);
-        }        
+        }
     }
-    
+
     function nav_menu_language_controls(){
         global $sitepress, $wpdb;
 		$default_language = $sitepress->get_default_language();
@@ -582,12 +576,12 @@ class iclNavMenu{
     function parse_query($q){
         global $sitepress;
         // not filtering nav_menu_item
-        if($q->query_vars['post_type'] == 'nav_menu_item'){
+        if(isset($q->query_vars['post_type']) && $q->query_vars['post_type'] === 'nav_menu_item'){
             return $q;
         } 
         
         // also - not filtering custom posts that are not translated
-        if($sitepress->is_translated_post_type($q->query_vars['post_type'])){
+        if(isset($q->query_vars['post_type']) && $sitepress->is_translated_post_type($q->query_vars['post_type'])){
             $q->query_vars['suppress_filters'] = 0;
         }
         
@@ -611,14 +605,12 @@ class iclNavMenu{
 		$default_language = $sitepress->get_default_language();
         if(isset($val['nav_menu_locations'])){
             foreach((array)$val['nav_menu_locations'] as $k=>$v){
-				if(!$v && $this->current_lang != $default_language ){
-                    $tl = get_theme_mod('nav_menu_locations');
-                    $val['nav_menu_locations'][$k] = $tl[$k]; 
-                }else{
-                    $val['nav_menu_locations'][$k] = icl_object_id($val['nav_menu_locations'][$k], 'nav_menu',true, $default_language );
+				if( $this->current_lang != $default_language ){
+                    $val['nav_menu_locations'][$k] = icl_object_id($v, 'nav_menu',true, $default_language );
                 }            
             }        
         }
+
         return $val;
     }
     

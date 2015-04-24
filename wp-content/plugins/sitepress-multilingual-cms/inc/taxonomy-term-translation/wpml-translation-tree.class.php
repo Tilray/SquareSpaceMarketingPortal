@@ -377,7 +377,7 @@ class WPML_Translation_Tree {
 				$this->sync_subtree( $lang, $element );
 			}
 		}
-		delete_option( 'category_children' );
+		delete_option( "{$this->taxonomy}_children" );
 		return true;
 	}
 

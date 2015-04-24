@@ -276,7 +276,7 @@
 		public static function save_labels_translation() {
 
             $nonce = filter_input( INPUT_POST, '_icl_nonce' );
-            if ( !wp_verify_nonce( $nonce, 'wpml_save_term_nonce' ) ) {
+            if ( !wp_verify_nonce( $nonce, 'wpml_tt_save_labels_translation_nonce' ) ) {
                 wp_send_json_error( 'Wrong Nonce' );
             }
 

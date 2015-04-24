@@ -6,48 +6,20 @@ class WPML_Post_Edit_Ajax {
 	 * Ajax handler for adding a term via Ajax.
 	 */
 	public static function wpml_save_term() {
-		global $sitepress;
-
-		$taxonomy    = false;
-		$lang        = false;
-		$name        = false;
-		$slug        = false;
-		$trid        = false;
-		$description = false;
-		$sync        = false;
         $nonce       = filter_input( INPUT_POST, '_icl_nonce' );
-
         if ( !wp_verify_nonce( $nonce, 'wpml_save_term_nonce' ) ) {
             wp_send_json_error( 'Wrong Nonce' );
         }
 
-		if ( isset( $_POST[ 'term_language_code' ] ) ) {
-			$lang = $_POST[ 'term_language_code' ];
-		}
+		global $sitepress;
 
-		if ( isset( $_POST[ 'taxonomy' ] ) ) {
-			$taxonomy = $_POST[ 'taxonomy' ];
-		}
-
-		if ( isset( $_POST[ 'slug' ] ) ) {
-			$slug = $_POST[ 'slug' ];
-		}
-
-		if ( isset( $_POST[ 'name' ] ) ) {
-			$name = $_POST[ 'name' ];
-		}
-
-		if ( isset( $_POST[ 'trid' ] ) ) {
-			$trid = $_POST[ 'trid' ];
-		}
-
-		if ( isset( $_POST[ 'description' ] ) ) {
-			$description = $_POST[ 'description' ];
-		}
-
-		if ( isset( $_POST[ 'force_hierarchical_sync' ] ) ) {
-			$sync = $_POST[ 'force_hierarchical_sync' ];
-		}
+		$lang        = filter_input ( INPUT_POST, 'term_language_code', FILTER_SANITIZE_FULL_SPECIAL_CHARS );
+		$taxonomy    = filter_input ( INPUT_POST, 'taxonomy' );
+		$slug        = filter_input ( INPUT_POST, 'slug' );
+		$name        = filter_input ( INPUT_POST, 'name' );
+		$trid        = filter_input ( INPUT_POST, 'trid', FILTER_SANITIZE_NUMBER_INT );
+		$description = filter_input ( INPUT_POST, 'description' );
+		$sync        = filter_input ( INPUT_POST, 'force_hierarchical_sync' );
 
 		$new_term_object = false;
 
@@ -62,7 +34,7 @@ class WPML_Post_Edit_Ajax {
 			);
 
 			if ( $slug ) {
-				$args[ 'slug' ] = $slug;
+				$args[ 'slug' ] = urlencode($slug);
 			}
 			if ( $description ) {
 				$args[ 'description' ] = $description;

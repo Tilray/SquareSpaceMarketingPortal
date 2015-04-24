@@ -100,36 +100,24 @@ function icl_plugin_upgrade(){
         $sql = "ALTER TABLE {$wpdb->prefix}icl_translation_status ADD COLUMN `_prevstate` longtext";
         $wpdb->query($sql);
     }
-    
-    icl_upgrade_version('2.0.5');
-    
-    icl_upgrade_version('2.2.2');
-    
-    icl_upgrade_version('2.3.0');
-    
-    icl_upgrade_version('2.3.1');
-    
-    icl_upgrade_version('2.3.3');
-    
-    icl_upgrade_version('2.4.0');
-    
-    icl_upgrade_version('2.5.0');
-    
-    icl_upgrade_version('2.5.2');
-    
-    icl_upgrade_version('2.6.0');
-    
-    icl_upgrade_version('2.7');
-    
-    icl_upgrade_version('2.9');
-    
-    icl_upgrade_version('2.9.3');
-    
-	icl_upgrade_version('3.1');
 
-	icl_upgrade_version('3.1.5');
-
-    icl_upgrade_version('3.1.8');
+	icl_upgrade_version( '2.0.5' );
+	icl_upgrade_version( '2.2.2' );
+	icl_upgrade_version( '2.3.0' );
+	icl_upgrade_version( '2.3.1' );
+	icl_upgrade_version( '2.3.3' );
+	icl_upgrade_version( '2.4.0' );
+	icl_upgrade_version( '2.5.0' );
+	icl_upgrade_version( '2.5.2' );
+	icl_upgrade_version( '2.6.0' );
+	icl_upgrade_version( '2.6.2' );
+	icl_upgrade_version( '2.7' );
+	icl_upgrade_version( '2.9' );
+	icl_upgrade_version( '2.9.3' );
+	icl_upgrade_version( '3.1' );
+	icl_upgrade_version( '3.1.5' );
+	icl_upgrade_version( '3.1.8' );
+	icl_upgrade_version( '3.1.9.5' );
 
 	//Forcing upgrade logic when ICL_SITEPRESS_DEV_VERSION is defined
 	//This allow to run the logic between different alpha/beta/RC versions

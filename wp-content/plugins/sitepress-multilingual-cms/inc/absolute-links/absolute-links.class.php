@@ -283,7 +283,7 @@ class AbsoluteLinks{
 					} else {
 						$alp_broken_links[ $alp_matches[ 2 ][ $k ] ] = array();
 						$name                                        = wpml_like_escape( $post_name );
-						$p                                           = $wpdb->get_results( "SELECT ID, post_type FROM {$wpdb->posts} WHERE post_name LIKE '{$name}%' AND post_type IN('post','page')" );
+						$p                                           = $this->_get_ids_and_post_types( $name );
 						if ( $p ) {
 							foreach ( $p as $post_suggestion ) {
 								if ( $post_suggestion->post_type == 'page' ) {
@@ -377,6 +377,18 @@ class AbsoluteLinks{
 		wp_cache_set( $cache_key, $text, $cache_group );
 
 		return $text;
+	}
+
+	function _get_ids_and_post_types( $name ) {
+		global $wpdb;
+		static $cache = array();
+
+		$name = rawurlencode( $name );
+		if ( ! isset( $cache[ $name ] ) ) {
+			$cache[ $name ] = $wpdb->get_results( $wpdb->prepare ("SELECT ID, post_type FROM {$wpdb->posts} WHERE post_name LIKE %s AND post_type IN('post','page')", $name . '%' ) );
+		}
+
+		return $cache[ $name ];
 	}
 
 	function all_rewrite_rules($rewrite) {

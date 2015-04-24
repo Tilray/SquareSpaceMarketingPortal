@@ -120,8 +120,8 @@ class TranslationManagement{
 		if(!$user || empty($user->data)) return;
 
 		$ct['translator_id'] =  $current_user->ID;
-		$ct['display_name'] =  isset($user->data->display_name) ? $user->data->display_name : $user->data->user_login;
-		$ct['user_login'] =  $user->data->user_login;
+        $ct['user_login']    =  isset($user->data->user_login) ? $user->data->user_login : false;
+		$ct['display_name']  =  isset( $user->data->display_name ) ? $user->data->display_name : $ct['user_login'];
 		$ct['language_pairs'] = get_user_meta($current_user->ID, $wpdb->prefix.'language_pairs', true);
 		if(empty($ct['language_pairs'])) $ct['language_pairs'] = array();
 
@@ -4203,7 +4203,10 @@ class TranslationManagement{
 			$taxonomy_types = array_merge( $sitepress->get_translatable_taxonomies( true, $post_type ), $taxonomy_types );
 		}
 		$taxonomy_types = array_unique( $taxonomy_types );
-		$taxonomies     = $wpdb->get_results( "SELECT taxonomy, term_taxonomy_id FROM {$wpdb->term_taxonomy} WHERE taxonomy IN ('" . join( "','", $taxonomy_types ) . "')" );
+        $taxonomies     = $wpdb->get_results( "SELECT taxonomy, term_taxonomy_id
+                                               FROM {$wpdb->term_taxonomy}
+                                               WHERE taxonomy
+                                                IN (" . wpml_prepare_in( $taxonomy_types ) . ")" );
 		if ( $taxonomies ) {
 			foreach ( $taxonomies as $taxonomy ) {
 				$this->add_missing_language_to_taxonomy( $taxonomy );

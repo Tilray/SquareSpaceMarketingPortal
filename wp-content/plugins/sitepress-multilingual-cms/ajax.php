@@ -553,14 +553,15 @@ switch($request){
         echo '1|' . intval($filtered_id) . '|' . $this->get_language_status_text( $filtered_from_lang, $filtered_to_lang );
         break;
     case 'icl_theme_localization_type':
-        $icl_tl_type = @intval($_POST['icl_theme_localization_type']);
-        $iclsettings['theme_localization_type'] = $icl_tl_type;
-        $iclsettings['theme_localization_load_textdomain'] = @intval($_POST['icl_theme_localization_load_td']);
+        $theme_localization_type = @intval($_POST['icl_theme_localization_type']);
+		icl_set_setting('theme_localization_type', $theme_localization_type, true);
+	    $theme_localization_load_td = @intval( $_POST[ 'icl_theme_localization_load_td' ] );
+	    icl_set_setting('theme_localization_load_textdomain', $theme_localization_load_td, true );
 	    $filtered_textdomain_value = filter_input( INPUT_POST, 'textdomain_value' );
-        $iclsettings['gettext_theme_domain_name'] = $filtered_textdomain_value;
-        if($icl_tl_type==1){
+	    icl_set_setting('gettext_theme_domain_name', $filtered_textdomain_value, true);
+        if($theme_localization_type==1){
             icl_st_scan_theme_files();
-        }elseif($icl_tl_type==2){
+        }elseif($theme_localization_type==2){
             $parent_theme = get_template_directory();
             $child_theme = get_stylesheet_directory();
             $languages_folders = array();
@@ -571,11 +572,10 @@ switch($request){
             if($parent_theme != $child_theme && $found_folder = icl_tf_determine_mo_folder($child_theme)){
                 $languages_folders['child'] = $found_folder;
             }
-            $iclsettings['theme_language_folders'] = $languages_folders;
+	        icl_set_setting('theme_language_folders', $languages_folders, true);
 
         }
-        $this->save_settings($iclsettings);
-        echo '1|'.$icl_tl_type;
+        echo '1|'.$theme_localization_type;
         break;
     case 'icl_ct_user_pref':
         $users = $wpdb->get_col("SELECT id FROM {$wpdb->users}");
@@ -615,7 +615,6 @@ switch($request){
         $wpdb->query("TRUNCATE TABLE {$wpdb->prefix}icl_translations");
         $wpdb->update($wpdb->prefix . 'icl_languages', array('active' => 0), array('active' => 1));
         $this->save_settings($iclsettings);
-
         break;
     case 'setup_got_to_step2':
         $iclsettings['setup_wizard_step'] = 2;

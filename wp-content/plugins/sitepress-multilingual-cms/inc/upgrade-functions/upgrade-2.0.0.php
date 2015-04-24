@@ -276,5 +276,3 @@ function icl_ajx_upgrade_2_0_0($call, $request){
             ));    
     }
 }
-
-?>

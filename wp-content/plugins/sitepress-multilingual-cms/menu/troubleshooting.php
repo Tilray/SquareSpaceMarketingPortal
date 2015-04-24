@@ -22,6 +22,8 @@ if ( isset( $action) && wp_verify_nonce($nonce, $action) ) {
 			SitePress_Setup::fill_languages_translations();
             icl_cache_clear();
 			exit;
+		case 'icl_fix_collation':
+			repair_el_type_collate();
 		case 'reset_pro_translation_configuration':
 			$sitepress_settings = get_option( 'icl_sitepress_settings' );
 
@@ -53,7 +55,6 @@ if ( isset( $action) && wp_verify_nonce($nonce, $action) ) {
 				basename( ICL_PLUGIN_PATH ) . '/menu/troubleshooting.php&message=' . __( 'PRO translation was reset.', 'sitepress' ) . "'</script>";
 			exit;
 		case 'ghost_clean':
-
 			// clean the icl_translations table
 			$orphans = $wpdb->get_col( "
                 SELECT t.translation_id 
@@ -136,7 +137,15 @@ if ( isset( $action) && wp_verify_nonce($nonce, $action) ) {
 
 
 			exit;
-			break;
+		case 'clear_transients':
+			$transients = $wpdb->get_col( "SELECT option_name AS name, option_value AS value
+											   FROM $wpdb->options
+											   WHERE option_name LIKE '_transient_%'" );
+			foreach($transients as $transient){
+				$transient_name = preg_replace('/^_transient_/', '', $transient);
+				delete_transient($transient_name);
+			}
+			exit;
 		case 'icl_sync_jobs':
 
 			$iclq     = new ICanLocalizeQuery( $sitepress_settings[ 'site_id' ], $sitepress_settings[ 'access_key' ] );
@@ -479,7 +488,7 @@ $icl_tables = array(
 
 
 if ( wp_verify_nonce(
-	filter_input( INPUT_POST, 'icl_reset_allnonce', FILTER_SANITIZE_STRING ),
+	(string)filter_input( INPUT_POST, 'icl_reset_allnonce', FILTER_SANITIZE_STRING ),
 	'icl_reset_all'
 ) ) {
 	if ( $_POST[ 'icl-reset-all' ] == 'on' ) {
@@ -624,7 +633,18 @@ echo '</textarea>';
 				jQuery('#icl_remove_ghost').next().fadeOut();
 
 			});
-		})
+		});
+		var clearTransients = jQuery('#icl_clear_transients');
+		clearTransients.click(function () {
+			jQuery(this).attr('disabled', 'disabled');
+			jQuery(this).after(icl_ajxloaderimg);
+			jQuery.post(location.href + '&debug_action=clear_transients&nonce=<?php echo wp_create_nonce('clear_transients'); ?>', function () {
+				clearTransients.removeAttr('disabled');
+				alert('<?php echo esc_js(__('Done', 'sitepress')) ?>');
+				clearTransients.next().fadeOut();
+
+			});
+		});
 		jQuery('#icl_sync_jobs').click(function () {
 			jQuery(this).attr('disabled', 'disabled');
 			jQuery(this).after(icl_ajxloaderimg);
@@ -634,7 +654,7 @@ echo '</textarea>';
 				jQuery('#icl_sync_jobs').next().fadeOut();
 
 			});
-		})
+		});
 		jQuery('#icl_cleanup').click(function () {
 			jQuery(this).attr('disabled', 'disabled');
 			jQuery(this).after(icl_ajxloaderimg);
@@ -762,7 +782,7 @@ echo '</textarea>';
 			jQuery(this).after(icl_ajxloaderimg);
 			jQuery('#icl_cms_id_fix_prgs').fadeIn();
 			_icl_sync_cms_id(0);
-		})
+		});
 
 		jQuery('#icl_sync_cancelled').click(function () {
 			jQuery(this).attr('disabled', 'disabled');
@@ -825,6 +845,16 @@ echo '</textarea>';
 
 			});
 		});
+		jQuery('#icl_fix_collation').click(function () {
+			jQuery(this).attr('disabled', 'disabled');
+			jQuery(this).after(icl_ajxloaderimg);
+			jQuery.post(location.href + '&debug_action=icl_fix_collation&nonce=<?php echo wp_create_nonce('icl_fix_collation'); ?>', function () {
+				jQuery('#icl_fix_collation').removeAttr('disabled');
+				alert('<?php echo esc_js(__('Done', 'sitepress')) ?>');
+				jQuery('#icl_fix_collation').next().fadeOut();
+
+			});
+		});
 
 		jQuery('#icl_fix_terms_count').click(function () {
 			jQuery(this).attr('disabled', 'disabled');
@@ -859,6 +889,14 @@ echo '</textarea>';
 	<p>
 		<input id="icl_remove_ghost" type="button" class="button-secondary" value="<?php _e( 'Remove ghost entries from the translation tables', 'sitepress' ) ?>"/><br/>
 		<small style="margin-left:10px;"><?php _e( 'Removes entries from the WPML tables that are not linked properly. Cleans the table off entries left over upgrades, bug fixes or undetermined factors.', 'sitepress' ) ?></small>
+	</p>
+	<p>
+		<input id="icl_clear_transients" type="button" class="button-secondary" value="<?php _e( 'Delete transient data', 'sitepress' ) ?>"/><br/>
+		<small style="margin-left:10px;"><?php _e( 'Clear all temporary data cached in transients.', 'sitepress' ) ?></small>
+	</p>
+	<p>
+		<input id="icl_fix_collation" type="button" class="button-secondary" value="<?php _e( 'Fix element_type Collation', 'sitepress' ) ?>"/><br/>
+		<small style="margin-left:10px;"><?php _e( 'Fixes the collation of the element_type column in icl_translations in case this setting changed for your posts.post_type column.', 'sitepress' ) ?></small>
 	</p>
 	<?php if ( $sitepress->get_setting('site_id') && $sitepress->get_setting('access_key') && $sitepress->get_setting('site_id') && $sitepress->get_setting('access_key') ){ ?>
 		<p>

@@ -20,7 +20,7 @@ class SitePress_EditLanguages {
 				$request_get_icl_nonce = filter_input(INPUT_GET, 'icl_nonce' );
 
 		if ( $request_get_action === 'delete-language' && wp_verify_nonce(
-				$request_get_icl_nonce,
+				(string)$request_get_icl_nonce,
 				'delete-language' . $request_get_id
 			)
 		) {

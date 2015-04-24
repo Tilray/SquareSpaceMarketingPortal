@@ -1,6 +1,6 @@
 <?php
 
-require ICL_PLUGIN_PATH . "/inc/taxonomy-term-translation/wpml-term-language-sychronization.class.php";
+require ICL_PLUGIN_PATH . "/inc/taxonomy-term-translation/wpml-term-language-synchronization.class.php";
 
 class WPML_Config
 {
@@ -207,8 +207,11 @@ class WPML_Config
                     $config = $file->config;
                     $type = $file->type;
                     $admin_text_context = $file->admin_text_context;
-                }else{
-				$config = icl_xml2array( file_get_contents( $file ) );
+                } else {
+                    $config = icl_xml2array ( file_get_contents ( $file ) );
+                    $type = ( dirname ( $file ) === get_template_directory ()
+                              || dirname ( $file ) === get_stylesheet_directory () ) ? 'theme' : 'plugin';
+                    $admin_text_context = basename ( dirname ( $file ) );
                 }
 
 				if ( isset( $config[ 'wpml-config' ] ) ) {
@@ -248,12 +251,6 @@ class WPML_Config
 
 					//admin-texts
 					if ( isset( $config[ 'wpml-config' ][ 'admin-texts' ][ 'key' ] ) ) {
-
-						$type = ( dirname( $file ) == get_template_directory() || dirname( $file ) == get_stylesheet_directory() ) ? 'theme' : 'plugin';
-
-						$admin_text_context = basename( dirname( $file ) );
-
-
 						if ( ! is_numeric( key( @current( $config[ 'wpml-config' ][ 'admin-texts' ] ) ) ) ) { //single
 							$config[ 'wpml-config' ][ 'admin-texts' ][ 'key' ][ 'type' ]    = $type;
 							$config[ 'wpml-config' ][ 'admin-texts' ][ 'key' ][ 'context' ] = $admin_text_context;
