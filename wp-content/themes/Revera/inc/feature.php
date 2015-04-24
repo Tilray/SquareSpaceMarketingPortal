@@ -39,15 +39,15 @@
 					RenderBanner($banner2ID, ft_of_get_option('fabthemes_banner2_text_color'), $url);
 				}
 				
-				$banner1ID = ft_of_get_option('fabthemes_banner1_id_' . $langCode);
-				if ($banner1ID)
+				$banner3ID = ft_of_get_option('fabthemes_banner3_id_' . $langCode);
+				if ($banner3ID)
 				{
-					$url = ft_of_get_option('fabthemes_url1_' . $langCode);
+					$url = ft_of_get_option('fabthemes_url3_' . $langCode);
 					if ($url == "")
 					{
-						$url = get_permalink($banner1ID);
+						$url = get_permalink($banner3ID);
 					}
-					RenderBanner($banner1ID, ft_of_get_option('fabthemes_banner1_text_color'), $url);
+					RenderBanner($banner3ID, ft_of_get_option('fabthemes_banner3_text_color'), $url);
 				}
 				?>
 		</ul>
