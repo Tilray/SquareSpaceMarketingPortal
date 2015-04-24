@@ -17,19 +17,37 @@
 				
 				$langCode = strtolower(get_current_language_code());
 				
-				if (ft_of_get_option('fabthemes_banner1_id_' . $langCode))
+				$banner1ID = ft_of_get_option('fabthemes_banner1_id_' . $langCode);
+				if ($banner1ID)
 				{
-					RenderBanner(ft_of_get_option('fabthemes_banner1_id_' . $langCode), ft_of_get_option('fabthemes_banner1_text_color'), ft_of_get_option('fabthemes_url1_' . $langCode));
+					$url = ft_of_get_option('fabthemes_url1_' . $langCode);
+					if ($url == "")
+					{
+						$url = get_permalink($banner1ID);
+					}
+					RenderBanner($banner1ID, ft_of_get_option('fabthemes_banner1_text_color'), $url);
 				}
 				
-				if (ft_of_get_option('fabthemes_banner2_id_' . $langCode))
+				$banner2ID = ft_of_get_option('fabthemes_banner2_id_' . $langCode);
+				if ($banner2ID)
 				{
-					RenderBanner(ft_of_get_option('fabthemes_banner2_id_' . $langCode), ft_of_get_option('fabthemes_banner2_text_color'), ft_of_get_option('fabthemes_url2_' . $langCode));
+					$url = ft_of_get_option('fabthemes_url2_' . $langCode);
+					if ($url == "")
+					{
+						$url = get_permalink($banner2ID);
+					}
+					RenderBanner($banner2ID, ft_of_get_option('fabthemes_banner2_text_color'), $url);
 				}
 				
-				if (ft_of_get_option('fabthemes_banner3_id_' . $langCode))
+				$banner1ID = ft_of_get_option('fabthemes_banner1_id_' . $langCode);
+				if ($banner1ID)
 				{
-					RenderBanner(ft_of_get_option('fabthemes_banner3_id_' . $langCode), ft_of_get_option('fabthemes_banner3_text_color'), ft_of_get_option('fabthemes_url3_' . $langCode));
+					$url = ft_of_get_option('fabthemes_url1_' . $langCode);
+					if ($url == "")
+					{
+						$url = get_permalink($banner1ID);
+					}
+					RenderBanner($banner1ID, ft_of_get_option('fabthemes_banner1_text_color'), $url);
 				}
 				?>
 		</ul>
