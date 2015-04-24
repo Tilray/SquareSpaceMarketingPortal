@@ -450,11 +450,11 @@ img.grayscale {
 	
 	
 .flex-caption{
-	width: 800px;
+	width: 80%;
 	position: absolute;
 	top:40%;
 	left: 50%;
-	margin-left: -400px;
+	margin-left: -40%;
 	text-align: center;
 	z-index: 120;
 	color: #fff;
