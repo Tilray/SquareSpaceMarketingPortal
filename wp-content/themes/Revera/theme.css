@@ -23,7 +23,6 @@ textarea {
 	line-height: 1.6;
 }
 
-
 h1 { font-size: 32px; }
 h2 { font-size: 26px; }
 h3 { font-size: 20px; }
@@ -31,12 +30,12 @@ h4 { font-size: 18px; }
 h5 { font-size: 16px; }
 h6 { font-size: 14px; }
 
+
 h1, h2, h3, h4, h5, h6 {
 	font-family: 'Univers LT W01_65 Bold',sans-serif;
 	color: #084875;
 	max-width: 100%;
 }
-
 
 code{
 	white-space: normal;
@@ -467,6 +466,7 @@ img.grayscale {
 	font-size: 36px;
 	color: #fff;
 }
+
 
 .flex-caption h2 a:link, .flex-caption h2 a:visited{
 	color: #fff;
@@ -1088,8 +1088,8 @@ h3.bothead{
 		display: inline-block;
 	}
 		
-	.flex-caption{
-		display: none;
+	.flex-caption h2{
+		font-size: 26px;
 	}
 	.portbox, .postbox{
 		margin-bottom: 30px;
@@ -1097,6 +1097,12 @@ h3.bothead{
 
 	#bottom .col-6 {
 		width: 100%;
+	}
+}
+
+@media screen and (max-width: 500px) {		
+	.flex-caption h2{
+		font-size: 18px;
 	}
 }
 
