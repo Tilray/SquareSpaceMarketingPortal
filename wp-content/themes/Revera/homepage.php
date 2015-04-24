@@ -34,8 +34,10 @@ get_header(); ?>
 	<div class="boxitems col-12">
 		<h2>BLOG</h2>
 		 <?php 	
-		 $updates_cat = ft_of_get_option('homepage_updates_category');
-		 $query = new WP_Query( array( 'cat' => $updates_cat,'posts_per_page' =>4 ) );
+		 //this doesn't play well: it's a global setting, not per language.  need to fix
+		 //$updates_cat = ft_of_get_option('homepage_updates_category');
+		 $langCode = get_current_language_code();
+		 $query = new WP_Query( array( 'cat' => 'Blog-' . strtoupper($langCode),'posts_per_page' =>4 ) );
 		 if ($query->have_posts()) : while ($query->have_posts()) : $query->the_post();	?>
 		 	
 		 <div class="homepage-blog-list">
