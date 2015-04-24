@@ -34,16 +34,16 @@ get_header(); ?>
 	$status = "";
 	$strainType = "";
 	
-	if (isset($_GET[$qpStrain]) && in_array(strtolower($_GET[$qpStrain]), $allStrainTypes))
+	if (isset($_GET[$qpStrain]) && array_key_exists(strtolower($_GET[$qpStrain]), $allStrainTypes))
 	{
 		$strainType = strtolower($_GET[$qpStrain]);
 	}
 	
-	if (isset($_GET[$qpStatus]) && in_array(strtolower($_GET[$qpStatus]), $allStatuses))
+	if (isset($_GET[$qpStatus]) && array_key_exists(strtolower($_GET[$qpStatus]), $allStatuses))
 	{
 		$status = strtolower($_GET[$qpStatus]);
 	}
-
+	
 	//write noscript block with links to all straintypes, current status
 	//write noscript block wiht links to all statuses, current strain type
 	//somehow hide all products and filters if noscript is rendered

@@ -30,8 +30,15 @@ function create_posttype() {
 add_image_size( 'product-thumb', 270, 240, false );
 add_image_size( 'product-single', 555, 2000, false );
 
-$allStatuses = array("", "available", "in-production");
-$allStrainTypes = array("", "indica", "sativa", "hybrid", "high-cbd");
+$allStatuses = array(	"" => array ("en" => "", "fr" => ""), 
+						"available" => array ("en" => "Available", "fr" => "Available"), 
+						"in-production" => array ("en" => "In Production", "fr" => "In Production"));
+						
+$allStrainTypes = array(	"" => array ("en" => "", "fr" => ""), 
+							"indica" => array ("en" => "Indica", "fr" => "Indica"), 
+							"sativa" => array ("en" => "Sativa", "fr" => "Sativa"), 
+							"hybrid" => array ("en" => "Hybrid", "fr" => "Hybrid"), 
+							"high-cbd" => array ("en" => "High CBD", "fr" => "High CBD"));
 
 function get_products_page_link($status, $strainType){
 	$langCode = get_current_language_code();

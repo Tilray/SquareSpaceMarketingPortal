@@ -40,21 +40,18 @@ get_header(); ?>
 			<?php the_content(); ?>
 			<div class="single-product-attributes">
 			<?php
-				$statusCats = get_all_categories_for_post_from_set($post->ID, $allStatuses);
-				$strainCats = get_all_categories_for_post_from_set($post->ID, $allStrainTypes);
+				$currLangCode = strtolower(get_current_language_code());
+				$itemStatus = trim(get_post_meta(get_the_ID(), 'status', true));
+				$itemStatusName = $allStatuses[$itemStatus][$currLangCode];
+				$itemStrainType = trim(get_post_meta(get_the_ID(), 'strain_type', true));
+				$itemStrainName = $allStrainTypes[$itemStrainType][$currLangCode];
 				
-				if ($statusCats){
-					foreach($statusCats as $status)
-					{
-						?><a href="<?= get_products_page_link($status, "") ?>"><?=$status?></a><?php
-					}
+				if ($itemStatus){
+					?><a href="<?= get_products_page_link($itemStatus, "") ?>"><?=$itemStatusName?></a><?php
 				}
 				
-				if ($strainCats){
-					foreach($strainCats as $strain)
-					{
-						?><a href="<?= get_products_page_link("", $strain) ?>"><?=$strain?></a><?php
-					}
+				if ($itemStrainType){
+					?><a href="<?= get_products_page_link("", $itemStrainType) ?>"><?=$itemStrainName?></a><?php
 				}				
 			?>
 			</div>
