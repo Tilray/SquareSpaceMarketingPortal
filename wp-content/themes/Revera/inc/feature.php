@@ -15,19 +15,21 @@
 					<?php
 				}
 				
-				if (ft_of_get_option('fabthemes_banner1_id'))
+				$langCode = strtolower(get_current_language_code());
+				
+				if (ft_of_get_option('fabthemes_banner1_id_' . $langCode))
 				{
-					RenderBanner(ft_of_get_option('fabthemes_banner1_id'), ft_of_get_option('fabthemes_banner1_text_color'), ft_of_get_option('fabthemes_url1'));
+					RenderBanner(ft_of_get_option('fabthemes_banner1_id_' . $langCode), ft_of_get_option('fabthemes_banner1_text_color'), ft_of_get_option('fabthemes_url1_' . $langCode));
 				}
 				
-				if (ft_of_get_option('fabthemes_banner2_id'))
+				if (ft_of_get_option('fabthemes_banner2_id_' . $langCode))
 				{
-					RenderBanner(ft_of_get_option('fabthemes_banner2_id'), ft_of_get_option('fabthemes_banner2_text_color'), ft_of_get_option('fabthemes_url2'));
+					RenderBanner(ft_of_get_option('fabthemes_banner2_id_' . $langCode), ft_of_get_option('fabthemes_banner2_text_color'), ft_of_get_option('fabthemes_url2_' . $langCode));
 				}
 				
-				if (ft_of_get_option('fabthemes_banner3_id'))
+				if (ft_of_get_option('fabthemes_banner3_id_' . $langCode))
 				{
-					RenderBanner(ft_of_get_option('fabthemes_banner3_id'), ft_of_get_option('fabthemes_banner3_text_color'), ft_of_get_option('fabthemes_url3'));
+					RenderBanner(ft_of_get_option('fabthemes_banner3_id_' . $langCode), ft_of_get_option('fabthemes_banner3_text_color'), ft_of_get_option('fabthemes_url3_' . $langCode));
 				}
 				?>
 		</ul>
