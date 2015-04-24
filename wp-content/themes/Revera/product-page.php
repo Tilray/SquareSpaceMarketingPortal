@@ -34,16 +34,14 @@ get_header(); ?>
 	$status = "";
 	$strainType = "";
 	
-	$requestedStrainType = strtolower($_GET[$qpStrain]);
-	if (isset($requestedStrainType) && in_array($requestedStrainType, $allStrainTypes))
+	if (isset($_GET[$qpStrain]) && in_array(strtolower($_GET[$qpStrain]), $allStrainTypes))
 	{
-		$strainType = $requestedStrainType;
+		$strainType = strtolower($_GET[$qpStrain]);
 	}
 	
-	$requestedStatus = strtolower($_GET[$qpStatus]);
-	if (isset($requestedStatus) && in_array($requestedStatus, $allStatuses))
+	if (isset($_GET[$qpStatus]) && in_array(strtolower($_GET[$qpStatus]), $allStatuses))
 	{
-		$status = $requestedStatus;
+		$status = strtolower($_GET[$qpStatus]);
 	}
 
 	//write noscript block with links to all straintypes, current status
@@ -106,11 +104,10 @@ get_header(); ?>
 			$wp_query = new WP_Query(array('post_type' => 'tilray_product', 'posts_per_page' => '100', 'paged' => $paged ));
 			?>
 			<?php while ($wp_query->have_posts()) : $wp_query->the_post(); 
-					$all_the_tags = wp_get_post_tags( get_the_ID() );
-					$combined_tags = "";
-					foreach($all_the_tags as $this_tag){
-						$combined_tags = $combined_tags . " category-" . str_replace(" ", "-", strtolower($this_tag->name));
-					}
+					$itemStatus = trim(get_post_meta(get_the_ID(), 'status', true));
+					$itemStrainType = trim(get_post_meta(get_the_ID(), 'strain_type', true));
+					
+					$combined_tags = "category-" . $itemStatus . " category-" . $itemStrainType;
 			?>
 				<div class="col-sm-3 col-6 portbox post product-item <?= $combined_tags?>" data-id="<?=get_the_ID()?>">
 						
@@ -162,6 +159,8 @@ get_header(); ?>
 	var preFilter = "<?= $combinedFilter?>";
 	var preselectedStatus = "<?= $status ?>";
 	var preselectedStrainType = "<?= $strainType ?>";
+	
+	console.log("status " + preselectedStatus + " and " + preselectedStrainType);
 	
 	jQuery( document ).ready(function() {
 		if (preselectedStatus != "")
