@@ -34,5 +34,10 @@ $allStatuses = array("", "available", "in-production");
 $allStrainTypes = array("", "indica", "sativa", "hybrid", "high-cbd");
 
 function get_products_page_link($status, $strainType){
-	return "/" . get_current_language_code() . "/products/?status=" . $status . "&straintype=" . $strainType;
+	$langCode = get_current_language_code();
+	$pageName = "products";
+	if ($langCode == "fr"){
+		$pageName = "produits";
+	}
+	return "/" . $langCode . "/" . $pageName . "/?status=" . $status . "&straintype=" . $strainType;
 }
