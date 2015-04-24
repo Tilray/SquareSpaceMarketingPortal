@@ -54,9 +54,8 @@ html[xmlns] .slides {display: block;}
 /* Direction Nav */
 .flex-direction-nav {*height: 0;}
 .flex-direction-nav a {width: 50px; height: 100px; margin: -50px 0 0; display: block; background: url(../images/bg_direction_nav.png) no-repeat 0 0; position: absolute; top: 50%; z-index: 110; cursor: pointer; text-indent: -9999px; }
-.flex-direction-nav .flex-next {background-position: 100% 0; right: 0px; }
-.flex-direction-nav .flex-prev {left: 0px;}
-.flexslider:hover .flex-next:hover, .flexslider:hover .flex-prev:hover {background-position-y: -100px;}
+.flex-direction-nav .flex-next {background-position: 100% -100px; right: 0px; }
+.flex-direction-nav .flex-prev {background-position-y: -100px; left: 0px;}
 .flex-direction-nav .flex-disabled {opacity: .3!important; filter:alpha(opacity=30); cursor: default;}
 
 /* Control Nav */
