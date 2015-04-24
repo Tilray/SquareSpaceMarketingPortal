@@ -9,7 +9,7 @@
 						<li>
 							<a href="<?= $linkURL ?>"><?= $imageurl ?></a>
 							<div class="flex-caption">
-								<h2 style="color:<?=$textColor?>"><?= $thisPost->post_title ?></h2>
+								<h2><a href="<?= $linkURL ?>" style="color:<?=$textColor?>"><?= $thisPost->post_title ?></a></h2>
 							</div>
 						</li>
 					<?php
