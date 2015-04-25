@@ -58,7 +58,7 @@
 						
 	$options[] = array( 'name' => 'Banner 2 Text Color',
 						'desc' => 'Hex value for text color (#ffffff)',
-						'id' => 'fabthemes_banner1_text_color',
+						'id' => 'fabthemes_banner2_text_color',
 						'std' => '',
 						'type' => 'text');		
 						

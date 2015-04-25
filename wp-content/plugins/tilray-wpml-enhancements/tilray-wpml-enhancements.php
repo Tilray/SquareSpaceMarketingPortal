@@ -38,3 +38,12 @@ function render_language_chooser($ul_class){
 	}
 	?></ul><?php
 }
+
+function get_other_language(){
+	$allTheLangs = icl_get_languages('skip_missing=0&orderby=id&order=asc');
+	foreach($allTheLangs as $lang){
+		if ($lang["active"] == "0"){
+			return $lang;
+		}
+	}
+}
