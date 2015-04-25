@@ -38,6 +38,8 @@ jQuery(window).load(function() {
 			}
 		}        
 	});
+	
+	jQuery("#mobile-nav").slicknav({label:''});
 });
 
 

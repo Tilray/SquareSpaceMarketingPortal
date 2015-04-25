@@ -1291,3 +1291,28 @@ div.blog-post-preview:nth-child(n+2){
 .single-post-featured-image {
 	margin-bottom: 20px;
 }
+
+div.slicknav_menu,
+#mobile-nav {
+	display: none;
+}
+
+@media screen and (max-width: 600px) {
+	div.slicknav_menu {
+		display: block;
+	}
+	div.login-nav-wrapper,
+	#languagedropdownwrapper,
+	nav.container {
+		display: none;
+	}
+}
+
+.slicknav_nav a, 
+.slicknav_nav a:visited, 
+.slicknav_nav a:hover, 
+.slicknav_nav a:focus, 
+.slicknav_nav a:active
+{
+	color: #ffffff;
+}
