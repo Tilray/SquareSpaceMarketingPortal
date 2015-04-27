@@ -1306,6 +1306,10 @@ div.slicknav_menu,
 	nav.container {
 		display: none;
 	}
+	
+	ul.flex-direction-nav {
+		display: none;
+	}
 }
 
 .slicknav_nav a, 
