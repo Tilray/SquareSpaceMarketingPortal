@@ -12,7 +12,6 @@ get_header(); ?>
 		<div class="row">
 			<div class="col-12">
 				<h1> 404 </h1>
-				<p> Page not found </p>
 			</div>
 			
 		</div>
@@ -31,7 +30,7 @@ get_header(); ?>
 				</header><!-- .page-header -->
 
 				<div class="page-content">
-					<p><?php _e( 'It looks like nothing was found at this location. Maybe try one of the links below or a search?', 'web2feel' ); ?></p>
+					<p><?php _e( 'It looks like nothing was found at this location. Maybe try one of the links above?', 'web2feel' ); ?></p>
 
 				
 				</div><!-- .page-content -->
