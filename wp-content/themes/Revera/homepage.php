@@ -31,7 +31,7 @@ get_header(); ?>
 
 <div class="section-wide">
 	<div class="row">
-	<div class="boxitems col-12">
+	<div class="boxitems col-8">
 		<h2><?php _e('NEWS'); ?></h2>
 		 <?php 	
 		 //this doesn't play well: it's a global setting, not per language.  need to fix
@@ -47,6 +47,8 @@ get_header(); ?>
 		
 		 <?php endwhile; endif; ?>
 		 
+	</div>
+	<div class="col-4">
 	</div>
 	
 	</div>
