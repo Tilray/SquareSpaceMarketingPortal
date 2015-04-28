@@ -32,7 +32,7 @@ get_header(); ?>
 <div class="section-wide">
 	<div class="row">
 	<div class="boxitems col-12">
-		<h2>NEWS</h2>
+		<h2><?php _e('NEWS'); ?></h2>
 		 <?php 	
 		 //this doesn't play well: it's a global setting, not per language.  need to fix
 		 //$updates_cat = ft_of_get_option('homepage_updates_category');
