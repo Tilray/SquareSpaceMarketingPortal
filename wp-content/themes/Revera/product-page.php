@@ -83,7 +83,7 @@ get_header(); ?>
 				<h3 class="gray-underline">Strain Type</h3>
 				<ul class="product-filters product-filters-strain-type">
 					<li><input type="radio" class="product-filters-strain-type" name="strain-types" id="strain-type-show-all" data-filter="" checked><label for="strain-type-show-all"><?php _e('Show All'); ?></label></li>
-					<li><input type="radio" class="product-filters-strain-type" name="strain-types" id="strain-type-indica" data-filter="indica" ><label for="strain-type-indica"><?php _e('Indica'); ?></label></li>
+					<li><input type="radio" class="product-filters-strain-type" name="strain-types" id="strain-type-indica" data-filter="indica" ><label for="strain-type-indica"><?= __('Indica'); ?></label></li>
 					<li><input type="radio" class="product-filters-strain-type" name="strain-types" id="strain-type-sativa" data-filter="sativa" ><label for="strain-type-sativa"><?php _e('Sativa'); ?></label></li>
 					<li><input type="radio" class="product-filters-strain-type" name="strain-types" id="strain-type-hybrid" data-filter="hybrid" ><label for="strain-type-hybrid"><?php _e('Hybrid'); ?></label></li>
 					<li><input type="radio" class="product-filters-strain-type" name="strain-types" id="strain-type-high-cbd" data-filter="high-cbd" ><label for="strain-type-high-cbd"><?php _e('High CBD'); ?></label></li>
