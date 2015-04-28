@@ -74,19 +74,19 @@ get_header(); ?>
 			<div class="product-filters-container">
 				<h3 class="gray-underline">Status</h3>
 				<ul class="product-filters product-filters-status">
-					<li><input type="radio" class="product-filters-status" name="status" id="status-show-all" data-filter="" checked><label for="status-show-all">Show All</label></li>
-					<li><input type="radio" class="product-filters-status" name="status" id="status-available" data-filter="available" ><label for="status-available">Available</label></li>
-					<li><input type="radio" class="product-filters-status" name="status" id="status-in-production" data-filter="in-production" ><label for="status-in-production">In Production</label></li>
+					<li><input type="radio" class="product-filters-status" name="status" id="status-show-all" data-filter="" checked><label for="status-show-all"><?php _e('Show All'); ?></label></li>
+					<li><input type="radio" class="product-filters-status" name="status" id="status-available" data-filter="available" ><label for="status-available"><?php _e('Available');?></label></li>
+					<li><input type="radio" class="product-filters-status" name="status" id="status-in-production" data-filter="in-production" ><label for="status-in-production"><?php _e('In Production');?></label></li>
 				</ul>
 			</div>
 			<div class="product-filters-container">
 				<h3 class="gray-underline">Strain Type</h3>
 				<ul class="product-filters product-filters-strain-type">
-					<li><input type="radio" class="product-filters-strain-type" name="strain-types" id="strain-type-show-all" data-filter="" checked><label for="strain-type-show-all">Show All</label></li>
-					<li><input type="radio" class="product-filters-strain-type" name="strain-types" id="strain-type-indica" data-filter="indica" ><label for="strain-type-indica">Indica</label></li>
-					<li><input type="radio" class="product-filters-strain-type" name="strain-types" id="strain-type-sativa" data-filter="sativa" ><label for="strain-type-sativa">Sativa</label></li>
-					<li><input type="radio" class="product-filters-strain-type" name="strain-types" id="strain-type-hybrid" data-filter="hybrid" ><label for="strain-type-hybrid">Hybrid</label></li>
-					<li><input type="radio" class="product-filters-strain-type" name="strain-types" id="strain-type-high-cbd" data-filter="high-cbd" ><label for="strain-type-high-cbd">High CBD</label></li>
+					<li><input type="radio" class="product-filters-strain-type" name="strain-types" id="strain-type-show-all" data-filter="" checked><label for="strain-type-show-all"><?php _e('Show All'); ?></label></li>
+					<li><input type="radio" class="product-filters-strain-type" name="strain-types" id="strain-type-indica" data-filter="indica" ><label for="strain-type-indica"><?php _e('Indica'); ?></label></li>
+					<li><input type="radio" class="product-filters-strain-type" name="strain-types" id="strain-type-sativa" data-filter="sativa" ><label for="strain-type-sativa"><?php _e('Sativa'); ?></label></li>
+					<li><input type="radio" class="product-filters-strain-type" name="strain-types" id="strain-type-hybrid" data-filter="hybrid" ><label for="strain-type-hybrid"><?php _e('Hybrid'); ?></label></li>
+					<li><input type="radio" class="product-filters-strain-type" name="strain-types" id="strain-type-high-cbd" data-filter="high-cbd" ><label for="strain-type-high-cbd"><?php _e('High CBD'); ?></label></li>
 				</ul>
 			</div>
 		</div>
