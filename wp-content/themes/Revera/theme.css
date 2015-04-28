@@ -1247,12 +1247,15 @@ a div.home-register-button h2{
 	text-align: center;
 }
 
+div.homepage-blog-list {
+	border-top: 2px solid #cccccc;
+}
+
 .homepage-blog-list h3 {
 	padding-top: 6px;
 	width: -moz-max-content;
 	width: -webkit-max-content;
 	width: max-content;	
-	border-top: 2px solid #cccccc;
 	margin: 0;
 }
 
