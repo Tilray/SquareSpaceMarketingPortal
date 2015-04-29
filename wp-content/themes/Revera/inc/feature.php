@@ -60,11 +60,8 @@
 		<style>
 			.flex-caption{
 				bottom: 0px;
+				top: 0px;
 			}	
-			
-			body {
-				background-color: #ff0000;
-			}
 		</style>
 		<?php
 	}
