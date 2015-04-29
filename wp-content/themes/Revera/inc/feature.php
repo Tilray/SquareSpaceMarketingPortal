@@ -53,4 +53,16 @@
 		</ul>
 <div class="doverlay"></div>
 </div>
+<?php
+	if (strpos($_SERVER["HTTP_USER_AGENT"], 'Safari') > 0 && !strpos($_SERVER["HTTP_USER_AGENT"], 'Chrome'))
+	{
+		?>
+		<style>
+			.flex-caption{
+				bottom: 0px;
+			}	
+		</style>
+		<?php
+	}
+?>
 
