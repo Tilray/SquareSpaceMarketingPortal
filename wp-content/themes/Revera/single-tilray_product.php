@@ -47,11 +47,11 @@ get_header(); ?>
 				$itemStrainName = $allStrainTypes[$itemStrainType][$currLangCode];
 				
 				if ($itemStatus){
-					?><a href="<?= get_products_page_link($itemStatus, "") ?>"><?=$itemStatusName?></a><?php
+					?><a href="<?= get_products_page_link($itemStatus, "") ?>"><?=__($itemStatusName)?></a><?php
 				}
 				
 				if ($itemStrainType){
-					?><a href="<?= get_products_page_link("", $itemStrainType) ?>"><?=$itemStrainName?></a><?php
+					?><a href="<?= get_products_page_link("", $itemStrainType) ?>"><?=__($itemStrainName)?></a><?php
 				}				
 			?>
 			</div>
