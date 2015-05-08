@@ -34,38 +34,39 @@ get_header(); ?>
 	//get incoming status and straintype params
 	$qpStrain = 'straintype';
 	$qpStatus = 'status';
-	$status = "";
-	$strainType = "";
+	$statuses = "";
+	$strainTypes = "";
 	
-	if (isset($_GET[$qpStrain]) && array_key_exists(strtolower($_GET[$qpStrain]), $allStrainTypes))
+	if (isset($_GET[$qpStrain]))
 	{
-		$strainType = strtolower($_GET[$qpStrain]);
+		$strainTypes = strtolower($_GET[$qpStrain]);
+		$arrStrainTypes = explode(',', $strainTypes);
+		foreach ($arrStrainTypes as $strain)
+		{
+			if (!array_key_exists($strain, $allStrainTypes)){
+				//invalidate strainTypes since it has something it shouldn't in it.
+				$strainTypes = "";
+			}
+		}
 	}
 	
-	if (isset($_GET[$qpStatus]) && array_key_exists(strtolower($_GET[$qpStatus]), $allStatuses))
+	if (isset($_GET[$qpStatus]))
 	{
-		$status = strtolower($_GET[$qpStatus]);
+		$statuses = strtolower($_GET[$qpStatus]);
+		$arrStatuses = explode(',', $statuses);
+		foreach ($arrStatuses as $status)
+		{
+			if (!array_key_exists($status, $allStatuses)){
+				//invalidate statuses since it has something it shouldn't in it.
+				$statuses = "";
+			}
+		}
 	}
 	
 	//write noscript block with links to all straintypes, current status
 	//write noscript block wiht links to all statuses, current strain type
 	//somehow hide all products and filters if noscript is rendered
 	//render filtered products in noscript block
-
-	$combinedFilter = "";
-	if ($status != "")
-	{
-		$combinedFilter = $combinedFilter . ".category-" . $status;
-	}
-	if ($strainType != "")
-	{
-		$combinedFilter = $combinedFilter . ".category-" . $strainType;
-	}
-	
-	if ($combinedFilter == "")
-	{
-		$combinedFilter = "*";
-	}
 ?>
 
 <div class="container">	
@@ -74,7 +75,7 @@ get_header(); ?>
 			<div class="product-filters-container">
 				<h3 class="gray-underline"><?= __('Status') ?></h3>
 				<ul class="product-filters product-filters-status">
-					<li><input type="checkbox" class="product-filters-status" name="status" id="status-show-all" data-filter="" checked><label for="status-show-all"><?php _e('Show All'); ?></label></li>
+					<li><input type="checkbox" class="product-filters-status" name="status" id="status-show-all" data-filter=""><label for="status-show-all"><?php _e('Show All'); ?></label></li>
 					<li><input type="checkbox" class="product-filters-status" name="status" id="status-available" data-filter="available" ><label for="status-available"><?php _e('Available');?></label></li>
 					<li><input type="checkbox" class="product-filters-status" name="status" id="status-in-production" data-filter="in-production" ><label for="status-in-production"><?php _e('In Production');?></label></li>
 				</ul>
@@ -82,7 +83,7 @@ get_header(); ?>
 			<div class="product-filters-container">
 				<h3 class="gray-underline"><?= __('Strain Type') ?></h3>
 				<ul class="product-filters product-filters-strain-type">
-					<li><input type="checkbox" class="product-filters-strain-type" name="strain-types" id="strain-type-show-all" data-filter="" checked><label for="strain-type-show-all"><?php _e('Show All'); ?></label></li>
+					<li><input type="checkbox" class="product-filters-strain-type" name="strain-types" id="strain-type-show-all" data-filter=""><label for="strain-type-show-all"><?php _e('Show All'); ?></label></li>
 					<li><input type="checkbox" class="product-filters-strain-type" name="strain-types" id="strain-type-indica" data-filter="indica" ><label for="strain-type-indica"><?= __('Indica'); ?></label></li>
 					<li><input type="checkbox" class="product-filters-strain-type" name="strain-types" id="strain-type-sativa" data-filter="sativa" ><label for="strain-type-sativa"><?php _e('Sativa'); ?></label></li>
 					<li><input type="checkbox" class="product-filters-strain-type" name="strain-types" id="strain-type-hybrid" data-filter="hybrid" ><label for="strain-type-hybrid"><?php _e('Hybrid'); ?></label></li>
@@ -94,7 +95,7 @@ get_header(); ?>
 	<div class="row">
 		<div class="col-12">
 		
-			<div id="primary" class="js-isotope" data-isotope-options='{ "columnWidth": 200, "itemSelector": ".product-item", "filter": "<?= $combinedFilter ?>" }'>
+			<div id="primary" class="js-isotope">
 			<?php
 			$port_cat =ft_of_get_option('fabthemes_portfolio');
 			
@@ -165,52 +166,90 @@ get_header(); ?>
 			jQuery(thisFilterCategorySelector + '[data-filter=""]').prop('checked', false);
 			
 			//if nothing's checked, re-check "show all"
-			console.log(jQuery(thisFilterCategorySelector + ':checked').length);
 			if (jQuery(thisFilterCategorySelector + ':checked').length == 0)
 				jQuery(thisFilterCategorySelector + '[data-filter=""]').prop('checked', true);
 		}
-	
-		var statusFilter = "";
-		var statusParam = "";
-		var statusFilters = jQuery('ul.product-filters-status input[type=checkbox]:checked');
-		if (statusFilters.length > 0 && jQuery(statusFilters[0]).attr('data-filter') != ""){
-			statusParam = jQuery(statusFilters[0]).attr('data-filter');
-			statusFilter = '.category-' + statusParam;
-		}
-
-		var strainTypeFilter = "";
-		var strainTypeParam = "";
-		var strainTypeFilters = jQuery('ul.product-filters-strain-type input[type=checkbox]:checked');
-		if (strainTypeFilters.length > 0 && jQuery(strainTypeFilters[0]).attr('data-filter') != ""){
-			strainTypeParam = jQuery(strainTypeFilters[0]).attr('data-filter');
-			strainTypeFilter = '.category-' + strainTypeParam;
-		}
-
-		var filter = statusFilter + strainTypeFilter;
-		if (filter.trim() == '')
-			filter = '*';
-			
-		jQuery('#primary').isotope({ filter: filter });
 		
-		window.history.replaceState({}, pageTitle, pageBaseURL + "?status=" + statusParam + "&straintype=" + strainTypeParam);
+		var statusFilters = GetFiltersArray('ul.product-filters-status input[type=checkbox]:checked');
+		var strainTypeFilters = GetFiltersArray('ul.product-filters-strain-type input[type=checkbox]:checked');
+		var combinedFilters = CombineFilters(statusFilters, strainTypeFilters);
+		
+		jQuery('#primary').isotope({ filter: combinedFilters });
+		window.history.replaceState({}, pageTitle, pageBaseURL + "?status=" + statusFilters.join(',') + "&straintype=" + strainTypeFilters.join(','));
+	}
+	
+	function GetFiltersArray(query)
+	{
+		var filters = [];
+		jQuery(query).each(function(){
+			filters.push(jQuery(this).attr('data-filter'));
+		});
+		
+		return filters;
+	}
+	
+	function CombineFilters(statusFilters, strainTypeFilters){
+		var combinedFilters = '';
+		var statusFilter = '';
+		var statusParam = '';
+		
+		//if one of the status filters that's not "show all" is checked, use that.
+		if (statusFilters.length == 1 && statusFilters[0] != ""){
+			statusFilter = '.category-' + statusFilters[0];
+			combinedFilters = statusFilter;
+		}
+
+		var arrFilters = [];
+		var strainTypeParam = "";
+		if (strainTypeFilters.length > 0 && strainTypeFilters[0] != ""){
+			strainTypeFilters.forEach(function(item){
+				arrFilters.push(statusFilter + '.category-' + item);
+			});
+		}
+
+		//if we have any strain filters, wipe out the status filter because it's tacked onto every strain filter
+		if (arrFilters.length > 0)
+			combinedFilters = arrFilters.join(', ');
+			
+		if (combinedFilters.trim() == '')
+			combinedFilters = '*';
+			
+		return combinedFilters
 	}
 
-	var preFilter = "<?= $combinedFilter?>";
-	var preselectedStatus = "<?= $status ?>";
-	var preselectedStrainType = "<?= $strainType ?>";
+	var arrPreselectedStatus = ("<?= $statuses ?>").split(',');
+	var arrPreselectedStrainType = ("<?= $strainTypes ?>").split(',');
 	
 	jQuery( document ).ready(function() {
-		if (preselectedStatus != "")
-		{
-			jQuery('input[data-filter="' + preselectedStatus + '"]').prop('checked', true);
+		if (arrPreselectedStatus.length == 0){
+			jQuery('input.product-filters-status[data-filter=""]').prop('checked', true);
 		}
-		if (preselectedStrainType != ""){
-			jQuery('input[data-filter="' + preselectedStrainType + '"]').prop('checked', true);
+		else 
+		{
+			arrPreselectedStatus.forEach(function(item)
+			{
+				jQuery('input.product-filters-status[data-filter="' + item + '"]').prop('checked', true);
+			});
+		}
+		
+		if (arrPreselectedStrainType.length == 0){
+			jQuery('input.product-filters-strain-type[data-filter=""]').prop('checked', true);
+		}
+		else 
+		{
+			arrPreselectedStrainType.forEach(function(item)
+			{
+				jQuery('input.product-filters-strain-type[data-filter="' + item + '"]').prop('checked', true);
+			});
 		}
 
 		jQuery('ul.product-filters input[type=checkbox]').change(function() {
 			UpdateProducts(jQuery(this));
 		});
+		
+		var combinedFilters = CombineFilters(arrPreselectedStatus, arrPreselectedStrainType);
+		jQuery('#primary').isotope({ "columnWidth": 200, "itemSelector": ".product-item", filter: combinedFilters });		
+		//data-isotope-options='{ "columnWidth": 200, "itemSelector": ".product-item", "filter": "" }'
 	});
 </script>
 
