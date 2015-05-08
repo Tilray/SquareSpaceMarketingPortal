@@ -74,19 +74,19 @@ get_header(); ?>
 			<div class="product-filters-container">
 				<h3 class="gray-underline"><?= __('Status') ?></h3>
 				<ul class="product-filters product-filters-status">
-					<li><input type="radio" class="product-filters-status" name="status" id="status-show-all" data-filter="" checked><label for="status-show-all"><?php _e('Show All'); ?></label></li>
-					<li><input type="radio" class="product-filters-status" name="status" id="status-available" data-filter="available" ><label for="status-available"><?php _e('Available');?></label></li>
-					<li><input type="radio" class="product-filters-status" name="status" id="status-in-production" data-filter="in-production" ><label for="status-in-production"><?php _e('In Production');?></label></li>
+					<li><input type="checkbox" class="product-filters-status" name="status" id="status-show-all" data-filter="" checked><label for="status-show-all"><?php _e('Show All'); ?></label></li>
+					<li><input type="checkbox" class="product-filters-status" name="status" id="status-available" data-filter="available" ><label for="status-available"><?php _e('Available');?></label></li>
+					<li><input type="checkbox" class="product-filters-status" name="status" id="status-in-production" data-filter="in-production" ><label for="status-in-production"><?php _e('In Production');?></label></li>
 				</ul>
 			</div>
 			<div class="product-filters-container">
 				<h3 class="gray-underline"><?= __('Strain Type') ?></h3>
 				<ul class="product-filters product-filters-strain-type">
-					<li><input type="radio" class="product-filters-strain-type" name="strain-types" id="strain-type-show-all" data-filter="" checked><label for="strain-type-show-all"><?php _e('Show All'); ?></label></li>
-					<li><input type="radio" class="product-filters-strain-type" name="strain-types" id="strain-type-indica" data-filter="indica" ><label for="strain-type-indica"><?= __('Indica'); ?></label></li>
-					<li><input type="radio" class="product-filters-strain-type" name="strain-types" id="strain-type-sativa" data-filter="sativa" ><label for="strain-type-sativa"><?php _e('Sativa'); ?></label></li>
-					<li><input type="radio" class="product-filters-strain-type" name="strain-types" id="strain-type-hybrid" data-filter="hybrid" ><label for="strain-type-hybrid"><?php _e('Hybrid'); ?></label></li>
-					<li><input type="radio" class="product-filters-strain-type" name="strain-types" id="strain-type-high-cbd" data-filter="high-cbd" ><label for="strain-type-high-cbd"><?php _e('High CBD'); ?></label></li>
+					<li><input type="checkbox" class="product-filters-strain-type" name="strain-types" id="strain-type-show-all" data-filter="" checked><label for="strain-type-show-all"><?php _e('Show All'); ?></label></li>
+					<li><input type="checkbox" class="product-filters-strain-type" name="strain-types" id="strain-type-indica" data-filter="indica" ><label for="strain-type-indica"><?= __('Indica'); ?></label></li>
+					<li><input type="checkbox" class="product-filters-strain-type" name="strain-types" id="strain-type-sativa" data-filter="sativa" ><label for="strain-type-sativa"><?php _e('Sativa'); ?></label></li>
+					<li><input type="checkbox" class="product-filters-strain-type" name="strain-types" id="strain-type-hybrid" data-filter="hybrid" ><label for="strain-type-hybrid"><?php _e('Hybrid'); ?></label></li>
+					<li><input type="checkbox" class="product-filters-strain-type" name="strain-types" id="strain-type-high-cbd" data-filter="high-cbd" ><label for="strain-type-high-cbd"><?php _e('High CBD'); ?></label></li>
 				</ul>
 			</div>
 		</div>
@@ -145,11 +145,34 @@ get_header(); ?>
 </div>
 
 <script>
-	function UpdateProducts()
+	function UpdateProducts($clicked)
 	{
+		//if it's a show-all, reset checkboxes for all others of same category-
+		//if it's not a show-all, reset show-all for this category-
+		var thisFilterCategory = jQuery($clicked).attr('name');
+		var thisFilterCategorySelector = 'ul input[type=checkbox][name=' + thisFilterCategory + ']';
+		
+		if (jQuery($clicked).attr('data-filter') == '')
+		{
+			var showAllChecked = jQuery($clicked).prop('checked');
+			jQuery(thisFilterCategorySelector).each(function(index){
+				jQuery(this).prop('checked', jQuery(this).attr('data-filter') == '' ? showAllChecked : !showAllChecked)
+			});
+		}
+		else
+		{
+			//uncheck "Show All"
+			jQuery(thisFilterCategorySelector + '[data-filter=""]').prop('checked', false);
+			
+			//if nothing's checked, re-check "show all"
+			console.log(jQuery(thisFilterCategorySelector + ':checked').length);
+			if (jQuery(thisFilterCategorySelector + ':checked').length == 0)
+				jQuery(thisFilterCategorySelector + '[data-filter=""]').prop('checked', true);
+		}
+	
 		var statusFilter = "";
 		var statusParam = "";
-		var statusFilters = jQuery('ul.product-filters-status input[type=radio]:checked');
+		var statusFilters = jQuery('ul.product-filters-status input[type=checkbox]:checked');
 		if (statusFilters.length > 0 && jQuery(statusFilters[0]).attr('data-filter') != ""){
 			statusParam = jQuery(statusFilters[0]).attr('data-filter');
 			statusFilter = '.category-' + statusParam;
@@ -157,7 +180,7 @@ get_header(); ?>
 
 		var strainTypeFilter = "";
 		var strainTypeParam = "";
-		var strainTypeFilters = jQuery('ul.product-filters-strain-type input[type=radio]:checked');
+		var strainTypeFilters = jQuery('ul.product-filters-strain-type input[type=checkbox]:checked');
 		if (strainTypeFilters.length > 0 && jQuery(strainTypeFilters[0]).attr('data-filter') != ""){
 			strainTypeParam = jQuery(strainTypeFilters[0]).attr('data-filter');
 			strainTypeFilter = '.category-' + strainTypeParam;
@@ -185,8 +208,8 @@ get_header(); ?>
 			jQuery('input[data-filter="' + preselectedStrainType + '"]').prop('checked', true);
 		}
 
-		jQuery('ul.product-filters input[type=radio]').change(function() {
-			UpdateProducts();
+		jQuery('ul.product-filters input[type=checkbox]').change(function() {
+			UpdateProducts(jQuery(this));
 		});
 	});
 </script>

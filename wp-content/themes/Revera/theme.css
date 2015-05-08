@@ -1181,13 +1181,13 @@ ul.product-filters label {
 	font-size: 12px;
 }
 
-ul.product-filters input[type=radio] {
+ul.product-filters input[type=checkbox] {
    position: absolute;
    left: -9999px;
    /* For mobile, it's typically better to position checkbox on top of clickable
       area and turn opacity to 0 instead. */
 }
-ul.product-filters input[type=radio]:checked ~ label {
+ul.product-filters input[type=checkbox]:checked ~ label {
 	color: #084875;
    font-weight: bold;
 }
