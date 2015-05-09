@@ -31,19 +31,22 @@ get_header(); ?>
 
 <div class="section-wide">
 	<div class="row">
-	<div class="boxitems col-8">
+	<div class="boxitems col-12 homepage-blog-container">
 		<h2><?php _e('NEWS'); ?></h2>
 		 <?php 	
-		 //this doesn't play well: it's a global setting, not per language.  need to fix
-		 //$updates_cat = ft_of_get_option('homepage_updates_category');
 		 $langCode = get_current_language_code();
-		 $query = new WP_Query( array( 'cat' => 'Blog-' . strtoupper($langCode),'posts_per_page' =>4 ) );
-		 if ($query->have_posts()) : while ($query->have_posts()) : $query->the_post();	?>
+		 $query = new WP_Query( array( 'cat' => 'Blog-' . strtoupper($langCode),'posts_per_page' => 6 ) );
+		 if ($query->have_posts()) : while ($query->have_posts()) : $query->the_post();
 		 	
-		 <div class="homepage-blog-list">
-			 <h3><a href="<?php the_permalink(); ?>"> <?php the_title(); ?></a></h3>
-			 <h4> <?php echo get_the_date();?> </h4>
-		 </div>
+			$thumb = get_post_thumbnail_id();
+			$img_attrs = wp_get_attachment_image_src( $thumb,'blog-homepage' ); 
+			$image = $img_attrs[0];
+			?>
+			
+			 <div class="homepage-blog-list">
+				<a href="<?php the_permalink(); ?>"><image src="<?= $image ?>"/></a>
+				<h3><a href="<?php the_permalink(); ?>"> <?php the_title(); ?></a></h3>
+			 </div>
 		
 		 <?php endwhile; endif; ?>
 		 

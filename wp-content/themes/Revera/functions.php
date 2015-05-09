@@ -254,4 +254,5 @@ function get_all_categories_for_post_from_set($postID, $validValues){
 remove_filter( 'the_content', 'wpautop' );
 
 add_image_size( 'blog-featured-image', 616, 280, true );
+add_image_size( 'blog-homepage', 365, 205, true );
 add_image_size( 'banner-image', 1200, 550, true );

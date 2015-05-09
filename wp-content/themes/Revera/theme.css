@@ -1247,20 +1247,30 @@ a div.home-register-button h2{
 	text-align: center;
 }
 
-div.homepage-blog-list {
+div.homepage-blog-container {
 	border-top: 2px solid #cccccc;
 }
 
-.homepage-blog-list h3 {
+div.homepage-blog-container h2{
+	margin-top: 10px;
+	margin-bottom: 20px;
+}
+
+div.homepage-blog-list {
+	display: inline-block;
+	width: 365px;
+	height: 280px;
+	margin-right: 22px;
+	vertical-align: top;
+}
+
+.homepage-blog-list h3{
 	padding-top: 6px;
 	width: -moz-max-content;
 	width: -webkit-max-content;
 	width: max-content;	
 	margin: 0;
-}
-
-.homepage-blog-list h3 a{
-	color: #a7a9ac;
+	font-size: 15px;
 }
 
 .homepage-blog-list h4 {
