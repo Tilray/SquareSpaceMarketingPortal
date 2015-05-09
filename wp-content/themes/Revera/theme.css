@@ -1258,10 +1258,14 @@ div.homepage-blog-container h2{
 
 div.homepage-blog-list {
 	display: inline-block;
-	width: 365px;
+	width: 360px;
 	height: 280px;
-	margin-right: 22px;
+	margin-right: 27px;
 	vertical-align: top;
+}
+
+div.homepage-blog-list img{
+	outline: solid 1px #a7a9ac;
 }
 
 .homepage-blog-list h3{
