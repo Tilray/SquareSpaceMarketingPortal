@@ -1327,6 +1327,19 @@ div.slicknav_menu,
 	ul.flex-direction-nav {
 		display: none;
 	}
+	
+	div.homepage-blog-list {
+		display: inline-block;
+		width: 100%;
+		vertical-align: top;
+		margin-left: 0px;
+		margin-right: 0px;
+	}
+	
+	div.homepage-blog-list img{
+		width: 100%;
+	}
+	
 }
 
 .slicknav_nav a, 
