@@ -38,6 +38,19 @@ get_header(); ?>
 	$strainTypes = "";
 	$arrStatuses = array();
 	$arrStrainTypes = array();
+
+	if (isset($_GET[$qpStatus]))
+	{
+		$statuses = strtolower($_GET[$qpStatus]);
+		$arrStatuses = explode(',', $statuses);
+		foreach ($arrStatuses as $status)
+		{
+			if (!array_key_exists($status, $allStatuses)){
+				//invalidate statuses since it has something it shouldn't in it.
+				$statuses = "";
+			}
+		}
+	}
 	
 	if (isset($_GET[$qpStrain]))
 	{
@@ -52,23 +65,35 @@ get_header(); ?>
 		}
 	}
 	
-	if (isset($_GET[$qpStatus]))
-	{
-		$statuses = strtolower($_GET[$qpStatus]);
-		$arrStatuses = explode(',', $statuses);
-		foreach ($arrStatuses as $status)
-		{
-			if (!array_key_exists($status, $allStatuses)){
-				//invalidate statuses since it has something it shouldn't in it.
-				$statuses = "";
-			}
-		}
+	//this is essentially the same code as in JS.  However, using the JS isotope constructor 
+	//does weird stuff when filtering, so we need to use the data- attribute isotope constrcutor
+	//hence this partially duplicated code
+	$arrCombinedFilters = array();
+	
+	//we could have no status (status == show all) or 2 (available and in production, which is the same as show all)
+	//either case should not add a status to the combinedFilters
+	$theOneActualStatus = '';
+	if (count($arrStatuses) == 1 && $arrStatuses[0] != ''){
+		$theOneActualStatus = '.category-' . $arrStatuses[0];
 	}
 	
-	//write noscript block with links to all straintypes, current status
-	//write noscript block wiht links to all statuses, current strain type
-	//somehow hide all products and filters if noscript is rendered
-	//render filtered products in noscript block
+	//if we have strain type show all, or now strain type, set filter to the status
+	if (count($arrStrainTypes) == 0 || (count($arrStrainTypes) == 1 && $arrStrainTypes[0] == "")){
+		$arrCombinedFilters[] = $theOneActualStatus;
+	}
+	//otherwise prefix status to each strain type
+	else{
+		foreach($arrStrainTypes as $thisStrainType){
+			if ($thisStrainType != "")
+				$arrCombinedFilters[] = $theOneActualStatus . '.category-' . $thisStrainType;
+		}
+	}	
+	
+	$combinedFilters = implode(" ", $arrCombinedFilters);
+	if ($combinedFilters == "")
+		$combinedFilters = "*";
+	
+	var_dump($combinedFilters);
 	
 	function RenderProductFilter($className, $name, $id, $filter, $label){
 	?>
@@ -147,7 +172,7 @@ get_header(); ?>
 	<div class="row noscript-hide">
 		<div class="col-12">
 		
-			<div id="primary" class="js-isotope">
+			<div id="primary" class="js-isotope" data-isotope-options='{ "columnWidth": 200, "itemSelector": ".product-item", "filter": "<?=$combinedFilters?>" }'>
 			<?php
 			foreach($theProducts as $product){
 				$combined_tags = "category-" . $product->itemStatus . " category-" . $product->itemStrainType;
@@ -300,8 +325,6 @@ get_header(); ?>
 		});
 		
 		var combinedFilters = CombineFilters(arrPreselectedStatus, arrPreselectedStrainType);
-		jQuery('#primary').isotope({ "columnWidth": 200, "itemSelector": ".product-item", filter: combinedFilters });		
-		//data-isotope-options='{ "columnWidth": 200, "itemSelector": ".product-item", "filter": "" }'
 	});
 </script>
 
