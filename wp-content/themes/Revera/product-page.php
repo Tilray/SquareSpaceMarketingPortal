@@ -93,8 +93,6 @@ get_header(); ?>
 	if ($combinedFilters == "")
 		$combinedFilters = "*";
 	
-	var_dump($combinedFilters);
-	
 	function RenderProductFilter($className, $name, $id, $filter, $label){
 	?>
 		<li>
