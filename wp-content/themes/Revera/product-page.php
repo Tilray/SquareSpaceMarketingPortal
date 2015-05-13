@@ -32,10 +32,12 @@ get_header(); ?>
 
 <?php
 	//get incoming status and straintype params
-	$qpStrain = 'straintype';
+	$qpStrain = 'strain-types';
 	$qpStatus = 'status';
 	$statuses = "";
 	$strainTypes = "";
+	$arrStatuses = array();
+	$arrStrainTypes = array();
 	
 	if (isset($_GET[$qpStrain]))
 	{
@@ -67,6 +69,52 @@ get_header(); ?>
 	//write noscript block wiht links to all statuses, current strain type
 	//somehow hide all products and filters if noscript is rendered
 	//render filtered products in noscript block
+	
+	function RenderProductFilter($className, $name, $id, $filter, $label){
+	?>
+		<li>
+			<span class="noscript-hide">
+				<input type="checkbox" class="<?= $className?>" name="<?=$name?>" id="<?=$id?>" data-filter="<?=$filter?>">
+				<label for="<?=$id?>"><?php _e($label); ?></label>
+			</span>
+			<noscript>
+				<a href="<?= sprintf('%s?%s=%s', the_permalink(), $name, $filter)?>"><?php _e($label); ?></a>
+			</noscript>
+		</li>
+	<?php
+	
+	}
+	
+	function QueryProducts()
+	{
+		$theProducts = array();
+		
+		$wp_query = new WP_Query(array('post_type' => 'tilray_product', 'posts_per_page' => '100' ));
+		while ($wp_query->have_posts()) : $wp_query->the_post(); 
+			$thisProduct = new stdClass;
+
+			$thisProduct->id = get_the_ID();
+			$thisProduct->itemStatus = trim(get_post_meta(get_the_ID(), 'status', true));
+			$thisProduct->itemStrainType = trim(get_post_meta(get_the_ID(), 'strain_type', true));
+
+			$thumbID = get_post_thumbnail_id();
+			$img_attrs = wp_get_attachment_image_src( $thumbID,'product-thumb' ); 
+			$thisProduct->image = $img_attrs[0];
+			
+			$productUrl = trim(get_post_meta(get_the_ID(), 'shop_url', true));
+			if ($productUrl == null || strlen($productUrl) == 0){
+				$productUrl = get_the_permalink();
+			}
+			
+			$thisProduct->productUrl = $productUrl;
+			$theProducts[] = $thisProduct;
+		endwhile;
+		
+		wp_reset_query();
+		return $theProducts;
+	}
+	
+	$theProducts = QueryProducts();	
 ?>
 
 <div class="container">	
@@ -75,75 +123,79 @@ get_header(); ?>
 			<div class="product-filters-container">
 				<h3 class="gray-underline"><?= __('Status') ?></h3>
 				<ul class="product-filters product-filters-status">
-					<li><input type="checkbox" class="product-filters-status" name="status" id="status-show-all" data-filter=""><label for="status-show-all"><?php _e('Show All'); ?></label></li>
-					<li><input type="checkbox" class="product-filters-status" name="status" id="status-available" data-filter="available" ><label for="status-available"><?php _e('Available');?></label></li>
-					<li><input type="checkbox" class="product-filters-status" name="status" id="status-in-production" data-filter="in-production" ><label for="status-in-production"><?php _e('In Production');?></label></li>
+					<?php
+					RenderProductFilter("product-filters-status", "status", "status-show-all", "", "Show All");
+					RenderProductFilter("product-filters-status", "status", "status-available", "available", "Available");
+					RenderProductFilter("product-filters-status", "status", "status-in-production", "in-production", "In Production");
+					?>
 				</ul>
 			</div>
 			<div class="product-filters-container">
 				<h3 class="gray-underline"><?= __('Strain Type') ?></h3>
 				<ul class="product-filters product-filters-strain-type">
-					<li><input type="checkbox" class="product-filters-strain-type" name="strain-types" id="strain-type-show-all" data-filter=""><label for="strain-type-show-all"><?php _e('Show All'); ?></label></li>
-					<li><input type="checkbox" class="product-filters-strain-type" name="strain-types" id="strain-type-indica" data-filter="indica" ><label for="strain-type-indica"><?= __('Indica'); ?></label></li>
-					<li><input type="checkbox" class="product-filters-strain-type" name="strain-types" id="strain-type-sativa" data-filter="sativa" ><label for="strain-type-sativa"><?php _e('Sativa'); ?></label></li>
-					<li><input type="checkbox" class="product-filters-strain-type" name="strain-types" id="strain-type-hybrid" data-filter="hybrid" ><label for="strain-type-hybrid"><?php _e('Hybrid'); ?></label></li>
-					<li><input type="checkbox" class="product-filters-strain-type" name="strain-types" id="strain-type-high-cbd" data-filter="high-cbd" ><label for="strain-type-high-cbd"><?php _e('High CBD'); ?></label></li>
+					<?php
+					RenderProductFilter("product-filters-strain-type", "strain-types", "strain-type-show-all", "", "Show All");
+					RenderProductFilter("product-filters-strain-type", "strain-types", "strain-type-indica", "indica", "Indica");
+					RenderProductFilter("product-filters-strain-type", "strain-types", "strain-type-sativa", "sativa", "Sativa");
+					RenderProductFilter("product-filters-strain-type", "strain-types", "strain-type-hybrid", "hybrid", "Hybrid");
+					RenderProductFilter("product-filters-strain-type", "strain-types", "strain-type-high-cbd", "high-cbd", "High CBD");
+					?>
 				</ul>
 			</div>
 		</div>
 	</div>
-	<div class="row">
+	<div class="row noscript-hide">
 		<div class="col-12">
 		
 			<div id="primary" class="js-isotope">
 			<?php
-			$port_cat =ft_of_get_option('fabthemes_portfolio');
-			
-			if ( get_query_var('paged') )
-				$paged = get_query_var('paged');
-			elseif ( get_query_var('page') )
-				$paged = get_query_var('page');
-			else
-				$paged = 1;
-			$wp_query = new WP_Query(array('post_type' => 'tilray_product', 'posts_per_page' => '100', 'paged' => $paged ));
+			foreach($theProducts as $product){
+				$combined_tags = "category-" . $product->itemStatus . " category-" . $product->itemStrainType;
 			?>
-			<?php while ($wp_query->have_posts()) : $wp_query->the_post(); 
-					$itemStatus = trim(get_post_meta(get_the_ID(), 'status', true));
-					$itemStrainType = trim(get_post_meta(get_the_ID(), 'strain_type', true));
-					
-					$combined_tags = "category-" . $itemStatus . " category-" . $itemStrainType;
-			?>
-				<div class="col-sm-3 col-6 portbox post product-item <?= $combined_tags?>" data-id="<?=get_the_ID()?>">
-						
-				 <?php
-					$thumb = get_post_thumbnail_id();
-					$img_attrs = wp_get_attachment_image_src( $thumb,'product-thumb' ); 
-					$image = $img_attrs[0];
-				 ?>
-							
+				<div class="col-sm-3 col-6 portbox post product-item <?= $combined_tags?>" data-id="<?=$product->id?>">
 					<div class="hthumb">
-						<?php if($image) { 
-							$productUrl = trim(get_post_meta(get_the_ID(), 'shop_url', true));
-							if ($productUrl == null || strlen($productUrl) == 0){
-								$productUrl = get_the_permalink();
-							}
+						<?php if($product->image) { 
 							?>
-							<a href="<?= $productUrl ?>"><img class="img-responsive" src="<?php echo $image ?>"/></a>
+							<a href="<?= $product->productUrl ?>"><img class="img-responsive" src="<?php echo $product->image ?>"/></a>
 						<?php } ?>
 					</div>
-
-				 
 				 </div>
-				
-
-			<?php endwhile; ?>
+			<?php } ?>
+			</div>
+		</div>
 	</div>
 </div>
-
-
-
+<noscript>
+	<style>
+		.noscript-hide {
+			display: none;
+		}
+	</style>
+	<div class="row">
+		<div class="col-12">
+			<ul>
+			<?php
+			foreach($theProducts as $product){
+				if ((count($arrStatuses) > 0 && !in_array($product->itemStatus, $arrStatuses)) ||
+					(count($arrStrainTypes) > 0 && !in_array($product->itemStrainType, $arrStrainTypes)))
+				{
+					continue;
+				}
+			?>
+			
+				<li>
+					<div class="hthumb">
+						<?php if($product->image) { 
+							?>
+							<a href="<?= $product->productUrl ?>"><img class="img-responsive" src="<?php echo $product->image ?>"/></a>
+						<?php } ?>
+					</div>
+				</li>
+			<?php } ?>
+			</ul>
+		</div>
 	</div>
-</div>
+</noscript>
 
 <script>
 	function UpdateProducts($clicked)
@@ -175,7 +227,7 @@ get_header(); ?>
 		var combinedFilters = CombineFilters(statusFilters, strainTypeFilters);
 		
 		jQuery('#primary').isotope({ filter: combinedFilters });
-		window.history.replaceState({}, pageTitle, pageBaseURL + "?status=" + statusFilters.join(',') + "&straintype=" + strainTypeFilters.join(','));
+		window.history.replaceState({}, pageTitle, pageBaseURL + "?status=" + statusFilters.join(',') + "&strain-types=" + strainTypeFilters.join(','));
 	}
 	
 	function GetFiltersArray(query)
