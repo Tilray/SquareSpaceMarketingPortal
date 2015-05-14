@@ -33,7 +33,7 @@ get_header(); ?>
 			$img_attrs = wp_get_attachment_image_src( $thumbid,'product-single' );
 			$image = $img_attrs[0];
 			?>
-			<img class="single-product-image" src="<?=$image?>"/>
+			<img class="single-product-image" src="<?=$image?>" alt="<?php the_title(); ?>"/>
 		</div>
 		<div class="col-sm-4">
 			<h2><?php the_title(); ?></h2>
