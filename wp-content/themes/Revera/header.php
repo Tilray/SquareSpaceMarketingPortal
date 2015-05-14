@@ -63,7 +63,6 @@
 			</div>
 		</div>
 			
-		</nav>
 		<nav class="container">
 			<div class="row">
 				<div class="site-branding col-sm-3">
