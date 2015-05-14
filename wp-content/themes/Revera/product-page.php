@@ -211,7 +211,7 @@ get_header(); ?>
 					<div class="hthumb">
 						<?php if($product->image) { 
 							?>
-							<a href="<?= $product->productUrl ?>"><img class="img-responsive" src="<?php echo $product->image ?>"/></a>
+							<a href="<?= $product->productUrl ?>"><img class="img-responsive" src="<?php echo $product->image ?>" alt="<?=$product->productName?>"/></a>
 						<?php } ?>
 					</div>
 				</li>
