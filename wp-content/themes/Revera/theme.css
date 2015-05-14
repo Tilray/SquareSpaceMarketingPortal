@@ -67,6 +67,18 @@ h1.site-title{
 	
 }
 
+h1.site-title a {
+	text-indent: -999em;
+	background-image: url('images/tilray-nav-logo.png');
+	display: block;
+	width: 180px;
+	height: 30px;
+	background-position: top left;
+	background-repeat: no-repeat;
+	position: relative;
+	top: 5px;
+}
+
 h1 > a, h1 > a:link, h1 > a:visited, 
 h2 > a, h2 > a:link, h2 > a:visited, 
 h3 > a, h3 > a:link, h3 > a:visited
