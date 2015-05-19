@@ -29,12 +29,18 @@ get_header(); ?>
 	</div>
 </div>
 
+<?php
+	$langCode = get_current_language_code();
+	$pageId = ft_of_get_option('fabthemes_blog_page_id_' . $langCode);
+	$page = get_page( $pageId );
+?>
 <div class="section-wide">
 	<div class="row">
 	<div class="boxitems col-12 homepage-blog-container">
-		<h2><?php _e('NEWS'); ?></h2>
+		<a href="<?=get_permalink($pageId)?>">
+		<h2><?=get_the_title($pageId)?></h2></a>
 		 <?php 	
-		 $langCode = get_current_language_code();
+		 
 		 $query = new WP_Query( array( 'cat' => 'Blog-' . strtoupper($langCode),'posts_per_page' => 6 ) );
 		 if ($query->have_posts()) : while ($query->have_posts()) : $query->the_post();
 		 	
