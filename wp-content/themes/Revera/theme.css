@@ -609,6 +609,9 @@ a.frmore{
 	font-weight: bold;
 }
 
+h2.blog-section {
+	text-transform: uppercase;
+}
 
 /* Article */
 

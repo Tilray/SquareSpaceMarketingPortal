@@ -38,7 +38,7 @@ get_header(); ?>
 	<div class="row">
 	<div class="boxitems col-12 homepage-blog-container">
 		<a href="<?=get_permalink($pageId)?>">
-		<h2><?=get_the_title($pageId)?></h2></a>
+		<h2 class="blog-section"><?=get_the_title($pageId)?></h2></a>
 		 <?php 	
 		 
 		 $query = new WP_Query( array( 'cat' => 'Blog-' . strtoupper($langCode),'posts_per_page' => 6 ) );
