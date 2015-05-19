@@ -6,24 +6,29 @@ Description: Adds additional functionality like menus to WPML
 Author: Kyall Barrows
 Version: 1.0
 */
-
-function get_current_language_name(){
+function get_current_language(){
 	$allTheLangs = icl_get_languages('skip_missing=0&orderby=id&order=asc');
 	foreach($allTheLangs as $lang){
 		if ($lang["active"] == "1"){
-			return $lang["native_name"];
+			return $lang;
 		}
+	}
+}
+
+
+function get_current_language_name(){
+	$currLang = get_current_language();
+	if ($currLang !== NULL){
+		return $currLang["native_name"];
 	}
 	
 	return "-";
 }
 
 function get_current_language_code(){
-	$allTheLangs = icl_get_languages('skip_missing=0&orderby=id&order=asc');
-	foreach($allTheLangs as $lang){
-		if ($lang["active"] == "1"){
-			return $lang["language_code"];
-		}
+	$currLang = get_current_language();
+	if ($currLang !== NULL){
+		return $currLang["language_code"];
 	}
 	
 	return "-";

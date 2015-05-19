@@ -256,3 +256,9 @@ remove_filter( 'the_content', 'wpautop' );
 add_image_size( 'blog-featured-image', 616, 280, true );
 add_image_size( 'blog-homepage', 358, 200, true );
 add_image_size( 'banner-image', 1200, 550, true );
+
+
+function blogroot_func( $atts ){
+	return get_site_url();
+}
+add_shortcode( 'blogroot', 'blogroot_func' );

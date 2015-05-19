@@ -31,8 +31,9 @@
 				}
 			
 				$allNavItems = array_merge(wp_get_nav_menu_items("login"), wp_get_nav_menu_items("primary"));
+				$thisLang = get_current_language();
+				RenderMobileNavLI("Home", $thisLang["url"]);
 				$otherLang = get_other_language();
-				RenderMobileNavLI("Home", home_url());
 				RenderMobileNavLI($otherLang["native_name"], $otherLang["url"]);
 				
 				foreach($allNavItems as $navItem){
