@@ -90,7 +90,7 @@ function FT_OP_options()
 
 	$options[] = array( "name" => "Blog Page Link",
 						"desc" => "Which page to show above homepage blog list",
-						"id" => "fabthemes_blog_page_id",
+						"id" => "fabthemes_blog_page",
 						"std" => "",
 						"type" => "text");							
 						
