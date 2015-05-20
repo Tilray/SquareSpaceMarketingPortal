@@ -31,11 +31,10 @@ get_header(); ?>
 
 <?php
 	$langCode = get_current_language_code();
-	$pageId = ft_of_get_option('fabthemes_blog_page');
+	$pageId = ft_of_get_option('fabthemes_blog_page_id_' . $langCode);
 	$page = get_page( $pageId );
 ?>
 <div class="section-wide">
-	<?php var_dump($pageId);?>
 	<div class="row">
 	<div class="boxitems col-12 homepage-blog-container">
 		<a href="<?=get_permalink($pageId)?>">

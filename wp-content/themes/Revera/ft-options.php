@@ -88,11 +88,17 @@ function FT_OP_options()
 						"std" => "",
 						"type" => "text");							
 
-	$options[] = array( "name" => "Blog Page Link",
+	$options[] = array( "name" => "English Blog Page Link",
 						"desc" => "Which page to show above homepage blog list",
-						"id" => "fabthemes_blog_page",
-						"std" => "",
-						"type" => "text");							
+						"id" => "fabthemes_blog_page_id_en",
+						"type" => "select",
+						"options" => $options_pages);						
+						
+	$options[] = array( "name" => "French Blog Page Link",
+						"desc" => "Which page to show above homepage blog list",
+						"id" => "fabthemes_blog_page_id_fr",
+						"type" => "select",
+						"options" => $options_pages);						
 						
 
 	$options[] = array( "name" => "Homepage widgets",
