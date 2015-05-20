@@ -31,7 +31,7 @@ get_header(); ?>
 
 <?php
 	$langCode = get_current_language_code();
-	$pageId = ft_of_get_option('fabthemes_blog_page_id_' . $langCode);
+	$pageId = ft_of_get_option('fabthemes_blog_page_id_');
 	$page = get_page( $pageId );
 ?>
 <div class="section-wide">
