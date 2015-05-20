@@ -91,8 +91,8 @@ function FT_OP_options()
 	$options[] = array( "name" => "Blog Page Link",
 						"desc" => "Which page to show above homepage blog list",
 						"id" => "fabthemes_blog_page_id",
-						"type" => "select",
-						"options" => $options_pages);						
+						"std" => "",
+						"type" => "text");							
 						
 
 	$options[] = array( "name" => "Homepage widgets",
