@@ -35,7 +35,7 @@ get_header(); ?>
 	$page = get_page( $pageId );
 ?>
 <div class="section-wide">
-	var_dump($pageId);
+	<?php var_dump($pageId);?>
 	<div class="row">
 	<div class="boxitems col-12 homepage-blog-container">
 		<a href="<?=get_permalink($pageId)?>">
