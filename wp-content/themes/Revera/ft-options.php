@@ -91,14 +91,14 @@ function FT_OP_options()
 	$options[] = array( "name" => "English Blog Page Link",
 						"desc" => "Which page to show above homepage blog list",
 						"id" => "fabthemes_blog_page_id_en",
-						"type" => "select",
-						"options" => $options_pages);						
+						"std" => "",
+						"type" => "text");							
 						
 	$options[] = array( "name" => "French Blog Page Link",
 						"desc" => "Which page to show above homepage blog list",
 						"id" => "fabthemes_blog_page_id_fr",
-						"type" => "select",
-						"options" => $options_pages);						
+						"std" => "",
+						"type" => "text");							
 						
 
 	$options[] = array( "name" => "Homepage widgets",
