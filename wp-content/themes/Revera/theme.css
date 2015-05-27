@@ -1188,11 +1188,14 @@ a.call-to-action-button svg path{
 	height: 30px;
 	display: table-cell;
 	vertical-align: middle;
+}
+.icon-bullet-line svg path{
 	fill: #dddddd;
 }
 .icon-bullet-content{
 	display: table-cell;
 	vertical-align: middle;
+	padding-left: 10px;
 }
 
 
