@@ -25,12 +25,20 @@ function call_to_action_button_func($atts){
 					$atts['label']);
 }
 
+function icon_bullet_line_func($atts, $content = null){
+	return sprintf('<div class="icon-bullet-line">%s<span class="icon-bullet-content">%s</span></div>', 
+					render_svg_icon($atts['icon_name']),
+					$content);
+}
+
+
 function reg_tilray_shortcodes(){
 	add_shortcode( 'icon_email', 'icon_email_func' );
 	add_shortcode( 'icon_pdf', 'icon_pdf_func' );
 	add_shortcode( 'icon_phone', 'icon_phone_func' );
 	add_shortcode( 'icon_user', 'icon_email_func' );
 	add_shortcode( 'call_to_action_button', 'call_to_action_button_func' );
+	add_shortcode( 'icon_bullet_line', 'icon_bullet_line_func' );
 }
 
 add_action( 'init', 'reg_tilray_shortcodes');
