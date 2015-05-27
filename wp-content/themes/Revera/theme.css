@@ -1151,8 +1151,31 @@ span.left-nav-selected-child h2::after{
 	cursor: pointer;
 }
 
+a.call-to-action-button{
+	padding: 13px 25px;
+	border: solid 4px #ffb12f;
+	text-align: center;
+	display: table;
+}
+a.call-to-action-button span{
+	display: table-cell;
+	vertical-align: middle;
+	font-size: 16px;
+	font-weight: bold;
+	color: #ffb12f;
+	text-transform: uppercase;
+}
 
+a.call-to-action-button svg{
+	width: 30px;
+	height: 30px;
+	display: table-cell;
+	vertical-align: middle;
+}
 
+a.call-to-action-button svg path{
+	fill: #ffb12f;
+}
 
 
 
