@@ -17,6 +17,7 @@ function icon_email_func(){	return render_svg_icon("icon_email");	}
 function icon_pdf_func(){	return render_svg_icon("icon_pdf");}
 function icon_phone_func(){	return render_svg_icon("icon_phone");}
 function icon_user_func(){	return render_svg_icon("icon_user");}
+function icon_ban_func(){	return render_svg_icon("icon_ban");}
 
 function call_to_action_button_func($atts){
 	return sprintf('<a href="%s" class="call-to-action-button">%s<span>%s</span></a>', 
@@ -37,6 +38,7 @@ function reg_tilray_shortcodes(){
 	add_shortcode( 'icon_pdf', 'icon_pdf_func' );
 	add_shortcode( 'icon_phone', 'icon_phone_func' );
 	add_shortcode( 'icon_user', 'icon_email_func' );
+	add_shortcode( 'icon_ban', 'icon_ban_func' );
 	add_shortcode( 'call_to_action_button', 'call_to_action_button_func' );
 	add_shortcode( 'icon_bullet_line', 'icon_bullet_line_func' );
 }
