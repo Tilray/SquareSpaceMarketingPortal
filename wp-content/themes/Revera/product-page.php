@@ -197,16 +197,9 @@ get_header(); ?>
 	</style>
 	<div class="row">
 		<div class="col-12">
-			<?php
-			var_dump($arrStatuses);
-			var_dump($arrStrainTypes);
-			var_dump(count($arrStatuses));
-			var_dump(count($arrStrainTypes));
-			?>
 			<ul>
 			<?php
 			foreach($theProducts as $product){
-				var_dump($product->itemStrainType);
 				if ((count($arrStatuses) > 0 && $arrStatuses[0] != "" && !in_array($product->itemStatus, $arrStatuses)) ||
 					(count($arrStrainTypes) > 0 && $arrStrainTypes[0] != "" && !in_array($product->itemStrainType, $arrStrainTypes)))
 				{
