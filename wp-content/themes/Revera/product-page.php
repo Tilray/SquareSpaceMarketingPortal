@@ -207,8 +207,8 @@ get_header(); ?>
 			<?php
 			foreach($theProducts as $product){
 				var_dump($product->itemStrainType);
-				if ((count($arrStatuses) > 0 && !in_array($product->itemStatus, $arrStatuses)) ||
-					(count($arrStrainTypes) > 0 && !in_array($product->itemStrainType, $arrStrainTypes)))
+				if ((count($arrStatuses) > 0 && $arrStatuses[0] != "" && !in_array($product->itemStatus, $arrStatuses)) ||
+					(count($arrStrainTypes) > 0 && $arrStrainTypes[0] != "" && !in_array($product->itemStrainType, $arrStrainTypes)))
 				{
 					continue;
 				}
