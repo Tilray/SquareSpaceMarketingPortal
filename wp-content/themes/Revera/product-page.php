@@ -135,6 +135,11 @@ get_header(); ?>
 		endwhile;
 		
 		wp_reset_query();
+
+		//2 lines, but still better than messing with WP's query sorting
+		function cmp($a, $b){return strcasecmp($a->productName, $b->productName);}
+		usort($theProducts, "cmp");		
+		
 		return $theProducts;
 	}
 	
