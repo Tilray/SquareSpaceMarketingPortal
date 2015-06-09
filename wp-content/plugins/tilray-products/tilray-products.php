@@ -46,5 +46,5 @@ function get_products_page_link($status, $strainType){
 	if ($langCode == "fr"){
 		$pageName = "produits";
 	}
-	return "/" . $langCode . "/" . $pageName . "/?status=" . $status . "&straintype=" . $strainType;
+	return "/" . $langCode . "/" . $pageName . "/?status=" . $status . "&strain-types=" . $strainType;
 }
