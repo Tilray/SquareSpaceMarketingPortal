@@ -54,6 +54,6 @@ else
 
 	</div>
 </div>
+<?php get_footer(); ?>
 </div><!-- #page -->
 <?php } //end giant if block for 404 hack-around ?>
-<?php get_footer(); ?>
