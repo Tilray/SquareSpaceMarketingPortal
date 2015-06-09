@@ -1072,6 +1072,7 @@ h3.bothead{
 	font-size: 12px;
 	height: 60px;
 	position: absolute;
+	bottom: 0;
 }
 
 .fcred{
