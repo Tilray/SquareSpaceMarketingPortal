@@ -1,3 +1,8 @@
+**2.1.4**
+
+* **Fix**
+	* Fixed a security issue
+	
 **2.1.3**
 
 * **Fix**

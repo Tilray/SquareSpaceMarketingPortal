@@ -29,7 +29,7 @@ if ( preg_match(
 }
 $status_filter  = $status_filter !== null ? (int) $status_filter : null;
 $context_filter = filter_input( INPUT_GET, 'context' );
-$search_filter  = filter_input( INPUT_GET, 'search' );
+$search_filter  = filter_input( INPUT_GET, 'search', FILTER_SANITIZE_FULL_SPECIAL_CHARS );
 $exact_match    = filter_input( INPUT_GET, 'em', FILTER_VALIDATE_BOOLEAN );
 
 $icl_string_translations = icl_get_string_translations();
@@ -186,12 +186,12 @@ function _icl_string_translation_rtl_textarea($language) {
         <?php echo __('Search for:', 'wpml-string-translation')?>
         <input type="text" id="icl_st_filter_search" value="<?php echo $search_filter ?>" />
         </label>
-        
+
         <label>
         <input type="checkbox" id="icl_st_filter_search_em" value="1" <?php if($exact_match):?>checked="checked"<?php endif;?> />
         <?php echo __('Exact match', 'wpml-string-translation')?>
         </label>
-        
+
         <input class="button" type="button" value="<?php _e('Search', 'wpml-string-translation')?>" id="icl_st_filter_search_sb" />
         </span>
 
@@ -279,7 +279,7 @@ function _icl_string_translation_rtl_textarea($language) {
                                 if(icl_st_is_translator()){
 
                                     $icl_pro_status = $wpdb->get_var($wpdb->prepare("
-                                            SELECT c.status FROM {$wpdb->prefix}icl_core_status c 
+                                            SELECT c.status FROM {$wpdb->prefix}icl_core_status c
                                                 JOIN {$wpdb->prefix}icl_string_status s ON s.rid = c.rid
                                                 WHERE s.string_translation_id = %d AND target=%s AND status = %d
                                                 ORDER BY s.id DESC LIMIT 1
@@ -350,7 +350,7 @@ function _icl_string_translation_rtl_textarea($language) {
                                                 }
                                             }else{
                                                 $icl_pro_status = $wpdb->get_var($wpdb->prepare("
-                                                    SELECT c.status FROM {$wpdb->prefix}icl_core_status c 
+                                                    SELECT c.status FROM {$wpdb->prefix}icl_core_status c
                                                         JOIN {$wpdb->prefix}icl_string_status s ON s.rid = c.rid
                                                         WHERE s.string_translation_id = %d  AND target=%s AND status = %d
                                                         ORDER BY s.id DESC LIMIT 1

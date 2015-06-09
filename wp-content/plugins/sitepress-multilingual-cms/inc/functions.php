@@ -64,7 +64,7 @@ function repair_el_type_collate() {
 function icl_get_setting( $key, $default = false ) {
 	global $sitepress;
 
-	if ( isset( $sitepress ) ) {
+	if ( isset( $sitepress ) && method_exists( $sitepress, 'get_setting' ) ) {
 		return $sitepress->get_setting( $key, $default );
 	} else {
 		//We don't have an instance of SitePress class: let's try with $sitepress_settings

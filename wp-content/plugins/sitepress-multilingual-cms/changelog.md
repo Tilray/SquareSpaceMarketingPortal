@@ -1,3 +1,9 @@
+# 3.1.9.7
+
+## Fixes
+* Saving menus in non default language leads to 404 error
+* Updated Installer to fix issues with happening when trying to install other products
+    
 # 3.1.9.6
 
 ## Security
