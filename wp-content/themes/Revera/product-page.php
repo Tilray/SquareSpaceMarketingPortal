@@ -332,6 +332,6 @@ get_header(); ?>
 	});
 </script>
 
+<?php get_footer(); ?>
 </div> <!-- #page -->
 
-<?php get_footer(); ?>
