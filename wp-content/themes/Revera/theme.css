@@ -429,6 +429,7 @@ html, body {
 	min-height: 100%;
 	margin-bottom: -60px;
 	padding-bottom: 60px;
+	position: relative;
 }
 
 #primary {
@@ -1065,10 +1066,12 @@ h3.bothead{
 /* Footer */
 
 .site-footer{
+	width: 100%;
 	padding: 10px 0px;
 	background:#444444;
 	font-size: 12px;
 	height: 60px;
+	position: absolute;
 }
 
 .fcred{
