@@ -13,7 +13,7 @@
 	<div class="container">
 		<div class="site-info wrap row">
 			<div id="copyright-footer-container" class="fcred col-12">
-				Copyright &copy; Tilray, all rights reserved <?php wp_nav_menu( array( 'container' => '', 'theme_location' => 'copyright-footer','container_class' => 'copyright-footer','menu_id'=>'copyright-footer-menu' ,'menu_class'=>'copyright-footer' ) ); ?>
+				&copy; <?=$date->now()->getYear()?> Tilray, all rights reserved <?php wp_nav_menu( array( 'container' => '', 'theme_location' => 'copyright-footer','container_class' => 'copyright-footer','menu_id'=>'copyright-footer-menu' ,'menu_class'=>'copyright-footer' ) ); ?>
 			</div>		
 
 		</div><!-- .site-info -->
