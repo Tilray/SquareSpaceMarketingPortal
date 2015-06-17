@@ -63,5 +63,5 @@ get_header(); ?>
 		</div><!-- #primary -->
 
 	</div>
-</div>
 <?php get_footer(); ?>
+</div>
