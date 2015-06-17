@@ -1170,6 +1170,10 @@ a.call-to-action-button span{
 	text-transform: uppercase;
 }
 
+img.svg{
+	display: none;
+}
+
 a.call-to-action-button svg{
 	width: 30px;
 	height: 30px;
