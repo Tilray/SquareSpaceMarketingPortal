@@ -221,7 +221,7 @@ nav.main-navigation{
 	position: static;
 	}
 
-#primay-menu-container ul.sub-menu li {
+#primary-menu-container li ul.sub-menu li {
 	float: left;
 	list-style: none;
 	margin: 0;
@@ -230,7 +230,7 @@ nav.main-navigation{
 	padding: 0 5px;
 }
 	
-#primay-menu-container .sub-menu li a {
+#primay-menu-container li ul.sub-menu li a {
 	font-family: 'Univers LT W01_65 Bold',sans-serif;
 	color: #084875;
 	display: block;
