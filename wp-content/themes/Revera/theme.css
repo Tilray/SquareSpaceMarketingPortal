@@ -152,7 +152,8 @@ nav.main-navigation{
 }
 
 #primary-menu-container li.current-page-ancestor ul.sub-menu li a,
-#primary-menu-container li.current-menu-item ul.sub-menu li a {
+#primary-menu-container li.current-menu-item ul.sub-menu li a,
+#primary-menu-container li.current-page-ancestor ul.sub-menu li.current-menu-item a {
     border-bottom: none;
 }
 
