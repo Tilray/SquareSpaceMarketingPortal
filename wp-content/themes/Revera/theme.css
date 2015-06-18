@@ -151,6 +151,11 @@ nav.main-navigation{
     border-bottom: 4px solid #084875;
 }
 
+#primary-menu-container li.current-page-ancestor ul.sub-menu li a,
+#primary-menu-container li.current-menu-item ul.sub-menu li a {
+    border-bottom: none;
+}
+
 
 #primary-menu-container li a:hover, #primary-menu-container li a:active, #primary-menu-container .current_page_item a  {
 }
