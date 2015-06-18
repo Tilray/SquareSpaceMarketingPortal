@@ -194,9 +194,8 @@ nav.main-navigation{
 	height: auto;
 	width: 160px;
 	margin: 0px 0px 0px 0px;
-	padding: 5px 5px;
-	background:#dddddd;
-	
+	padding: 0;
+	background:#eeeeee;
 	}
 
 #primary-menu-container li ul a { 
@@ -222,16 +221,16 @@ nav.main-navigation{
 	position: static;
 	}
 
-.sub-menu li {
+#primay-menu-container ul.sub-menu li {
 	float: left;
 	list-style: none;
 	margin: 0;
 	padding: 0;
 	font-weight:400;
-	padding: 4px 10px 4px 10px;
+	padding: 0 5px;
 }
 	
-.sub-menu li a {
+#primay-menu-container .sub-menu li a {
 	font-family: 'Univers LT W01_65 Bold',sans-serif;
 	color: #084875;
 	display: block;
