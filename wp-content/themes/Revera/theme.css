@@ -152,7 +152,9 @@ nav.main-navigation{
     border-bottom: 4px solid #084875;
 }
 
+#primary-menu-container li.current-menu-ancestor ul.sub-menu li a,
 #primary-menu-container li.current-page-ancestor ul.sub-menu li a,
+#primary-menu-container li.current_page_ancestor ul.sub-menu li a,
 #primary-menu-container li.current-menu-item ul.sub-menu li a,
 #primary-menu-container li.current-menu-ancestor ul.sub-menu li.current-menu-item a,
 #primary-menu-container li.current_page_ancestor ul.sub-menu li.current-menu-item a {
