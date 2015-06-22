@@ -95,10 +95,10 @@ get_header(); ?>
 	
 	function RenderProductFilter($className, $name, $id, $filter, $label){
 	?>
-		<li>
+		<li class="product-filter">
 			<span class="noscript-hide">
 				<input type="checkbox" class="<?= $className?>" name="<?=$name?>" id="<?=$id?>" data-filter="<?=$filter?>">
-				<label for="<?=$id?>"><?php _e($label); ?></label>
+				<label class="checkbox-label" for="<?=$id?>"><?php _e($label); ?></label>
 			</span>
 			<noscript>
 				<a href="<?= sprintf('%s?%s=%s', the_permalink(), $name, $filter)?>"><?php _e($label); ?></a>

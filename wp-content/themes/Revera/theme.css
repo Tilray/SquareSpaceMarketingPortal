@@ -1275,6 +1275,16 @@ ul.product-filters input[type=checkbox]:checked ~ label {
 	color: #084875;
    font-weight: bold;
 }
+ul.product-filters input[type=checkbox]:checked ~ label::after {
+	content: "";
+	color: #084875;
+	position: absolute;
+	display: list-item;
+	font-size: 30px;
+	top: -10px;
+	left: 10px;
+}
+
 
 img.single-product-image {
 	margin-left: -15px;
