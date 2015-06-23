@@ -17,7 +17,7 @@ input,
 select,
 textarea {
 	color: #a7a9ac;
-	font-family: 'Univers LT W01_55 Roman',serif;
+	font-family: 'Proxima-Nova',serif;
 	font-size: 14px;
 	font-size: 1.4rem;
 	line-height: 1.6;
@@ -32,9 +32,10 @@ h6 { font-size: 14px; }
 
 
 h1, h2, h3, h4, h5, h6 {
-	font-family: 'Univers LT W01_65 Bold',serif;
+	font-family: 'Proxima-Nova',serif;
 	color: #084875;
 	max-width: 100%;
+	font-weight: bold;
 }
 
 code{
@@ -137,7 +138,8 @@ nav.main-navigation{
 }
 	
 #primary-menu-container li a {
-	font-family: 'Univers LT W01_65 Bold',serif;
+	font-family: 'Proxima-Nova',serif;
+	font-weight: bold;
 	color: #084875;
 	display: block;
     margin: 0;
@@ -275,7 +277,7 @@ ul#login-menu li a {
 
 ul#login-menu li,
 #language-chooser {
-	font-family: 'Univers LT W01_65 Bold',serif;
+	font-family: 'Proxima-Nova',serif;
 }
 
 ul#login-menu li:last-child a{
@@ -1300,7 +1302,8 @@ div.single-product-attributes {
 }
 
 div.single-product-attributes a {
-	font-family:"Univers LT W01_65 Bold";
+	font-family:"Proxima-Nova";
+	font-weight: bold;
 	margin-right: 20px;
 }
 
