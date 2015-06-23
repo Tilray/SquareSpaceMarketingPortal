@@ -1274,6 +1274,7 @@ ul.product-filters input[type=checkbox] {
 ul.product-filters input[type=checkbox]:checked ~ label {
 	color: #084875;
    font-weight: bold;
+   position: relative;
 }
 ul.product-filters input[type=checkbox]:checked ~ label::after {
 	content: "";
@@ -1281,8 +1282,10 @@ ul.product-filters input[type=checkbox]:checked ~ label::after {
 	position: absolute;
 	display: list-item;
 	font-size: 30px;
-	top: -10px;
-	left: 10px;
+	top: 5px;
+	left: -13px;
+	border: 4px solid #084875;
+	border-radius: 20px;
 }
 
 
