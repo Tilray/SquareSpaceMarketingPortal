@@ -1214,6 +1214,9 @@ a.call-to-action-button svg{
 a.call-to-action-button svg path{
 	fill: #ffb12f;
 }
+a.call-to-action-button:hover svg path{
+	fill: #fff;
+}
 
 
 .icon-bullet-line{
