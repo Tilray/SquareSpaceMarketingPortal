@@ -148,9 +148,9 @@ nav.main-navigation{
 	text-transform: uppercase;
 }
 
-#primary-menu-container li.current_page_ancestor a,
-#primary-menu-container li.current-page-ancestor a,
-#primary-menu-container li.current-menu-item a {
+#primary-menu-container li.current_page_ancestor a:hover,
+#primary-menu-container li.current-page-ancestor a:hover,
+#primary-menu-container li.current-menu-item a:hover {
     border-bottom: 4px solid #084875;
 }
 
