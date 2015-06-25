@@ -1182,6 +1182,10 @@ a.call-to-action-button{
 	text-align: center;
 	display: table;
 }
+a.call-to-action-button:hover{
+	background-color: #ffb12f;
+}
+
 a.call-to-action-button span{
 	display: table-cell;
 	vertical-align: middle;
@@ -1189,6 +1193,9 @@ a.call-to-action-button span{
 	font-weight: bold;
 	color: #ffb12f;
 	text-transform: uppercase;
+}
+a.call-to-action-button:hover span{
+	color: #fff;
 }
 
 img.svg{
