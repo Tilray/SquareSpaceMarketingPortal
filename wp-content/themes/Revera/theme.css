@@ -1178,7 +1178,7 @@ span.left-nav-selected-child h2::after{
 
 a.call-to-action-button{
 	padding: 13px 25px;
-	border: solid 4px #ffb12f;
+	border: solid 2px #ffb12f;
 	text-align: center;
 	display: table;
 }
