@@ -282,7 +282,7 @@ ul#login-menu li,
 
 ul#login-menu li:last-child a{
 	background-color: #ffb12f;
-	width: 150px;
+	width: 105px;
 	float: right;
 	text-align: center;
 	height: 100%;
@@ -515,7 +515,7 @@ a.frmore{
 	display: block;
 	text-transform: uppercase;
 	color: #fff;
-	width: 105px;
+	width: 150px;
 	border: 1px solid #fff;
 	padding: 5px 0px;
 	margin: 10px auto;
