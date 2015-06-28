@@ -140,13 +140,14 @@ nav.main-navigation{
 #primary-menu-container li a {
 	font-family: 'Proxima-Nova',serif;
 	font-weight: bold;
-	color: #fff;
+	color: #666;
 	display: block;
     margin: 0;
 	text-decoration: none;
 	position: relative;
 	text-transform: uppercase;
 }
+
 
 #primary-menu-container li.current_page_ancestor a,
 #primary-menu-container li.current-page-ancestor a,
@@ -177,6 +178,7 @@ nav.main-navigation{
 #primary-menu-container li ul li a, #primary-menu-container li ul li a:link, #primary-menu-container li ul li a:visited,
 #primary-menu-container li ul li ul li a, #primary-menu-container li ul li ul li a:link, #primary-menu-container li ul li ul li a:visited,
 #primary-menu-container li ul li ul li ul li a, #primary-menu-container li ul li ul li ul li a:link, #primary-menu-container li ul li ul li ul li a:visited {
+	color: #084875;
 	width: 148px; 
 	margin: 0;
 	padding: 10px 10px;
