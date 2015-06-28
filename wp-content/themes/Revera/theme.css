@@ -193,7 +193,7 @@ nav.main-navigation{
 
 	
 #primary-menu-container li ul li a:hover ,#primary-menu-container li ul li ul li a:hover ,#primary-menu-container li ul li ul li ul li a:hover {
-	color: #ed564b;
+	color:#3caefb;
 }
 
 #primary-menu-container li ul.sub-menu li {
@@ -528,7 +528,7 @@ a.frmore{
 
 .fwidgets{
 	padding: 40px 0px;
-	background: #ed564b;
+	background: #3caefb;
 	border-top:5px solid #f96b61;
 	border-bottom:5px solid #f96b61;
 }
@@ -598,7 +598,7 @@ a.frmore{
 }
 .overlay{
 	position: absolute;
-	background: #ED564B;
+	background: #3caefb;
 	width: 30px;
 	height: 30px;
 	line-height: 35px;
@@ -741,7 +741,7 @@ h1.widget-title, h3.sidetitl {
 }
 
 .widget ul li a:hover{
-	color:#ed564b;
+	color:#3caefb;
 }
 
 .widget.widget_categories ul li,.widget.widget_pages ul li,.widget.widget_archive ul li,.widget.widget_links ul li,.widget.widget_meta ul li {
@@ -824,7 +824,7 @@ li.rbanner{
 h2.comments-title{
 	font-size: 24px;
 	margin-bottom: 20px;
-	color: #ed564b;
+	color:#3caefb;
 }
 
 #comments ol.comment-list {
@@ -889,13 +889,13 @@ ol.comment-list li .comment-meta a {
 }
 
 ol.comment-list li .reply {
-    color: #ed564b;
+	color:#3caefb;
     font-size: 12px;
     margin-left: 74px;
 }
 
 ol.comment-list li .reply a {
-    color: #ed564b;
+	color:#3caefb;
 
 }
 
@@ -991,7 +991,7 @@ textarea#comment {
 #bottom{
 	padding: 20px 0px 40px 0px;
 	background: #3b3b3b;
-	border-top:5px solid #ed564b;
+	border-top:5px solid #3caefb;
 }
 
 #bottom ul{
