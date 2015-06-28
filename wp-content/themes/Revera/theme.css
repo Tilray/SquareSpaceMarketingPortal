@@ -235,8 +235,8 @@ nav.main-navigation{
 	}
 
 #primary-menu-container li:hover ul, #primary-menu-container li li:hover ul, #primary-menu-container li li li:hover ul, #primary-menu-container li.sfHover ul, #primary-menu-container li li.sfHover ul, #primary-menu-container li li li.sfHover ul {
-	left: auto;
-	}
+	left: -30px;
+}
 
 #primary-menu-container li:hover, #primary-menu-container li.sfHover { 
 	position: static;
