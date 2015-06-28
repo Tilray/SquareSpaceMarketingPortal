@@ -1352,6 +1352,12 @@ a div.home-register-button h2{
 	line-height: 16px;
 }
 
+.home-register-button:hover{
+	background-color: #ffb12f;
+}
+a div.home-register-button:hover h2{
+	color: #fff;
+}
 
 .homepage-main-content {
 	text-align: center;
