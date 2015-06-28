@@ -64,8 +64,8 @@ a:active {
 h1.site-title{
 	text-transform: uppercase;
 	font-weight: 800;
-	margin-top: 25px;
-	
+	margin-top: 15px;
+	margin-bottom: 25px;
 }
 
 h1.site-title a {
