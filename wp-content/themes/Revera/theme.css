@@ -140,7 +140,7 @@ nav.main-navigation{
 #primary-menu-container li a {
 	font-family: 'Proxima-Nova',serif;
 	font-weight: bold;
-	color: #666;
+	color: #a7a9ac;
 	display: block;
     margin: 0;
 	text-decoration: none;
@@ -152,6 +152,7 @@ nav.main-navigation{
 #primary-menu-container li.current_page_ancestor a,
 #primary-menu-container li.current-page-ancestor a,
 #primary-menu-container li.current-menu-item a {
+	color: #084875;
     border-bottom: 4px solid #084875;
 }
 
