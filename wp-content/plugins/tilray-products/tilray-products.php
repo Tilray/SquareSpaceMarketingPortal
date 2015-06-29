@@ -52,28 +52,15 @@ function get_products_page_link($status, $strainType){
 
 
 
-<?php
 function additional_active_item_classes($classes = array(), $menu_item = false){
 global $wp_query;
 
-var_dump($classes);
-var_dump($menu_item);
+$postType = get_post_type( get_the_ID() );
 
-if(in_array('current-menu-item', $menu_item->classes)){
-    $classes[] = 'current-menu-item';
+if (is_single() && ($menu_item->title == 'Products' || $menu_item->title == 'Produits') && $postType == 'tilray_product' ){
+    $classes[] = 'current_page_ancestor';
 }
-
-if ( $menu_item->post_name == 'product' && is_post_type_archive('product') ) {
-    $classes[] = 'current-menu-item';
-}
-
-if ( $menu_item->post_name == 'product' && is_singular('product') ) {
-    $classes[] = 'current-menu-item';
-}
-
 
 return $classes;
 }
 add_filter( 'nav_menu_css_class', 'additional_active_item_classes', 10, 2 );
-
-?>
