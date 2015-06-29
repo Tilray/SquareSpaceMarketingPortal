@@ -19,7 +19,7 @@ function create_posttype() {
       ),
       'public' => true,
       'has_archive' => true,
-      'rewrite' => array('slug' => 'tilray-products'),
+      'rewrite' => array('slug' => 'products/tilray-products'),
 	  'capability_type' => 'post',
 	  'taxonomies' => array('post_tag'),
 	  'supports' => array('title', 'editor', 'thumbnail', 'excerpt'),
