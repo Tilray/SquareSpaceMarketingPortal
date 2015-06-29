@@ -22,7 +22,8 @@ function create_posttype() {
       'rewrite' => array('slug' => 'tilray-products'),
 	  'capability_type' => 'post',
 	  'taxonomies' => array('post_tag'),
-	  'supports' => array('title', 'editor', 'thumbnail', 'excerpt')
+	  'supports' => array('title', 'editor', 'thumbnail', 'excerpt'),
+	  'hierarchical' => true
     )
   );
 }
