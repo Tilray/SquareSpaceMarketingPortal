@@ -49,3 +49,31 @@ function get_products_page_link($status, $strainType){
 	}
 	return "/" . $langCode . "/" . $pageName . "/?status=" . $status . "&strain-types=" . $strainType;
 }
+
+
+
+<?php
+function additional_active_item_classes($classes = array(), $menu_item = false){
+global $wp_query;
+
+var_dump($classes);
+var_dump($menu_item);
+
+if(in_array('current-menu-item', $menu_item->classes)){
+    $classes[] = 'current-menu-item';
+}
+
+if ( $menu_item->post_name == 'product' && is_post_type_archive('product') ) {
+    $classes[] = 'current-menu-item';
+}
+
+if ( $menu_item->post_name == 'product' && is_singular('product') ) {
+    $classes[] = 'current-menu-item';
+}
+
+
+return $classes;
+}
+add_filter( 'nav_menu_css_class', 'additional_active_item_classes', 10, 2 );
+
+?>
