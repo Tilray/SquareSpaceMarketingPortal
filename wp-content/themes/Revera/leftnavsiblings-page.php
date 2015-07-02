@@ -37,7 +37,7 @@ get_header(); ?>
 				}
 			?>
 		</div>
-		<div id="primary" class="content-area col-sm-9">
+		<div id="primary" class="content-area col-sm-8">
 			<main id="main" class="site-main" role="main">
 
 				<?php while ( have_posts() ) : the_post(); ?>
