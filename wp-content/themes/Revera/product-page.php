@@ -171,6 +171,9 @@ get_header(); ?>
 					?>
 				</ul>
 			</div>
+			<div class="product-filters-underline">
+				<div class="gray-underline"></div>
+			</div>
 		</div>
 	</div>
 	<div class="row noscript-hide">

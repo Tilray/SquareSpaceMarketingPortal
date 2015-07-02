@@ -1267,6 +1267,10 @@ div.product-filters-container{
 	border-bottom: 1px solid #cccccc;
 }
 
+.product-filters-underline{
+	width: 250px;
+}
+
 
 ul.product-filters{
 	margin: 0;
