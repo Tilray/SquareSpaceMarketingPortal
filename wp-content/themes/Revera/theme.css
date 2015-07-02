@@ -1268,7 +1268,7 @@ div.product-filters-container{
 }
 
 .product-filters-underline{
-	width: 320px;
+	width: 250px;
 	padding: 15px 0 25px 0;
 }
 
@@ -1296,6 +1296,10 @@ ul.product-filters input[type=checkbox] {
    left: -9999px;
    /* For mobile, it's typically better to position checkbox on top of clickable
       area and turn opacity to 0 instead. */
+}
+
+ul.product-filters input[type=checkbox] ~ label {
+	color: #a7a9ac;
 }
 ul.product-filters input[type=checkbox]:checked ~ label {
 	color: #084875;
