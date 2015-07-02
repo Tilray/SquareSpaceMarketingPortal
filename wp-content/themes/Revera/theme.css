@@ -1274,6 +1274,7 @@ ul.product-filters{
 
 ul.product-filters li {
 	list-style-type: none;
+	margin-bottom: -4px;
 }
 
 ul.product-filters li, 
