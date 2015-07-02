@@ -28,7 +28,7 @@ function create_posttype() {
   );
 }
 
-add_image_size( 'product-thumb', 270, 240, false );
+add_image_size( 'product-thumb', 180, 220, false );
 add_image_size( 'product-single', 555, 2000, false );
 
 $allStatuses = array(	"" => array ("en" => "", "fr" => ""), 
