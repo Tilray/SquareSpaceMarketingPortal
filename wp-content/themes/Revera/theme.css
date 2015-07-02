@@ -1452,6 +1452,10 @@ div.slicknav_menu,
 	display: none;
 }
 
+.page-template-leftnavsiblings-page #primary h3{
+	font-size: 16px;
+}
+
 @media screen and (max-width: 600px) {
 	div.slicknav_menu {
 		display: block;
