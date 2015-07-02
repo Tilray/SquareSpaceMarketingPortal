@@ -184,7 +184,7 @@ get_header(); ?>
 			foreach($theProducts as $product){
 				$combined_tags = "category-" . $product->itemStatus . " category-" . $product->itemStrainType;
 			?>
-				<div class="col-sm-3 col-6 portbox post product-item <?= $combined_tags?>" data-id="<?=$product->id?>">
+				<div class="col-2 portbox post product-item <?= $combined_tags?>" data-id="<?=$product->id?>">
 					<div class="hthumb">
 						<?php if($product->image) { 
 							?>
