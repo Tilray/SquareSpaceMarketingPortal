@@ -257,13 +257,13 @@ function render_news_section($args, $showDetails, $showPagination){
 	<?php if ( $the_query->have_posts() ) : ?>
 		<!-- the loop -->
 		<?php while ( $the_query->have_posts() ) : $the_query->the_post(); ?>
-			<div class="blog-post-preview">
+			<div class="blog-post-preview col-4">
 				<?php
 				$thumbID = get_post_thumbnail_id();
 				$img_attrs = wp_get_attachment_image_src( $thumbID,'blog-preview' ); 
 				$image = $img_attrs[0];
 				if($image) {?>
-					<a href="<?php the_permalink(); ?>"><img class="blog-featured-image" src="<?= $image ?>"/></a>
+					<a href="<?php the_permalink(); ?>"><img class="blog-preview" src="<?= $image ?>"/></a>
 				<?php }?>
 				<a href="<?php the_permalink(); ?>"><h2><?php the_title(); ?></h2></a>
 				<p>

@@ -25,7 +25,7 @@ get_header(); ?>
 
 <div class="container">	
 	<div class="row">
-		<div id="secondary" class="col-sm-8">
+		<div id="secondary" class="col-sm-12">
 			<?php 
 			$catName = 'blog-' . get_current_language_code();
 			$args = array(

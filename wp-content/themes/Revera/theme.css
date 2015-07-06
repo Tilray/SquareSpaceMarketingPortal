@@ -1442,6 +1442,9 @@ div.blog-post-preview:nth-child(n+2){
 	margin-top: 10px;
 }
 
+div.blog-post-preview h3{
+	margin-top: 10px;
+}
 
 .single-post-featured-image {
 	margin-bottom: 20px;
