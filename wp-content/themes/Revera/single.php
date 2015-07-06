@@ -18,7 +18,7 @@ get_header(); ?>
 					<div class="col-sm-4">
 						<?php
 							$thumb = get_post_thumbnail_id();
-							$img_url = wp_get_attachment_url( $thumb,'full' ); //get full URL to image (use "large" or "medium" if the images too big)
+							$img_url = wp_get_attachment_url( $thumb,'blog-featured-image' ); //get full URL to image (use "large" or "medium" if the images too big)
 							if($image) : ?>
 						<img class="img-responsive single-post-featured-image" src="<?php echo $img_url ?>"/>
 						<?php endif; ?>		
