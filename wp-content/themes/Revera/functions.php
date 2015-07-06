@@ -251,10 +251,44 @@ function get_all_categories_for_post_from_set($postID, $validValues){
 	return $filteredCategories;
 }
 
+
+function render_news_section($args, $showDetails, $showPagination){
+	$the_query = new WP_Query( $args ); ?>
+	<?php if ( $the_query->have_posts() ) : ?>
+		<!-- the loop -->
+		<?php while ( $the_query->have_posts() ) : $the_query->the_post(); ?>
+			<div class="blog-post-preview">
+				<?php
+				$thumbID = get_post_thumbnail_id();
+				$img_attrs = wp_get_attachment_image_src( $thumbID,'blog-preview' ); 
+				$image = $img_attrs[0];
+				if($image) {?>
+					<a href="<?php the_permalink(); ?>"><img class="blog-featured-image" src="<?= $image ?>"/></a>
+				<?php }?>
+				<a href="<?php the_permalink(); ?>"><h2><?php the_title(); ?></h2></a>
+				<p>
+					<?php echo get_the_excerpt(); ?>
+					<a href="<?php the_permalink(); ?>"><?= __('Read more') ?> &raquo;</a>
+				</p>
+				<h3><?php the_time('F j, Y'); ?></h3>
+			</div>
+		<?php endwhile; ?>
+		<!-- end of the loop -->
+
+		<!-- pagination here -->
+		<div class="navigation"><p><?php posts_nav_link(); ?></p></div>
+
+		<?php wp_reset_postdata(); ?>
+
+	<?php else : ?>
+		<p><?php _e( 'Sorry, no posts matched your criteria.' ); ?></p>
+	<?php endif; ?>	
+}
+
 remove_filter( 'the_content', 'wpautop' );
 
 add_image_size( 'blog-featured-image', 616, 280, true );
-add_image_size( 'blog-homepage', 358, 200, true );
+add_image_size( 'blog-preview', 340, 191, true );
 add_image_size( 'banner-image', 1200, 550, true );
 
 
