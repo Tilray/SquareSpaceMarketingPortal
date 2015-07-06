@@ -13,18 +13,25 @@ get_header(); ?>
 			<div class="col-12">
 				<?php while ( have_posts() ) : the_post(); ?>
 				<h1>News</h1>
-				<h2><?php the_title() ?></h2>
-				<div class="col-sm-4">
-				</div>
-				<div id="primary" class="content-area col-sm-8">
-					<main id="main" class="site-main" role="main">
-
-						<?php get_template_part( 'content', 'single' ); ?>
-
-					<?php endwhile; // end of the loop. ?>
-
-					</main><!-- #main -->
-				</div><!-- #primary -->
+				<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+					<h2><?php the_title() ?></h2>
+					<div class="col-sm-4">
+						<?php
+							$thumb = get_post_thumbnail_id();
+							$img_url = wp_get_attachment_url( $thumb,'full' ); //get full URL to image (use "large" or "medium" if the images too big)
+							if($image) : ?>
+						<img class="img-responsive single-post-featured-image" src="<?php echo $img_url ?>"/>
+						<?php endif; ?>		
+					</div>
+					<div id="primary" class="content-area col-sm-8">
+						<main id="main" class="site-main" role="main">
+							<div class="entry-content">
+								<?php the_content(); ?>
+							</div><!-- .entry-content -->
+						<?php endwhile; // end of the loop. ?>
+						</main><!-- #main -->
+					</div><!-- #primary -->
+				</article><!-- #post-## -->
 			</div>
 		</div>
 	</div>
