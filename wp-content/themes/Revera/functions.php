@@ -282,7 +282,7 @@ function render_news_section($args, $showDetails, $showPagination){
 
 	<?php else : ?>
 		<p><?php _e( 'Sorry, no posts matched your criteria.' ); ?></p>
-	<?php endif; ?>	
+	<?php endif;	
 }
 
 remove_filter( 'the_content', 'wpautop' );
