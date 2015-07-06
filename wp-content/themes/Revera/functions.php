@@ -254,6 +254,7 @@ function get_all_categories_for_post_from_set($postID, $validValues){
 
 function render_news_section($args, $showDetails, $showPagination){
 	$the_query = new WP_Query( $args ); ?>
+	<?php $numRendered = 0;?>
 	<?php if ( $the_query->have_posts() ) : ?>
 		<!-- the loop -->
 		<?php while ( $the_query->have_posts() ) : $the_query->the_post(); ?>
@@ -272,6 +273,14 @@ function render_news_section($args, $showDetails, $showPagination){
 				</p>
 				<h3><?php the_time('F j, Y'); ?></h3>
 			</div>
+			<?php 
+			$numRendered++;
+			if ($numRendered % 3 == 0){
+				?>
+				</div><div class="col-12">
+				<?
+			}
+			?>
 		<?php endwhile; ?>
 		<!-- end of the loop -->
 

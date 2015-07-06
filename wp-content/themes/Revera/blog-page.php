@@ -30,7 +30,7 @@ get_header(); ?>
 			$catName = 'blog-' . get_current_language_code();
 			$args = array(
 				'category_name' => $catName,
-				'posts_per_page' => '10'
+				'posts_per_page' => '12'
 			);
 			render_news_section($args, true, true);
 			?>
