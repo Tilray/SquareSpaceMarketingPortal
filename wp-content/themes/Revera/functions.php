@@ -296,7 +296,7 @@ function render_news_section($args, $showDetails, $showPagination){
 
 remove_filter( 'the_content', 'wpautop' );
 
-add_image_size( 'blog-featured-image', 616, 280, true );
+add_image_size( 'blog-featured-image', 384 );
 add_image_size( 'blog-preview', 340, 191, true );
 add_image_size( 'banner-image', 1200, 550, true );
 
