@@ -41,20 +41,9 @@ get_header(); ?>
 		<h2 class="blog-section"><?=get_the_title($pageId)?></h2></a>
 		 <?php 	
 		 
-		 $query = new WP_Query( array( 'cat' => 'Blog-' . strtoupper($langCode),'posts_per_page' => 6 ) );
-		 if ($query->have_posts()) : while ($query->have_posts()) : $query->the_post();
-		 	
-			$thumb = get_post_thumbnail_id();
-			$img_attrs = wp_get_attachment_image_src( $thumb,'blog-homepage' ); 
-			$image = $img_attrs[0];
-			?>
-			
-			 <div class="homepage-blog-list">
-				<a href="<?php the_permalink(); ?>"><img src="<?= $image ?>" alt="<?php the_title(); ?>"/></a>
-				<h3><a href="<?php the_permalink(); ?>"> <?php the_title(); ?></a></h3>
-			 </div>
-		
-		 <?php endwhile; endif; ?>
+		 $args = array( 'cat' => 'Blog-' . strtoupper($langCode),'posts_per_page' => 6 );
+		 render_news_section( $args, true, false);
+		 ?>
 		 
 	</div>
 	<div class="col-4">
