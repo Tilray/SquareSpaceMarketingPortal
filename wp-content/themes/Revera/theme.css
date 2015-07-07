@@ -495,14 +495,6 @@ img.grayscale {
 	
 	
 .flex-caption{
-/*
-	-ms-transform: translateY(-50%);
-	-webkit-transform: translateY(-50%);
-	-moz-transform: translateY(-50%);
-	-o-transform: translateY(-50%);
-	transform: translateY(-50%);
-	color: #fff;
-*/
 	margin: 0;
 	z-index: 120;
 	width: 80%;
@@ -511,7 +503,7 @@ img.grayscale {
 	top:0; 
 	position: absolute;
 	height: 100%;
-
+	pointer-events: none;
 }	
 	
 .flex-caption h2{
