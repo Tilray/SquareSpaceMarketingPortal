@@ -7,10 +7,12 @@
 					$imageurl = get_the_post_thumbnail($postID, 'banner-image');
 					?>
 						<li>
-							<a href="<?= $linkURL ?>"><?= $imageurl ?></a>
-							<div class="flex-caption">
-								<h2><a href="<?= $linkURL ?>" style="color:<?=$textColor?>"><?= $thisPost->post_title ?></a></h2>
-							</div>
+							<a href="<?= $linkURL ?>">
+								<?= $imageurl ?>
+								<div class="flex-caption">
+									<h2><a href="<?= $linkURL ?>" style="color:<?=$textColor?>"><?= $thisPost->post_title ?></a></h2>
+								</div>
+							</a>
 						</li>
 					<?php
 				}
