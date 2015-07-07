@@ -329,6 +329,7 @@ ul#login-menu li:first-child a,
 
 #languagechooserbutton{
 	cursor: pointer;
+	text-transform: uppercase;
 }	
 
 #languagedropdown{
