@@ -1447,12 +1447,6 @@ div.blog-post-preview{
 	margin-bottom: 50px;
 }
 
-div.blog-post-preview:nth-child(n+2){
-	border-top: 1px solid #cccccc;
-	margin-top: 10px;
-}
-
-
 .single-post-featured-image {
 	margin-bottom: 20px;
 }
