@@ -488,25 +488,39 @@ img.grayscale {
 	
 	
 .flex-caption{
-	left:10%; 
-	top:50%; 
+/*
 	-ms-transform: translateY(-50%);
 	-webkit-transform: translateY(-50%);
 	-moz-transform: translateY(-50%);
 	-o-transform: translateY(-50%);
 	transform: translateY(-50%);
-	width: 80%;
-	position: absolute;
-	text-align: center;
-	z-index: 120;
 	color: #fff;
+*/
 	margin: 0;
+	z-index: 120;
+	width: 80%;
+	left:10%; 
+	text-align: center;
+	top:0; 
+	position: absolute;
+	height: 100%;
+
 }	
 	
 .flex-caption h2{
+	top:50%; 
+	width: 100%;
+	-ms-transform: translateY(-50%);
+	-webkit-transform: translateY(-50%);
+	-moz-transform: translateY(-50%);
+	-o-transform: translateY(-50%);
+	transform: translateY(-50%);
+
 	text-transform: uppercase;
 	font-size: 36px;
 	color: #fff;
+	position: absolute;
+	margin: 0;
 }
 
 
@@ -595,8 +609,8 @@ a.frmore{
 
 }
 .product-item{
-	width: 230px;
-	height: 245px;
+	width: 280px;
+	height: 260px;
 }
 .hthumb a img{
 	margin: auto;
@@ -651,17 +665,10 @@ h2.blog-section {
 
 
 .page-head h1{
-	font-size: 30px;
+	font-size: 24px;
 	text-transform: uppercase;
 	font-weight: bold;
 	border-bottom:1px solid #cccccc;
-}
-
-.page-head h2{
-	font-size: 24px;
-	font-weight: bold;
-	padding-top: 25px;
-	padding-bottom: 15px;
 }
 
 article.post, article.page, section.error-404{
@@ -1275,7 +1282,7 @@ div.product-filters-container{
 }
 
 .product-filters-underline{
-	width: 250px;
+	width: 320px;
 	padding: 15px 0 25px 0;
 }
 
@@ -1303,10 +1310,6 @@ ul.product-filters input[type=checkbox] {
    left: -9999px;
    /* For mobile, it's typically better to position checkbox on top of clickable
       area and turn opacity to 0 instead. */
-}
-
-ul.product-filters input[type=checkbox] ~ label {
-	color: #a7a9ac;
 }
 ul.product-filters input[type=checkbox]:checked ~ label {
 	color: #084875;
@@ -1426,8 +1429,15 @@ div.homepage-blog-list img{
 	padding-bottom: 15px;
 }
 
-div.blog-post-preview h2{
+.page-template-blog-page h2{
 	font-size: 22px;
+}
+.page-template-blog-page h3{
+	margin-top: -10px;
+	margin-bottom: 12px;
+	color: #a7a9ac;
+	font-size: 12px;
+	text-transform: uppercase;
 }
 .page-template-blog-page img.blog-featured-image{
 	margin-bottom: 12px;
@@ -1437,13 +1447,11 @@ div.blog-post-preview{
 	margin-bottom: 50px;
 }
 
-div.blog-post-preview h3{
+div.blog-post-preview:nth-child(n+2){
+	border-top: 1px solid #cccccc;
 	margin-top: 10px;
-	margin-bottom: 12px;
-	color: #a7a9ac;
-	font-size: 12px;
-	text-transform: uppercase;
 }
+
 
 .single-post-featured-image {
 	margin-bottom: 20px;
@@ -1452,10 +1460,6 @@ div.blog-post-preview h3{
 div.slicknav_menu,
 #mobile-nav {
 	display: none;
-}
-
-.page-template-leftnavsiblings-page #primary h3{
-	font-size: 16px;
 }
 
 @media screen and (max-width: 600px) {
