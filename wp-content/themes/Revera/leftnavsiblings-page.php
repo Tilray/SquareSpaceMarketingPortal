@@ -31,8 +31,13 @@ get_header(); ?>
 					{
 						$linkClass = "left-nav-selected-child";
 					}
+					
+					$newTab = "";
+					var_dump($productUrl = get_post_meta(get_the_ID(), 'open_in_new_tab', true));
+					if (get_post_meta(get_the_ID(), 'open_in_new_tab', true) == 'true')
+						$newTab = "target='_blank'";
 					?>
-					<span class="<?=$linkClass?>"><a href="<?php echo get_permalink( $child->ID );?>"><span class="left-nav-bullet"></span><h2><?php echo $child->post_title; ?></h2></a></span>
+					<span class="<?=$linkClass?>"><a <?=$newTab?> href="<?php echo get_permalink( $child->ID );?>"><span class="left-nav-bullet"></span><h2><?php echo $child->post_title; ?></h2></a></span>
 					<?php
 				}
 			?>
