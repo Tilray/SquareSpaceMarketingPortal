@@ -33,9 +33,9 @@ get_header(); ?>
 					}
 					
 					$newTab = "";
-					var_dump(get_the_ID());
-					var_dump(get_post_meta(get_the_ID(), 'open_in_new_tab', true));
-					if (get_post_meta(get_the_ID(), 'open_in_new_tab', true) == 'true')
+					var_dump($child->ID);
+					var_dump(get_post_meta($child->ID, 'open_in_new_tab', true));
+					if (get_post_meta($child->ID, 'open_in_new_tab', true) == 'true')
 						$newTab = "target='_blank'";
 					?>
 					<span class="<?=$linkClass?>"><a <?=$newTab?> href="<?php echo get_permalink( $child->ID );?>"><span class="left-nav-bullet"></span><h2><?php echo $child->post_title; ?></h2></a></span>
