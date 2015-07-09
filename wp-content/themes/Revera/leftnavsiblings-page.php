@@ -33,7 +33,7 @@ get_header(); ?>
 					}
 					
 					$newTab = "";
-					var_dump($productUrl = get_post_meta(get_the_ID(), 'open_in_new_tab', true));
+					var_dump(get_post_meta(get_the_ID(), 'open_in_new_tab', true));
 					if (get_post_meta(get_the_ID(), 'open_in_new_tab', true) == 'true')
 						$newTab = "target='_blank'";
 					?>
