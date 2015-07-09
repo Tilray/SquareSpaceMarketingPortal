@@ -25,22 +25,7 @@ get_header(); ?>
 				$parID = wp_get_post_parent_id(get_the_ID());
 				if ($parID)
 				{
-					$childPages = get_child_pages($parID);
-					foreach ($childPages as $child)
-					{
-						$linkClass = "none";
-						if ($child->ID == get_the_ID())
-						{
-							$linkClass = "left-nav-selected-child";
-						}
-						?>
-						<p><a href="<?php echo get_permalink( $child->ID );?>"><h3 class="<?=$linkClass?>"><?php echo $child->post_title; ?></h3></a></p>
-						<?php
-					}
-				}
-				else
-				{
-					echo "NO";
+					render_left_nav($parID, get_the_ID());
 				}
 			?>
 		</div>

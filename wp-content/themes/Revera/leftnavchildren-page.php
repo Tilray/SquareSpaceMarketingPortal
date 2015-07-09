@@ -22,18 +22,7 @@ get_header(); ?>
 	<div class="row">
 		<div id="secondary" class="col-sm-3 left-nav-menu">
 			<?php
-				$childPages = get_child_pages(get_the_ID());
-				foreach ($childPages as $child)
-				{
-					$linkClass = "none";
-					if ($child->ID == get_the_ID())
-					{
-						$linkClass = "left-nav-selected-child";
-					}
-					?>
-					<span class="<?=$linkClass?>"><a href="<?php echo get_permalink( $child->ID );?>"><span class="left-nav-bullet"></span><h2><?php echo $child->post_title; ?></h2></a></span>
-					<?php
-				}
+				render_left_nav(get_the_ID(), get_the_ID());
 			?>
 		</div>
 		<div id="primary" class="content-area col-sm-9">

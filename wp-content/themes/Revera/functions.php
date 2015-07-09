@@ -252,6 +252,26 @@ function get_all_categories_for_post_from_set($postID, $validValues){
 }
 
 
+function render_left_nav($parentID, $pageID)
+{
+	$childPages = get_child_pages($parentID);
+	foreach ($childPages as $child)
+	{
+		$linkClass = "none";
+		if ($child->ID == $pageID)
+		{
+			$linkClass = "left-nav-selected-child";
+		}
+		
+		$newTab = "";
+		if (get_post_meta($child->ID, 'open_in_new_tab', true) == '1')
+			$newTab = "target='_blank'";
+		?>
+		<span class="<?=$linkClass?>"><a <?=$newTab?> href="<?php echo get_permalink( $child->ID );?>"><span class="left-nav-bullet"></span><h2><?php echo $child->post_title; ?></h2></a></span>
+		<?php
+	}
+}
+
 function render_news_section($args, $showDetails, $showPagination){
 	$the_query = new WP_Query( $args ); ?>
 	<?php $numRendered = 0;?>
