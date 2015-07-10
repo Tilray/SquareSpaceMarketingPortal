@@ -20,8 +20,8 @@ function icon_user_func(){	return render_svg_icon("icon_user");}
 function icon_ban_func(){	return render_svg_icon("icon_ban");}
 
 function call_to_action_button_func($atts){
-	$newTab = "";
-	if ($atts['target'])
+	$newTab = "target='_self'";
+	if ($atts['target'] != "")
 		$newTab = "target='" + $atts['target'] + "'";
 		
 	return sprintf('<a href="%s" %s class="call-to-action-button">%s<span>%s</span></a>', 
