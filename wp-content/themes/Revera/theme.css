@@ -1172,6 +1172,12 @@ h3.bothead{
 	margin-top:20px;
 }
 
+.left-nav-menu h2,
+.center-nav h3{
+	margin-top:0;
+	margin-bottom: 30px;
+}
+
 .left-nav-menu span a,
 span.left-nav-selected-child a,
 span.center-nav-selected-child a{
