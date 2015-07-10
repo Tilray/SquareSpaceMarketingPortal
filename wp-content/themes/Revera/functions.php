@@ -267,7 +267,7 @@ function render_left_nav($parentID, $pageID)
 		if (get_post_meta($child->ID, 'open_in_new_tab', true) == '1')
 			$newTab = "target='_blank'";
 		?>
-		<span class="<?=$linkClass?>"><a <?=$newTab?> href="<?php echo get_permalink( $child->ID );?>"><span class="left-nav-bullet"></span><h2><?php echo $child->post_title; ?></h2></a></span>
+		<span class="<?=$linkClass?>"><a <?=$newTab?> href="<?php echo get_permalink( $child->ID );?>"><h2><?php echo $child->post_title; ?></h2></a></span>
 		<?php
 	}
 }

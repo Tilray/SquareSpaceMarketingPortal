@@ -1185,8 +1185,10 @@ span.left-nav-selected-child h2::after{
 	position: absolute;
 	display: list-item;
 	font-size: 30px;
-	top: -10px;
-	left: 10px;
+	top: 5px;
+	left: -13px;
+	border: 4px solid #084875;
+	border-radius: 20px;
 }
 
 .left-nav-menu a h2, 
