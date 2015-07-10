@@ -1167,6 +1167,11 @@ h3.bothead{
 	}
 }
 
+.left-nav-menu h2:first-of-type,
+.center-nav h3:first-of-type{
+	margin-top:20px;
+}
+
 .left-nav-menu span a,
 span.left-nav-selected-child a,
 span.center-nav-selected-child a{
@@ -1183,7 +1188,6 @@ span.left-nav-selected-child h2::after{
 	content: "";
 	color: #084875;
 	position: absolute;
-	display: list-item;
 	font-size: 30px;
 	top: 5px;
 	left: -13px;
