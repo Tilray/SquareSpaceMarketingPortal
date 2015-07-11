@@ -1168,11 +1168,6 @@ h3.bothead{
 }
 
 
-.left-nav-menu h2,
-.center-nav h3{
-	margin-top:0;
-	margin-bottom: 30px;
-}
 
 .left-nav-menu span a,
 span.left-nav-selected-child a,
@@ -1183,6 +1178,7 @@ span.center-nav-selected-child a{
 span.center-nav-selected-child a h3,
 span.left-nav-selected-child a h2{
 	color: #084875;
+	position: relative;	
 }
 
 span.center-nav-selected-child h3::after,
