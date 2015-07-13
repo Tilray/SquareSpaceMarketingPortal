@@ -1492,6 +1492,9 @@ div.slicknav_menu,
 		width: 100%;
 	}
 	
+	 .left-nav-menu {
+		display: none;
+	 }
 }
 
 .slicknav_nav a, 

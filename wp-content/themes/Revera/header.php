@@ -30,14 +30,47 @@
 				function RenderMobileNavLI($text, $url){
 					?><li><a href="<?=$url?>"><?=$text?></a></li><?php
 				}
-			
+				
+				function RenderMobileNavSubMenu($navItem, $items)
+				{
+					?><li><a href="<?=$navItem->url?>"><?=$navItem->title?></a><ul><?
+					foreach($items as $item){
+						?><li><a href="<?=$item->url?>"><?=$item->title?></a></li><?php
+					}
+					?></ul></li><?
+				}
+					
 				$allNavItems = array_merge(wp_get_nav_menu_items("login"), wp_get_nav_menu_items("primary"));
+				$childPagesByParentId = array();
+				$primaryNavItems = array();
+				//walk the array, looking for items with parent_id's
+				foreach($allNavItems as $navItem){
+					$parentId = $navItem->menu_item_parent;
+					if ($parentId == "0")
+					{
+						$primaryNavItems[] = $navItem;
+					}
+					else{
+						if (!array_key_exists($parentId, $childPagesByParentId)){
+							$childPagesByParentId[$parentId] = array();
+						}
+						
+						$childPagesByParentId[$parentId][] = $navItem;
+					}
+				}
+				
 				RenderMobileNavLI("Home", get_home_url());
 				$otherLang = get_other_language();
 				RenderMobileNavLI($otherLang["native_name"], $otherLang["url"]);
 				
-				foreach($allNavItems as $navItem){
-					RenderMobileNavLI($navItem->title, $navItem->url);
+				foreach($primaryNavItems as $navItem){
+					if (array_key_exists($navItem->ID, $childPagesByParentId))
+					{
+						RenderMobileNavSubMenu($navItem, $childPagesByParentId[$navItem->ID]);
+					}
+					else{
+						RenderMobileNavLI($navItem->title, $navItem->url);
+					}
 				}
 			?>
 			</ul>
