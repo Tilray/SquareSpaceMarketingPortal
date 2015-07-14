@@ -1443,7 +1443,10 @@ div.homepage-blog-list img{
 
 div.blog-post-preview{
 	margin-bottom: 50px;
+	width: 33.333333333333%;
 }
+
+
 
 div.blog-post-preview h2{
 	font-size: 22px;
@@ -1492,8 +1495,12 @@ div.slicknav_menu,
 		width: 100%;
 	}
 	
-	 .left-nav-menu {
+	 div.left-nav-menu {
 		display: none;
+	 }
+	 
+	 div.blog-post-preview{
+		width: 100%;
 	 }
 }
 
