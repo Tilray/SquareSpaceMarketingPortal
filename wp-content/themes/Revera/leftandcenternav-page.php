@@ -32,7 +32,7 @@ get_header(); ?>
 		<div id="primary" class="content-area col-sm-9">
 			<div id="center-nav" class="col-sm-4">
 			</div>
-			<div class="col-sm-8">
+			<div id="right-pane" class="col-sm-8">
 				<?php the_content(); ?>
 			</div>
 		</div><!-- #primary -->
@@ -53,6 +53,10 @@ get_header(); ?>
 				var parentDiv = jQuery('#center-nav')[0];
 				
 				jQuery(parentDiv).append('<span data-index="'+ i +'" class="center-nav-item"><a><span class="left-nav-bullet"></span><h3>' + title + '</h3></a></span>');
+				
+				jQuery(allPanes[i]).click(function(){
+					jQuery(this).toggleClass("drawer-open");
+				});
 			}
 
 			var allCenterNavItems = jQuery(centerNavItemSelector);

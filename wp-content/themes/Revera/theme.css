@@ -267,6 +267,19 @@ nav.main-navigation{
 	line-height: 25px;
 }
 
+span.social-connections{
+	display: block;
+	float: right;
+	padding-top: 2px;
+}
+
+span.social-connections a{
+	color: #a7a9ac;;
+	font-size: 16px;
+	padding-left: 5px;
+	padding-right: 5px;
+}
+
 ul#login-menu li
 {
 	display: inline;
@@ -278,6 +291,9 @@ ul#login-menu li
 
 ul#login-menu {
 	height: 100%;
+	float: right;
+	width: 230px;
+	margin: 0;
 }
 
 ul#login-menu li a {
@@ -1502,6 +1518,40 @@ div.slicknav_menu,
 	 div.blog-post-preview{
 		width: 100%;
 	 }
+	 
+	 .page-template-leftandcenternav-page div#center-nav{
+		display: none;
+	 }
+	 .page-template-leftandcenternav-page div#right-pane{
+		width: 100%;
+	 }
+	 
+	 .page-template-leftandcenternav-page div#right-pane h3{
+		cursor: pointer;
+	 }
+	 
+	 .page-template-leftandcenternav-page .switchpane {
+		display: block;
+	 }
+	 
+	 .page-template-leftandcenternav-page div#right-pane span.answer{
+		overflow: hidden;
+		max-height: 0;
+		display: block;
+		-webkit-transition: max-height .25s;
+		transition: max-height .25s;
+	 }
+	 
+	 .page-template-leftandcenternav-page div#right-pane .drawer-open span.answer{
+		max-height: 800px;
+		-webkit-transition: max-height .5s;
+		transition: max-height .5s;
+	 }
+	 
+	 .page-template-leftandcenternav-page div#right-pane h3{
+		cursor: pointer;
+	 }
+	 
 }
 
 .slicknav_nav a, 

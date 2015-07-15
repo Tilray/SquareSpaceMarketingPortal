@@ -278,7 +278,7 @@ function render_news_section($args, $showDetails, $showPagination){
 	<?php if ( $the_query->have_posts() ) : ?>
 		<!-- the loop -->
 		<?php while ( $the_query->have_posts() ) : $the_query->the_post(); ?>
-			<div class="blog-post-preview">
+			<div class="blog-post-preview col-4">
 				<?php
 				$thumbID = get_post_thumbnail_id();
 				$img_attrs = wp_get_attachment_image_src( $thumbID,'blog-preview' ); 
