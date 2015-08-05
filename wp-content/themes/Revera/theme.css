@@ -493,6 +493,7 @@ html, body {
 /* Slider */
 
 #slidebox{
+	max-height: 550px;
 	position: relative;
 	background: #000;
 }
