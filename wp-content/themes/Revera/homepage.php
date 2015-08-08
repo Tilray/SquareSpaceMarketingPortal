@@ -41,7 +41,11 @@ get_header(); ?>
 		<h2 class="blog-section"><?=get_the_title($pageId)?></h2></a>
 		 <?php 	
 		 
-		 $args = array( 'cat' => 'Blog-' . strtoupper($langCode),'posts_per_page' => 6 );
+		$catName = 'blog-' . get_current_language_code();
+		$args = array(
+			'category_name' => $catName,
+			'posts_per_page' => '6'
+		);
 		 render_news_section( $args, true, false);
 		 ?>
 		 
