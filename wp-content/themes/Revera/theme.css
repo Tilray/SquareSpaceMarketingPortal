@@ -1374,17 +1374,7 @@ ul.copyright-footer{
 ul.copyright-footer li {
 	list-style-type: none;
 	display: inline;
-}
-
-ul.copyright-footer li:before {
-	content: " | ";
-	margin-left: 20px;
-	margin-right: 20px;
-}
-
-ul.copyright-footer li:first-child:before {
-	content: none;
-	margin-right: 20px;
+	margin-right: 40px;
 }
 
 .home-register-button
