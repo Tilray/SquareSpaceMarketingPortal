@@ -49,9 +49,12 @@ a:hover,
 a:focus,
 a:active {
 	color: #084875;
-	text-decoration: underline;
+	text-decoration: none;
 }
 
+p a {
+	text-decoration: underline;
+}
 /* Head */
 
 #masthead{
