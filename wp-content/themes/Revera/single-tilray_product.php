@@ -44,9 +44,7 @@ get_header(); ?>
 				if ($itemPriceObj){
 					$value = get_field('price', get_the_ID());
 					$label = $itemPriceObj['choices'][ $value ];	
-var_dump($value);
-var_dump($itemPriceObj);					
-					if (intval($itemPrice['key']) > 0){
+					if (intval($value['key']) > 0){
 						?>
 							<?=$label?> per Gram
 						<?php
