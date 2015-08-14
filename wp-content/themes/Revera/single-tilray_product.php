@@ -40,6 +40,15 @@ get_header(); ?>
 			<?php 
 				the_content();
 				
+				$itemPrice = trim(get_post_meta(get_the_ID(), 'price', true));
+				if ($itemPrice){
+					if (intval($itemPrice) > 0){
+						?>
+							<?=$itemPrice?> per Gram
+						<?php
+					}
+				}
+				
 				$itemStoreLink = trim(get_post_meta(get_the_ID(), 'store_link', true));
 				if ($itemStoreLink){
 				?>
