@@ -46,7 +46,7 @@ get_header(); ?>
 					$label = $itemPriceObj['choices'][ $value ];	
 					if (intval($value) > 0){
 						?>
-							<?=$label?> per Gram
+							<?=$label?> per gram
 						<?php
 					}
 				}
