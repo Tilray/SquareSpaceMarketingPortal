@@ -41,6 +41,7 @@ get_header(); ?>
 				the_content();
 				
 				$itemPrice = get_field_object( 'price', get_the_ID() );
+				var_dump($itemPrice);
 				if ($itemPrice){
 					if (intval($itemPrice['key']) > 0){
 						?>
