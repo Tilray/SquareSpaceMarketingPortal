@@ -42,7 +42,7 @@ get_header(); ?>
 				
 				$itemPriceObj = get_field_object( 'price', get_the_ID() );
 				if ($itemPriceObj){
-					$value = get_field('price');
+					$value = get_field('price', get_the_ID());
 					$label = $field['choices'][ $value ];				
 					if (intval($itemPrice['key']) > 0){
 						?>
