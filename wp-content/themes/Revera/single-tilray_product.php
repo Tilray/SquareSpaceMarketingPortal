@@ -40,7 +40,7 @@ get_header(); ?>
 			<?php 
 				the_content();
 				
-				$itemPrice = trim(get_field_object( 'price', get_the_ID() ));
+				$itemPrice = get_field_object( 'price', get_the_ID() );
 				if ($itemPrice){
 					if (intval($itemPrice['key']) > 0){
 						?>
