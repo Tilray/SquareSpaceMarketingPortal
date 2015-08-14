@@ -37,7 +37,17 @@ get_header(); ?>
 		</div>
 		<div class="col-sm-4">
 			<h2><?php the_title(); ?></h2>
-			<?php the_content(); ?>
+			<?php 
+				the_content();
+				
+				$itemStoreLink = trim(get_post_meta(get_the_ID(), 'store_link', true));
+				if ($itemStoreLink){
+				?>
+					<a href='<?=$itemStoreLink?>' class='inline-btn'>Buy Now</a>
+				<?php
+				}
+			?>
+			
 			<div class="single-product-attributes">
 			<?php
 				$currLangCode = strtolower(get_current_language_code());

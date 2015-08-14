@@ -1554,3 +1554,19 @@ div.slicknav_menu,
 {
 	color: #ffffff;
 }
+
+.inline-btn {
+  background: #FFB12F;
+  background-image: -webkit-linear-gradient(top, #FFB12F, #FFB12F);
+  background-image: -moz-linear-gradient(top, #FFB12F, #FFB12F);
+  background-image: -ms-linear-gradient(top, #FFB12F, #FFB12F);
+  background-image: -o-linear-gradient(top, #FFB12F, #FFB12F);
+  background-image: linear-gradient(to bottom, #FFB12F, #FFB12F);
+  -webkit-border-radius: 5;
+  -moz-border-radius: 5;
+  border-radius: 5px;
+  color: #ffffff;
+  font-size: 11px;
+  padding: 3px 6px 3px 6px;
+  text-decoration: none;
+}
