@@ -40,12 +40,13 @@ get_header(); ?>
 			<?php 
 				the_content();
 				
-				$itemPrice = get_field_object( 'price', get_the_ID() );
-				var_dump($itemPrice);
-				if ($itemPrice){
+				$itemPriceObj = get_field_object( 'price', get_the_ID() );
+				if ($itemPriceObj){
+					$value = get_field('price');
+					$label = $field['choices'][ $value ];				
 					if (intval($itemPrice['key']) > 0){
 						?>
-							<?=$itemPrice['label']?> per Gram
+							<?=$label?> per Gram
 						<?php
 					}
 				}
