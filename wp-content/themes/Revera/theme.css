@@ -1370,6 +1370,10 @@ div.single-product-attributes a {
 	margin-right: 20px;
 }
 
+a.inline-btn.buy-btn {
+	margin-left: 13px;
+}
+
 ul.copyright-footer{
 	display: inline;
 }

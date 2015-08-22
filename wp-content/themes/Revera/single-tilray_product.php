@@ -54,7 +54,7 @@ get_header(); ?>
 				$itemStoreLink = trim(get_post_meta(get_the_ID(), 'store_link', true));
 				if ($itemStoreLink){
 				?>
-					<a href='<?=$itemStoreLink?>' class='inline-btn'>Buy Now</a>
+					<a href='<?=$itemStoreLink?>' class='inline-btn buy-btn'>Buy Now</a>
 				<?php
 				}
 			?>
