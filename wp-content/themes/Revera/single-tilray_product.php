@@ -40,23 +40,26 @@ get_header(); ?>
 			<?php 
 				the_content();
 				
+				$itemPrice = 0;
 				$itemPriceObj = get_field_object( 'price', get_the_ID() );
 				if ($itemPriceObj){
 					$value = get_field('price', get_the_ID());
+					$itemPrice = intval($value);
 					$label = $itemPriceObj['choices'][ $value ];	
-					if (intval($value) > 0){
+					if ($itemPrice > 0){
 						?>
 							<?=$label?> per gram
+							
 						<?php
+						$itemStoreLink = trim(get_post_meta(get_the_ID(), 'store_link', true));
+						if ($itemStoreLink){
+						?>
+							<a href='<?=$itemStoreLink?>' class='inline-btn buy-btn'>Buy Now</a>
+						<?php
+						}
 					}
 				}
 				
-				$itemStoreLink = trim(get_post_meta(get_the_ID(), 'store_link', true));
-				if ($itemStoreLink){
-				?>
-					<a href='<?=$itemStoreLink?>' class='inline-btn buy-btn'>Buy Now</a>
-				<?php
-				}
 			?>
 			
 			<div class="single-product-attributes">
