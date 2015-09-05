@@ -37,6 +37,21 @@ function get_current_language_code(){
 	return "-";
 }
 
+function get_current_locale(){
+	$currLang = get_current_language();
+	if ($currLang !== NULL){
+		return $currLang["default_locale"];
+	}
+	
+	return "-";
+}
+
+function format_price_for_current_locale($price){
+	if (get_current_language_code() == "en")
+		return "$" . $price . ".00";
+		
+	return $price . ",00 $";
+}
 
 function render_language_chooser($ul_class){
 	if (!function_exists(icl_get_languages))

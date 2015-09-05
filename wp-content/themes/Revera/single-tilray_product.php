@@ -48,7 +48,7 @@ get_header(); ?>
 					$label = $itemPriceObj['choices'][ $value ];	
 					if ($itemPrice > 0){
 						?>
-							<?=$label?> per gram
+							<?=format_price_for_current_locale($itemPrice) . " " . __('per gram')?>
 							
 						<?php
 						$itemStoreLink = trim(get_post_meta(get_the_ID(), 'store_link', true));
