@@ -11,7 +11,7 @@
  *
  * @package web2feel
  */
-
+ 
 get_header(); ?>
 <div class="page-head">
 	<div class="container">
@@ -31,40 +31,35 @@ get_header(); ?>
 </script>
 
 <?php
-	//get incoming status and straintype params
+	function splitAndGetQueryStringParamIfValid($paramName, $allOfType)
+	{
+		$arrParams = Array();
+		if (isset($_GET[$paramName]))
+		{
+			$validParam = strtolower($_GET[$paramName]);
+			$arrParams = explode(',', $validParam);
+			foreach ($arrParams as $item)
+			{
+				if (!array_key_exists($item, $allOfType) && !in_array($item, $allOfType)){
+					//invalidate strainTypes since it has something it shouldn't in it.
+					return Array();
+				}
+			}
+		}
+	
+		return $arrParams;
+	}
+	
+
+	//get incoming status and straintype querystring params
 	$qpStrain = 'strain-types';
 	$qpStatus = 'status';
-	$statuses = "";
-	$strainTypes = "";
-	$arrStatuses = array();
-	$arrStrainTypes = array();
+	$qpPrice = 'prices';
+	$arrStatuses = splitAndGetQueryStringParamIfValid($qpStatus, $allStatuses);
+	$arrStrainTypes = splitAndGetQueryStringParamIfValid($qpStrain, $allStrainTypes);
+	$arrPrices = splitAndGetQueryStringParamIfValid($qpPrice, $allPrices);
 
-	if (isset($_GET[$qpStatus]))
-	{
-		$statuses = strtolower($_GET[$qpStatus]);
-		$arrStatuses = explode(',', $statuses);
-		foreach ($arrStatuses as $status)
-		{
-			if (!array_key_exists($status, $allStatuses)){
-				//invalidate statuses since it has something it shouldn't in it.
-				$statuses = "";
-			}
-		}
-	}
-	
-	if (isset($_GET[$qpStrain]))
-	{
-		$strainTypes = strtolower($_GET[$qpStrain]);
-		$arrStrainTypes = explode(',', $strainTypes);
-		foreach ($arrStrainTypes as $strain)
-		{
-			if (!array_key_exists($strain, $allStrainTypes)){
-				//invalidate strainTypes since it has something it shouldn't in it.
-				$strainTypes = "";
-			}
-		}
-	}
-	
+
 	//this is essentially the same code as in JS.  However, using the JS isotope constructor 
 	//does weird stuff when filtering, so we need to use the data- attribute isotope constrcutor
 	//hence this partially duplicated code
@@ -108,6 +103,26 @@ get_header(); ?>
 	
 	}
 	
+	function getPriceRange($price){
+		global $allPrices;
+		$priceVal = intval($price);
+		foreach ($allPrices as $thisRange)
+		{
+			$thisRange = ltrim($thisRange, "$");
+			if ($thisRange == "")
+				continue;
+				
+			$ends = explode("-", $thisRange);
+			$low = intval($ends[0]);
+			$high = intval($ends[1]);
+			if ($priceVal >= $low && $priceVal <= $high){
+				return $thisRange;
+			}
+		}
+		
+		return "";
+	}
+	
 	function QueryProducts()
 	{
 		$theProducts = array();
@@ -131,6 +146,11 @@ get_header(); ?>
 			
 			$thisProduct->productUrl = $productUrl;
 			$thisProduct->productName = get_the_title();
+			
+			$productPrice = trim(get_post_meta(get_the_ID(), 'price', true));
+			$thisProduct->price = $productPrice;
+			$thisProduct->priceRange = getPriceRange($productPrice);
+
 			$theProducts[] = $thisProduct;
 		endwhile;
 		
@@ -171,6 +191,18 @@ get_header(); ?>
 					?>
 				</ul>
 			</div>
+			<div class="product-filters-container">
+				<h3 class="gray-underline"><?= __('Price') ?></h3>
+				<ul class="product-filters product-filters-price">
+					<?php
+					RenderProductFilter("product-filters-price", "price", "price-show-all", "", "Show All");
+					RenderProductFilter("product-filters-price", "price", "price-8-9", "8-9", "$8-9");
+					RenderProductFilter("product-filters-price", "price", "price-10-11", "10-11", "$10-11");
+					RenderProductFilter("product-filters-price", "price", "price-12-13", "12-13", "$12-13");
+					RenderProductFilter("product-filters-price", "price", "price-14-15", "14-15", "$14-15");
+					?>
+				</ul>
+			</div>
 			<div class="product-filters-underline">
 				<div class="gray-underline"></div>
 			</div>
@@ -179,12 +211,31 @@ get_header(); ?>
 	<div class="row noscript-hide">
 		<div class="col-12">
 		
-			<div id="primary" class="js-isotope" data-isotope-options='{ "columnWidth": 200, "itemSelector": ".product-item", "filter": "<?=$combinedFilters?>" }'>
+			<div id="primary" class="js-isotope" data-isotope-options='{ "columnWidth": 200, "itemSelector": ".product-item", "filter": ".active" }'>
 			<?php
+			$firstStatus = "";
+			$firstStrainType = "";
+			$firstPrice = "";
+			if (count($arrStatuses) > 0) $firstStatus = $arrStatuses[0];
+			if (count($arrStrainTypes) > 0) $firstStrainType = $arrStrainTypes[0];
+			if (count($arrPrices) > 0) $firstPrice = $arrPrices[0];
+			
 			foreach($theProducts as $product){
+				$activeClass = "";
+				if (
+					($firstStatus == "" || in_array($product->itemStatus, $arrStatuses)) &&
+					($firstStrainType == "" || in_array($product->itemStrainType, $arrStrainTypes)) &&
+					($firstPrice == "" || in_array($product->priceRange, $arrPrices)))
+				{
+					$activeClass = "active";
+				}
 				$combined_tags = "category-" . $product->itemStatus . " category-" . $product->itemStrainType;
 			?>
-				<div class="col-2 portbox post product-item <?= $combined_tags?>" data-id="<?=$product->id?>">
+				<div class="col-2 portbox post product-item <?= $activeClass?>" 
+					data-id="<?=$product->id?>" 
+					data-straintype="<?=$product->itemStrainType?>" 
+					data-status="<?=$product->itemStatus?>" 
+					data-pricerange="<?=$product->priceRange?>">
 					<div class="hthumb">
 						<?php if($product->image) { 
 							?>
@@ -209,7 +260,8 @@ get_header(); ?>
 			<?php
 			foreach($theProducts as $product){
 				if ((count($arrStatuses) > 0 && $arrStatuses[0] != "" && !in_array($product->itemStatus, $arrStatuses)) ||
-					(count($arrStrainTypes) > 0 && $arrStrainTypes[0] != "" && !in_array($product->itemStrainType, $arrStrainTypes)))
+					(count($arrStrainTypes) > 0 && $arrStrainTypes[0] != "" && !in_array($product->itemStrainType, $arrStrainTypes)) || 
+					(count($arrPrices) > 0 && $arrPrices[0] != "" && !in_array($product->itemStrainType, $arrStrainTypes)))
 				{
 					continue;
 				}
@@ -236,8 +288,8 @@ get_header(); ?>
 		//if it's not a show-all, reset show-all for this category-
 		var thisFilterCategory = jQuery($clicked).attr('name');
 		var thisFilterCategorySelector = 'ul input[type=checkbox][name=' + thisFilterCategory + ']';
-		
 		if (jQuery($clicked).attr('data-filter') == '')
+		
 		{
 			var showAllChecked = jQuery($clicked).prop('checked');
 			jQuery(thisFilterCategorySelector).each(function(index){
@@ -256,10 +308,39 @@ get_header(); ?>
 		
 		var statusFilters = GetFiltersArray('ul.product-filters-status input[type=checkbox]:checked');
 		var strainTypeFilters = GetFiltersArray('ul.product-filters-strain-type input[type=checkbox]:checked');
-		var combinedFilters = CombineFilters(statusFilters, strainTypeFilters);
+		var priceFilters = GetFiltersArray('ul.product-filters-price input[type=checkbox]:checked');
+		setProductsActive(statusFilters, strainTypeFilters, priceFilters);
 		
-		jQuery('#primary').isotope({ filter: combinedFilters });
-		window.history.replaceState({}, pageTitle, pageBaseURL + "?status=" + statusFilters.join(',') + "&strain-types=" + strainTypeFilters.join(','));
+		jQuery('#primary').isotope({ filter: '.active' });
+		window.history.replaceState({}, pageTitle, pageBaseURL + "?status=" + statusFilters.join(',') + "&strain-types=" + strainTypeFilters.join(',') + "&prices=" + priceFilters.join(','));
+	}
+	
+	function setProductsActive(statusFilters, strainTypeFilters, priceFilters)
+	{
+		if (statusFilters.length == 0)
+			statusFilters = [''];
+		if (strainTypeFilters.length == 0)
+			strainTypeFilters = [''];
+		if (priceFilters.length == 0)
+			priceFilters = [''];
+	
+		var combinedStatus = "|||" + statusFilters.join("|||") + "|||";
+		var combinedStrainType = "|||" + strainTypeFilters.join("|||") + "|||";
+		var combinedPrice = "|||" + priceFilters.join("|||") + "|||";
+		var selector = 'div#primary div.product-item';
+		
+		jQuery(selector).removeClass('active');
+		jQuery(selector).each(function( index ) {
+			var status = jQuery( this ).attr("data-status");
+			var strainType = jQuery( this ).attr("data-straintype");
+			var priceRange = jQuery( this ).attr("data-pricerange");
+			if ((statusFilters[0] == '' || combinedStatus.indexOf("|||" + status + "|||") > -1) &&
+				(strainTypeFilters[0] == '' || combinedStrainType.indexOf("|||" + strainType + "|||") > -1) && 
+				(priceFilters[0] == '' || combinedPrice.indexOf("|||" + priceRange + "|||") > -1))
+			{
+				jQuery(this).addClass('active');
+			}
+		});	
 	}
 	
 	function GetFiltersArray(query)
@@ -301,31 +382,28 @@ get_header(); ?>
 		return combinedFilters
 	}
 
-	var arrPreselectedStatus = ("<?= $statuses ?>").split(',');
-	var arrPreselectedStrainType = ("<?= $strainTypes ?>").split(',');
+	var arrPreselectedStatus = ['<?= implode("', '", $arrStatuses) ?>'];
+	var arrPreselectedStrainType = ['<?= implode("', '", $arrStrainTypes) ?>'];
+	var arrPreselectedPrices = ['<?= implode("', '", $arrPrices) ?>'];
+	
+	function setFilterStates(filterSelector, statuses)
+	{
+		if (statuses.length == 0){
+			jQuery(filterSelector.replace("###", "")).prop('checked', true);
+		}
+		else 
+		{
+			statuses.forEach(function(item)
+			{
+				jQuery(filterSelector.replace("###", item)).prop('checked', true);
+			});
+		}
+	}
 	
 	jQuery( document ).ready(function() {
-		if (arrPreselectedStatus.length == 0){
-			jQuery('input.product-filters-status[data-filter=""]').prop('checked', true);
-		}
-		else 
-		{
-			arrPreselectedStatus.forEach(function(item)
-			{
-				jQuery('input.product-filters-status[data-filter="' + item + '"]').prop('checked', true);
-			});
-		}
-		
-		if (arrPreselectedStrainType.length == 0){
-			jQuery('input.product-filters-strain-type[data-filter=""]').prop('checked', true);
-		}
-		else 
-		{
-			arrPreselectedStrainType.forEach(function(item)
-			{
-				jQuery('input.product-filters-strain-type[data-filter="' + item + '"]').prop('checked', true);
-			});
-		}
+		setFilterStates('input.product-filters-status[data-filter="###"]', arrPreselectedStatus);
+		setFilterStates('input.product-filters-strain-type[data-filter="###"]', arrPreselectedStrainType);
+		setFilterStates('input.product-filters-price[data-filter="###"]', arrPreselectedPrices);
 
 		jQuery('ul.product-filters input[type=checkbox]').change(function() {
 			UpdateProducts(jQuery(this));

@@ -41,6 +41,8 @@ $allStrainTypes = array(	"" => array ("en" => "", "fr" => ""),
 							"hybrid" => array ("en" => "Hybrid", "fr" => "Hybrid"), 
 							"high-cbd" => array ("en" => "High CBD", "fr" => "High CBD"));
 
+$allPrices = array(	"", "8-9", "10-11", "12-13", "14-15");
+							
 function get_products_page_link($status, $strainType){
 	$langCode = get_current_language_code();
 	$pageName = "products";
