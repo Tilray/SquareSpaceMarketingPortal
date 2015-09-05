@@ -498,7 +498,8 @@ html, body {
 #slidebox{
 	max-height: 550px;
 	position: relative;
-	background: #000;
+	background: #eee;
+	min-height: 486px;
 }
 
 .doverlay{
