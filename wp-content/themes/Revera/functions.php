@@ -291,7 +291,6 @@ function render_news_section($args, $showDetails, $showPagination){
 					<?php echo get_the_excerpt(); ?>
 					<a href="<?php the_permalink(); ?>"><?= __('Read more') ?> &raquo;</a>
 				</p>
-				<h3><?php the_time('F j, Y'); ?></h3>
 			</div>
 			<?php 
 			$numRendered++;
