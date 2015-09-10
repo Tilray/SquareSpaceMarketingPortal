@@ -39,17 +39,27 @@ $allStrainTypes = array(	"" => array ("en" => "", "fr" => ""),
 							"indica" => array ("en" => "Indica", "fr" => "Indica"), 
 							"sativa" => array ("en" => "Sativa", "fr" => "Sativa"), 
 							"hybrid" => array ("en" => "Hybrid", "fr" => "Hybrid"), 
-							"high-cbd" => array ("en" => "High CBD", "fr" => "High CBD"));
+							"high-cbd" => array ("en" => "+CBD", "fr" => "+CBD"));
 
-$allPrices = array(	"", "8-9", "10-11", "12-13", "14-15");
-							
-function get_products_page_link($status, $strainType){
+$allCategories = array(	"" => array ("en" => "", "fr" => ""), 
+						"flower" => array ("en" => "Flower", "fr" => "Flower"), 
+						"blend" => array ("en" => "Blend", "fr" => "Blend"), 
+						"extract" => array ("en" => "Extract", "fr" => "Extract"));
+					
+$allPrices = array(	"" => "", 
+					"4-6" => "$4-6", 
+					"7-9" => "$7-9", 
+					"10-12" => "$10-12", 
+					"13-1000" => "$13+");
+
+					
+function get_products_page_link($status, $strainType, $strainCategory){
 	$langCode = get_current_language_code();
 	$pageName = "products";
 	if ($langCode == "fr"){
 		$pageName = "produits";
 	}
-	return home_url() . "/" . $langCode . "/" . $pageName . "/?status=" . $status . "&strain-types=" . $strainType;
+	return home_url() . "/" . $langCode . "/" . $pageName . "/?status=" . $status . "&strain-types=" . $strainType . "&categories=" . $strainCategory;
 }
 
 

@@ -69,13 +69,19 @@ get_header(); ?>
 				$itemStatusName = $allStatuses[$itemStatus][$currLangCode];
 				$itemStrainType = trim(get_post_meta(get_the_ID(), 'strain_type', true));
 				$itemStrainName = $allStrainTypes[$itemStrainType][$currLangCode];
+				$itemCategory = trim(get_post_meta(get_the_ID(), 'product_category', true));
+				$itemCategoryName = $allCategories[$itemCategory][$currLangCode];
 				
 				if ($itemStatus){
-					?><a href="<?= get_products_page_link($itemStatus, "") ?>"><?=__($itemStatusName)?></a><?php
+					?><a href="<?= get_products_page_link($itemStatus, "", "") ?>"><?=__($itemStatusName)?></a><?php
 				}
 				
 				if ($itemStrainType){
-					?><a href="<?= get_products_page_link("", $itemStrainType) ?>"><?=__($itemStrainName)?></a><?php
+					?><a href="<?= get_products_page_link("", $itemStrainType, "") ?>"><?=__($itemStrainName)?></a><?php
+				}				
+				
+				if ($itemCategory){
+					?><a href="<?= get_products_page_link("", "", $itemCategory) ?>"><?=__($itemCategoryName)?></a><?php
 				}				
 			?>
 			</div>

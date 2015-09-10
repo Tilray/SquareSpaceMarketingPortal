@@ -54,9 +54,11 @@ get_header(); ?>
 	//get incoming status and straintype querystring params
 	$qpStrain = 'strain-types';
 	$qpStatus = 'status';
+	$qpCategory = 'categories';
 	$qpPrice = 'prices';
 	$arrStatuses = splitAndGetQueryStringParamIfValid($qpStatus, $allStatuses);
 	$arrStrainTypes = splitAndGetQueryStringParamIfValid($qpStrain, $allStrainTypes);
+	$arrCategories = splitAndGetQueryStringParamIfValid($qpCategory, $allCategories);
 	$arrPrices = splitAndGetQueryStringParamIfValid($qpPrice, $allPrices);
 
 
@@ -106,17 +108,16 @@ get_header(); ?>
 	function getPriceRange($price){
 		global $allPrices;
 		$priceVal = intval($price);
-		foreach ($allPrices as $thisRange)
+		foreach ($allPrices as $priceRange => $display)
 		{
-			$thisRange = ltrim($thisRange, "$");
-			if ($thisRange == "")
+			if ($priceRange == "")
 				continue;
 				
-			$ends = explode("-", $thisRange);
+			$ends = explode("-", $priceRange);
 			$low = intval($ends[0]);
 			$high = intval($ends[1]);
 			if ($priceVal >= $low && $priceVal <= $high){
-				return $thisRange;
+				return $priceRange;
 			}
 		}
 		
@@ -133,6 +134,7 @@ get_header(); ?>
 
 			$thisProduct->id = get_the_ID();
 			$thisProduct->itemStatus = trim(get_post_meta(get_the_ID(), 'status', true));
+			$thisProduct->itemCategory = trim(get_post_meta(get_the_ID(), 'product_category', true));
 			$thisProduct->itemStrainType = trim(get_post_meta(get_the_ID(), 'strain_type', true));
 
 			$thumbID = get_post_thumbnail_id();
@@ -192,14 +194,25 @@ get_header(); ?>
 				</ul>
 			</div>
 			<div class="product-filters-container">
+				<h3 class="gray-underline"><?= __('Category') ?></h3>
+				<ul class="product-filters product-filters-category">
+					<?php
+					RenderProductFilter("product-filters-category", "categories", "category-show-all", "", "Show All");
+					RenderProductFilter("product-filters-category", "categories", "category-flower", "flower", "Flower");
+					RenderProductFilter("product-filters-category", "categories", "category-blend", "blend", "Blend");
+					RenderProductFilter("product-filters-category", "categories", "category-extract", "extract", "Extract");
+					?>
+				</ul>
+			</div>
+			<div class="product-filters-container">
 				<h3 class="gray-underline"><?= __('Price') ?></h3>
 				<ul class="product-filters product-filters-price">
 					<?php
-					RenderProductFilter("product-filters-price", "price", "price-show-all", "", "Show All");
-					RenderProductFilter("product-filters-price", "price", "price-8-9", "8-9", "$8-9");
-					RenderProductFilter("product-filters-price", "price", "price-10-11", "10-11", "$10-11");
-					RenderProductFilter("product-filters-price", "price", "price-12-13", "12-13", "$12-13");
-					RenderProductFilter("product-filters-price", "price", "price-14-15", "14-15", "$14-15");
+					RenderProductFilter("product-filters-price", "prices", "price-show-all", "", "Show All");
+					RenderProductFilter("product-filters-price", "prices", "price-4-6", "4-6", "$4-6");
+					RenderProductFilter("product-filters-price", "prices", "price-7-9", "7-9", "$7-9");
+					RenderProductFilter("product-filters-price", "prices", "price-10-12", "10-12", "$10-12");
+					RenderProductFilter("product-filters-price", "prices", "price-13-1000", "13-1000", "$13+");
 					?>
 				</ul>
 			</div>
@@ -215,9 +228,11 @@ get_header(); ?>
 			<?php
 			$firstStatus = "";
 			$firstStrainType = "";
+			$firstCategory = "";
 			$firstPrice = "";
 			if (count($arrStatuses) > 0) $firstStatus = $arrStatuses[0];
 			if (count($arrStrainTypes) > 0) $firstStrainType = $arrStrainTypes[0];
+			if (count($arrCategories) > 0) $firstCategory = $arrCategories[0];
 			if (count($arrPrices) > 0) $firstPrice = $arrPrices[0];
 			
 			foreach($theProducts as $product){
@@ -225,16 +240,17 @@ get_header(); ?>
 				if (
 					($firstStatus == "" || in_array($product->itemStatus, $arrStatuses)) &&
 					($firstStrainType == "" || in_array($product->itemStrainType, $arrStrainTypes)) &&
+					($firstCategory == "" || in_array($product->itemCategory, $arrCategories)) &&
 					($firstPrice == "" || in_array($product->priceRange, $arrPrices)))
 				{
 					$activeClass = "active";
 				}
-				$combined_tags = "category-" . $product->itemStatus . " category-" . $product->itemStrainType;
 			?>
 				<div class="col-2 portbox post product-item <?= $activeClass?>" 
 					data-id="<?=$product->id?>" 
 					data-straintype="<?=$product->itemStrainType?>" 
 					data-status="<?=$product->itemStatus?>" 
+					data-category="<?=$product->itemCategory?>" 
 					data-pricerange="<?=$product->priceRange?>">
 					<div class="hthumb">
 						<?php if($product->image) { 
@@ -261,7 +277,8 @@ get_header(); ?>
 			foreach($theProducts as $product){
 				if ((count($arrStatuses) > 0 && $arrStatuses[0] != "" && !in_array($product->itemStatus, $arrStatuses)) ||
 					(count($arrStrainTypes) > 0 && $arrStrainTypes[0] != "" && !in_array($product->itemStrainType, $arrStrainTypes)) || 
-					(count($arrPrices) > 0 && $arrPrices[0] != "" && !in_array($product->itemStrainType, $arrStrainTypes)))
+					(count($arrCategories) > 0 && $arrCategories[0] != "" && !in_array($product->itemCategory, $arrCategories)) || 
+					(count($arrPrices) > 0 && $arrPrices[0] != "" && !in_array(getPriceRange($product->price), $arrPrices)))
 				{
 					continue;
 				}
@@ -308,24 +325,35 @@ get_header(); ?>
 		
 		var statusFilters = GetFiltersArray('ul.product-filters-status input[type=checkbox]:checked');
 		var strainTypeFilters = GetFiltersArray('ul.product-filters-strain-type input[type=checkbox]:checked');
+		var categoryFilters = GetFiltersArray('ul.product-filters-category input[type=checkbox]:checked');
 		var priceFilters = GetFiltersArray('ul.product-filters-price input[type=checkbox]:checked');
-		setProductsActive(statusFilters, strainTypeFilters, priceFilters);
+		setProductsActive(statusFilters, strainTypeFilters, categoryFilters, priceFilters);
 		
 		jQuery('#primary').isotope({ filter: '.active' });
-		window.history.replaceState({}, pageTitle, pageBaseURL + "?status=" + statusFilters.join(',') + "&strain-types=" + strainTypeFilters.join(',') + "&prices=" + priceFilters.join(','));
+		window.history.replaceState(
+			{}, 
+			pageTitle, 
+			pageBaseURL + 
+				"?status=" + statusFilters.join(',') + 
+				"&strain-types=" + strainTypeFilters.join(',') + 
+				"&categories=" + categoryFilters.join(',') + 
+				"&prices=" + priceFilters.join(','));
 	}
 	
-	function setProductsActive(statusFilters, strainTypeFilters, priceFilters)
+	function setProductsActive(statusFilters, strainTypeFilters, categoryFilters, priceFilters)
 	{
 		if (statusFilters.length == 0)
 			statusFilters = [''];
 		if (strainTypeFilters.length == 0)
 			strainTypeFilters = [''];
+		if (categoryFilters.length == 0)
+			categoryFilters = [''];
 		if (priceFilters.length == 0)
 			priceFilters = [''];
 	
 		var combinedStatus = "|||" + statusFilters.join("|||") + "|||";
 		var combinedStrainType = "|||" + strainTypeFilters.join("|||") + "|||";
+		var combinedCategory = "|||" + categoryFilters.join("|||") + "|||";
 		var combinedPrice = "|||" + priceFilters.join("|||") + "|||";
 		var selector = 'div#primary div.product-item';
 		
@@ -333,9 +361,11 @@ get_header(); ?>
 		jQuery(selector).each(function( index ) {
 			var status = jQuery( this ).attr("data-status");
 			var strainType = jQuery( this ).attr("data-straintype");
+			var category = jQuery( this ).attr("data-category");
 			var priceRange = jQuery( this ).attr("data-pricerange");
 			if ((statusFilters[0] == '' || combinedStatus.indexOf("|||" + status + "|||") > -1) &&
 				(strainTypeFilters[0] == '' || combinedStrainType.indexOf("|||" + strainType + "|||") > -1) && 
+				(categoryFilters[0] == '' || combinedCategory.indexOf("|||" + category + "|||") > -1) && 
 				(priceFilters[0] == '' || combinedPrice.indexOf("|||" + priceRange + "|||") > -1))
 			{
 				jQuery(this).addClass('active');
@@ -353,37 +383,10 @@ get_header(); ?>
 		return filters;
 	}
 	
-	function CombineFilters(statusFilters, strainTypeFilters){
-		var combinedFilters = '';
-		var statusFilter = '';
-		var statusParam = '';
-		
-		//if one of the status filters that's not "show all" is checked, use that.
-		if (statusFilters.length == 1 && statusFilters[0] != ""){
-			statusFilter = '.category-' + statusFilters[0];
-			combinedFilters = statusFilter;
-		}
-
-		var arrFilters = [];
-		var strainTypeParam = "";
-		if (strainTypeFilters.length > 0 && strainTypeFilters[0] != ""){
-			strainTypeFilters.forEach(function(item){
-				arrFilters.push(statusFilter + '.category-' + item);
-			});
-		}
-
-		//if we have any strain filters, wipe out the status filter because it's tacked onto every strain filter
-		if (arrFilters.length > 0)
-			combinedFilters = arrFilters.join(', ');
-			
-		if (combinedFilters.trim() == '')
-			combinedFilters = '*';
-			
-		return combinedFilters
-	}
 
 	var arrPreselectedStatus = ['<?= implode("', '", $arrStatuses) ?>'];
 	var arrPreselectedStrainType = ['<?= implode("', '", $arrStrainTypes) ?>'];
+	var arrPreselectedCategory = ['<?= implode("', '", $arrCategories) ?>'];
 	var arrPreselectedPrices = ['<?= implode("', '", $arrPrices) ?>'];
 	
 	function setFilterStates(filterSelector, statuses)
@@ -403,13 +406,12 @@ get_header(); ?>
 	jQuery( document ).ready(function() {
 		setFilterStates('input.product-filters-status[data-filter="###"]', arrPreselectedStatus);
 		setFilterStates('input.product-filters-strain-type[data-filter="###"]', arrPreselectedStrainType);
+		setFilterStates('input.product-filters-category[data-filter="###"]', arrPreselectedCategory);
 		setFilterStates('input.product-filters-price[data-filter="###"]', arrPreselectedPrices);
 
 		jQuery('ul.product-filters input[type=checkbox]').change(function() {
 			UpdateProducts(jQuery(this));
 		});
-		
-		var combinedFilters = CombineFilters(arrPreselectedStatus, arrPreselectedStrainType);
 	});
 </script>
 
