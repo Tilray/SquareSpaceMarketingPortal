@@ -234,11 +234,11 @@ function get_combined_category_ids($categoryNames)
 }
 
 function get_all_categories_for_post_from_set($postID, $validValues){
-	$allCategories = get_the_terms($postID, 'post_tag');
+	$allTheseCategories = get_the_terms($postID, 'post_tag');
 	$filteredCategories = array();
 	
-	if ($allCategories){
-		foreach($allCategories as $thisCat)
+	if ($allTheseCategories){
+		foreach($allTheseCategories as $thisCat)
 		{
 			$catName = str_replace(" ", "-", $thisCat->name);
 			if (in_array(strtolower($catName), array_map('strtolower', $validValues)))
@@ -272,7 +272,7 @@ function render_left_nav($parentID, $pageID)
 	}
 }
 
-function render_news_section($args, $showDetails, $showPagination){
+function render_news_section($args, $showDetails, $pageNumber){
 	$the_query = new WP_Query( $args ); ?>
 	<?php $numRendered = 0;?>
 	<?php if ( $the_query->have_posts() ) : ?>

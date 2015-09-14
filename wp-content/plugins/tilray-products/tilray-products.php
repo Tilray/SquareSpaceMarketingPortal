@@ -41,7 +41,7 @@ $allStrainTypes = array(	"" => array ("en" => "", "fr" => ""),
 							"hybrid" => array ("en" => "Hybrid", "fr" => "Hybrid"), 
 							"high-cbd" => array ("en" => "+CBD", "fr" => "+CBD"));
 
-$allCategories = array(	"" => array ("en" => "", "fr" => ""), 
+$allProducts = array(	"" => array ("en" => "", "fr" => ""), 
 						"flower" => array ("en" => "Flower", "fr" => "Flower"), 
 						"blend" => array ("en" => "Blend", "fr" => "Blend"), 
 						"extract" => array ("en" => "Extract", "fr" => "Extract"));

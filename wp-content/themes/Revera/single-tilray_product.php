@@ -54,7 +54,7 @@ get_header(); ?>
 						$itemStoreLink = trim(get_post_meta(get_the_ID(), 'store_link', true));
 						if ($itemStoreLink){
 						?>
-							<a href='<?=$itemStoreLink?>' class='inline-btn buy-btn'>Buy Now</a>
+							<a href='<?=$itemStoreLink?>' class='inline-btn buy-btn'><?= __('Buy Now')?></a>
 						<?php
 						}
 					}
@@ -70,7 +70,7 @@ get_header(); ?>
 				$itemStrainType = trim(get_post_meta(get_the_ID(), 'strain_type', true));
 				$itemStrainName = $allStrainTypes[$itemStrainType][$currLangCode];
 				$itemCategory = trim(get_post_meta(get_the_ID(), 'product_category', true));
-				$itemCategoryName = $allCategories[$itemCategory][$currLangCode];
+				$itemCategoryName = $allProducts[$itemCategory][$currLangCode];
 				
 				if ($itemStatus){
 					?><a href="<?= get_products_page_link($itemStatus, "", "") ?>"><?=__($itemStatusName)?></a><?php

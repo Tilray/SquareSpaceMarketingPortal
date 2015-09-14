@@ -58,7 +58,7 @@ get_header(); ?>
 	$qpPrice = 'prices';
 	$arrStatuses = splitAndGetQueryStringParamIfValid($qpStatus, $allStatuses);
 	$arrStrainTypes = splitAndGetQueryStringParamIfValid($qpStrain, $allStrainTypes);
-	$arrCategories = splitAndGetQueryStringParamIfValid($qpCategory, $allCategories);
+	$arrCategories = splitAndGetQueryStringParamIfValid($qpCategory, $allProducts);
 	$arrPrices = splitAndGetQueryStringParamIfValid($qpPrice, $allPrices);
 
 
