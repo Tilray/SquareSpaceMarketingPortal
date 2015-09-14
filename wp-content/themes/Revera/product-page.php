@@ -189,7 +189,7 @@ get_header(); ?>
 					RenderProductFilter("product-filters-strain-type", "strain-types", "strain-type-indica", "indica", "Indica");
 					RenderProductFilter("product-filters-strain-type", "strain-types", "strain-type-sativa", "sativa", "Sativa");
 					RenderProductFilter("product-filters-strain-type", "strain-types", "strain-type-hybrid", "hybrid", "Hybrid");
-					RenderProductFilter("product-filters-strain-type", "strain-types", "strain-type-high-cbd", "high-cbd", "High CBD");
+					RenderProductFilter("product-filters-strain-type", "strain-types", "strain-type-high-cbd", "high-cbd", "+CBD");
 					?>
 				</ul>
 			</div>
