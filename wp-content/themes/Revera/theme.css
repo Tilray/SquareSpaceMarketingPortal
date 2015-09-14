@@ -1559,7 +1559,7 @@ div.slicknav_menu,
 	color: #ffffff;
 }
 
-.inline-btn {
+a.inline-btn {
   background: #FFB12F;
   background-image: -webkit-linear-gradient(top, #FFB12F, #FFB12F);
   background-image: -moz-linear-gradient(top, #FFB12F, #FFB12F);
