@@ -67,21 +67,21 @@ get_header(); ?>
 				$currLangCode = strtolower(get_current_language_code());
 				$itemStatus = trim(get_post_meta(get_the_ID(), 'status', true));
 				$itemStatusName = $allStatuses[$itemStatus][$currLangCode];
-				$itemStrainType = trim(get_post_meta(get_the_ID(), 'strain_type', true));
-				$itemStrainName = $allStrainTypes[$itemStrainType][$currLangCode];
-				$itemCategory = trim(get_post_meta(get_the_ID(), 'product_category', true));
-				$itemCategoryName = $allProducts[$itemCategory][$currLangCode];
+				$itemStrainCategory = trim(get_post_meta(get_the_ID(), 'strain_category', true));
+				$itemStrainName = $allStrainCategories[$itemStrainCategory][$currLangCode];
+				$productType = trim(get_post_meta(get_the_ID(), 'product_type', true));
+				$productTypeName = $allProducts[$productType][$currLangCode];
 				
 				if ($itemStatus){
 					?><a href="<?= get_products_page_link($itemStatus, "", "") ?>"><?=__($itemStatusName)?></a><?php
 				}
 				
-				if ($itemStrainType){
-					?><a href="<?= get_products_page_link("", $itemStrainType, "") ?>"><?=__($itemStrainName)?></a><?php
+				if ($itemStrainCategory){
+					?><a href="<?= get_products_page_link("", $itemStrainCategory, "") ?>"><?=__($itemStrainName)?></a><?php
 				}				
 				
-				if ($itemCategory){
-					?><a href="<?= get_products_page_link("", "", $itemCategory) ?>"><?=__($itemCategoryName)?></a><?php
+				if ($productType){
+					?><a href="<?= get_products_page_link("", "", $productType) ?>"><?=__($productTypeName)?></a><?php
 				}				
 			?>
 			</div>

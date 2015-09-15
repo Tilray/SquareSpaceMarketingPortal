@@ -53,13 +53,13 @@ $allPrices = array(	"" => "",
 					"13-1000" => "$13+");
 
 					
-function get_products_page_link($status, $strainType, $strainCategory){
+function get_products_page_link($status, $strainType, $productType){
 	$langCode = get_current_language_code();
 	$pageName = "products";
 	if ($langCode == "fr"){
 		$pageName = "produits";
 	}
-	return home_url() . "/" . $langCode . "/" . $pageName . "/?status=" . $status . "&strain-types=" . $strainType . "&categories=" . $strainCategory;
+	return home_url() . "/" . $langCode . "/" . $pageName . "/?status=" . $status . "&strain-types=" . $strainType . "&productTypes=" . $productType;
 }
 
 
