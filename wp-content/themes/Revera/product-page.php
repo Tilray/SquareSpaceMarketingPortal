@@ -52,12 +52,12 @@ get_header(); ?>
 	
 
 	//get incoming status and straintype querystring params
-	$qpStrain = 'strain-types';
 	$qpStatus = 'status';
-	$qpProductType = 'producttypes';
+	$qpStrain = 'strain-categories';
+	$qpProductType = 'product-types';
 	$qpPrice = 'prices';
 	$arrStatuses = splitAndGetQueryStringParamIfValid($qpStatus, $allStatuses);
-	$arrStrainTypes = splitAndGetQueryStringParamIfValid($qpStrain, $allStrainCategories);
+	$arrStrainCategories = splitAndGetQueryStringParamIfValid($qpStrain, $allStrainCategories);
 	$arrProductTypes = splitAndGetQueryStringParamIfValid($qpProductType, $allProducts);
 	$arrPrices = splitAndGetQueryStringParamIfValid($qpPrice, $allPrices);
 
@@ -75,12 +75,12 @@ get_header(); ?>
 	}
 	
 	//if we have strain type show all, or now strain type, set filter to the status
-	if (count($arrStrainTypes) == 0 || (count($arrStrainTypes) == 1 && $arrStrainTypes[0] == "")){
+	if (count($arrStrainCategories) == 0 || (count($arrStrainCategories) == 1 && $arrStrainCategories[0] == "")){
 		$arrCombinedFilters[] = $theOneActualStatus;
 	}
 	//otherwise prefix status to each strain type
 	else{
-		foreach($arrStrainTypes as $thisStrainType){
+		foreach($arrStrainCategories as $thisStrainType){
 			if ($thisStrainType != "")
 				$arrCombinedFilters[] = $theOneActualStatus . '.category-' . $thisStrainType;
 		}
@@ -134,7 +134,7 @@ get_header(); ?>
 
 			$thisProduct->id = get_the_ID();
 			$thisProduct->itemStatus = trim(get_post_meta(get_the_ID(), 'status', true));
-			$thisProduct->itemStrainType = trim(get_post_meta(get_the_ID(), 'strain_category', true));
+			$thisProduct->itemStrainCategory = trim(get_post_meta(get_the_ID(), 'strain_category', true));
 			$thisProduct->itemProductType = trim(get_post_meta(get_the_ID(), 'product_type', true));
 
 			$thumbID = get_post_thumbnail_id();
@@ -231,7 +231,7 @@ get_header(); ?>
 			$firstProductType = "";
 			$firstPrice = "";
 			if (count($arrStatuses) > 0) $firstStatus = $arrStatuses[0];
-			if (count($arrStrainTypes) > 0) $firstStrainCategory = $arrStrainTypes[0];
+			if (count($arrStrainCategories) > 0) $firstStrainCategory = $arrStrainCategories[0];
 			if (count($arrProductTypes) > 0) $firstProductType = $arrProductTypes[0];
 			if (count($arrPrices) > 0) $firstPrice = $arrPrices[0];
 			
@@ -239,8 +239,8 @@ get_header(); ?>
 				$activeClass = "";
 				if (
 					($firstStatus == "" || in_array($product->itemStatus, $arrStatuses)) &&
-					($firstStrainCategory == "" || in_array($product->itemStrainType, $arrStrainTypes)) &&
-					($firstProductType == "" || in_array($product->itemCategory, $arrProductTypes)) &&
+					($firstStrainCategory == "" || in_array($product->itemStrainCategory, $arrStrainCategories)) &&
+					($firstProductType == "" || in_array($product->itemProductType, $arrProductTypes)) &&
 					($firstPrice == "" || in_array($product->priceRange, $arrPrices)))
 				{
 					$activeClass = "active";
@@ -276,8 +276,8 @@ get_header(); ?>
 			<?php
 			foreach($theProducts as $product){
 				if ((count($arrStatuses) > 0 && $arrStatuses[0] != "" && !in_array($product->itemStatus, $arrStatuses)) ||
-					(count($arrStrainTypes) > 0 && $arrStrainTypes[0] != "" && !in_array($product->itemStrainType, $arrStrainTypes)) || 
-					(count($arrProductTypes) > 0 && $arrProductTypes[0] != "" && !in_array($product->itemCategory, $arrProductTypes)) || 
+					(count($arrStrainCategories) > 0 && $arrStrainCategories[0] != "" && !in_array($product->itemStrainCategory, $arrStrainCategories)) || 
+					(count($arrProductTypes) > 0 && $arrProductTypes[0] != "" && !in_array($product->itemProductType, $arrProductTypes)) || 
 					(count($arrPrices) > 0 && $arrPrices[0] != "" && !in_array(getPriceRange($product->price), $arrPrices)))
 				{
 					continue;
@@ -306,7 +306,6 @@ get_header(); ?>
 		var thisFilterCategory = jQuery($clicked).attr('name');
 		var thisFilterCategorySelector = 'ul input[type=checkbox][name=' + thisFilterCategory + ']';
 		if (jQuery($clicked).attr('data-filter') == '')
-		
 		{
 			var showAllChecked = jQuery($clicked).prop('checked');
 			jQuery(thisFilterCategorySelector).each(function(index){
@@ -360,8 +359,8 @@ get_header(); ?>
 		jQuery(selector).removeClass('active');
 		jQuery(selector).each(function( index ) {
 			var status = jQuery( this ).attr("data-status");
-			var strainType = jQuery( this ).attr("data-straintype");
-			var category = jQuery( this ).attr("data-category");
+			var strainType = jQuery( this ).attr("data-straincategory");
+			var category = jQuery( this ).attr("data-producttype");
 			var priceRange = jQuery( this ).attr("data-pricerange");
 			if ((statusFilters[0] == '' || combinedStatus.indexOf("|||" + status + "|||") > -1) &&
 				(strainCategoryFilters[0] == '' || combinedStrainCategory.indexOf("|||" + strainType + "|||") > -1) && 
@@ -385,7 +384,7 @@ get_header(); ?>
 	
 
 	var arrPreselectedStatus = ['<?= implode("', '", $arrStatuses) ?>'];
-	var arrPreselectedStrainCategory = ['<?= implode("', '", $arrStrainTypes) ?>'];
+	var arrPreselectedStrainCategory = ['<?= implode("', '", $arrStrainCategories) ?>'];
 	var arrPreselectedProductType = ['<?= implode("', '", $arrProductTypes) ?>'];
 	var arrPreselectedPrices = ['<?= implode("', '", $arrPrices) ?>'];
 	

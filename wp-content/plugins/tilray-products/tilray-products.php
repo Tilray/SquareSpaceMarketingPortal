@@ -35,7 +35,7 @@ $allStatuses = array(	"" => array ("en" => "", "fr" => ""),
 						"available" => array ("en" => "Available", "fr" => "Available"), 
 						"in-production" => array ("en" => "In Production", "fr" => "In Production"));
 						
-$allStrainTypes = array(	"" => array ("en" => "", "fr" => ""), 
+$allStrainCategories = array(	"" => array ("en" => "", "fr" => ""), 
 							"indica" => array ("en" => "Indica", "fr" => "Indica"), 
 							"sativa" => array ("en" => "Sativa", "fr" => "Sativa"), 
 							"hybrid" => array ("en" => "Hybrid", "fr" => "Hybrid"), 
