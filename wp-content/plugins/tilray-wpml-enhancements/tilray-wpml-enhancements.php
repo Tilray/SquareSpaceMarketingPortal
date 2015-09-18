@@ -76,23 +76,3 @@ function get_other_language(){
 		}
 	}
 }
-
-// A copy of rel_canonical but to allow an override on a custom tag
-function rel_canonical_with_custom_tag_override()
-{
-	if (!function_exists(icl_get_languages))
-		return;
-
-	$allTheLangs = icl_get_languages('skip_missing=0&orderby=id&order=asc');
-	foreach($allTheLangs as $lang){
-		echo "<link rel='canonical' href='" . esc_url( $lang["url"] ) . "' hreflang='". strtolower($lang["tag"])."'/>\n";
-	}
-}
-
-// remove the default WordPress canonical URL function
-if( function_exists( 'rel_canonical' ) )
-{
-    remove_action( 'wp_head', 'rel_canonical' );
-}
-// replace the default WordPress canonical URL function with your own
-add_action( 'wp_head', 'rel_canonical_with_custom_tag_override' );
