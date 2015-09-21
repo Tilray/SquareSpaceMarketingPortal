@@ -200,7 +200,6 @@ get_header(); ?>
 					RenderProductFilter("product-filters-product-type", "product-types", "product-type-show-all", "", "Show All");
 					RenderProductFilter("product-filters-product-type", "product-types", "product-type-flower", "flower", "Flower");
 					RenderProductFilter("product-filters-product-type", "product-types", "product-type-blend", "blend", "Blend");
-					RenderProductFilter("product-filters-product-type", "product-types", "product-type-extract", "extract", "Extract");
 					?>
 				</ul>
 			</div>
