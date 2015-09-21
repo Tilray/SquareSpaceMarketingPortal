@@ -17,6 +17,7 @@
 <?php wp_head(); ?>
 <script src="//use.typekit.net/cfw8inp.js"></script>
 <script>try{Typekit.load();}catch(e){}</script>
+<script src="//cdn.optimizely.com/js/3528030967.js"></script>
 </head>
 
 <body <?php body_class(); ?>>
