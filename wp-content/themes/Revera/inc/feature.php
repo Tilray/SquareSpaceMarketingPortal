@@ -35,23 +35,55 @@
 
 		<ul class="slides">
 		    <?php 	
-				function RenderBanner($content, $imageurl, $linkURL){
+				function RenderBanner($postID, $textColor, $linkURL){
+					$thisPost = get_post($postID);
+					$imageurl = get_the_post_thumbnail($postID, 'banner-image');					
 					?>
 						<li>
-							<a href="<?= $linkURL ?>"><img src="<?= $imageurl ?>"></a>
+							<a href="<?= $linkURL ?>"><?= $imageurl ?></a>
 							<div class="flex-caption">
-								<?= $content ?>
+								<h2><a href="<?= $linkURL ?>" style="color:<?=$textColor?>"></a></h2>
 							</div>
 						</li>
 					<?php
 				}
 				
-				$theBanners = QueryBanners();
-				foreach($theBanners as $thisBanner)
+				$langCode = strtolower(get_current_language_code());
+				
+				$banner1ID = ft_of_get_option('fabthemes_banner1_id_' . $langCode);
+				if ($banner1ID)
 				{
-					RenderBanner($thisBanner->content, $thisBanner->image, $thisBanner->link);
+					$url = ft_of_get_option('fabthemes_url1_' . $langCode);
+					if ($url == "")
+					{
+						$url = get_permalink($banner1ID);
+					}
+					RenderBanner($banner1ID, ft_of_get_option('fabthemes_banner1_text_color'), $url);
+				}
+				
+				$banner2ID = ft_of_get_option('fabthemes_banner2_id_' . $langCode);
+				if ($banner2ID)
+				{
+					$url = ft_of_get_option('fabthemes_url2_' . $langCode);
+					if ($url == "")
+					{
+						$url = get_permalink($banner2ID);
+					}
+					RenderBanner($banner2ID, ft_of_get_option('fabthemes_banner2_text_color'), $url);
+				}
+				
+				$banner3ID = ft_of_get_option('fabthemes_banner3_id_' . $langCode);
+				if ($banner3ID)
+				{
+					$url = ft_of_get_option('fabthemes_url3_' . $langCode);
+					if ($url == "")
+					{
+						$url = get_permalink($banner3ID);
+					}
+					RenderBanner($banner3ID, ft_of_get_option('fabthemes_banner3_text_color'), $url);
 				}
 				?>
+					
 		</ul>
 <div class="doverlay"></div>
 </div>
