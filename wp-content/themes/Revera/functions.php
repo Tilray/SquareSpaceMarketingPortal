@@ -317,7 +317,7 @@ remove_filter( 'the_content', 'wpautop' );
 
 add_image_size( 'blog-featured-image', 384 );
 add_image_size( 'blog-preview', 340, 191, true );
-add_image_size( 'banner-image', 1200, 550, true );
+add_image_size( 'banner-image', 1200, 384, true );
 
 
 function blogroot_func( $atts ){

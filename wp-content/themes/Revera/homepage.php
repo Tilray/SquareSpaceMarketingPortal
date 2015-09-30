@@ -16,17 +16,11 @@ get_header(); ?>
 	$postContent = $post->post_content;
 ?>
 
-<?php if( is_page_template('homepage.php') ){ get_template_part( 'inc/feature' ); } ?>
-
-
 <div class="container">
 
-<div class="section-wide">
-	<div class="row">
-		<div class="col-12 homepage-main-content">
-			<?php echo $postContent; ?>
-		</div>
-	</div>
+<div class="section-banner-slides">
+	<?php get_template_part( 'inc/feature' ); ?>
+
 </div>
 
 <?php
@@ -35,6 +29,11 @@ get_header(); ?>
 	$page = get_page( $pageId );
 ?>
 <div class="section-wide">
+	<div class="row">
+		<div class="col-12 homepage-main-content">
+			<?php echo $postContent; ?>
+		</div>
+	</div>
 	<div class="row">
 	<div class="boxitems col-12 homepage-blog-container">
 		<a href="<?=get_permalink($pageId)?>">
