@@ -16,12 +16,9 @@ get_header(); ?>
 	$postContent = $post->post_content;
 ?>
 
+<?php get_template_part( 'inc/feature' ); ?>
 <div class="container">
 
-<div class="section-banner-slides">
-	<?php get_template_part( 'inc/feature' ); ?>
-
-</div>
 
 <?php
 	$langCode = get_current_language_code();
