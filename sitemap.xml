@@ -3,8 +3,9 @@
 <url><loc>http://www.tilray.ca/</loc><changefreq>daily</changefreq><priority>1.00</priority></url>
 <url><loc>http://www.tilray.ca/</loc><changefreq>daily</changefreq><priority>1.00</priority></url>
 <url><loc>https://www.tilray.ca</loc><changefreq>daily</changefreq><priority>1.00</priority></url>
-<url><loc>https://www.tilray.ca/en/</loc><changefreq>daily</changefreq><priority>0.85</priority></url>
 <url><loc>https://www.tilray.ca/fr/</loc><changefreq>daily</changefreq><priority>0.85</priority></url>
+<url><loc>https://customer.tilray.ca/en/Authentication/Login</loc><changefreq>daily</changefreq><priority>0.85</priority></url>
+<url><loc>https://customer.tilray.ca/en/Registration/Signup</loc><lastmod>2015-10-01T01:48:38+00:00</lastmod><changefreq>daily</changefreq><priority>0.85</priority></url>
 <url><loc>https://www.tilray.ca/en/products/</loc><changefreq>daily</changefreq><priority>0.85</priority></url>
 <url><loc>https://www.tilray.ca/en/resources/ways-to-register/</loc><changefreq>daily</changefreq><priority>0.85</priority></url>
 <url><loc>https://www.tilray.ca/en/resources/talk-to-your-doctor/</loc><changefreq>daily</changefreq><priority>0.85</priority></url>
@@ -15,13 +16,15 @@
 <url><loc>https://www.tilray.ca/en/news/</loc><changefreq>daily</changefreq><priority>0.85</priority></url>
 <url><loc>https://www.tilray.ca/en/about/about-us/</loc><changefreq>daily</changefreq><priority>0.85</priority></url>
 <url><loc>https://www.tilray.ca/en/about/contact-us/</loc><changefreq>daily</changefreq><priority>0.85</priority></url>
+<url><loc>https://www.tilray.ca/en/blog-en/terpene-profile-linalool/</loc><changefreq>daily</changefreq><priority>0.85</priority></url>
 <url><loc>https://www.tilray.ca/en/blog-en/strain-profile-skywalker-og/</loc><changefreq>daily</changefreq><priority>0.85</priority></url>
 <url><loc>https://www.tilray.ca/en/blog-en/terpene-profile-pinene/</loc><changefreq>daily</changefreq><priority>0.85</priority></url>
 <url><loc>https://www.tilray.ca/en/blog-en/tilray-tips-cannabis-butter-2-ways/</loc><changefreq>daily</changefreq><priority>0.85</priority></url>
 <url><loc>https://www.tilray.ca/en/blog-en/terpene-profile-limonene/</loc><changefreq>daily</changefreq><priority>0.85</priority></url>
 <url><loc>https://www.tilray.ca/en/blog-en/what-is-a-landrace-strain/</loc><changefreq>daily</changefreq><priority>0.85</priority></url>
-<url><loc>https://www.tilray.ca/en/blog-en/research-update-terpene-testing/</loc><changefreq>daily</changefreq><priority>0.85</priority></url>
 <url><loc>https://www.tilray.ca/en/policy-and-terms/privacy-policy/</loc><changefreq>daily</changefreq><priority>0.85</priority></url>
+<url><loc>https://customer.tilray.ca/fr/Authentication/Login</loc><changefreq>daily</changefreq><priority>0.69</priority></url>
+<url><loc>https://customer.tilray.ca/fr/Registration/Signup</loc><lastmod>2015-10-01T01:48:50+00:00</lastmod><changefreq>daily</changefreq><priority>0.69</priority></url>
 <url><loc>https://www.tilray.ca/fr/produits/</loc><changefreq>daily</changefreq><priority>0.69</priority></url>
 <url><loc>https://www.tilray.ca/fr/ressources/comment-sinscrire/</loc><changefreq>daily</changefreq><priority>0.69</priority></url>
 <url><loc>https://www.tilray.ca/fr/ressources/comment-parler-avec-votre-medecin/</loc><changefreq>daily</changefreq><priority>0.69</priority></url>
@@ -38,6 +41,10 @@
 <url><loc>https://www.tilray.ca/fr/blog-fr/le-premier-anniversaire-de-tilray/</loc><changefreq>daily</changefreq><priority>0.69</priority></url>
 <url><loc>https://www.tilray.ca/fr/blog-fr/tilray-annonce-des-recoltes-record-et-la-disponibilite-de-nouvelles-varietes/</loc><changefreq>daily</changefreq><priority>0.69</priority></url>
 <url><loc>https://www.tilray.ca/fr/politique-et-modalites/politique-de-confidentialite/</loc><changefreq>daily</changefreq><priority>0.69</priority></url>
+<url><loc>https://customer.tilray.ca/fr</loc><changefreq>daily</changefreq><priority>0.69</priority></url>
+<url><loc>https://customer.tilray.ca/en/Authentication/ResetPassword</loc><changefreq>daily</changefreq><priority>0.69</priority></url>
+<url><loc>https://customer.tilray.ca/en/Home/Feedback</loc><changefreq>daily</changefreq><priority>0.69</priority></url>
+<url><loc>https://www.tilray.ca/en/policy-and-terms/terms-and-conditions/</loc><changefreq>daily</changefreq><priority>0.69</priority></url>
 <url><loc>https://www.tilray.ca/en/products/?status=</loc><changefreq>daily</changefreq><priority>0.69</priority></url>
 <url><loc>https://www.tilray.ca/en/products/?status=available</loc><changefreq>daily</changefreq><priority>0.69</priority></url>
 <url><loc>https://www.tilray.ca/en/products/?status=in-production</loc><changefreq>daily</changefreq><priority>0.69</priority></url>
@@ -71,7 +78,6 @@
 <url><loc>https://www.tilray.ca/en/products/tilray-products/orange-jack/</loc><changefreq>daily</changefreq><priority>0.69</priority></url>
 <url><loc>https://www.tilray.ca/en/products/tilray-products/pink-kush/</loc><changefreq>daily</changefreq><priority>0.69</priority></url>
 <url><loc>https://www.tilray.ca/en/products/tilray-products/purple-kush/</loc><changefreq>daily</changefreq><priority>0.69</priority></url>
-<url><loc>https://www.tilray.ca/en/products/tilray-products/rockstar/</loc><changefreq>daily</changefreq><priority>0.69</priority></url>
 <url><loc>https://www.tilray.ca/en/products/tilray-products/skywalker-og/</loc><changefreq>daily</changefreq><priority>0.69</priority></url>
 <url><loc>https://www.tilray.ca/en/products/tilray-products/sour-diesel/</loc><changefreq>daily</changefreq><priority>0.69</priority></url>
 <url><loc>https://www.tilray.ca/en/products/tilray-products/sweet-skunk-cbd/</loc><changefreq>daily</changefreq><priority>0.69</priority></url>
@@ -81,6 +87,7 @@
 <url><loc>https://www.tilray.ca/en/products/tilray-products/tilray-house-blend-sativa/</loc><changefreq>daily</changefreq><priority>0.69</priority></url>
 <url><loc>https://www.tilray.ca/en/products/tilray-products/warlock-cbd/</loc><changefreq>daily</changefreq><priority>0.69</priority></url>
 <url><loc>https://www.tilray.ca/en/products/tilray-products/white-widow/</loc><changefreq>daily</changefreq><priority>0.69</priority></url>
+<url><loc>https://www.tilray.ca/en/blog-en/research-update-terpene-testing/</loc><changefreq>daily</changefreq><priority>0.69</priority></url>
 <url><loc>https://www.tilray.ca/en/blog-en/team-tilray-joshua-eades-phd/</loc><changefreq>daily</changefreq><priority>0.69</priority></url>
 <url><loc>https://www.tilray.ca/en/blog-en/introducing-tilray-tips/</loc><changefreq>daily</changefreq><priority>0.69</priority></url>
 <url><loc>https://www.tilray.ca/en/blog-en/tilray-medical-cannabis-derivatives/</loc><changefreq>daily</changefreq><priority>0.69</priority></url>
@@ -118,8 +125,11 @@
 <url><loc>https://www.tilray.ca/en/blog-en/production-update-january-2015/</loc><changefreq>daily</changefreq><priority>0.69</priority></url>
 <url><loc>https://www.tilray.ca/en/blog-en/room-approvals-update-january-2015/</loc><changefreq>daily</changefreq><priority>0.69</priority></url>
 <url><loc>https://www.tilray.ca/en/products/?status=&amp;strain-categories=&amp;product-types=blend&amp;prices=</loc><changefreq>daily</changefreq><priority>0.69</priority></url>
-<url><loc>https://www.tilray.ca/en/policy-and-terms/terms-and-conditions/</loc><changefreq>daily</changefreq><priority>0.69</priority></url>
 <url><loc>https://www.tilray.ca/en/policy-and-terms/social-media-policy/</loc><changefreq>daily</changefreq><priority>0.69</priority></url>
+<url><loc>http://www.tilray.ca/fr/</loc><changefreq>daily</changefreq><priority>0.56</priority></url>
+<url><loc>https://customer.tilray.ca/fr/Authentication/ResetPassword</loc><changefreq>daily</changefreq><priority>0.56</priority></url>
+<url><loc>https://customer.tilray.ca/fr/Home/Feedback</loc><changefreq>daily</changefreq><priority>0.56</priority></url>
+<url><loc>https://www.tilray.ca/fr/politique-et-modalites/modalites-et-conditions/</loc><changefreq>daily</changefreq><priority>0.56</priority></url>
 <url><loc>https://www.tilray.ca/fr/produits/?status=</loc><changefreq>daily</changefreq><priority>0.56</priority></url>
 <url><loc>https://www.tilray.ca/fr/produits/?status=available</loc><changefreq>daily</changefreq><priority>0.56</priority></url>
 <url><loc>https://www.tilray.ca/fr/produits/?status=in-production</loc><changefreq>daily</changefreq><priority>0.56</priority></url>
@@ -157,7 +167,6 @@
 <url><loc>https://www.tilray.ca/fr/products/tilray-products/orange-jack/</loc><changefreq>daily</changefreq><priority>0.56</priority></url>
 <url><loc>https://www.tilray.ca/fr/products/tilray-products/pink-kush/</loc><changefreq>daily</changefreq><priority>0.56</priority></url>
 <url><loc>https://www.tilray.ca/fr/products/tilray-products/purple-kush/</loc><changefreq>daily</changefreq><priority>0.56</priority></url>
-<url><loc>https://www.tilray.ca/fr/products/tilray-products/rockstar/</loc><changefreq>daily</changefreq><priority>0.56</priority></url>
 <url><loc>https://www.tilray.ca/fr/products/tilray-products/skywalker-og/</loc><changefreq>daily</changefreq><priority>0.56</priority></url>
 <url><loc>https://www.tilray.ca/fr/products/tilray-products/sour-diesel/</loc><changefreq>daily</changefreq><priority>0.56</priority></url>
 <url><loc>https://www.tilray.ca/fr/products/tilray-products/sweet-skunk-cbd/</loc><changefreq>daily</changefreq><priority>0.56</priority></url>
@@ -169,7 +178,6 @@
 <url><loc>https://www.tilray.ca/fr/blog-fr/scientific-american-demande-une-levee-de-linterdiction-des-recherches-sur-les-drogues-psychoactives/</loc><changefreq>daily</changefreq><priority>0.56</priority></url>
 <url><loc>https://www.tilray.ca/fr/blog-fr/association-dinfermieres-devient-le-premier-groupe-medical-a-appuyer-une-legislation-sur-le-cannabis/</loc><changefreq>daily</changefreq><priority>0.56</priority></url>
 <url><loc>https://www.tilray.ca/fr/blog-fr/le-gouvernement-des-etats-unis-finance-une-campagne-pour-empecher-la-conduite-sous-linfluence-du-cannabis/</loc><changefreq>daily</changefreq><priority>0.56</priority></url>
-<url><loc>https://www.tilray.ca/fr/politique-et-modalites/modalites-et-conditions/</loc><changefreq>daily</changefreq><priority>0.56</priority></url>
 <url><loc>https://www.tilray.ca/fr/politique-et-modalites/politique-dutilisation-des-medias-sociaux/</loc><changefreq>daily</changefreq><priority>0.56</priority></url>
 <url><loc>https://www.tilray.ca/en/products/?status=in-production&amp;strain-categories=&amp;product-types=</loc><changefreq>daily</changefreq><priority>0.56</priority></url>
 <url><loc>https://www.tilray.ca/en/products/?status=&amp;strain-categories=hybrid&amp;product-types=</loc><changefreq>daily</changefreq><priority>0.56</priority></url>
@@ -179,6 +187,7 @@
 <url><loc>https://www.tilray.ca/en/products/?status=&amp;strain-categories=high-cbd&amp;product-types=</loc><changefreq>daily</changefreq><priority>0.56</priority></url>
 <url><loc>https://www.tilray.ca/en/products/?status=&amp;strain-categories=sativa&amp;product-types=</loc><changefreq>daily</changefreq><priority>0.56</priority></url>
 <url><loc>https://www.tilray.ca/en/products/?status=&amp;strain-categories=&amp;product-types=blend</loc><changefreq>daily</changefreq><priority>0.56</priority></url>
+<url><loc>http://store.tilray.ca/green-cush</loc><changefreq>daily</changefreq><priority>0.56</priority></url>
 <url><loc>https://www.tilray.ca/en/news/?guid=//tilrayportal.wordpress.com/?p=434</loc><changefreq>daily</changefreq><priority>0.56</priority></url>
 <url><loc>https://www.tilray.ca/fr/produits/?status=in-production&amp;strain-categories=&amp;product-types=</loc><changefreq>daily</changefreq><priority>0.46</priority></url>
 <url><loc>https://www.tilray.ca/fr/produits/?status=&amp;strain-categories=hybrid&amp;product-types=</loc><changefreq>daily</changefreq><priority>0.46</priority></url>
