@@ -10,7 +10,7 @@
 			$thisBanner->id = get_the_ID();
 
 			$thumbID = get_post_thumbnail_id();
-			$img_attrs = wp_get_attachment_image_src( $thumbID,'banner-image' ); 
+			$img_attrs = wp_get_attachment_image_src( $thumbID,'full' ); 
 			$thisBanner->image = $img_attrs[0];
 			
 			$thisBanner->content = get_the_content();
