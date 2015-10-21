@@ -524,8 +524,7 @@ img.grayscale {
 .flex-caption{
 	margin: 0;
 	z-index: 120;
-	width: 80%;
-	left:10%; 
+	width: 100%;
 	text-align: center;
 	top:0; 
 	position: absolute;
@@ -534,29 +533,12 @@ img.grayscale {
 }	
 	
 .flex-caption h2{
-	top:50%; 
 	width: 100%;
-	-ms-transform: translateY(-50%);
-	-webkit-transform: translateY(-50%);
-	-moz-transform: translateY(-50%);
-	-o-transform: translateY(-50%);
-	transform: translateY(-50%);
-
-	text-transform: uppercase;
-	font-size: 36px;
-	color: #fff;
-	position: absolute;
 	margin: 0;
+	padding: 0;
 }
 
 
-.flex-caption h2 a:link, .flex-caption h2 a:visited{
-	color: #fff;
-}
-
-.flex-caption p{
-	font-size: 16px;
-}
 
 a.frmore{
 	background: rgba(255,255,255,0.2);
