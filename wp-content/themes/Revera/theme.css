@@ -63,14 +63,14 @@ p a {
 .site-branding{
 	margin-bottom: 20px;
 }
-h1.site-title{
+h2.site-title{
 	text-transform: uppercase;
 	font-weight: 800;
 	margin-top: 15px;
 	margin-bottom: 25px;
 }
 
-h1.site-title a {
+h2.site-title a {
 	text-indent: -999em;
 	background-image: url('images/tilray-nav-logo.png');
 	display: block;
@@ -1140,7 +1140,7 @@ h3.bothead{
 		font-size: 60%;
 	}
 
-	h1.site-title{
+	h2.site-title{
 		text-align: center;
 	}
 	
@@ -1565,4 +1565,16 @@ a.inline-btn {
   font-size: 11px;
   padding: 3px 6px 3px 6px;
   text-decoration: none;
+}
+
+div.tags{
+	font-size: 12px;
+	text-align: right;
+	text-transform: uppercase;
+	font-weight: bold;
+	padding-top: 50px;
+}
+
+div.news-archive{
+	margin-bottom: 50px;
 }

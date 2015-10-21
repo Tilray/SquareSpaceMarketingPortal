@@ -313,6 +313,25 @@ function render_news_section($args, $showDetails, $pageNumber){
 	<?php endif;	
 }
 
+function render_news_archive($postId){
+?>
+	<div class="blog-post-preview col-4">
+		<?php
+		$thumbID = get_post_thumbnail_id($postId);
+		$img_attrs = wp_get_attachment_image_src( $thumbID,'blog-preview' ); 
+		$image = $img_attrs[0];
+		if($image) {?>
+			<a href="<?php the_permalink($postId); ?>"><img class="blog-preview" src="<?= $image ?>"/></a>
+		<?php }?>
+		<a href="<?php the_permalink($postId); ?>"><h2><?= get_the_title($postId); ?></h2></a>
+		<p>
+			<?php echo get_the_excerpt($postId); ?>
+			<a href="<?php the_permalink($postId); ?>"><?= __('Read more') ?> &raquo;</a>
+		</p>
+	</div>
+<?php 
+}
+
 remove_filter( 'the_content', 'wpautop' );
 
 add_image_size( 'blog-featured-image', 384 );

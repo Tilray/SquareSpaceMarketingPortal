@@ -112,7 +112,7 @@
 		<nav class="container">
 			<div class="row">
 				<div class="site-branding col-sm-3">
-				<h1 class="site-title logo"><a id="blogname" rel="home" href="<?=get_wpml_home_url()?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>"><?php bloginfo( 'name' ); ?></a></h1>
+				<h2 class="site-title logo"><a id="blogname" rel="home" href="<?=get_wpml_home_url()?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>"><?php bloginfo( 'name' ); ?></a></h2>
 				</div>
 				<div class="col-sm-9 mainmenu">
 						<?php wp_nav_menu( array( 'container_id' => 'primary-menu-container', 'theme_location' => 'primary','container_class' => 'topmenu','menu_id'=>'primary-menu' ,'menu_class'=>'sfmenu' ) ); ?>

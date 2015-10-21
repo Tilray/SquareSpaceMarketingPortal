@@ -30,6 +30,19 @@ get_header(); ?>
 							</div><!-- .entry-content -->
 						<?php endwhile; // end of the loop. ?>
 						</main><!-- #main -->
+						<div class="tags">
+							<?
+								$allTags = wp_get_post_tags(get_the_ID());
+								if (count($allTags) > 0)
+								{
+									echo __("TAGGED");
+									foreach($allTags as $thisTag)
+									{
+										?>&nbsp;<a href="<?=get_tag_link( $thisTag->term_id )?>"><?=__($thisTag->name)?></a><?php
+									}
+								}
+							?>
+						</div>
 					</div><!-- #primary -->
 				</article><!-- #post-## -->
 			</div>
