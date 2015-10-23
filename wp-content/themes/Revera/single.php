@@ -18,9 +18,9 @@ get_header(); ?>
 					<div class="col-sm-4">
 						<?php
 							$thumb = get_post_thumbnail_id();
-							$img_url = wp_get_attachment_url( $thumb,'blog-featured-image' ); //get full URL to image (use "large" or "medium" if the images too big)
+							$img_url = wp_get_attachment_image_src( $thumb,'blog-featured-image' );
 							if($img_url) : ?>
-						<img class="img-responsive single-post-featured-image" src="<?php echo $img_url ?>"/>
+						<img class="img-responsive single-post-featured-image" src="<?php echo $img_url[0] ?>"/>
 						<?php endif; ?>		
 					</div>
 					<div id="primary" class="content-area col-sm-8">
@@ -43,7 +43,12 @@ get_header(); ?>
 								}
 							?>
 						</div>
-					</div><!-- #primary -->
+					</div><!-- #primary   comments -->
+				<?php
+					// If comments are open or we have at least one comment, load up the comment template
+					if ( comments_open() || '0' != get_comments_number() )
+						comments_template();
+				?>
 				</article><!-- #post-## -->
 			</div>
 		</div>
