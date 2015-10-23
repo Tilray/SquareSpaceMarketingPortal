@@ -72,33 +72,18 @@ get_header(); ?>
 
 <div class="container">	
 	<div class="row">
-	<section id="primary" class="content-area col-sm-12">
-		<main id="main" class="site-main" role="main">
-
-		<?php if ( have_posts() ) : ?>
-
-		
-			<?php /* Start the Loop */ ?>
-			<?php while ( have_posts() ) : the_post(); ?>
-
-				<?php
-					render_news_archive(get_the_ID());
-				?>
-
-			<?php endwhile; ?>
-
-			<?php web2feel_content_nav( 'nav-below' ); ?>
-
-		<?php else : ?>
-
-			<?php get_template_part( 'no-results', 'archive' ); ?>
-
-		<?php endif; ?>
-
-		</main><!-- #main -->
-	</section><!-- #primary -->
-
-<?php get_sidebar(); ?>
+		<div id="secondary" class="col-sm-12">
+		<?php
+			$args = array(
+				'category_name' => get_query_var('category_name'),
+				'tag' => get_query_var('tag'),
+				'posts_per_page' => '6',
+				'paged' => $paged
+			);
+			$paged = ( get_query_var( 'paged' ) ) ? get_query_var( 'paged' ) : 1;
+			render_news_section($args, $paged, true);
+		?>
+		</div><!-- #primary -->
 	</div>
 </div>
 <?php get_footer(); ?>

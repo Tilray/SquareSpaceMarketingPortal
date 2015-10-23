@@ -1294,7 +1294,7 @@ div.product-filters-container{
 }
 
 .product-filters-underline{
-	width: 534px;
+	max-width: 534px;
 	padding: 15px 0 25px 0;
 }
 
@@ -1577,4 +1577,20 @@ div.tags{
 
 div.news-archive{
 	margin-bottom: 50px;
+}
+
+.pagination-buttons {
+	text-align: center;
+}
+.pagination-buttons p a{
+    color: #ffffff;
+	font-size: 11px;
+    font-weight: bold;
+    text-transform: uppercase;
+    text-decoration: none;
+    background-color: #084875;
+    padding: 3px 12px 3px 12px;
+    margin-left: 10px;
+    margin-right: 10px;
+    display: inline-block;
 }

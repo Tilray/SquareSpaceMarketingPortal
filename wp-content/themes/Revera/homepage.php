@@ -42,7 +42,7 @@ get_header(); ?>
 			'category_name' => $catName,
 			'posts_per_page' => '6'
 		);
-		 render_news_section( $args, true, false);
+		 render_news_section( $args, false);
 		 ?>
 		 
 	</div>

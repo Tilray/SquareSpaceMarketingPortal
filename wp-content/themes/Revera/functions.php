@@ -115,7 +115,7 @@ function web2feel_scripts() {
 	wp_enqueue_style( 'slicknav', get_template_directory_uri() . '/css/slicknav.css');
 	wp_enqueue_style( 'fontawesome', '//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css');
 
-	wp_enqueue_style( 'theme', get_template_directory_uri() . '/theme.css?v=1.001');
+	wp_enqueue_style( 'theme', get_template_directory_uri() . '/theme.css?v=1.003');
 
 	wp_enqueue_script( 'bootstrap', get_template_directory_uri() . '/bootstrap/bootstrap.min.js', array( 'jquery' ), '20120206', true );
 	wp_enqueue_script( 'flexslider', get_template_directory_uri() . '/js/jquery.flexslider.js', array( 'jquery' ), '20120206', true );
@@ -272,12 +272,13 @@ function render_left_nav($parentID, $pageID)
 	}
 }
 
-function render_news_section($args, $showDetails, $pageNumber){
-	$the_query = new WP_Query( $args ); ?>
-	<?php $numRendered = 0;?>
-	<?php if ( $the_query->have_posts() ) : ?>
+function render_news_section($args, $showPagination = false){
+	global $wp_query, $paged;
+	$wp_query = new WP_Query( $args );
+	$numRendered = 0;
+	if ( $wp_query->have_posts() ) : ?>
 		<!-- the loop -->
-		<?php while ( $the_query->have_posts() ) : $the_query->the_post(); ?>
+		<?php while ( $wp_query->have_posts() ) : $wp_query->the_post(); ?>
 			<div class="blog-post-preview col-4">
 				<?php
 				$thumbID = get_post_thumbnail_id();
@@ -304,14 +305,24 @@ function render_news_section($args, $showDetails, $pageNumber){
 		<!-- end of the loop -->
 
 		<!-- pagination here -->
-		<div class="navigation"><p><?php posts_nav_link(); ?></p></div>
+		<?php if ($showPagination){?>
+			<div class="navigation pagination-buttons"><p><?php 
+				previous_posts_link("<i class='fa fa-arrow-left'></i>&nbsp;&nbsp;prev");
+				next_posts_link("next&nbsp;&nbsp;<i class='fa fa-arrow-right'></i>");
+			?></p></div>
+		<?php } ?>
 
-		<?php wp_reset_postdata(); ?>
+		<?php 
+			wp_reset_postdata(); 
+			wp_reset_query();
+		?>
 
 	<?php else : ?>
 		<p><?php _e( 'Sorry, no posts matched your criteria.' ); ?></p>
 	<?php endif;	
 }
+
+
 
 function render_news_archive($postId){
 ?>
@@ -334,7 +345,7 @@ function render_news_archive($postId){
 
 remove_filter( 'the_content', 'wpautop' );
 
-add_image_size( 'blog-featured-image', 384 );
+add_image_size( 'blog-featured-image', 360 );
 add_image_size( 'blog-preview', 340, 191, true );
 add_image_size( 'banner-image', 1200, 384, true );
 

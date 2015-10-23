@@ -28,11 +28,14 @@ get_header(); ?>
 		<div id="secondary" class="col-sm-12">
 			<?php 
 			$catName = 'blog-' . get_current_language_code();
+			$paged = ( get_query_var( 'paged' ) ) ? get_query_var( 'paged' ) : 1;
 			$args = array(
 				'category_name' => $catName,
-				'posts_per_page' => '60'
+				'posts_per_page' => '6',
+				'paged' => $paged
 			);
-			render_news_section($args, true, true);
+			render_news_section($args, $paged, true);
+			wp_reset_query();			
 			?>
 		</div>
 	</div>
