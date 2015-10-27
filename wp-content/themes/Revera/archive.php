@@ -74,13 +74,19 @@ get_header(); ?>
 	<div class="row">
 		<div id="secondary" class="col-sm-12">
 		<?php
+			$searchType = 'category_name';
+			$searchValue = get_query_var('category_name');
+			if (is_tag()){
+				$searchType = 'tag';
+				$searchValue = get_query_var('tag');
+			}
+		
+			$paged = ( get_query_var( 'paged' ) ) ? get_query_var( 'paged' ) : 1;
 			$args = array(
-				'category_name' => get_query_var('category_name'),
-				'tag' => get_query_var('tag'),
+				$searchType => $searchValue,
 				'posts_per_page' => '6',
 				'paged' => $paged
 			);
-			$paged = ( get_query_var( 'paged' ) ) ? get_query_var( 'paged' ) : 1;
 			render_news_section($args, $paged, true);
 		?>
 		</div><!-- #primary -->
