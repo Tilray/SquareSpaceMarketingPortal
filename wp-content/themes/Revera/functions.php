@@ -306,6 +306,7 @@ function render_news_section($args, $showPagination = false){
 
 		<!-- pagination here -->
 		<?php if ($showPagination){?>
+			</div><div class="col-12">
 			<div class="navigation pagination-buttons"><p><?php 
 				previous_posts_link("<i class='fa fa-arrow-left'></i>&nbsp;&nbsp;prev");
 				next_posts_link("next&nbsp;&nbsp;<i class='fa fa-arrow-right'></i>");
