@@ -36,10 +36,14 @@ get_header(); ?>
 		<a href="<?=get_permalink($pageId)?>">
 		<h2 class="blog-section"><?=get_the_title($pageId)?></h2></a>
 		 <?php 	
-		 
-		$catName = 'blog-' . get_current_language_code();
+		
+		$catName = 'news';
+		if (strtolower(get_current_language_code()) == "fr"){
+			$catName = 'nouvelles';
+		}
 		$args = array(
 			'category_name' => $catName,
+			'post_status' => 'publish',
 			'posts_per_page' => '6'
 		);
 		 render_news_section( $args, false);
