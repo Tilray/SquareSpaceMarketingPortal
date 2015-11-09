@@ -496,12 +496,13 @@ html, body {
 /* Slider */
 
 #slidebox{
-	max-width: 1828px;
+	height: 32vw;
+	max-width: 1719px;
 	max-height: 550px;
 	margin-left: auto;
 	margin-right: auto;
 	position: relative;
-	background: #eee;
+	background: #ffffff;
 }
 
 .doverlay{
@@ -520,7 +521,6 @@ img.grayscale {
 	-webkit-filter: grayscale(100%); /* Chrome 19+, Safari 6+, Safari 6+ iOS */
 }
 	
-	
 .flex-caption{
 	margin: 0;
 	z-index: 120;
@@ -532,7 +532,9 @@ img.grayscale {
 	pointer-events: none;
 }	
 	
-.flex-caption h2{
+.flex-caption h1,
+.flex-caption h2,
+.flex-caption h3{
 	width: 100%;
 	margin: 0;
 	padding: 0;
@@ -1121,9 +1123,13 @@ h3.bothead{
 	padding: 10px 0px;
 	background:#444444;
 	font-size: 12px;
-	height: 60px;
+	min-height: 60px;
 	position: absolute;
 	bottom: 0;
+}
+
+.site-footer li a {
+	white-space: nowrap;
 }
 
 .fcred{
@@ -1464,6 +1470,10 @@ div.blog-post-preview h3{
 	text-transform: uppercase;
 }
 
+.read-more-link{
+	white-space: nowrap;
+}
+
 .single-post-featured-image {
 	margin-bottom: 20px;
 }
@@ -1593,4 +1603,22 @@ div.news-archive{
     margin-left: 10px;
     margin-right: 10px;
     display: inline-block;
+}
+
+.accordion .collapse{
+	overflow: hidden;
+	max-height: 0;
+	display: block;
+	-webkit-transition: max-height .25s;
+	transition: max-height .25s;
+}
+
+.accordion > :first-child{
+	cursor: pointer;
+}
+
+.accordion.open .collapse{
+	max-height: 1000px;
+	-webkit-transition: max-height .5s;
+	transition: max-height .5s;
 }

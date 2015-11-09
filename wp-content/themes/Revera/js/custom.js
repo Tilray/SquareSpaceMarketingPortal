@@ -40,6 +40,11 @@ jQuery(window).load(function() {
 	});
 	
 	jQuery("#mobile-nav").slicknav({label:''});
+	
+	
+	jQuery(".accordion").click(function(){
+		jQuery(this).toggleClass("open");
+	});
 });
 
 
