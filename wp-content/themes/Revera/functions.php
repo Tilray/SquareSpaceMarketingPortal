@@ -11,8 +11,20 @@ include ('aq_resizer.php');
 include ( 'guide.php' );
 
 
+//due to our custom permalink structure, /en/[category name}/page/2 will try to find a page called "page" in the given category
+//this fixes it
+function remove_page_from_query_string($query_string)
+{ 
+    if ($query_string['name'] == 'page' && isset($query_string['page'])) {
+        unset($query_string['name']);
+        // 'page' in the query_string looks like '/2', so i'm spliting it out
+        list($delim, $page_index) = split('/', $query_string['page']);
+        $query_string['paged'] = $page_index;
+    }      
+    return $query_string;
+}
+add_filter('request', 'remove_page_from_query_string');
 
- 
  
 
 
@@ -126,6 +138,10 @@ function web2feel_scripts() {
 	wp_enqueue_script( 'slicknav', get_template_directory_uri() . '/js/jquery.slicknav.min.js', array( 'jquery' ), '20120206', true );	
 	wp_enqueue_script( 'web2feel-skip-link-focus-fix', get_template_directory_uri() . '/js/skip-link-focus-fix.js', array(), '20130115', true );
 
+	wp_enqueue_style('share-button', get_template_directory_uri() . '/css/share-button.min.css');
+	wp_enqueue_script('share-button', get_template_directory_uri() . '/js/share-button.js');
+	
+	
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );
 	}
@@ -290,7 +306,7 @@ function render_news_section($args, $showPagination = false){
 				<a href="<?php the_permalink(); ?>"><h2><?php the_title(); ?></h2></a>
 				<p>
 					<?php echo get_the_excerpt(); ?>
-					<a href="<?php the_permalink(); ?>"><?= __('Read more') ?> &raquo;</a>
+					<a class="read-more-link" href="<?php the_permalink(); ?>"><?= __('Read more') ?> &raquo;</a>
 				</p>
 			</div>
 			<?php 
@@ -338,7 +354,7 @@ function render_news_archive($postId){
 		<a href="<?php the_permalink($postId); ?>"><h2><?= get_the_title($postId); ?></h2></a>
 		<p>
 			<?php echo get_the_excerpt($postId); ?>
-			<a href="<?php the_permalink($postId); ?>"><?= __('Read more') ?> &raquo;</a>
+			<a class="read-more-link" href="<?php the_permalink($postId); ?>"><?= __('Read more') ?> &raquo;</a>
 		</p>
 	</div>
 <?php 
@@ -380,3 +396,16 @@ function eg_create_sitemap() {
     fwrite( $fp, $sitemap );
     fclose( $fp );
 }
+
+
+
+
+
+	
+	
+	
+	
+	
+	
+	
+	

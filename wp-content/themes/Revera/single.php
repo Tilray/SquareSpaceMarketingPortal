@@ -12,7 +12,7 @@ get_header(); ?>
 		<div class="row">
 			<div class="col-12">
 				<?php while ( have_posts() ) : the_post(); ?>
-				<h1>News</h1>
+				<h1><?=__('News')?></h1>
 				<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 					<h2><?php the_title() ?></h2>
 					<div class="col-sm-4">
@@ -35,13 +35,17 @@ get_header(); ?>
 								$allTags = wp_get_post_tags(get_the_ID());
 								if (count($allTags) > 0)
 								{
-									echo __("TAGGED");
+									echo __("TAGGED") . "&nbsp;";
+									$tags = [];
 									foreach($allTags as $thisTag)
 									{
-										?>&nbsp;<a href="<?=get_tag_link( $thisTag->term_id )?>"><?=__($thisTag->name)?></a><?php
+										$tags[] = '<a href="' . get_tag_link( $thisTag->term_id ) . '">' . __($thisTag->name) . '</a>';
 									}
+									
+									echo implode(", ", $tags);
 								}
 							?>
+							<share-button>Share This</share-button>
 						</div>
 					</div><!-- #primary   comments -->
 				</article><!-- #post-## -->
