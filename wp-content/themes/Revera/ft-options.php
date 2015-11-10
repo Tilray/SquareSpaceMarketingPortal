@@ -57,7 +57,12 @@ function FT_OP_options()
 	$options[] = array( "name" => "Homepage",
 						"type" => "heading");	
 						
-						
+	$options[] = array( "name" => "Homepage News category",
+						"desc" => "Select a category for the image slider",
+						"id" => "home_news_category",
+						"type" => "select",
+						"options" => $options_categories);						
+												
 	$options[] = array( "name" => "Slider Category",
 						"desc" => "Select a category for the image slider",
 						"id" => "fabthemes_slide_categories",
