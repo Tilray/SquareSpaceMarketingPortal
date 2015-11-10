@@ -21,8 +21,8 @@ get_header(); ?>
 
 <?php
 	$langCode = get_current_language_code();
-	$pageId = ft_of_get_option('fabthemes_blog_page_id_' . $langCode);
-	$page = get_page( $pageId );
+	$newsCategoryId = ft_of_get_option('home_news_category' . $langCode);
+	$newsCategory = get_category($newsCategoryId);
 ?>
 <div class="section-wide">
 	<div class="row">
@@ -32,8 +32,8 @@ get_header(); ?>
 	</div>
 	<div class="row">
 	<div class="boxitems col-12 homepage-blog-container">
-		<a href="<?=get_permalink($pageId)?>">
-		<h2 class="blog-section"><?=get_the_title($pageId)?></h2></a>
+		<a href="/<?=strtolower($langCode)?>/<?=$newsCategory->slug?>">
+		<h2 class="blog-section"><?=$newsCategory->name?></h2></a>
 		 <?php 	
 		
 		$catName = 'news';
