@@ -21,8 +21,11 @@ get_header(); ?>
 
 <?php
 	$langCode = get_current_language_code();
-	$newsCategoryId = ft_of_get_option('home_news_category' . $langCode);
-	$newsCategory = get_category($newsCategoryId);
+	$catName = 'news';
+	if (strtolower($langCode) == "fr"){
+		$catName = 'nouvelles';
+	}
+	$newsCategory = get_category_by_slug($catName);
 ?>
 <div class="section-wide">
 	<div class="row">
@@ -32,14 +35,10 @@ get_header(); ?>
 	</div>
 	<div class="row">
 	<div class="boxitems col-12 homepage-blog-container">
-		<a href="/<?=strtolower($langCode)?>/<?=$newsCategory->slug?>">
+		<a href="/<?=strtolower($langCode)?>/<?=$catName?>">
 		<h2 class="blog-section"><?=$newsCategory->name?></h2></a>
 		 <?php 	
 		
-		$catName = 'news';
-		if (strtolower(get_current_language_code()) == "fr"){
-			$catName = 'nouvelles';
-		}
 		$args = array(
 			'category_name' => $catName,
 			'post_status' => 'publish',
