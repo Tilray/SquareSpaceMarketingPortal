@@ -45,7 +45,6 @@ get_header(); ?>
 									echo implode(", ", $tags);
 								}
 							?>
-							<share-button>Share This</share-button>
 						</div>
 					</div><!-- #primary   comments -->
 				</article><!-- #post-## -->
