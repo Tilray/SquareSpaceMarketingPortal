@@ -130,7 +130,7 @@ function web2feel_scripts() {
 	wp_enqueue_style( 'theme', get_template_directory_uri() . '/theme.css?v=1.003');
 
 	wp_enqueue_script( 'bootstrap', get_template_directory_uri() . '/bootstrap/bootstrap.min.js', array( 'jquery' ), '20120206', true );
-	wp_enqueue_script( 'flexslider', get_template_directory_uri() . '/js/jquery.flexslider.js', array( 'jquery' ), '20120206', true );
+	wp_enqueue_script( 'flexslider', get_template_directory_uri() . '/js/jquery.flexslider-min.js', array( 'jquery' ), '20120206', true );
 	wp_enqueue_script( 'superfish', get_template_directory_uri() . '/js/superfish.js', array( 'jquery' ), '20120206', true );	
 	wp_enqueue_script( 'custom', get_template_directory_uri() . '/js/custom.js', array( 'jquery' ), '20120206', true );
 	wp_enqueue_script( 'mobilemenu', get_template_directory_uri() . '/js/mobilemenu.js', array(), '20120206', true );
@@ -138,10 +138,6 @@ function web2feel_scripts() {
 	wp_enqueue_script( 'slicknav', get_template_directory_uri() . '/js/jquery.slicknav.min.js', array( 'jquery' ), '20120206', true );	
 	wp_enqueue_script( 'web2feel-skip-link-focus-fix', get_template_directory_uri() . '/js/skip-link-focus-fix.js', array(), '20130115', true );
 
-	wp_enqueue_style('share-button', get_template_directory_uri() . '/css/share-button.min.css');
-	wp_enqueue_script('share-button', get_template_directory_uri() . '/js/share-button.js');
-	
-	
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );
 	}
@@ -371,41 +367,3 @@ function blogroot_func( $atts ){
 	return get_site_url();
 }
 add_shortcode( 'blogroot', 'blogroot_func' );
-
-add_action( "save_post", "eg_create_sitemap" );   
-function eg_create_sitemap() {
-    $postsForSitemap = get_posts( array(
-        'numberposts' => -1,
-        'orderby'     => 'modified',
-        'post_type'   => array( 'post', 'page' ),
-        'order'       => 'DESC'
-    ) );
-    $sitemap = '<?xml version="1.0" encoding="UTF-8"?>';
-    $sitemap .= "\n" . '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' . "\n";    
-    foreach( $postsForSitemap as $post ) {
-        setup_postdata( $post );   
-        $postdate = explode( " ", $post->post_modified );   
-        $sitemap .= "\t" . '<url>' . "\n" .
-            "\t\t" . '<loc>' . get_permalink( $post->ID ) . '</loc>' .
-            "\n\t\t" . '<lastmod>' . $postdate[0] . '</lastmod>' .
-            "\n\t\t" . '<changefreq>weekly</changefreq>' .
-            "\n\t" . '</url>' . "\n";
-    }     
-    $sitemap .= '</urlset>';     
-    $fp = fopen( ABSPATH . "sitemap.xml", 'w' );
-    fwrite( $fp, $sitemap );
-    fclose( $fp );
-}
-
-
-
-
-
-	
-	
-	
-	
-	
-	
-	
-	
