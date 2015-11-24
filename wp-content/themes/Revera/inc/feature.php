@@ -12,6 +12,8 @@
 			$thumbID = get_post_thumbnail_id();
 			$img_attrs = wp_get_attachment_image_src( $thumbID,'full' ); 
 			$thisBanner->image = $img_attrs[0];
+			$thisBanner->width = $img_attrs[1];
+			$thisBanner->height = $img_attrs[2];
 			
 			$thisBanner->content = get_the_content();
 			$thisBanner->order = get_post_field('menu_order', get_the_ID());
@@ -35,10 +37,10 @@
 
 		<ul class="slides">
 		    <?php 	
-				function RenderBanner($content, $imageurl, $linkURL){					
+				function RenderBanner($content, $imageurl, $width, $height, $linkURL){					
 					?>
 						<li>
-							<a href="<?= $linkURL ?>"><img src="<?= $imageurl ?>"></a>
+							<a href="<?= $linkURL ?>"><img width="<?=$width?>" height="<?=$height?>" src="<?= $imageurl ?>"></a>
 							<div class="flex-caption">
 								<?= $content ?>
 							</div>
@@ -49,7 +51,7 @@
 				$theBanners = QueryBanners();
 				foreach($theBanners as $thisBanner)				
 				{
-					RenderBanner($thisBanner->content, $thisBanner->image, $thisBanner->link);
+					RenderBanner($thisBanner->content, $thisBanner->image, $thisBanner->width, $thisBanner->height, $thisBanner->link);
 				}
 				?>
 					

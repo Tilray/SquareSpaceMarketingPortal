@@ -130,7 +130,7 @@ function web2feel_scripts() {
 	wp_enqueue_style( 'theme', get_template_directory_uri() . '/theme.css?v=1.003');
 
 	wp_enqueue_script( 'bootstrap', get_template_directory_uri() . '/bootstrap/bootstrap.min.js', array( 'jquery' ), '20120206', true );
-	wp_enqueue_script( 'flexslider', get_template_directory_uri() . '/js/jquery.flexslider-min.js', array( 'jquery' ), '20120206', true );
+	wp_enqueue_script( 'flexslider', get_template_directory_uri() . '/js/jquery.flexslider.js', array( 'jquery' ), '20120206', true );
 	wp_enqueue_script( 'superfish', get_template_directory_uri() . '/js/superfish.js', array( 'jquery' ), '20120206', true );	
 	wp_enqueue_script( 'custom', get_template_directory_uri() . '/js/custom.js', array( 'jquery' ), '20120206', true );
 	wp_enqueue_script( 'mobilemenu', get_template_directory_uri() . '/js/mobilemenu.js', array(), '20120206', true );
@@ -297,7 +297,7 @@ function render_news_section($args, $showPagination = false){
 				$img_attrs = wp_get_attachment_image_src( $thumbID,'blog-preview' ); 
 				$image = $img_attrs[0];
 				if($image) {?>
-					<a href="<?php the_permalink(); ?>"><img class="blog-preview" src="<?= $image ?>"/></a>
+					<a href="<?php the_permalink(); ?>"><img class="blog-preview" src="<?= $image ?>" width="<?=$img_attrs[1]?>" height="<?=$img_attrs[2]?>"/></a>
 				<?php }?>
 				<a href="<?php the_permalink(); ?>"><h2><?php the_title(); ?></h2></a>
 				<p>
