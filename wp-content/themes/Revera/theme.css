@@ -1390,7 +1390,7 @@ ul.copyright-footer{
 
 ul.copyright-footer li {
 	list-style-type: none;
-	display: inline;
+	display: inline-block;
 	margin-right: 40px;
 }
 
@@ -1497,6 +1497,15 @@ div.slicknav_menu,
 }
 
 @media screen and (max-width: 600px) {
+	ul.copyright-footer {
+		margin-left: 0;
+		display: block;
+	}
+	ul.copyright-footer li{
+		display: block;
+	}
+
+
 	div.slicknav_menu {
 		display: block;
 	}
