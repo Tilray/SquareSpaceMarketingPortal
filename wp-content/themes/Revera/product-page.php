@@ -55,10 +55,12 @@ get_header(); ?>
 	$qpStatus = 'status';
 	$qpStrain = 'strain-categories';
 	$qpProductType = 'product-types';
+	$qpTHC = 'thc';
 	$qpPrice = 'prices';
 	$arrStatuses = splitAndGetQueryStringParamIfValid($qpStatus, $allStatuses);
 	$arrStrainCategories = splitAndGetQueryStringParamIfValid($qpStrain, $allStrainCategories);
 	$arrProductTypes = splitAndGetQueryStringParamIfValid($qpProductType, $allProducts);
+	$arrTHCs = splitAndGetQueryStringParamIfValid($qpTHC, $allTHCs);
 	$arrPrices = splitAndGetQueryStringParamIfValid($qpPrice, $allPrices);
 
 
@@ -136,6 +138,7 @@ get_header(); ?>
 			$thisProduct->itemStatus = trim(get_post_meta(get_the_ID(), 'status', true));
 			$thisProduct->itemStrainCategory = trim(get_post_meta(get_the_ID(), 'strain_category', true));
 			$thisProduct->itemProductType = trim(get_post_meta(get_the_ID(), 'product_type', true));
+			$thisProduct->thc = trim(get_post_meta(get_the_ID(), 'product_thc', true));
 
 			$thumbID = get_post_thumbnail_id();
 			$img_attrs = wp_get_attachment_image_src( $thumbID,'product-thumb' ); 
@@ -200,6 +203,7 @@ get_header(); ?>
 					RenderProductFilter("product-filters-product-type", "product-types", "product-type-show-all", "", "Show All");
 					RenderProductFilter("product-filters-product-type", "product-types", "product-type-flower", "flower", "Flower");
 					RenderProductFilter("product-filters-product-type", "product-types", "product-type-blend", "blend", "Blend");
+					RenderProductFilter("product-filters-product-type", "product-types", "product-type-accessory", "accessory", "Accessory");
 					?>
 				</ul>
 			</div>
@@ -228,10 +232,12 @@ get_header(); ?>
 			$firstStatus = "";
 			$firstStrainCategory = "";
 			$firstProductType = "";
+			$firstTHC = "";
 			$firstPrice = "";
 			if (count($arrStatuses) > 0) $firstStatus = $arrStatuses[0];
 			if (count($arrStrainCategories) > 0) $firstStrainCategory = $arrStrainCategories[0];
 			if (count($arrProductTypes) > 0) $firstProductType = $arrProductTypes[0];
+			if (count($arrTHCs) > 0) $firstTHC = $arrTHCs[0];
 			if (count($arrPrices) > 0) $firstPrice = $arrPrices[0];
 			
 			foreach($theProducts as $product){
@@ -240,6 +246,7 @@ get_header(); ?>
 					($firstStatus == "" || in_array($product->itemStatus, $arrStatuses)) &&
 					($firstStrainCategory == "" || in_array($product->itemStrainCategory, $arrStrainCategories)) &&
 					($firstProductType == "" || in_array($product->itemProductType, $arrProductTypes)) &&
+					($firstTHC == "" || in_array($product->itemProductType, $arrProductTypes)) &&
 					($firstPrice == "" || in_array($product->priceRange, $arrPrices)))
 				{
 					$activeClass = "active";
@@ -250,6 +257,7 @@ get_header(); ?>
 					data-straincategory="<?=$product->itemStrainCategory?>" 
 					data-status="<?=$product->itemStatus?>" 
 					data-producttype="<?=$product->itemProductType?>" 
+					data-thc="<?=$product->thc?>" 
 					data-pricerange="<?=$product->priceRange?>">
 					<div class="hthumb">
 						<?php if($product->image) { 
@@ -277,6 +285,7 @@ get_header(); ?>
 				if ((count($arrStatuses) > 0 && $arrStatuses[0] != "" && !in_array($product->itemStatus, $arrStatuses)) ||
 					(count($arrStrainCategories) > 0 && $arrStrainCategories[0] != "" && !in_array($product->itemStrainCategory, $arrStrainCategories)) || 
 					(count($arrProductTypes) > 0 && $arrProductTypes[0] != "" && !in_array($product->itemProductType, $arrProductTypes)) || 
+					(count($arrTHCs) > 0 && $arrTHCs[0] != "" && !in_array($product->thc, $arrTHCs)) || 
 					(count($arrPrices) > 0 && $arrPrices[0] != "" && !in_array(getPriceRange($product->price), $arrPrices)))
 				{
 					continue;

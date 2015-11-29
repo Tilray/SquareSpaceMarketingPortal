@@ -47,10 +47,14 @@ get_header(); ?>
 					$itemPrice = intval($value);
 					$label = $itemPriceObj['choices'][ $value ];	
 					if ($itemPrice > 0){
-						?>
-							<?=format_price_for_current_locale($itemPrice) . " " . __('per gram')?>
-							
-						<?php
+						$productType = trim(get_post_meta(get_the_ID(), 'product_type', true));
+						$priceText = format_price_for_current_locale($itemPrice);
+						if (strtolower($productType) != "accessory"){
+							$priceText .= " " . __('per gram');
+						}
+						
+						echo $priceText;
+						
 						$itemStoreLink = trim(get_post_meta(get_the_ID(), 'store_link', true));
 						if ($itemStoreLink){
 						?>

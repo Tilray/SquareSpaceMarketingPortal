@@ -44,7 +44,15 @@ $allStrainCategories = array(	"" => array ("en" => "", "fr" => ""),
 $allProducts = array(	"" => array ("en" => "", "fr" => ""), 
 						"flower" => array ("en" => "Flower", "fr" => "Flower"), 
 						"blend" => array ("en" => "Blend", "fr" => "Blend"), 
-						"extract" => array ("en" => "Extract", "fr" => "Extract"));
+						"extract" => array ("en" => "Extract", "fr" => "Extract"),
+						"accessory" => array ("en" => "Accessory", "fr" => "Accessory")
+					);
+
+$allTHCs = array(	"" => "", 
+					"low" => "low", 
+					"some" => "some", 
+					"lots" => "lots", 
+					"extreme" => "extreme");
 					
 $allPrices = array(	"" => "", 
 					"4-6" => "$4-6", 
