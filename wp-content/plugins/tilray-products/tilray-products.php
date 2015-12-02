@@ -49,10 +49,10 @@ $allProducts = array(	"" => array ("en" => "", "fr" => ""),
 					);
 
 $allTHCs = array(	"" => "", 
-					"low" => "low", 
-					"some" => "some", 
-					"lots" => "lots", 
-					"extreme" => "extreme");
+					"0-14" => "< 15%", 
+					"15-20" => "15% - 20%", 
+					"21-25" => "21% - 25%", 
+					"26-100" => "> 25%");
 					
 $allPrices = array(	"" => "", 
 					"4-6" => "$4-6", 
@@ -61,13 +61,28 @@ $allPrices = array(	"" => "",
 					"13-1000" => "$13+");
 
 					
-function get_products_page_link($status, $strainType, $productType){
+function get_products_page_link($status, $strainType, $productType, $thcRange){
 	$langCode = get_current_language_code();
 	$pageName = "products";
 	if ($langCode == "fr"){
 		$pageName = "produits";
 	}
-	return home_url("/") . $pageName . "/?status=" . $status . "&strain-categories=" . $strainType . "&product-types=" . $productType;
+	
+	$url = home_url("/") . $pageName;
+	
+	if ($status != "")
+		$url .= ("/?status=" . $status);
+		
+	if ($strainType != "")
+		$url .= ("&strain-categories=" . $strainType);
+		
+	if ($productType != "")
+		$url .= ("&product-types=" . $productType);
+		
+	if ($thcRange != "")
+		$url .= ("/?thc=" . $thcRange);
+	
+	return $url;
 }
 
 

@@ -1187,6 +1187,17 @@ h3.bothead{
 	#bottom .col-6 {
 		width: 100%;
 	}
+	
+	div.tags{
+		text-align: center;
+		float: none;
+	}
+
+	div.social-buttons{
+		text-align: center;
+		margin-bottom: 30px;
+	}
+	
 }
 
 @media screen and (max-width: 500px) {		
@@ -1599,12 +1610,72 @@ a.inline-btn {
   text-decoration: none;
 }
 
+div.buttons-container{
+	padding-top: 50px;
+	padding-bottom: 50px;
+}
+
 div.tags{
 	font-size: 12px;
 	text-align: right;
 	text-transform: uppercase;
 	font-weight: bold;
-	padding-top: 50px;
+	display: inline-block;
+	float: right;
+}
+
+div.social-buttons{
+	display: inline-block;
+}
+
+div.social-buttons a{
+	font-family: sans-serif;
+	color: #ffffff;
+	padding: 9px 15px;
+	font-weight: bold;
+	border-radius: 3px;
+	margin-right: 6px;
+	-webkit-transition: border-radius .25s;
+	transition: border-radius .25s;
+}
+
+div.social-buttons a:hover{
+	border-radius: 20px;
+	-webkit-transition: border-radius .5s;
+	transition: border-radius .5s;
+}
+
+
+div.social-buttons a::before{
+	content: "";
+	padding-left: 15px;
+	background-image: url(images/socialicons.png);
+	background-repeat: no-repeat;
+}
+
+a.social-button-facebook{
+	background-color: #3b5999;
+}
+
+a.social-button-twitter{
+	background-color: #55acef;
+}
+a.social-button-twitter::before{
+	background-position: 0 -17px;
+}
+
+a.social-button-linkedin{
+	background-color: #007bb6;
+}
+a.social-button-linkedin::before{
+	background-position: 0 -34px;
+}
+
+a.social-button-pinterest{
+	background-color: #D20000;
+}
+a.social-button-pinterest::before{
+	background-position: 0 -51px;
 }
 
 div.news-archive{
