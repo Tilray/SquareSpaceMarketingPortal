@@ -367,3 +367,102 @@ function blogroot_func( $atts ){
 	return get_site_url();
 }
 add_shortcode( 'blogroot', 'blogroot_func' );
+
+function render_social_buttons($url, $imgUrl, $title){
+	render_facebook_button($url);
+	render_twitter_button($url);
+	render_linkedin_button($url);
+	render_pinterest_button($url, $imgUrl, $title);
+}
+
+function render_facebook_button($url)
+{
+	__render_social_button("Share", "social-button-facebook", "https://www.facebook.com/sharer/sharer.php?u=", $url);
+}
+function render_twitter_button($url)
+{
+	__render_social_button("Tweet", "social-button-twitter", "https://twitter.com/intent/tweet?url=", $url);
+}
+function render_linkedin_button($url)
+{
+	__render_social_button("Share", "social-button-linkedin", "https://www.linkedin.com/shareArticle?mini=true&url=", $url);
+}
+function render_pinterest_button($url, $imgUrl, $title)
+{
+	$canonical = strlen($url) > 0 ? rel_canonical_with_custom_tag_override($url) : $url;
+	?><a class="social-button-pinterest" target="_blank" href="http://pinterest.com/pin/create/button/?url=<?=urlencode($canonical)?>&media=<?=$imgUrl?>&description=<?=$title?>"></a><?php
+}
+
+function __render_social_button($label, $class, $sharingPrefix, $url)
+{
+	$canonical = strlen($url) > 0 ? rel_canonical_with_custom_tag_override($url) : $url;
+	?><a class="<?=$class?>" target="_blank" href="<?=$sharingPrefix?><?=urlencode($canonical)?>"></a><?php
+}
+
+// A copy of rel_canonical but to allow an override on a custom tag
+function rel_canonical_with_custom_tag_override($canonical)
+{
+	if (!function_exists(icl_get_languages))
+		return $canonical;
+		
+	$allTheLangs = icl_get_languages('skip_missing=0&orderby=id&order=asc');
+	foreach($allTheLangs as $lang){
+		if ($lang["language_code"] == get_current_language_code()){
+		
+			//if we're rendering out the homepage, don't use /en, because it's 301'd over to /
+			if ($lang["language_code"] == "en" && $lang["url"] == get_home_url())
+				return site_url();
+				
+			$escapedPageUrl = esc_url( $lang["url"] );
+			$escapedPageUrl = str_replace('en/category/news/', 'en/news/', $escapedPageUrl);
+			return str_replace('fr/category/nouvelles/', 'fr/nouvelles/', $escapedPageUrl);
+		}
+	}
+}
+
+// replace the default WordPress canonical URL function with your own
+add_filter( 'wpseo_canonical', 'rel_canonical_with_custom_tag_override' );
+
+function getProductTHCRange($thc, $getDisplayValue = false){
+	if (trim($thc) == "")
+		return;
+		
+	global $allTHCs;
+	$thcVal = intval($thc);
+	foreach ($allTHCs as $thcRange => $display)
+	{
+		if ($thcRange == "")
+			continue;
+			
+		$ends = explode("-", $thcRange);
+		$low = intval($ends[0]);
+		$high = intval($ends[1]);
+		if ($thcVal >= $low && $thcVal <= $high){
+			if ($getDisplayValue)
+				return $display;
+				
+			return $thcRange;
+		}
+	}
+	
+	return "";
+}
+
+function getProductPriceRange($price){
+	global $allPrices;
+	$priceVal = intval($price);
+	foreach ($allPrices as $priceRange => $display)
+	{
+		if ($priceRange == "")
+			continue;
+			
+		$ends = explode("-", $priceRange);
+		$low = intval($ends[0]);
+		$high = intval($ends[1]);
+		if ($priceVal >= $low && $priceVal <= $high){
+			return $priceRange;
+		}
+	}
+	
+	return "";
+}

@@ -86,29 +86,3 @@ function get_wpml_home_url(){
 	return get_home_url();
 }
 
-// A copy of rel_canonical but to allow an override on a custom tag
-function rel_canonical_with_custom_tag_override()
-{
-	if (!function_exists(icl_get_languages))
-		return;
-		
-	$allTheLangs = icl_get_languages('skip_missing=0&orderby=id&order=asc');
-	foreach($allTheLangs as $lang){
-		if ($lang["language_code"] == get_current_language_code()){
-		
-			//if we're rendering out the homepage, don't use /en, because it's 301'd over to /
-			if ($lang["language_code"] == "en" && $lang["url"] == get_home_url())
-				echo "<link rel='canonical' href='" . site_url() . "' />\n";
-			else
-				echo "<link rel='canonical' href='" . esc_url( $lang["url"] ) . "' />\n";
-		}
-	}
-}
-
-// remove the default WordPress canonical URL function
-if( function_exists( 'rel_canonical' ) )
-{
-    remove_action( 'wp_head', 'rel_canonical' );
-}
-// replace the default WordPress canonical URL function with your own
-add_action( 'wp_head', 'rel_canonical_with_custom_tag_override' );

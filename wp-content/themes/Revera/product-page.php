@@ -107,24 +107,6 @@ get_header(); ?>
 	
 	}
 	
-	function getPriceRange($price){
-		global $allPrices;
-		$priceVal = intval($price);
-		foreach ($allPrices as $priceRange => $display)
-		{
-			if ($priceRange == "")
-				continue;
-				
-			$ends = explode("-", $priceRange);
-			$low = intval($ends[0]);
-			$high = intval($ends[1]);
-			if ($priceVal >= $low && $priceVal <= $high){
-				return $priceRange;
-			}
-		}
-		
-		return "";
-	}
 	
 	function QueryProducts()
 	{
@@ -139,7 +121,8 @@ get_header(); ?>
 			$thisProduct->itemStrainCategory = trim(get_post_meta(get_the_ID(), 'strain_category', true));
 			$thisProduct->itemProductType = trim(get_post_meta(get_the_ID(), 'product_type', true));
 			$thisProduct->thc = trim(get_post_meta(get_the_ID(), 'product_thc', true));
-
+			$thisProduct->thcRange = getProductTHCRange($thisProduct->thc);
+			
 			$thumbID = get_post_thumbnail_id();
 			$img_attrs = wp_get_attachment_image_src( $thumbID,'product-thumb' ); 
 			$thisProduct->image = $img_attrs[0];
@@ -154,7 +137,7 @@ get_header(); ?>
 			
 			$productPrice = trim(get_post_meta(get_the_ID(), 'price', true));
 			$thisProduct->price = $productPrice;
-			$thisProduct->priceRange = getPriceRange($productPrice);
+			$thisProduct->priceRange = getProductPriceRange($productPrice);
 
 			$theProducts[] = $thisProduct;
 		endwhile;
@@ -208,6 +191,18 @@ get_header(); ?>
 				</ul>
 			</div>
 			<div class="product-filters-container">
+				<h3 class="gray-underline"><?= __('THC Level') ?></h3>
+				<ul class="product-filters product-filters-thc">
+					<?php
+					RenderProductFilter("product-filters-thc", "thc", "thc-show-all", "", "Show All");
+					RenderProductFilter("product-filters-thc", "thc", "thc-0-14", "0-14", "< 15%");
+					RenderProductFilter("product-filters-thc", "thc", "thc-15-20", "15-20", "15% - 20%");
+					RenderProductFilter("product-filters-thc", "thc", "thc-21-25", "21-25", "21% - 25%");
+					RenderProductFilter("product-filters-thc", "thc", "thc-26-100", "26-100", "> 25%");
+					?>
+				</ul>
+			</div>
+			<div class="product-filters-container">
 				<h3 class="gray-underline"><?= __('Price') ?></h3>
 				<ul class="product-filters product-filters-price">
 					<?php
@@ -240,24 +235,25 @@ get_header(); ?>
 			if (count($arrTHCs) > 0) $firstTHC = $arrTHCs[0];
 			if (count($arrPrices) > 0) $firstPrice = $arrPrices[0];
 			
+			
 			foreach($theProducts as $product){
 				$activeClass = "";
 				if (
 					($firstStatus == "" || in_array($product->itemStatus, $arrStatuses)) &&
 					($firstStrainCategory == "" || in_array($product->itemStrainCategory, $arrStrainCategories)) &&
 					($firstProductType == "" || in_array($product->itemProductType, $arrProductTypes)) &&
-					($firstTHC == "" || in_array($product->itemProductType, $arrProductTypes)) &&
+					($firstTHC == "" || in_array($product->thcRange, $arrTHCs)) &&
 					($firstPrice == "" || in_array($product->priceRange, $arrPrices)))
 				{
 					$activeClass = "active";
 				}
-			?>
+				?>
 				<div class="col-2 portbox post product-item <?= $activeClass?>" 
 					data-id="<?=$product->id?>" 
 					data-straincategory="<?=$product->itemStrainCategory?>" 
 					data-status="<?=$product->itemStatus?>" 
 					data-producttype="<?=$product->itemProductType?>" 
-					data-thc="<?=$product->thc?>" 
+					data-thcrange="<?=$product->thcRange?>" 
 					data-pricerange="<?=$product->priceRange?>">
 					<div class="hthumb">
 						<?php if($product->image) { 
@@ -285,8 +281,8 @@ get_header(); ?>
 				if ((count($arrStatuses) > 0 && $arrStatuses[0] != "" && !in_array($product->itemStatus, $arrStatuses)) ||
 					(count($arrStrainCategories) > 0 && $arrStrainCategories[0] != "" && !in_array($product->itemStrainCategory, $arrStrainCategories)) || 
 					(count($arrProductTypes) > 0 && $arrProductTypes[0] != "" && !in_array($product->itemProductType, $arrProductTypes)) || 
-					(count($arrTHCs) > 0 && $arrTHCs[0] != "" && !in_array($product->thc, $arrTHCs)) || 
-					(count($arrPrices) > 0 && $arrPrices[0] != "" && !in_array(getPriceRange($product->price), $arrPrices)))
+					(count($arrTHCs) > 0 && $arrTHCs[0] != "" && !in_array($product->thcRange, $arrTHCs)) || 
+					(count($arrPrices) > 0 && $arrPrices[0] != "" && !in_array(getProductPriceRange($product->price), $arrPrices)))
 				{
 					continue;
 				}
@@ -333,8 +329,9 @@ get_header(); ?>
 		var statusFilters = GetFiltersArray('ul.product-filters-status input[type=checkbox]:checked');
 		var strainCategoryFilters = GetFiltersArray('ul.product-filters-strain-category input[type=checkbox]:checked');
 		var productTypeFilters = GetFiltersArray('ul.product-filters-product-type input[type=checkbox]:checked');
+		var thcFilters = GetFiltersArray('ul.product-filters-thc input[type=checkbox]:checked');
 		var priceFilters = GetFiltersArray('ul.product-filters-price input[type=checkbox]:checked');
-		setProductsActive(statusFilters, strainCategoryFilters, productTypeFilters, priceFilters);
+		setProductsActive(statusFilters, strainCategoryFilters, productTypeFilters, thcFilters, priceFilters);
 		
 		jQuery('#primary').isotope({ filter: '.active' });
 		window.history.replaceState(
@@ -344,10 +341,11 @@ get_header(); ?>
 				"?status=" + statusFilters.join(',') + 
 				"&strain-categories=" + strainCategoryFilters.join(',') + 
 				"&product-types=" + productTypeFilters.join(',') + 
+				"&thc=" + thcFilters.join(',') + 
 				"&prices=" + priceFilters.join(','));
 	}
 	
-	function setProductsActive(statusFilters, strainCategoryFilters, productTypeFilters, priceFilters)
+	function setProductsActive(statusFilters, strainCategoryFilters, productTypeFilters, thcFilters, priceFilters)
 	{
 		if (statusFilters.length == 0)
 			statusFilters = [''];
@@ -355,12 +353,15 @@ get_header(); ?>
 			strainCategoryFilters = [''];
 		if (productTypeFilters.length == 0)
 			productTypeFilters = [''];
+		if (thcFilters.length == 0)
+			thcFilters = [''];
 		if (priceFilters.length == 0)
 			priceFilters = [''];
 	
 		var combinedStatus = "|||" + statusFilters.join("|||") + "|||";
 		var combinedStrainCategory = "|||" + strainCategoryFilters.join("|||") + "|||";
 		var combinedProductType = "|||" + productTypeFilters.join("|||") + "|||";
+		var combinedTHCs = "|||" + thcFilters.join("|||") + "|||";
 		var combinedPrice = "|||" + priceFilters.join("|||") + "|||";
 		var selector = 'div#primary div.product-item';
 		
@@ -369,10 +370,12 @@ get_header(); ?>
 			var status = jQuery( this ).attr("data-status");
 			var strainType = jQuery( this ).attr("data-straincategory");
 			var category = jQuery( this ).attr("data-producttype");
+			var thcRange = jQuery( this ).attr("data-thcrange");
 			var priceRange = jQuery( this ).attr("data-pricerange");
 			if ((statusFilters[0] == '' || combinedStatus.indexOf("|||" + status + "|||") > -1) &&
 				(strainCategoryFilters[0] == '' || combinedStrainCategory.indexOf("|||" + strainType + "|||") > -1) && 
 				(productTypeFilters[0] == '' || combinedProductType.indexOf("|||" + category + "|||") > -1) && 
+				(thcFilters[0] == '' || combinedTHCs.indexOf("|||" + thcRange + "|||") > -1) &&
 				(priceFilters[0] == '' || combinedPrice.indexOf("|||" + priceRange + "|||") > -1))
 			{
 				jQuery(this).addClass('active');
@@ -394,6 +397,7 @@ get_header(); ?>
 	var arrPreselectedStatus = ['<?= implode("', '", $arrStatuses) ?>'];
 	var arrPreselectedStrainCategory = ['<?= implode("', '", $arrStrainCategories) ?>'];
 	var arrPreselectedProductType = ['<?= implode("', '", $arrProductTypes) ?>'];
+	var arrPreselectedTHCs = ['<?= implode("', '", $arrTHCs) ?>'];
 	var arrPreselectedPrices = ['<?= implode("', '", $arrPrices) ?>'];
 	
 	function setFilterStates(filterSelector, statuses)
@@ -414,6 +418,7 @@ get_header(); ?>
 		setFilterStates('input.product-filters-status[data-filter="###"]', arrPreselectedStatus);
 		setFilterStates('input.product-filters-strain-category[data-filter="###"]', arrPreselectedStrainCategory);
 		setFilterStates('input.product-filters-product-type[data-filter="###"]', arrPreselectedProductType);
+		setFilterStates('input.product-filters-thc[data-filter="###"]', arrPreselectedTHCs);
 		setFilterStates('input.product-filters-price[data-filter="###"]', arrPreselectedPrices);
 
 		jQuery('ul.product-filters input[type=checkbox]').change(function() {

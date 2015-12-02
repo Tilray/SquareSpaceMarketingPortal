@@ -75,18 +75,25 @@ get_header(); ?>
 				$itemStrainName = $allStrainCategories[$itemStrainCategory][$currLangCode];
 				$productType = trim(get_post_meta(get_the_ID(), 'product_type', true));
 				$productTypeName = $allProducts[$productType][$currLangCode];
+				$thc = trim(get_post_meta(get_the_ID(), 'product_thc', true));
+				$thcRange = getProductTHCRange($thc);
+				$prettyTHCRange = getProductTHCRange($thc, true);
 				
 				if ($itemStatus){
-					?><a href="<?= get_products_page_link($itemStatus, "", "") ?>"><?=__($itemStatusName)?></a><?php
+					?><a href="<?= get_products_page_link($itemStatus, "", "", "") ?>"><?=__($itemStatusName)?></a><?php
 				}
 				
 				if ($itemStrainCategory){
-					?><a href="<?= get_products_page_link("", $itemStrainCategory, "") ?>"><?=__($itemStrainName)?></a><?php
+					?><a href="<?= get_products_page_link("", $itemStrainCategory, "", "") ?>"><?=__($itemStrainName)?></a><?php
 				}				
 				
 				if ($productType){
-					?><a href="<?= get_products_page_link("", "", $productType) ?>"><?=__($productTypeName)?></a><?php
+					?><a href="<?= get_products_page_link("", "", $productType, "") ?>"><?=__($productTypeName)?></a><?php
 				}				
+				
+				if ($thc != ""){
+					?><a href="<?= get_products_page_link("", "", "", $thcRange) ?>"><?=__('THC ' . $prettyTHCRange)?></a><?php
+				}
 			?>
 			</div>
 		</div>

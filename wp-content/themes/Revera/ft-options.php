@@ -171,8 +171,18 @@ function FT_OP_options()
 						"std" => "glyphicon-heart",
 						"type" => "text");	
 						
+	$options[] = array( "name" => "Disable comments?",
+						"desc" => "Put a 0 (the number) in here to disable Disqus comments",
+						"id" => "fabthemes_disable_disqus",
+						"std" => "",
+						"type" => "text");	
 						
-						
+	$options[] = array( "name" => "Disable social icons?",
+						"desc" => "Put a 0 (the number) in here to disable social buttons",
+						"id" => "fabthemes_disable_social_sharing",
+						"std" => "",
+						"type" => "text");	
+												
 					
 
 	if (file_exists(dirname(__FILE__) . '/FT/options/banners.php'))
