@@ -120,7 +120,7 @@ get_header(); ?>
 			$thisProduct->itemStatus = trim(get_post_meta(get_the_ID(), 'status', true));
 			$thisProduct->itemStrainCategory = trim(get_post_meta(get_the_ID(), 'strain_category', true));
 			$thisProduct->itemProductType = trim(get_post_meta(get_the_ID(), 'product_type', true));
-			$thisProduct->thc = trim(get_post_meta(get_the_ID(), 'product_thc', true));
+			$thisProduct->thc = trim(get_post_meta(get_the_ID(), 'thc_level', true));
 			$thisProduct->thcRange = getProductTHCRange($thisProduct->thc);
 			
 			$thumbID = get_post_thumbnail_id();

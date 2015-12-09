@@ -75,7 +75,7 @@ get_header(); ?>
 				$itemStrainName = $allStrainCategories[$itemStrainCategory][$currLangCode];
 				$productType = trim(get_post_meta(get_the_ID(), 'product_type', true));
 				$productTypeName = $allProducts[$productType][$currLangCode];
-				$thc = trim(get_post_meta(get_the_ID(), 'product_thc', true));
+				$thc = trim(get_post_meta(get_the_ID(), 'thc_level', true));
 				$thcRange = getProductTHCRange($thc);
 				$prettyTHCRange = getProductTHCRange($thc, true);
 				
