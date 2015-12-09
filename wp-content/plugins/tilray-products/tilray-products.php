@@ -68,19 +68,19 @@ function get_products_page_link($status, $strainType, $productType, $thcRange){
 		$pageName = "produits";
 	}
 	
-	$url = home_url("/") . $pageName;
+	$url = home_url("/") . $pageName . "/?";
 	
 	if ($status != "")
-		$url .= ("/?status=" . $status);
+		$url .= ("status=" . $status);
 		
-	if ($strainType != "")
-		$url .= ("&strain-categories=" . $strainType);
+	else if ($strainType != "")
+		$url .= ("strain-categories=" . $strainType);
 		
-	if ($productType != "")
-		$url .= ("&product-types=" . $productType);
+	else if ($productType != "")
+		$url .= ("product-types=" . $productType);
 		
-	if ($thcRange != "")
-		$url .= ("/?thc=" . $thcRange);
+	else if ($thcRange != "")
+		$url .= ("thc=" . $thcRange);
 	
 	return $url;
 }
