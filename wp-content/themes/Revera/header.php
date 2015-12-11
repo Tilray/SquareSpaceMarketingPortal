@@ -17,7 +17,6 @@
 <?php wp_head(); ?>
 <script src="//use.typekit.net/cfw8inp.js"></script>
 <script>try{Typekit.load();}catch(e){}</script>
-<script src="//cdn.optimizely.com/js/3528030967.js"></script>
 <meta name="msvalidate.01" content="8D1268D07946606791541B9681F5FBBE" />
 </head>
 
