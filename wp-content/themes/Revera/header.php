@@ -18,6 +18,7 @@
 <script src="//use.typekit.net/cfw8inp.js"></script>
 <script>try{Typekit.load();}catch(e){}</script>
 <meta name="msvalidate.01" content="8D1268D07946606791541B9681F5FBBE" />
+<meta name="p:domain_verify" content="f120c771cc01596bc34ee72616a99494"/>
 </head>
 
 <body <?php body_class(); ?>>
