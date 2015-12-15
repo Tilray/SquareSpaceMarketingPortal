@@ -120,6 +120,8 @@ add_action( 'widgets_init', 'web2feel_widgets_init' );
  * Enqueue scripts and styles
  */
 function web2feel_scripts() {
+	global $wp_styles;
+	
 	wp_enqueue_style( 'web2feel-style', get_stylesheet_uri() );
 	wp_enqueue_style( 'bootstrap', get_template_directory_uri() . '/bootstrap/bootstrap.min.css');
 	wp_enqueue_style( 'flexslider', get_template_directory_uri() . '/css/flexslider.css');
@@ -127,7 +129,9 @@ function web2feel_scripts() {
 	wp_enqueue_style( 'slicknav', get_template_directory_uri() . '/css/slicknav.css');
 	wp_enqueue_style( 'fontawesome', '//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css');
 
-	wp_enqueue_style( 'theme', get_template_directory_uri() . '/theme.css?v=1.003');
+	wp_enqueue_style( 'theme', get_template_directory_uri() . '/theme.css?v=1.004');
+	wp_enqueue_style( 'ie-overrides', get_template_directory_uri() . '/css/ie.css?v=1.003');
+	$wp_styles->add_data( 'ie-overrides', 'conditional', 'IE' );
 
 	wp_enqueue_script( 'bootstrap', get_template_directory_uri() . '/bootstrap/bootstrap.min.js', array( 'jquery' ), '20120206', true );
 	wp_enqueue_script( 'flexslider', get_template_directory_uri() . '/js/jquery.flexslider.js', array( 'jquery' ), '20120206', true );
@@ -466,3 +470,5 @@ function getProductPriceRange($price){
 	
 	return "";
 }
+
+

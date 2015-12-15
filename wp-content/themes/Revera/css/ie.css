@@ -1,0 +1,13 @@
+body h2.site-title a {
+	text-indent: 0;
+	background-image: url('images/tilray-nav-logo.jpg');
+	background-position:center;
+    background-repeat:no-repeat;	
+	background-size: inherit;
+	display: block;
+	width: 211px;
+	height: 37px;
+	position: relative;
+	top: -4px;
+	border: none;
+}
