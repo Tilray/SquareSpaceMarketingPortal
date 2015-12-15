@@ -144,8 +144,15 @@ get_header(); ?>
 		
 		wp_reset_query();
 
-		//2 lines, but still better than messing with WP's query sorting
-		function cmp($a, $b){return strcasecmp($a->productName, $b->productName);}
+		function cmp($a, $b){
+			//want to put accessories at the end, then sub-sort alphabetically
+			$aIsAccessory = ($a->itemProductType == "accessory");
+			$bIsAccessory = ($b->itemProductType == "accessory");
+			if ($aIsAccessory == $bIsAccessory)
+				return strcasecmp($a->productName, $b->productName);
+				
+			return $aIsAccessory ? 1 : -1;
+		}
 		usort($theProducts, "cmp");		
 		
 		return $theProducts;
