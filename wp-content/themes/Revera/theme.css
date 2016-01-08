@@ -88,6 +88,11 @@ h2.site-title a {
 	background-size: contain;
 }
 
+html[lang='en-CA'] h2.site-title a {
+	background-image: url('images/tilray-nav-logo-fr.svg');
+}
+
+
 h1 > a, h1 > a:link, h1 > a:visited, 
 h2 > a, h2 > a:link, h2 > a:visited, 
 h3 > a, h3 > a:link, h3 > a:visited
@@ -1713,3 +1718,7 @@ div.news-archive{
 	transition: max-height .5s;
 }
 
+.liveswitcher.extracts-child img {
+	max-height: 300px;
+	margin-bottom: 30px;
+}
