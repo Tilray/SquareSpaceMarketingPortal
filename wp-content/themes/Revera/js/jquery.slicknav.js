@@ -106,7 +106,8 @@
                     '<span class="' + prefix + '_icon-bar"></span>',
                     '<span class="' + prefix + '_icon-bar"></span>',
                 '</span>',
-            '</' + settings.parentTag + '>'
+            '</' + settings.parentTag + '>',
+			'<div class="mobile-header-logo"></div>'
             ].join('')
         );
         $(menuBar).append($this.btn);
