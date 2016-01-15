@@ -365,6 +365,7 @@ remove_filter( 'the_content', 'wpautop' );
 add_image_size( 'blog-featured-image', 360 );
 add_image_size( 'blog-preview', 340, 191, true );
 add_image_size( 'banner-image', 1200, 384, true );
+add_image_size( 'extracts-image', 1740 );
 
 
 function blogroot_func( $atts ){
@@ -472,3 +473,5 @@ function getProductPriceRange($price){
 }
 
 
+add_filter('wpseo_premium_post_redirect_slug_change', '__return_true' ); 
+add_filter('wpseo_premium_term_redirect_slug_change', '__return_true' );
