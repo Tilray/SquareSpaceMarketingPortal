@@ -126,11 +126,7 @@ get_header(); ?>
 			$thumbID = get_post_thumbnail_id();
 			$img_attrs = wp_get_attachment_image_src( $thumbID,'product-thumb' ); 
 			$thisProduct->image = $img_attrs[0];
-			
-			$productUrl = trim(get_post_meta(get_the_ID(), 'shop_url', true));
-			if ($productUrl == null || strlen($productUrl) == 0){
-				$productUrl = get_the_permalink();
-			}
+			$productUrl = get_the_permalink();
 			
 			$thisProduct->productUrl = $productUrl;
 			$thisProduct->productName = get_the_title();
@@ -193,7 +189,7 @@ get_header(); ?>
 					RenderProductFilter("product-filters-product-type", "product-types", "product-type-show-all", "", "Show All");
 					RenderProductFilter("product-filters-product-type", "product-types", "product-type-flower", "flower", "Flower");
 					RenderProductFilter("product-filters-product-type", "product-types", "product-type-blend", "blend", "Blend");
-					RenderProductFilter("product-filters-product-type", "product-types", "product-type-accessory", "accessory", "Accessory");
+					RenderProductFilter("product-filters-product-type", "product-types", "product-type-accessory", "accessory", "Accessories");
 					?>
 				</ul>
 			</div>
@@ -214,7 +210,7 @@ get_header(); ?>
 				<ul class="product-filters product-filters-price">
 					<?php
 					RenderProductFilter("product-filters-price", "prices", "price-show-all", "", "Show All");
-					RenderProductFilter("product-filters-price", "prices", "price-4-6", "4-6", "$4-6");
+					RenderProductFilter("product-filters-price", "prices", "price-4-6", "4-6", "$5-6");
 					RenderProductFilter("product-filters-price", "prices", "price-7-9", "7-9", "$7-9");
 					RenderProductFilter("product-filters-price", "prices", "price-10-12", "10-12", "$10-12");
 					RenderProductFilter("product-filters-price", "prices", "price-13-1000", "13-1000", "$13+");

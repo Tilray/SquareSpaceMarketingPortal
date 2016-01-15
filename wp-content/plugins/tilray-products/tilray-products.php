@@ -45,7 +45,7 @@ $allProducts = array(	"" => array ("en" => "", "fr" => ""),
 						"flower" => array ("en" => "Flower", "fr" => "Flower"), 
 						"blend" => array ("en" => "Blend", "fr" => "Blend"), 
 						"extract" => array ("en" => "Extract", "fr" => "Extract"),
-						"accessory" => array ("en" => "Accessory", "fr" => "Accessory")
+						"accessory" => array ("en" => "Accessories", "fr" => "Accessories")
 					);
 
 $allTHCs = array(	"" => "", 
@@ -55,7 +55,7 @@ $allTHCs = array(	"" => "",
 					"26-100" => "> 25%");
 					
 $allPrices = array(	"" => "", 
-					"4-6" => "$4-6", 
+					"4-6" => "$5-6", 
 					"7-9" => "$7-9", 
 					"10-12" => "$10-12", 
 					"13-1000" => "$13+");
