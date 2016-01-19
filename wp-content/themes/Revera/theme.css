@@ -88,7 +88,7 @@ h2.site-title a {
 	background-size: contain;
 }
 
-html[lang='en-CA'] h2.site-title a {
+html[lang='fr-CA'] h2.site-title a {
 	background-image: url('images/tilray-nav-logo-fr.svg');
 }
 
