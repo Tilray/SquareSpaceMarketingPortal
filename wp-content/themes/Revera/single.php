@@ -12,9 +12,9 @@ get_header(); ?>
 		<div class="row">
 			<div class="col-12">
 				<?php while ( have_posts() ) : the_post(); ?>
-				<h1><?=__('News')?></h1>
+				<h2 class="mockH1"><?=__('News')?></h2>
 				<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-					<h2><?php the_title() ?></h2>
+					<h1 class="mockH2"><?php the_title() ?></h1>
 					<div class="col-sm-4">
 						<?php
 							$thumb = get_post_thumbnail_id();
@@ -61,19 +61,13 @@ get_header(); ?>
 						?>
 						<div id="disqus_thread"></div>
 						<script>
-							/**
-							 *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-							 *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
-							 */
 							var disqus_config = function () {
-								this.page.url = "<?= get_permalink()?>";  // Replace PAGE_URL with your page's canonical URL variable
-								this.page.identifier = "<?=str_replace(" ", "_", get_the_title())?>"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+								this.page.url = "<?= get_permalink()?>";
+								this.page.identifier = "<?=str_replace(" ", "_", get_the_title())?>";
 							};
-							(function() {  // DON'T EDIT BELOW THIS LINE
+							(function() {
 								var d = document, s = d.createElement('script');
-								
 								s.src = '//tilray.disqus.com/embed.js';
-								
 								s.setAttribute('data-timestamp', +new Date());
 								(d.head || d.body).appendChild(s);
 							})();
