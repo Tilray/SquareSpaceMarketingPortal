@@ -44,7 +44,7 @@ get_header(); ?>
 			'post_status' => 'publish',
 			'posts_per_page' => '6'
 		);
-		 render_news_section( $args, false);
+		 render_news_section( $args, false, true );
 		 ?>
 		 
 	</div>
