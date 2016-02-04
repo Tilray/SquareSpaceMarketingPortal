@@ -50,38 +50,24 @@ get_header(); ?>
 		return $arrParams;
 	}
 	
-
-	//get incoming status and straintype querystring params
-	$qpStatus = 'status';
-	$qpStrain = 'strain-categories';
-	$qpProductType = 'product-types';
-	$qpTHC = 'thc';
-	$qpPrice = 'prices';
-	$arrStatuses = splitAndGetQueryStringParamIfValid($qpStatus, $allStatuses);
-	$arrStrainCategories = splitAndGetQueryStringParamIfValid($qpStrain, $allStrainCategories);
-	$arrProductTypes = splitAndGetQueryStringParamIfValid($qpProductType, $allProducts);
-	$arrTHCs = splitAndGetQueryStringParamIfValid($qpTHC, $allTHCs);
-	$arrPrices = splitAndGetQueryStringParamIfValid($qpPrice, $allPrices);
-	
-
 	$productFilters->loadFiltersFromQueryString($_GET);	
 
 	
 	
-	function QueryProducts()
+	function QueryProducts($productFilters)
 	{
 		$theProducts = array();
 		
 		$wp_query = new WP_Query(array('post_type' => 'tilray_product', 'posts_per_page' => '100' ));
 		while ($wp_query->have_posts()) : $wp_query->the_post(); 
-			$thisProduct = new stdClass;
-
-			$thisProduct->id = get_the_ID();
+			$thisProduct = new Product($wp_query->post, $productFilters);
+        
+/*			$thisProduct->id = get_the_ID();
 			$thisProduct->status = trim(get_post_meta(get_the_ID(), 'status', true));
 			$thisProduct->straincategory = trim(get_post_meta(get_the_ID(), 'strain_category', true));
 			$thisProduct->producttype = trim(get_post_meta(get_the_ID(), 'product_type', true));
 			$thisProduct->actualthc = trim(get_post_meta(get_the_ID(), 'thc_level', true));
-			$thisProduct->thc = getProductTHCRange($thisProduct->actualthc);
+			$thisProduct->thc = getProductTHCRange($thisProduct->actualthc, $productFilters->thc->validFilterValues);
 			
 			$thumbID = get_post_thumbnail_id();
 			$img_attrs = wp_get_attachment_image_src( $thumbID,'product-thumb' ); 
@@ -93,8 +79,17 @@ get_header(); ?>
 			
 			$productPrice = trim(get_post_meta(get_the_ID(), 'price', true));
 			$thisProduct->actualprice = $productPrice;
-			$thisProduct->price = getProductPriceRange($productPrice);
+			$thisProduct->price = getProductPriceRange($productPrice, $productFilters->price->validFilterValues);
 
+            $thisProduct->initiallyActive = TRUE;
+            $prodAtts = get_object_vars($thisProduct);
+            foreach ($productFilters->filters as $filter)
+            {
+                $prodFilterState = $prodAtts[$filter->qsParamName];
+                $thisPropActive = ($filter->getFirstActiveFilter() == "" || in_array($prodFilterState, $filter->currentFilterValues));
+                $thisProduct->initiallyActive = $thisProduct->initiallyActive && $thisPropActive;
+            }
+                */
 			$theProducts[] = $thisProduct;
 		endwhile;
 		
@@ -114,7 +109,7 @@ get_header(); ?>
 		return $theProducts;
 	}
 	
-	$theProducts = QueryProducts();	
+	$theProducts = QueryProducts($productFilters);	
 ?>
 
 <div class="container">	
@@ -131,34 +126,10 @@ get_header(); ?>
 		
 			<div id="primary" class="js-isotope" data-isotope-options='{ "columnWidth": 200, "itemSelector": ".product-item", "filter": ".active" }'>
 			<?php
-			$firstStatus = "";
-			$firstStrainCategory = "";
-			$firstProductType = "";
-			$firstTHC = "";
-			$firstPrice = "";
-			if (count($arrStatuses) > 0) $firstStatus = $arrStatuses[0];
-			if (count($arrStrainCategories) > 0) $firstStrainCategory = $arrStrainCategories[0];
-			if (count($arrProductTypes) > 0) $firstProductType = $arrProductTypes[0];
-			if (count($arrTHCs) > 0) $firstTHC = $arrTHCs[0];
-			if (count($arrPrices) > 0) $firstPrice = $arrPrices[0];
-			
 			
 			foreach($theProducts as $product){
-				$isActive = true;
-				foreach ($productFilters->filters as $filter)
-				{
-					$filter->getFirstActiveFilter() == "" || in_array($product->status, $arrStatuses)
-				}
-				if (
-					($productFilters->status->getFirstActiveFilter() == "" || in_array($product->status, $arrStatuses)) &&
-					($firstStrainCategory == "" || in_array($product->straincategory, $arrStrainCategories)) &&
-					($firstProductType == "" || in_array($product->producttype, $arrProductTypes)) &&
-					($firstTHC == "" || in_array($product->thc, $arrTHCs)) &&
-					($firstPrice == "" || in_array($product->priceRange, $arrPrices))
-					)
-				{
-					$activeClass = "active";
-				}
+                
+                $activeClass = $product->initiallyActive ? "active" : "";
 				?>
 				<div class="col-2 portbox post product-item <?= $activeClass?>" 
 					data-id="<?=$product->id?>" 
@@ -190,16 +161,11 @@ get_header(); ?>
 			<ul>
 			<?php
 			foreach($theProducts as $product){
-				if ((count($arrStatuses) > 0 && $arrStatuses[0] != "" && !in_array($product->status, $arrStatuses)) ||
-					(count($arrStrainCategories) > 0 && $arrStrainCategories[0] != "" && !in_array($product->straincategory, $arrStrainCategories)) || 
-					(count($arrProductTypes) > 0 && $arrProductTypes[0] != "" && !in_array($product->producttype, $arrProductTypes)) || 
-					(count($arrTHCs) > 0 && $arrTHCs[0] != "" && !in_array($product->thc, $arrTHCs)) || 
-					(count($arrPrices) > 0 && $arrPrices[0] != "" && !in_array(getProductPriceRange($product->price), $arrPrices)))
+				if ($product->initiallyActive == FALSE)
 				{
 					continue;
 				}
-			?>
-			
+			?>			
 				<li>
 					<div class="hthumb">
 						<?php if($product->image) { 
@@ -294,11 +260,12 @@ get_header(); ?>
 	}
 	
 	jQuery( document ).ready(function() {
-		setFilterStates('input.product-filters-status[data-filter="###"]', arrpreselectedstatus);
-		setFilterStates('input.product-filters-straincategory[data-filter="###"]', arrpreselectedstraincategory);
-		setFilterStates('input.product-filters-producttype[data-filter="###"]', arrpreselectedproducttype);
-		setFilterStates('input.product-filters-thc[data-filter="###"]', arrpreselectedthc);
-		setFilterStates('input.product-filters-price[data-filter="###"]', arrpreselectedprice);
+        <?php
+            foreach ($productFilters->filters as $filter)
+            {
+                echo "setFilterStates('input.product-filters-" . $filter->qsParamName . "[data-filter=\"###\"]', arrpreselected" . $filter->qsParamName . ");\n";
+            }
+        ?>
 
 		jQuery('ul.product-filters input[type=checkbox]').change(function() {
 			UpdateProducts(jQuery(this));

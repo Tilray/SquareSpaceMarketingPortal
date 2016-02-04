@@ -335,7 +335,7 @@ function render_news_section($args, $showPagination = false, $showNewsPageLink =
 			}
 		?>
 			
-			<div class="navigation pagination-buttons"><p><a href="<?=$pageLink?>">next&nbsp;&nbsp;<i class="fa fa-arrow-right"></i></a></p></div>
+			<div class="navigation pagination-buttons"><p><a href="<?=$pageLink?>"><?=__('next')?>&nbsp;&nbsp;<i class="fa fa-arrow-right"></i></a></p></div>
 		<?php
 		}
 		?>
@@ -439,13 +439,14 @@ function rel_canonical_with_custom_tag_override($canonical)
 // replace the default WordPress canonical URL function with your own
 add_filter( 'wpseo_canonical', 'rel_canonical_with_custom_tag_override' );
 
-function getProductTHCRange($thc, $getDisplayValue = false){
+
+function getProductTHCRange($thc, $validTHCValues, $getDisplayValue = false){
 	if (trim($thc) == "")
 		return;
-		
-	global $allTHCs;
+	
+    
 	$thcVal = intval($thc);
-	foreach ($allTHCs as $thcRange => $display)
+	foreach ($validTHCValues as $thcRange => $display)
 	{
 		if ($thcRange == "")
 			continue;
@@ -464,8 +465,7 @@ function getProductTHCRange($thc, $getDisplayValue = false){
 	return "";
 }
 
-function getProductPriceRange($price){
-	global $allPrices;
+function getProductPriceRange($price, $allPrices){
 	$priceVal = intval($price);
 	foreach ($allPrices as $priceRange => $display)
 	{
@@ -514,58 +514,15 @@ function create_posttype() {
 add_image_size( 'product-thumb', 180, 220, false );
 add_image_size( 'product-single', 555, 2000, false );
 
-$allStatuses = array(	"" => array ("en" => "", "fr" => ""), 
-						"available" => array ("en" => "Available", "fr" => "Available"), 
-						"in-production" => array ("en" => "In Production", "fr" => "In Production"));
-						
-$allStrainCategories = array(	"" => array ("en" => "", "fr" => ""), 
-							"indica" => array ("en" => "Indica", "fr" => "Indica"), 
-							"sativa" => array ("en" => "Sativa", "fr" => "Sativa"), 
-							"hybrid" => array ("en" => "Hybrid", "fr" => "Hybrid"), 
-							"high-cbd" => array ("en" => "+CBD", "fr" => "+CBD"));
-
-$allProducts = array(	"" => array ("en" => "", "fr" => ""), 
-						"flower" => array ("en" => "Flower", "fr" => "Flower"), 
-						"blend" => array ("en" => "Blend", "fr" => "Blend"), 
-						"extract" => array ("en" => "Extract", "fr" => "Extract"),
-						"accessory" => array ("en" => "Accessories", "fr" => "Accessories")
-					);
-
-$allTHCs = array(	"" => "", 
-					"0-14" => "< 15%", 
-					"15-20" => "15% - 20%", 
-					"21-25" => "21% - 25%", 
-					"26-100" => "> 25%");
 					
-$allPrices = array(	"" => "", 
-					"4-6" => "$5-6", 
-					"7-9" => "$7-9", 
-					"10-12" => "$10-12", 
-					"13-1000" => "$13+");
 
-					
-function get_products_page_link($status, $strainType, $productType, $thcRange){
-	$langCode = get_current_language_code();
+function get_products_page_link($paramName, $paramValue){
 	$pageName = "products";
 	if ($langCode == "fr"){
 		$pageName = "produits";
 	}
 	
-	$url = home_url("/") . $pageName . "/?";
-	
-	if ($status != "")
-		$url .= ("status=" . $status);
-		
-	else if ($strainType != "")
-		$url .= ("strain-categories=" . $strainType);
-		
-	else if ($productType != "")
-		$url .= ("product-types=" . $productType);
-		
-	else if ($thcRange != "")
-		$url .= ("thc=" . $thcRange);
-	
-	return $url;
+	return home_url("/") . $pageName . "/?" . $paramName . "=" . $paramValue;    
 }
 
 
@@ -582,6 +539,14 @@ class ProductFilter
 		$this->validFilterValues = $values;
 	}
 	
+    public function getNameFromID($id)
+    {
+        if (array_key_exists($id, $this->validFilterValues))
+            return $this->validFilterValues[$id];
+        
+        return "";
+    }
+    
 	public function loadFromQueryString($queryString){
 		$this->currentFilterValues = array();
 		if (isset($queryString[$this->qsParamName]))
@@ -595,6 +560,10 @@ class ProductFilter
 				}
 			}
 		}
+        else
+        {
+            $this->currentFilterValues[] = '';
+        }
 	}
 	
 	private function renderFilter($className, $name, $filter, $label){
@@ -633,7 +602,7 @@ class ProductFilter
 	}
 	
 	public function getFirstActiveFilter(){
-		if (count($this->currentFilterValues) == 0)
+		if (count($this->currentFilterValues) > 0)
 			return $this->currentFilterValues[0];
 			
 		return "";
@@ -647,25 +616,81 @@ class ProductFilter
 		$jsArray .= "]";
 		return $jsArray;
 	}
+
+    public function renderProductsPageLink($itemFilterValue)
+    {
+        if ($itemFilterValue == NULL || trim($itemFilterValue) == "")
+        {
+            return "";
+        }
+
+        $langCode = get_current_language_code();
+        $url = home_url("/") . ($langCode == "en" ? "products" : "produits") . "/?" . $this->qsParamName . "=" . $itemFilterValue;
+        $label = $this->getNameFromID($itemFilterValue);
+        if ($this->qsParamName == "thc")
+            $label = 'THC ' . $label;
+        ?>
+            <a href="<?=$url?>"><?=__($label)?></a>
+        <?php
+    }
+    
+    
 }
 
 class Product{
+    
+    
 	public $id;
-	public $itemStatus;
-	public $itemStrainCategory;
-	public $itemProductType;
+	public $status;
+	public $straincategory;
+	public $producttype;
+    public $actualthc;
 	public $thc;
 	public $thcRange;
 	public $image;
 	public $productUrl;
 	public $productName;
 	public $price;
-	public $priceRange;
+	public $actualprice;
+    public $initiallyActive;
 	
 	public function isActive($filters){
 		//loop through filters, check against active ones
 		return true;
 	}
+    
+    function __construct($post, $productFilters){
+        $id = $post->ID;
+        $validTHCs = $productFilters->thc->validFilterValues;
+        $this->id = $id;
+        $this->status = trim(get_post_meta($id, 'status', true));
+        $this->straincategory = trim(get_post_meta($id, 'strain_category', true));
+        $this->producttype = trim(get_post_meta($id, 'product_type', true));
+        $this->actualthc = trim(get_post_meta($id, 'thc_level', true));
+        $this->thc = getProductTHCRange($this->actualthc, $validTHCs);
+
+        $thumbID = get_post_thumbnail_id($id);
+        $img_attrs = wp_get_attachment_image_src( $thumbID,'product-thumb' ); 
+        $this->image = $img_attrs[0];
+        $productUrl = get_the_permalink($id);
+
+        $this->productUrl = $productUrl;
+        $this->productName = get_the_title($id);
+
+        $productPrice = trim(get_post_meta($id, 'price', true));
+        $this->actualprice = $productPrice;
+        $this->price = getProductPriceRange($productPrice, $productFilters->price->validFilterValues);
+
+        $this->initiallyActive = TRUE;
+        $prodAtts = get_object_vars($this);
+        foreach ($productFilters->filters as $filter)
+        {
+            $prodFilterState = $prodAtts[$filter->qsParamName];
+            $thisPropActive = ($filter->getFirstActiveFilter() == "" || in_array($prodFilterState, $filter->currentFilterValues));
+            $this->initiallyActive = $this->initiallyActive && $thisPropActive;
+        }
+        
+    }
 }
 
 class ProductFilters{
@@ -674,8 +699,9 @@ class ProductFilters{
 	public $productType;
 	public $thc;
 	public $price;
+    public $duration;
 	
-	private $filters;
+	public $filters;
 
 	function __construct(){
 		$this->status = new ProductFilter("status", "Status",
@@ -710,6 +736,12 @@ class ProductFilters{
 											"7-9" => "$7-9", 
 											"10-12" => "$10-12", 
 											"13-1000" => "$13+"));
+        
+		$this->duration = new ProductFilter("duration", "Duration",
+									array(	"" => "", 
+											"core" => "Core", 
+											"seasonal" => "Seasonal", 
+											"limited" => "Limited"));
 											
 		$this->filters = array($this->status, $this->strainCategory, $this->productType, $this->thc, $this->price);
 	}

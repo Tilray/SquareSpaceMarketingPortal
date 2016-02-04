@@ -10,13 +10,16 @@
  * @package web2feel
  */
 
-get_header(); ?>
+get_header(); 
+$thisProduct = new Product($post, $productFilters);
+
+?>
 
 <div class="page-head">
 	<div class="container">
 		<div class="row">
 			<div class="col-12">
-				<h1><?=__('PRODUCTS')?></h1>
+				<h2 class="mockH1"><?=__('PRODUCTS')?></h2>
 				<p> </p>
 			</div>
 			
@@ -36,7 +39,7 @@ get_header(); ?>
 			<img class="single-product-image" src="<?=$image?>" alt="<?php the_title(); ?>"/>
 		</div>
 		<div class="col-sm-4">
-			<h2><?php the_title(); ?></h2>
+			<h1 class="mockH2"><?php the_title(); ?></h1>
 			<?php 
 				the_content();
 				
@@ -68,32 +71,10 @@ get_header(); ?>
 			
 			<div class="single-product-attributes">
 			<?php
-				$currLangCode = strtolower(get_current_language_code());
-				$itemStatus = trim(get_post_meta(get_the_ID(), 'status', true));
-				$itemStatusName = $allStatuses[$itemStatus][$currLangCode];
-				$itemStrainCategory = trim(get_post_meta(get_the_ID(), 'strain_category', true));
-				$itemStrainName = $allStrainCategories[$itemStrainCategory][$currLangCode];
-				$productType = trim(get_post_meta(get_the_ID(), 'product_type', true));
-				$productTypeName = $allProducts[$productType][$currLangCode];
-				$thc = trim(get_post_meta(get_the_ID(), 'thc_level', true));
-				$thcRange = getProductTHCRange($thc);
-				$prettyTHCRange = getProductTHCRange($thc, true);
-				
-				if ($itemStatus){
-					?><a href="<?= get_products_page_link($itemStatus, "", "", "") ?>"><?=__($itemStatusName)?></a><?php
-				}
-				
-				if ($itemStrainCategory){
-					?><a href="<?= get_products_page_link("", $itemStrainCategory, "", "") ?>"><?=__($itemStrainName)?></a><?php
-				}				
-				
-				if ($productType){
-					?><a href="<?= get_products_page_link("", "", $productType, "") ?>"><?=__($productTypeName)?></a><?php
-				}				
-				
-				if ($thc != ""){
-					?><a href="<?= get_products_page_link("", "", "", $thcRange) ?>"><?=__('THC ' . $prettyTHCRange)?></a><?php
-				}
+                $productFilters->status->renderProductsPageLink($thisProduct->status);
+                $productFilters->strainCategory->renderProductsPageLink($thisProduct->straincategory);
+                $productFilters->productType->renderProductsPageLink($thisProduct->producttype);
+                $productFilters->thc->renderProductsPageLink($thisProduct->thc);                
 			?>
 			</div>
 			<div class="buttons-container">
