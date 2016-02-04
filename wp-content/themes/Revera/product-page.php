@@ -61,35 +61,6 @@ get_header(); ?>
 		$wp_query = new WP_Query(array('post_type' => 'tilray_product', 'posts_per_page' => '100' ));
 		while ($wp_query->have_posts()) : $wp_query->the_post(); 
 			$thisProduct = new Product($wp_query->post, $productFilters);
-        
-/*			$thisProduct->id = get_the_ID();
-			$thisProduct->status = trim(get_post_meta(get_the_ID(), 'status', true));
-			$thisProduct->straincategory = trim(get_post_meta(get_the_ID(), 'strain_category', true));
-			$thisProduct->producttype = trim(get_post_meta(get_the_ID(), 'product_type', true));
-			$thisProduct->actualthc = trim(get_post_meta(get_the_ID(), 'thc_level', true));
-			$thisProduct->thc = getProductTHCRange($thisProduct->actualthc, $productFilters->thc->validFilterValues);
-			
-			$thumbID = get_post_thumbnail_id();
-			$img_attrs = wp_get_attachment_image_src( $thumbID,'product-thumb' ); 
-			$thisProduct->image = $img_attrs[0];
-			$productUrl = get_the_permalink();
-			
-			$thisProduct->productUrl = $productUrl;
-			$thisProduct->productName = get_the_title();
-			
-			$productPrice = trim(get_post_meta(get_the_ID(), 'price', true));
-			$thisProduct->actualprice = $productPrice;
-			$thisProduct->price = getProductPriceRange($productPrice, $productFilters->price->validFilterValues);
-
-            $thisProduct->initiallyActive = TRUE;
-            $prodAtts = get_object_vars($thisProduct);
-            foreach ($productFilters->filters as $filter)
-            {
-                $prodFilterState = $prodAtts[$filter->qsParamName];
-                $thisPropActive = ($filter->getFirstActiveFilter() == "" || in_array($prodFilterState, $filter->currentFilterValues));
-                $thisProduct->initiallyActive = $thisProduct->initiallyActive && $thisPropActive;
-            }
-                */
 			$theProducts[] = $thisProduct;
 		endwhile;
 		
