@@ -700,6 +700,7 @@ class ProductFilters{
 	public $thc;
 	public $price;
     public $duration;
+    public $sortOrder;
 	
 	public $filters;
 
@@ -730,7 +731,7 @@ class ProductFilters{
 										"21-25" => "21% - 25%", 
 										"26-100" => "> 25%"));
 										
-		$this->price = new ProductFilter("price", "Price",
+		$this->price = new ProductFilter("price", "Price", 
 									array(	"" => "", 
 											"4-6" => "$5-6", 
 											"7-9" => "$7-9", 
@@ -744,6 +745,7 @@ class ProductFilters{
 											"limited" => "Limited"));
 											
 		$this->filters = array($this->status, $this->strainCategory, $this->productType, $this->thc, $this->price);
+        $this->sortOrder = array("flower" => 0, "blend" => 1, "extract" => 2, "accessory" => 3);
 	}
 											
 	public function loadFiltersFromQueryString($querySring){
