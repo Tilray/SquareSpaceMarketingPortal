@@ -81,7 +81,7 @@ get_header(); ?>
 				$searchValue = get_query_var('tag');
 			}
 		
-			$paged = ( get_query_var( 'paged' ) ) ? get_query_var( 'paged' ) : 1;
+			$paged = ( get_query_var( 'page' ) ) ? get_query_var( 'page' ) : 1;
 			$args = array(
 				$searchType => $searchValue,
 				'posts_per_page' => '6',
