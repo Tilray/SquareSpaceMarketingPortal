@@ -67,13 +67,12 @@ get_header(); ?>
 		wp_reset_query();
 
 		function cmp($a, $b){
-			//want to put accessories at the end, then sub-sort alphabetically
-			$aIsAccessory = ($a->producttype == "accessory");
-			$bIsAccessory = ($b->producttype == "accessory");
-			if ($aIsAccessory == $bIsAccessory)
+            global $productFilters;
+            $aSortOrder = $productFilters->sortOrder[$a->producttype];
+            $bSortOrder = $productFilters->sortOrder[$b->producttype];
+			if ($aSortOrder == $bSortOrder)
 				return strcasecmp($a->productName, $b->productName);
-				
-			return $aIsAccessory ? 1 : -1;
+            return ($aSortOrder > $bSortOrder) ? 1 : -1;
 		}
 		usort($theProducts, "cmp");		
 		
