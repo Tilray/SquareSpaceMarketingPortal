@@ -288,7 +288,7 @@ function render_left_nav($parentID, $pageID)
 	}
 }
 
-function render_news_section($args, $showPagination = false, $showNewsPageLink = false){
+function render_news_section($args, $showPagination = false, $pageLinkNumber = 0){
 	global $wp_query, $paged;
 	$wp_query = new WP_Query( $args );
 	$numRendered = 0;
@@ -328,10 +328,10 @@ function render_news_section($args, $showPagination = false, $showNewsPageLink =
 				next_posts_link("next&nbsp;&nbsp;<i class='fa fa-arrow-right'></i>");
 			?></p></div>
 		<?php } 
-		else if ($showNewsPageLink){
-			$pageLink = '/en/News/page/2';
+		else if ($pageLinkNumber > 0){
+			$pageLink = '/en/News/page/' . $pageLinkNumber;
 			if (get_current_language_code() == "fr"){
-				$pageLink = '/fr/Nouvelles/page/2';
+				$pageLink = '/fr/Nouvelles/page/' . $pageLinkNumber;
 			}
 		?>
 			
@@ -377,6 +377,7 @@ add_image_size( 'blog-featured-image', 360 );
 add_image_size( 'blog-preview', 360, 202, true );
 add_image_size( 'banner-image', 1200, 384, true );
 add_image_size( 'extracts-image', 1740 );
+add_image_size( 'mobile-banner', 1000 );
 
 
 function blogroot_func( $atts ){
@@ -818,3 +819,8 @@ if (is_single() && ($menu_item->title == 'Products' || $menu_item->title == 'Pro
 return $classes;
 }
 add_filter( 'nav_menu_css_class', 'additional_active_item_classes', 10, 2 );
+
+$userAgent = $_SERVER['HTTP_USER_AGENT'];
+$mobileRegex = '/Mobile|iP(hone|od|ad)|Android|BlackBerry|IEMobile|Kindle|NetFront|Silk-Accelerated|(hpw|web)OS|Fennec|Minimo|Opera M(obi|ini)|Blazer|Dolfin|Dolphin|Skyfire|Zune/';
+$isMobile = (1 === preg_match($mobileRegex, $userAgent));
+if ($isMobile){ echo "MOBILE"; }
