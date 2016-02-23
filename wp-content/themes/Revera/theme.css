@@ -279,6 +279,47 @@ nav.main-navigation{
 	position: static;
 	}
 
+#primary-menu-container #primary-menu{
+    display: inline;
+}
+
+#primary-menu-container form{
+    display: inline;
+    float: right;
+    margin: 15px 0 15px 40px;    
+    border: 2px solid #a7a9ac;
+}
+
+#primary-menu-container form label{
+    margin: 0;
+}
+
+
+input.search-field{
+	height: 24px;
+    width: 70px;
+	padding: 5px 5%;
+	display: block;
+    border: none;
+    background: #ffffff;
+    color: #eeeeee;
+    -webkit-transition: width .5s, -webkit-transform .5s;
+    transition: width .5s, transform .5s;
+}
+
+input.search-field:focus{
+    width: 150px;
+    -webkit-transition: width .5s, -webkit-transform .5s;
+    transition: width .5s, transform .5s;    
+    outline: none;
+}
+
+button.search-submit{
+    border: none;
+    background: none;
+    box-shadow: none;    
+    padding: 0 3px 0 0;
+}
 
 	
 #loginmenucontainer{
@@ -473,15 +514,6 @@ ul.lang-chooser-dropdown li a:visited{
     background-position: center; 
 }
 
-#loginmenu li a[href*="facebook"]{
-	background-image: url('images/icon-facebook.png');
-}
-#loginmenu li a[href*="twitter"]{
-	background-image: url('images/twitter-logo.svg');
-}
-#loginmenu li a[href*="instagram"]{
-	background-image: url('images/icon-instagram.png');
-}
 #loginmenu li a[href*="registration.tilray"]{
 	vertical-align: top;
 	margin: -4px 0 0 10px;
@@ -734,14 +766,8 @@ h1.entry-title a:link, h1.entry-title a:visited{
 .widget_search label{
 	width: 100%;
 }
-input.search-field{
-	border: 1px solid #ddd;
-	background: #fafafa;
-	height: 24px;
-	width: 90%;
-	padding: 5px 5%;
-	display: block;
-}
+
+
 
 
 
@@ -1526,12 +1552,8 @@ div.social-buttons a:hover{
 	transition: border-radius .5s;
 }
 
-
-div.social-buttons a::before{
-	content: "";
-	padding-left: 15px;
-	background-image: url(images/socialicons.png);
-	background-repeat: no-repeat;
+div.social-buttons span.fa{
+    width: 10px;
 }
 
 a.social-button-facebook{
