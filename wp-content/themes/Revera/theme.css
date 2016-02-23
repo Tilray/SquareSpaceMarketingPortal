@@ -279,6 +279,47 @@ nav.main-navigation{
 	position: static;
 	}
 
+#primary-menu-container #primary-menu{
+    display: inline;
+}
+
+#primary-menu-container form{
+    display: inline;
+    float: right;
+    margin: 15px 0 15px 40px;    
+    border: 2px solid #a7a9ac;
+}
+
+#primary-menu-container form label{
+    margin: 0;
+}
+
+
+input.search-field{
+	height: 24px;
+    width: 70px;
+	padding: 5px 5%;
+	display: block;
+    border: none;
+    background: #ffffff;
+    color: #eeeeee;
+    -webkit-transition: width .5s, -webkit-transform .5s;
+    transition: width .5s, transform .5s;
+}
+
+input.search-field:focus{
+    width: 150px;
+    -webkit-transition: width .5s, -webkit-transform .5s;
+    transition: width .5s, transform .5s;    
+    outline: none;
+}
+
+button.search-submit{
+    border: none;
+    background: none;
+    box-shadow: none;    
+    padding: 0 3px 0 0;
+}
 
 	
 #loginmenucontainer{
@@ -734,14 +775,8 @@ h1.entry-title a:link, h1.entry-title a:visited{
 .widget_search label{
 	width: 100%;
 }
-input.search-field{
-	border: 1px solid #ddd;
-	background: #fafafa;
-	height: 24px;
-	width: 90%;
-	padding: 5px 5%;
-	display: block;
-}
+
+
 
 
 

@@ -87,8 +87,18 @@
 				}
 				?>
 				<?php wp_nav_menu( array( 'container' => '', 'theme_location' => 'login','container_class' => 'login-menu-container','menu_id'=>'login-menu' ,'menu_class'=>'login-menu' ) ); ?>
-				<?php get_search_form(); ?>
-			</div>
+				<span class="social-connections">
+					<a href="http://www.facebook.com/tilray" target="_blank">
+						<span class="fa fa-facebook"></span>
+					</a>
+					<a href="http://twitter.com/@tilray" target="_blank">
+						<span class="fa fa-twitter"></span>
+					</a>
+					<a href="http://www.instagram.com/tilray" target="_blank">
+						<span class="fa fa-instagram"></span>
+					</a>
+				</span>		
+            </div>
 			<div id="languagedropdownwrapper">
 				<div id="languagedropdown" class="closed"><?php
 								if (function_exists("render_language_chooser")){
@@ -104,9 +114,23 @@
 				<h2 class="site-title logo"><a id="blogname" rel="home" href="<?=get_wpml_home_url()?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>"><?php bloginfo( 'name' ); ?></a></h2>
 				</div>
 				<div class="col-sm-9 mainmenu">
-						<?php wp_nav_menu( array( 'container_id' => 'primary-menu-container', 'theme_location' => 'primary','container_class' => 'topmenu','menu_id'=>'primary-menu' ,'menu_class'=>'sfmenu' ) ); ?>
-				</div>
-		
+                    <div id="primary-menu-container" class="topmenu">
+                        <?php wp_nav_menu( array( 'container' => '', 'theme_location' => 'primary','container_class' => '','menu_id'=>'primary-menu' ,'menu_class'=>'sfmenu' ) ); ?>
+                        <form method="get" id="search-form" action="<?php bloginfo('url'); ?>">
+                        <form role="search" method="get" class="search-form" action="http://tilray.staging.wpengine.com/en/"> 
+                            <label>
+                                <span class="screen-reader-text">Search for:</span>
+                                <input type="search" class="search-field" placeholder="" value="" name="s" title="Search for:">
+                            </label>
+                            <button type="submit" class="search-submit">
+                                <span class="fa fa-search">
+                                    
+                                </span>
+                            </button>
+                            <input type="hidden" name="lang" value="en"></form>                            
+                        </form>
+                    </div>
+				</div>		
 			</div> <!-- end row -->
 		</nav>	
 	</header><!-- #masthead -->
