@@ -1162,6 +1162,9 @@ h3.bothead{
 
 
 /* Footer */
+.site-footer.mobile {
+    display: none;
+}
 
 .site-footer{
 	width: 100%;
@@ -1171,6 +1174,10 @@ h3.bothead{
 	min-height: 60px;
 	position: absolute;
 	bottom: 0;
+}
+
+footer ul li.mobile-menu-line-break{
+    display:none;
 }
 
 .site-footer li a {
@@ -1636,6 +1643,13 @@ div.news-archive{
 
 
 @media screen and (max-width: 600px) {
+    .site-footer.mobile{
+        display: block;
+    }
+    .site-footer.desktop{
+        display: none;
+    }
+    
 	ul.copyright-footer {
 		margin-left: 0;
 		display: block;
@@ -1647,6 +1661,12 @@ div.news-archive{
 	.site-footer {
 		bottom: inherit;
 	}
+    
+    footer ul li.mobile-menu-line-break{
+        display:block;
+        text-indent: -9999px;
+        height: 3px;
+    }
 	
 	div#page{
 		padding-top: 47px;
