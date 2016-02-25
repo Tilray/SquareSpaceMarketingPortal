@@ -48,3 +48,10 @@ jQuery(window).load(function() {
 });
 
 
+trackEvent(category, action, label = "", value = 0){
+    var trackerName = ga.getAll()[0].get('name');
+    ga(trackerName + '.send', 'event', { eventCategory: category, eventAction: action, eventLabel: label, eventValue: value });
+    return true;
+}
+
+
