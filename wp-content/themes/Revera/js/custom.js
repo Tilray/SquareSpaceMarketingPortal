@@ -48,7 +48,9 @@ jQuery(window).load(function() {
 });
 
 
-trackEvent(category, action, label = "", value = 0){
+function trackEvent(category, action, label, value){
+    if (label == undefined) label = "";
+    if (value == undefined) value = 0;
     var trackerName = ga.getAll()[0].get('name');
     ga(trackerName + '.send', 'event', { eventCategory: category, eventAction: action, eventLabel: label, eventValue: value });
     return true;
