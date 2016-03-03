@@ -17,7 +17,7 @@ get_header(); ?>
 ?>
 
 <?php get_template_part( 'inc/feature' ); ?>
-<div class="container">
+<div class="container ">
 
 <?php
 	$langCode = get_current_language_code();

@@ -1162,18 +1162,40 @@ h3.bothead{
 
 
 /* Footer */
-.site-footer.mobile {
-    display: none;
-}
-
 .site-footer{
 	width: 100%;
-	padding: 10px 0px;
 	background:#444444;
 	font-size: 12px;
-	min-height: 60px;
-	position: absolute;
+	position: fixed;
 	bottom: 0;
+}
+
+.site-footer .social-icons-container{
+	padding: 10px 0px;
+    display:none;
+}
+
+.site-footer div.container.primary{
+    max-height: 0;   
+    overflow: hidden;
+	-webkit-transition: min-height .25s, max-height .25s;
+	transition: min-height .25s, max-height .25s;
+}
+
+.site-footer div.container.primary div.collapse-container{
+    padding: 10px 0px;
+}
+
+.site-footer.expanded div.container.primary{
+    max-height: 1000px;
+	-webkit-transition: min-height .25s, max-height .25s;
+	transition: min-height .25s, max-height .25s;
+}
+
+
+
+.site-footer .row {
+    margin: 0;
 }
 
 footer ul li.mobile-menu-line-break{
@@ -1643,12 +1665,9 @@ div.news-archive{
 
 
 @media screen and (max-width: 600px) {
-    .site-footer.mobile{
-        display: block;
-    }
-    .site-footer.desktop{
-        display: none;
-    }
+    .site-footer .social-icons-container{
+        display:block;
+    }    
     
 	ul.copyright-footer {
 		margin-left: 0;
@@ -1658,10 +1677,6 @@ div.news-archive{
 		display: block;
 	}
 
-	.site-footer {
-		bottom: inherit;
-	}
-    
     footer ul li.mobile-menu-line-break{
         display:block;
         text-indent: -9999px;

@@ -824,3 +824,11 @@ $userAgent = $_SERVER['HTTP_USER_AGENT'];
 $mobileRegex = '/Mobile|iP(hone|od|ad)|Android|BlackBerry|IEMobile|Kindle|NetFront|Silk-Accelerated|(hpw|web)OS|Fennec|Minimo|Opera M(obi|ini)|Blazer|Dolfin|Dolphin|Skyfire|Zune/';
 $isMobile = (1 === preg_match($mobileRegex, $userAgent));
 if ($isMobile){ echo "MOBILE"; }
+
+
+function sticky_footer_content_func( $atts, $content = null ) {
+    global $stickyFooterContent;
+    $stickyFooterContent = $content;
+}
+
+add_shortcode( 'sticky_footer_content', 'sticky_footer_content_func' );
