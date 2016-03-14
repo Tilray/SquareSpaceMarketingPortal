@@ -409,13 +409,13 @@ function render_linkedin_button($url)
 function render_pinterest_button($url, $imgUrl, $title)
 {
 	$canonical = strlen($url) > 0 ? rel_canonical_with_custom_tag_override($url) : $url;
-	?><a class="social-button-pinterest" target="_blank" href="http://pinterest.com/pin/create/button/?url=<?=urlencode($canonical)?>&media=<?=$imgUrl?>&description=<?=$title?>"><span class="fa fa-pinterest"></span></a><?php
+	?><a class="social-button-pinterest" target="_blank" onclick="trackEvent('socialshare', 'pinterest', '<?=urlencode($canonical)?>')" href="http://pinterest.com/pin/create/button/?url=<?=urlencode($canonical)?>&media=<?=$imgUrl?>&description=<?=$title?>"><span class="fa fa-pinterest"></span></a><?php
 }
 
 function __render_social_button($label, $class, $sharingPrefix, $url)
 {
 	$canonical = strlen($url) > 0 ? rel_canonical_with_custom_tag_override($url) : $url;
-	?><a class="social-button-<?=$class?>" target="_blank" href="<?=$sharingPrefix?><?=urlencode($canonical)?>"><span class="fa fa-<?=$class?>"></span></a><?php
+	?><a class="social-button-<?=$class?>" target="_blank" onclick="trackEvent('socialshare', '<?=$class?>', '<?=urlencode($canonical)?>')" href="<?=$sharingPrefix?><?=urlencode($canonical)?>"><span class="fa fa-<?=$class?>"></span></a><?php
 }
 
 // A copy of rel_canonical but to allow an override on a custom tag

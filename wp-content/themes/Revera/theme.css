@@ -294,6 +294,9 @@ nav.main-navigation{
     margin: 0;
 }
 
+form#search-form{
+    display:none;
+}
 
 input.search-field{
 	height: 24px;
