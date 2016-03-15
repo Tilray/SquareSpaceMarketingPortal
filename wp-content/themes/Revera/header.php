@@ -116,8 +116,7 @@
 				<div class="col-sm-9 mainmenu">
                     <div id="primary-menu-container" class="topmenu">
                         <?php wp_nav_menu( array( 'container' => '', 'theme_location' => 'primary','container_class' => '','menu_id'=>'primary-menu' ,'menu_class'=>'sfmenu' ) ); ?>
-                        <form method="get" id="search-form" action="<?php bloginfo('url'); ?>">
-                        <form role="search" method="get" class="search-form" action="http://tilray.staging.wpengine.com/en/"> 
+                        <form method="get" id="search-form" action="<?php bloginfo('url') . get_current_language_code(); ?>">
                             <label>
                                 <span class="screen-reader-text">Search for:</span>
                                 <input type="search" class="search-field" placeholder="" value="" name="s" title="Search for:">

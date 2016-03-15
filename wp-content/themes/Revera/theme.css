@@ -287,15 +287,11 @@ nav.main-navigation{
     display: inline;
     float: right;
     margin: 15px 0 15px 40px;    
-    border: 2px solid #a7a9ac;
+    border: 1px solid #a7a9ac;
 }
 
 #primary-menu-container form label{
     margin: 0;
-}
-
-form#search-form{
-    display:none;
 }
 
 input.search-field{
@@ -304,14 +300,13 @@ input.search-field{
 	padding: 5px 5%;
 	display: block;
     border: none;
-    background: #ffffff;
+    background: none;
     color: #eeeeee;
     -webkit-transition: width .5s, -webkit-transform .5s;
     transition: width .5s, transform .5s;
 }
 
 input.search-field:focus{
-    width: 150px;
     -webkit-transition: width .5s, -webkit-transform .5s;
     transition: width .5s, transform .5s;    
     outline: none;
@@ -322,6 +317,7 @@ button.search-submit{
     background: none;
     box-shadow: none;    
     padding: 0 3px 0 0;
+    color: #a7a9ac;
 }
 
 	
@@ -1638,6 +1634,16 @@ div.slicknav_menu,
 		cursor: pointer;
 	 }
 	 
+
+	.search-result div.search-image{
+		width: 100%;
+	}
+
+	.search-result div.search-result-body{
+		width: 100%;
+		margin: 10px 0 40px 0;
+		padding: 0;
+	}
 }
 
 .slicknav_nav a, 
@@ -1770,4 +1776,27 @@ div.news-archive{
 .liveswitcher.extracts-child img {
 	max-height: 300px;
 	margin-bottom: 30px;
+}
+
+div.search-result{
+	padding: 0 0 50px 0;
+}
+
+.search-result div.search-image{
+	padding: 0;
+	margin: 0;
+}
+
+.search-result div.search-result-body h3{
+	margin: 0;
+	font-size: 16px;
+	color: #a7a9ac;
+	margin-bottom: 4px;
+	text-transform: uppercase;
+}
+
+.search-result div.search-result-body h2{
+	margin: 0;
+	font-size: 22px;
+	margin-bottom: 4px;
 }
