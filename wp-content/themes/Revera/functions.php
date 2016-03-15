@@ -823,9 +823,8 @@ return $classes;
 add_filter( 'nav_menu_css_class', 'additional_active_item_classes', 10, 2 );
 
 $userAgent = $_SERVER['HTTP_USER_AGENT'];
-$mobileRegex = '/Mobile|iP(hone|od|ad)|Android|BlackBerry|IEMobile|Kindle|NetFront|Silk-Accelerated|(hpw|web)OS|Fennec|Minimo|Opera M(obi|ini)|Blazer|Dolfin|Dolphin|Skyfire|Zune/';
+$mobileRegex = '/Mobile|iP(hone|od|ad)|Android|BlackBerry|IEMobile|Kindle|NetFront|Silk-Accelerated|(hpw|web)OS|Fennec|Minimo|OperaM(obi|ini)|Blazer|Dolfin|Dolphin|Skyfire|Zune/';
 $isMobile = (1 === preg_match($mobileRegex, $userAgent));
-if ($isMobile){ echo "MOBILE"; }
 
 
 function sticky_footer_content_func( $atts, $content = null ) {
@@ -834,3 +833,17 @@ function sticky_footer_content_func( $atts, $content = null ) {
 }
 
 add_shortcode( 'sticky_footer_content', 'sticky_footer_content_func' );
+
+
+function custom_excerpt($new_length = 20, $new_more = '...') {
+  add_filter('excerpt_length', function () use ($new_length) {
+    return $new_length;
+  }, 999);
+  add_filter('excerpt_more', function () use ($new_more) {
+    return $new_more;
+  });
+  $output = get_the_excerpt();
+  $output = apply_filters('wptexturize', $output);
+  $output = apply_filters('convert_chars', $output);
+  return $output;
+}
