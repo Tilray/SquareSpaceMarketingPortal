@@ -17,7 +17,7 @@ get_header(); ?>
 ?>
 
 <?php get_template_part( 'inc/feature' ); ?>
-<div class="container">
+<div class="container ">
 
 <?php
 	$langCode = get_current_language_code();
@@ -39,12 +39,15 @@ get_header(); ?>
 		<h2 class="blog-section"><?=$newsCategory->name?></h2></a>
 		 <?php 	
 		
+        $postsPerPage = $isMobile ? '3' : '6';
 		$args = array(
 			'category_name' => $catName,
 			'post_status' => 'publish',
-			'posts_per_page' => '6'
+			'posts_per_page' => $postsPerPage
 		);
-		 render_news_section( $args, false, true );
+           
+        $pageLinkNumber = $isMobile ? 1 : 2;
+		 render_news_section( $args, false, $pageLinkNumber );
 		 ?>
 		 
 	</div>

@@ -45,6 +45,26 @@ jQuery(window).load(function() {
 	jQuery(".accordion").click(function(){
 		jQuery(this).toggleClass("open");
 	});
+    
+    function updateFooter(){
+        var maxScroll = jQuery(document).height() - jQuery(window).height();
+        var showFooterZone = 10;
+        if (jQuery(window).scrollTop() >= maxScroll - showFooterZone )
+        {
+            jQuery("footer").addClass("expanded");
+        } 
+        else if (jQuery(document).height() <= jQuery(window).height())
+        {
+            jQuery("footer").addClass("expanded");
+        }
+        else
+        {
+            jQuery("footer").removeClass("expanded");
+        }
+    }
+    
+    jQuery(window).scroll(updateFooter);
+    updateFooter();
 });
 
 

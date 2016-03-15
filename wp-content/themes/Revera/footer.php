@@ -10,15 +10,26 @@
 
 	</div><!-- #content -->
 <footer id="colophon" class="site-footer" role="contentinfo">
-	<div class="container">
-		<div class="site-info wrap row">
-			<div id="copyright-footer-container" class="fcred col-12">
-				&copy; <?=date("Y")?> <?php _e('Tilray, all rights reserved'); ?> <?php wp_nav_menu( array( 'container' => '', 'theme_location' => 'copyright-footer','container_class' => 'copyright-footer','menu_id'=>'copyright-footer-menu' ,'menu_class'=>'copyright-footer' ) ); ?>
-			</div>		
-
-		</div><!-- .site-info -->
+    
+    <?php
+    global $stickyFooterContent;
+    if($stickyFooterContent){
+        echo $stickyFooterContent;
+    }
+    ?>
+    <div class="social-icons-container">
+        FACEYBOK HERE.
+    </div>
+	<div class="container primary">
+        <div class="collapse-container">
+            <div class="site-info wrap row">
+                <div id="copyright-footer-container" class="fcred col-12">
+                    &copy; <?=date("Y")?> <?php _e('Tilray, all rights reserved'); ?> <?php wp_nav_menu( array( 'container' => '', 'theme_location' => 'copyright-footer','container_class' => 'copyright-footer','menu_id'=>'copyright-footer-menu' ,'menu_class'=>'copyright-footer' ) ); ?>
+                </div>		
+            </div>
+        </div>
 	</div>	
-</footer><!-- #colophon .site-footer -->
+</footer>
 
 
 <?php wp_footer(); ?>

@@ -3,14 +3,16 @@
 	{
 		$theBanners = array();
 		$wp_query = new WP_Query(array('post_type' => 'tilray_banners', 'posts_per_page' => '100' ));
-		
+        global $isMobile;
+		$imageSize = $isMobile ? 'mobile-banner' : 'full';
+        
 		while ($wp_query->have_posts()) : $wp_query->the_post(); 
 			$thisBanner = new stdClass;
 
 			$thisBanner->id = get_the_ID();
 
 			$thumbID = get_post_thumbnail_id();
-			$img_attrs = wp_get_attachment_image_src( $thumbID,'full' ); 
+			$img_attrs = wp_get_attachment_image_src( $thumbID, $imageSize); 
 			$thisBanner->image = $img_attrs[0];
 			$thisBanner->width = $img_attrs[1];
 			$thisBanner->height = $img_attrs[2];
