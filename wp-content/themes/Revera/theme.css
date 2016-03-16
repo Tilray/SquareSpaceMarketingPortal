@@ -1165,7 +1165,8 @@ h3.bothead{
 	width: 100%;
 	background:#444444;
 	font-size: 12px;
-	position: fixed;
+	position: absolute;
+	min-height: 60px;
 	bottom: 0;
 }
 
@@ -1173,24 +1174,6 @@ h3.bothead{
 	padding: 10px 0px;
     display:none;
 }
-
-.site-footer div.container.primary{
-    max-height: 0;   
-    overflow: hidden;
-	-webkit-transition: min-height .25s, max-height .25s;
-	transition: min-height .25s, max-height .25s;
-}
-
-.site-footer div.container.primary div.collapse-container{
-    padding: 10px 0px;
-}
-
-.site-footer.expanded div.container.primary{
-    max-height: 1000px;
-	-webkit-transition: min-height .25s, max-height .25s;
-	transition: min-height .25s, max-height .25s;
-}
-
 
 
 .site-footer .row {
@@ -1765,7 +1748,7 @@ div.search-result{
 
 @media screen and (max-width: 768px) {
 	div#page {
-		margin-bottom: 128px;
+		padding-bottom: 130px;
 	}
 }
 
@@ -1792,10 +1775,6 @@ div.search-result{
 		display: inline-block;
 	}
 
-	div#page {
-		margin-bottom: 60px;
-	}
-		
 	.flex-caption h2{
 		font-size: 26px;
 	}
