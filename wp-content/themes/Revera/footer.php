@@ -17,9 +17,6 @@
         echo $stickyFooterContent;
     }
     ?>
-    <div class="social-icons-container">
-        FACEYBOK HERE.
-    </div>
 	<div class="container primary">
         <div class="collapse-container">
             <div class="site-info wrap row">

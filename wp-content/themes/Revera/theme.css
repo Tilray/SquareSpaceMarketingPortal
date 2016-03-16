@@ -1662,6 +1662,10 @@ div.search-result{
 	margin: 0;
 }
 
+.search-result div.search-result-body{
+	max-width: 500px;	
+}
+
 .search-result div.search-result-body h3{
 	margin: 0;
 	font-size: 16px;
@@ -1704,35 +1708,6 @@ div.search-result{
         text-indent: -9999px;
         height: 3px;
     }
-	
-	div#page{
-		padding-top: 47px;
-	}	
-	
-	div.slicknav_menu {
-		display: block;
-		position: fixed;
-		width: 100%;
-		z-index: 3;
-	}
-	div.login-nav-wrapper,
-	#languagedropdownwrapper,
-	nav.container {
-		display: none;
-	}
-	
-	div.mobile-header-logo{
-		width: 100%;
-		height: 36px;
-		background-image: url('images/tilray-nav-logo-white.svg');
-	    background-size: 50%;
-		background-repeat: no-repeat;
-		background-position: center;
-	}
-	
-	ul.flex-direction-nav {
-		display: none;
-	}
 	
 	div.homepage-blog-list {
 		display: inline-block;
@@ -1786,21 +1761,13 @@ div.search-result{
 	 .page-template-leftandcenternav-page div#right-pane h3{
 		cursor: pointer;
 	 }
-	 
-
-	.search-result div.search-image {
-		width: 100%;
-	}
-
-	.search-result div.search-result-body {
-		width: 100%;
-		margin: 10px 0 40px 0;
-		padding: 0;
-	}
-
 }
 
-
+@media screen and (max-width: 768px) {
+	div#page {
+		margin-bottom: 128px;
+	}
+}
 
 @media screen and (max-width: 768px) {
 	html{
@@ -1824,6 +1791,10 @@ div.search-result{
 	#primary-menu-container ul{
 		display: inline-block;
 	}
+
+	div#page {
+		margin-bottom: 60px;
+	}
 		
 	.flex-caption h2{
 		font-size: 26px;
@@ -1846,4 +1817,80 @@ div.search-result{
 		margin-bottom: 30px;
 	}
 	
+	.search-result div.search-image {
+		width: 100%;
+	}
+
+	.search-result div.search-image img {
+		width: 100%;
+	}
+
+	.search-result div.search-result-body {
+		width: 100%;
+		margin: 10px 0 40px 0;
+		padding: 0;
+	}
+
+}
+
+@media screen and (max-width: 991px){
+	div.site-branding{
+		margin: 0;
+	}
+
+	h2.site-title{
+		margin-bottom: 0;
+	}
+
+	div.mainmenu{
+		width: 100%;
+	}
+
+	form#search-form, 
+	div#primary-menu-container{
+		margin: 0;
+	}
+
+	div#primary-menu-container ul li {
+		padding-top: 0;
+		padding-bottom: 0;
+	}
+
+	div#page{
+		padding-top: 47px;
+	}	
+	
+	div.slicknav_menu {
+		display: block;
+		position: fixed;
+		width: 100%;
+		z-index: 300;
+	}
+
+	div.login-nav-wrapper,
+	#languagedropdownwrapper,
+	nav.container {
+		display: none;
+	}
+	
+	div.mobile-header-logo{
+		width: 100%;
+		height: 36px;
+		max-width: 400px;
+		margin-left: auto;
+		margin-right: auto;
+		background-image: url('images/tilray-nav-logo-white.svg');
+	    background-size: 50%;
+		background-repeat: no-repeat;
+		background-position: center;
+	}
+	
+	ul.flex-direction-nav {
+		display: none;
+	}	
+
+	.search-result div.search-image {
+		min-width: 220px;
+	}
+
 }

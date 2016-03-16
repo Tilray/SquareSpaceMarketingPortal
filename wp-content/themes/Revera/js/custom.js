@@ -48,7 +48,7 @@ jQuery(window).load(function() {
     
     function updateFooter(){
         var maxScroll = jQuery(document).height() - jQuery(window).height();
-        var showFooterZone = 10;
+        var showFooterZone = 20;
         if (jQuery(window).scrollTop() >= maxScroll - showFooterZone )
         {
             jQuery("footer").addClass("expanded");
