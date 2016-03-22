@@ -157,7 +157,7 @@ transition: opacity 1s;
 	?>
 	</div>
 </div>			
-
+<?php the_content(); ?>
 		</main><!-- #main -->
 	</div><!-- #primary -->
 

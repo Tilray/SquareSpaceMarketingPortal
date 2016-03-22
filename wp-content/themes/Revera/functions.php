@@ -10,6 +10,7 @@
 include ('aq_resizer.php');
 include ( 'guide.php' );
 
+$stickyFooterContent = false;
 
 //due to our custom permalink structure, /en/[category name}/page/2 will try to find a page called "page" in the given category
 //this fixes it

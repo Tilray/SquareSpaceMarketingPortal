@@ -1163,11 +1163,15 @@ h3.bothead{
 /* Footer */
 .site-footer{
 	width: 100%;
-	background:#444444;
 	font-size: 12px;
 	position: absolute;
-	min-height: 60px;
 	bottom: 0;
+}
+
+.site-footer .color-wrapper {
+	min-height: 60px;
+	width: 100%;
+	background:#444444;	
 }
 
 .site-footer .social-icons-container{
@@ -1197,6 +1201,16 @@ footer ul li.mobile-menu-line-break{
 	color:#eee;
 }
 
+.sticky-footer-content{
+	position: fixed;
+	bottom: 0;
+	width: 100%;
+}
+
+footer.expanded .sticky-footer-content
+{
+	position: relative;
+}
 
 
 
@@ -1400,6 +1414,7 @@ ul.copyright-footer li {
 	margin-right: 40px;
 }
 
+.big-register-button,
 .home-register-button
 {
 	width: 220px;
@@ -1410,14 +1425,18 @@ ul.copyright-footer li {
 	margin: 10px auto 15px auto;
 }
 
+a div.big-register-button h2,
 a div.home-register-button h2{
 	color: #ffb12f;
 	line-height: 16px;
 }
 
+.big-register-button:hover,
 .home-register-button:hover{
 	background-color: #ffb12f;
 }
+
+a div.big-register-button:hover h2,
 a div.home-register-button:hover h2{
 	color: #fff;
 }

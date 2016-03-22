@@ -28,12 +28,10 @@ jQuery(window).load(function() {
 	
 	jQuery(document).click(function(event) { 
 		if(jQuery(event.target).attr('id') === 'languagechooserbutton' && jQuery('#languagedropdown').hasClass('closed')) {
-			console.log("Clicked lang chooser");
 			jQuery('#languagedropdown').removeClass('closed');
 		}
 		else{
 			if(!jQuery('#languagedropdown').hasClass('closed')) {
-				console.log("Hiding the menu");
 				jQuery('#languagedropdown').addClass('closed');
 			}
 		}        
@@ -48,7 +46,7 @@ jQuery(window).load(function() {
     
     function updateFooter(){
         var maxScroll = jQuery(document).height() - jQuery(window).height();
-        var showFooterZone = 20;
+        var showFooterZone = 60;
         if (jQuery(window).scrollTop() >= maxScroll - showFooterZone )
         {
             jQuery("footer").addClass("expanded");
