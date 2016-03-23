@@ -1863,6 +1863,8 @@ div.search-result{
 		position: fixed;
 		width: 100%;
 		z-index: 300;
+		max-height: 100%;
+		overflow: scroll;
 	}
 
 	div.login-nav-wrapper,
