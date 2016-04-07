@@ -678,6 +678,7 @@ class Product{
     	return $rawCategory;
     }
 
+
     function __construct($post, $productFilters){
         $id = $post->ID;
         $validTHCs = $productFilters->thc->validFilterValues;
