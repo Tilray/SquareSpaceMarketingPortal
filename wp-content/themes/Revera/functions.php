@@ -621,15 +621,19 @@ class ProductFilter
 		return $jsArray;
 	}
 
-    public function renderProductsPageLink($itemFilterValue)
+    public function renderProductsPageLink($itemFilterValue, $hcp = false)
     {
         if ($itemFilterValue == NULL || trim($itemFilterValue) == "")
         {
             return "";
         }
 
+        $pageId = get_field('consumer_products_page', 'option');
+        if ($hcp)
+        	$pageId = get_field('hcp_products_page', 'option');
+        $pageUrl = get_permalink($pageId);
         $langCode = get_current_language_code();
-        $url = home_url("/") . ($langCode == "en" ? "products" : "produits") . "/?" . $this->qsParamName . "=" . $itemFilterValue;
+        $url = $pageUrl . "?" . $this->qsParamName . "=" . $itemFilterValue;
         $label = $this->getNameFromID($itemFilterValue);
         if ($this->qsParamName == "thc")
             $label = 'THC ' . $label;
@@ -652,6 +656,7 @@ class Product{
 	public $thc;
 	public $thcRange;
 	public $image;
+	public $hcpImage;
 	public $productUrl;
 	public $productName;
 	public $price;
@@ -663,19 +668,32 @@ class Product{
 		return true;
 	}
     
+    function safe_get_strain_category($rawCategory)
+    {
+    	if (is_array($rawCategory))
+    	{
+    		return implode("|", $rawCategory);
+    	}
+
+    	return $rawCategory;
+    }
+
     function __construct($post, $productFilters){
         $id = $post->ID;
         $validTHCs = $productFilters->thc->validFilterValues;
         $this->id = $id;
         $this->status = trim(get_post_meta($id, 'status', true));
-        $this->straincategory = trim(get_post_meta($id, 'strain_category', true));
-        $this->producttype = trim(get_post_meta($id, 'product_type', true));
+        $this->straincategory = $this->safe_get_strain_category(get_post_meta($id, 'strain_category', true));
+        $this->producttype = get_post_meta($id, 'product_type', true);
         $this->actualthc = trim(get_post_meta($id, 'thc_level', true));
         $this->thc = getProductTHCRange($this->actualthc, $validTHCs);
 
         $thumbID = get_post_thumbnail_id($id);
         $img_attrs = wp_get_attachment_image_src( $thumbID,'product-thumb' ); 
         $this->image = $img_attrs[0];
+        $hcpThumbID = get_post_meta($id, 'hcp_photo', true);
+        $hcp_img_attrs = wp_get_attachment_image_src( $hcpThumbID,'product-thumb' ); 
+        $this->hcpImage = $hcp_img_attrs[0];
         $productUrl = get_the_permalink($id);
 
         $this->productUrl = $productUrl;
@@ -690,7 +708,12 @@ class Product{
         foreach ($productFilters->filters as $filter)
         {
             $prodFilterState = $prodAtts[$filter->qsParamName];
-            $thisPropActive = ($filter->getFirstActiveFilter() == "" || in_array($prodFilterState, $filter->currentFilterValues));
+            //HERE
+            $thisPropActive = ($filter->getFirstActiveFilter() == "");
+            $filterPieces = explode('|', $prodFilterState);
+            foreach ($filterPieces as $key => $value) {
+	            $thisPropActive = $thisPropActive || in_array($value, $filter->currentFilterValues);
+            }
             $this->initiallyActive = $this->initiallyActive && $thisPropActive;
         }
         
@@ -800,7 +823,8 @@ class ProductFilters{
 		$conditions = array();
 		foreach($this->filters as $filter)
 		{
-			$conditions[] = "(combined" . $filter->qsParamName . " == '||||||' || combined" . $filter->qsParamName . ".indexOf('|||' + jQuery( this ).attr('data-" . $filter->qsParamName . "') + '|||') > -1)";
+			$conditions[] = "testFilter(combined" . $filter->qsParamName . ", jQuery( this ).attr('data-" . $filter->qsParamName . "'))";
+//			$conditions[] = "(combined" . $filter->qsParamName . " == '||||||' || combined" . $filter->qsParamName . ".indexOf('|||' + jQuery( this ).attr('data-" . $filter->qsParamName . "') + '|||') > -1)";
 		}
 		
 		return implode(" && \n", $conditions);	
@@ -847,4 +871,8 @@ function custom_excerpt($new_length = 20, $new_more = '...') {
   $output = apply_filters('wptexturize', $output);
   $output = apply_filters('convert_chars', $output);
   return $output;
+}
+
+if( function_exists('acf_add_options_page') ) {	
+	acf_add_options_page();
 }

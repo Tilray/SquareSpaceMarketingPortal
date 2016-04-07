@@ -12,7 +12,11 @@
  * @package web2feel
  */
  
-get_header(); ?>
+
+get_header(); 
+
+$displayMode = get_post_meta($id, 'display_mode', true);
+?>
 <div class="page-head">
 	<div class="container">
 		<div class="row">
@@ -62,14 +66,19 @@ get_header(); ?>
 		while ($wp_query->have_posts()) : $wp_query->the_post(); 
 			$thisProduct = new Product($wp_query->post, $productFilters);
 			$theProducts[] = $thisProduct;
+
 		endwhile;
 		
 		wp_reset_query();
 
+
 		function cmp($a, $b){
             global $productFilters;
-            $aSortOrder = $productFilters->sortOrder[$a->producttype];
-            $bSortOrder = $productFilters->sortOrder[$b->producttype];
+            $aType = $a->producttype;
+            $bType = $b->producttype;
+
+            $aSortOrder = $productFilters->sortOrder[$aType];
+            $bSortOrder = $productFilters->sortOrder[$bType];
 			if ($aSortOrder == $bSortOrder)
 				return strcasecmp($a->productName, $b->productName);
             return ($aSortOrder > $bSortOrder) ? 1 : -1;
@@ -109,10 +118,15 @@ get_header(); ?>
 					data-thc="<?=$product->thc?>" 
 					data-price="<?=$product->price?>">
 					<div class="hthumb">
-						<?php if($product->image) { 
-							?>
-							<a href="<?= $product->productUrl ?>"><img src="<?php echo $product->image ?>" alt="<?=$product->productName?>"/></a>
-						<?php } ?>
+						<?php 
+						$imageUrl = $product->image;
+						$hcpParam = "";
+						if ($displayMode == 'hcp'){
+							$imageUrl = $product->hcpImage;
+							$hcpParam = "?hcp=1";
+						}
+						?>
+						<a href="<?=$product->productUrl?><?=$hcpParam?>"><img src="<?=$imageUrl?>" alt="<?=$product->productName?>"/></a>
 					</div>
 				 </div>
 			<?php } ?>
@@ -184,6 +198,30 @@ get_header(); ?>
 		);
 	}
 	
+	//filterState: zero or more strings, joined and end-capped with |||
+	//itemFilter: one or more strings, joined by |
+	function testFilter(filterState, itemFilter){
+		//if filter is set to "show all", return true, since everything matches
+		if (filterState == '||||||')
+			return true;
+
+		if (itemFilter.indexOf('|') >= 0)
+		{
+			var itemParts = itemFilter.split('|');
+			for (var thisPart in itemParts)
+			{
+				if (filterState.indexOf('|||' + itemParts[thisPart] + '|||') >= 0)
+					return true;
+			}
+		}
+		else if (filterState.indexOf('|||' + itemFilter + '|||') >= 0)
+		{
+			return true;
+		}
+
+		return false;
+	}
+
 	function setProductsActive()
 	{
 		<?= $productFilters->renderProductsFilteringStatuses() ?>

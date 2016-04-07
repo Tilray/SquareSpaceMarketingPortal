@@ -71,10 +71,11 @@ $thisProduct = new Product($post, $productFilters);
 			
 			<div class="single-product-attributes">
 			<?php
-                $productFilters->status->renderProductsPageLink($thisProduct->status);
-                $productFilters->strainCategory->renderProductsPageLink($thisProduct->straincategory);
-                $productFilters->productType->renderProductsPageLink($thisProduct->producttype);
-                $productFilters->thc->renderProductsPageLink($thisProduct->thc);                
+				$useHCP = array_key_exists('hcp', $_GET);
+                $productFilters->status->renderProductsPageLink($thisProduct->status, $useHCP);
+                $productFilters->strainCategory->renderProductsPageLink($thisProduct->straincategory, $useHCP);
+                $productFilters->productType->renderProductsPageLink($thisProduct->producttypes, $useHCP);
+                $productFilters->thc->renderProductsPageLink($thisProduct->thc, $useHCP);                
 			?>
 			</div>
 			<div class="buttons-container">
