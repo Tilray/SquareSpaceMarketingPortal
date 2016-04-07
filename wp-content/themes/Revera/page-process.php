@@ -21,14 +21,33 @@ get_header(); ?>
 		<main id="main" class="site-main" role="main">
 
 <style>
+
+div.layout-left{
+	width: 55%;
+	position: relative;
+	float: left;
+}
+div.layout-right{
+	margin-left: 10%;
+	width: 35%;
+	float: right;
+}
+
 div.process-diagram{
-width: 80%;
+width: 100%;
 padding: 7%;
-margin-left: 10%;
 background-repeat: no-repeat;
 background-size: contain;
 position:relative;
 }
+
+div.process-map{
+margin-left: 5%;
+background-repeat: no-repeat;
+background-size: contain;
+position:relative;
+}
+
 
 div.process-diagram div{
 width:12.5%; 
@@ -72,15 +91,12 @@ div.layers-container{
 	position: relative;
 }
 
-div.process-map{
-	float: left;
-	width: 44%;
+div.process-galleries{
 }
 
-div.process-galleries{
-	width: 44%;
-	margin-left: 10%;
-	float: right;
+div.process-galleries img{
+	margin-bottom: 30px;
+	margin-bottom: 30px;
 }
 
 div.process-galleries,
@@ -95,73 +111,144 @@ width: 100%;
 
 div.process-galleries div.gallery-container,
 div.process-map img.layer{
-position: absolute;
-opacity: 0;
-top: 0px;
+display: none;
 -webkit-transition: opacity 1s;
 -moz-transition: opacity 1s;
 transition: opacity 1s;
 }
 div.process-galleries div.gallery-container.active,
 div.process-map img.layer.active{
-opacity: 1;
+display: block;
 -webkit-transition: opacity 1s;
 -moz-transition: opacity 1s;
 transition: opacity 1s;
 }
+div.process-map img.layer{
+	position: absolute;
+	top: 0;
+}
 
+div.process-steps-background{}
+
+div.process-steps-foreground
+{
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+}
+div.process-steps-foreground img{
+	opacity: 0;
+}
+div.process-steps-foreground a{
+	cursor: pointer;
+}
+div.process-steps-foreground img.active,
+div.process-steps-foreground img:hover{
+	opacity: 1;
+}
 </style>
 
+<?php
+function makeProcessStep($stepName, $layerIndex, $showBlueVersion){
+	$blue = "";
+	if ($showBlueVersion){
+		$blue = "_blue";
+	}
+	echo "<a onClick='showLayer(" . $layerIndex . ")' onMouseOver='showBlue(this)' onMouseOut='showGray(this)'>";
+	echo "<img class='layer step" . $layerIndex . "' style='width:12.5%' src='" . get_bloginfo('template_directory') . "/images/process/" . $stepName . $blue . ".png'/>";
+	echo "</a>";
+}
 
-<div class="process-diagram">
-<div class="layer chip1" style="left:0%; background-position-x: 0;"><a onClick="showLayer(1)"></a></div>
-<div class="layer chip2" style="left:12.5%; background-position-x: -100%;"><a onClick="showLayer(2)"></a></div>
-<div class="layer chip3" style="left:25%;  background-position-x: -200%;"><a onClick="showLayer(3)"></a></div>
-<div class="layer chip4" style="left:37.5%; background-position-x: -300%;"><a onClick="showLayer(4)"></a></div>
-<div class="layer chip5" style="left:50%; background-position-x: -400%;"><a onClick="showLayer(5)"></a></div>
-<div class="layer chip6" style="left:62.5%; background-position-x: -500%;"><a onClick="showLayer(6)"></a></div>
-<div class="layer chip7" style="left:75%; background-position-x: -600%;"><a onClick="showLayer(7)"></a></div>
-<div class="layer chip8" style="left:87.5%; background-position-x: -700%;"><a onClick="showLayer(8)"></a></div>
-</div>
-<br><br>
-
-<div class="layer-containers">
-	<div class="process-map">
-	<img src="<?php bloginfo('template_directory');?>/images/ProcessMap.png" class="base"/>
-	<img class="process-layer1 layer" src="<?php bloginfo('template_directory');?>/images/ProcessOverlay1.png"/>
-	<img class="process-layer2 layer" src="<?php bloginfo('template_directory');?>/images/ProcessOverlay2.png"/>
-	<img class="process-layer3 layer" src="<?php bloginfo('template_directory');?>/images/ProcessOverlay3.png"/>
-	<img class="process-layer4 layer" src="<?php bloginfo('template_directory');?>/images/ProcessOverlay4.png"/>
-	<img class="process-layer5 layer" src="<?php bloginfo('template_directory');?>/images/ProcessOverlay5.png"/>
-	<img class="process-layer6 layer" src="<?php bloginfo('template_directory');?>/images/ProcessOverlay6.png"/>
-	<img class="process-layer7 layer" src="<?php bloginfo('template_directory');?>/images/ProcessOverlay7.png"/>
-	<img class="process-layer8 layer" src="<?php bloginfo('template_directory');?>/images/ProcessOverlay8.png"/>
-	</div>
-	<div class="process-galleries">
+function makeProcessGallery($stepName, $stepNumber, $numImages)
+{
+	$text = get_field('step_'. $stepNumber . '_text');
+	$images = get_field('step_'. $stepNumber . '_images');
+	?>
+	<div class="gallery-container layer step<?=$stepNumber?>">
+		<p>
+		<?=$text?>
+		</p>
 	<?php
-	for($step = 1; $step <= 8; $step++)
+	foreach($images as $img)
 	{
-		$images = get_field('step_'. $step . '_images');
 		?>
-		<div class="flexslider gallery-container layer gallery<?=$step?>">
-			<ul class="slides"><?php
-				foreach($images as $img){
-					?>
-					<li data-thumb='<?=$img['sizes']['thumbnail']?>'><img src='<?=$img['url']?>'/></li>
-					<?php
-				}
-			?>
-			</ul>
-		</div><?php
+		<img src='<?=$img['url']?>'/>
+		<?php
 	}
 	?>
 	</div>
-</div>			
+	<?php
+}
+
+function makeMapLayer($stepNumber){
+	$image = get_field('step_'. $stepNumber . '_map');
+	?>
+		<img class="step<?=$stepNumber?> layer" src='<?=$image?>'/>
+	<?php
+}
+?>
+
+	<div class="layout-left">
+		<div class="process-steps-container">
+			<div class="process-steps-background">
+			<?php
+				makeProcessStep('mother', 1, false);
+				makeProcessStep('clone', 2, false);
+				makeProcessStep('flower', 3, false);
+				makeProcessStep('cure', 4, false);
+				makeProcessStep('trim', 5, false);
+				makeProcessStep('analyze', 6, false);
+				makeProcessStep('package', 7, false);
+				makeProcessStep('ship', 8, false);
+			?>
+			</div>
+			<div class="process-steps-foreground">
+			<?php
+				makeProcessStep('mother', 1, true);
+				makeProcessStep('clone', 2, true);
+				makeProcessStep('flower', 3, true);
+				makeProcessStep('cure', 4, true);
+				makeProcessStep('trim', 5, true);
+				makeProcessStep('analyze', 6, true);
+				makeProcessStep('package', 7, true);
+				makeProcessStep('ship', 8, true);
+			?>
+			</div>
+		</div>
+		<div class="process-galleries">
+		<?php
+			makeProcessGallery('mother', 1, 2);
+			makeProcessGallery('clone', 2, 3);
+			makeProcessGallery('flower', 3, 3);
+			makeProcessGallery('cure', 4, 2);
+			makeProcessGallery('trim', 5, 2);
+			makeProcessGallery('analyze', 6, 2);
+			makeProcessGallery('package', 7, 2);
+			makeProcessGallery('ship', 8, 2);
+		?>
+		</div>
+	</div>
+	<div class="layout-right">
+		<div class="layer-containers">
+			<div class="process-map">
+			<?php
+			$image = get_field('step_1_map');
+			?>
+				<img class="base" src='<?=$image?>'/>
+			<?php			
+			for ($i = 1; $i <= 8; $i++)
+			{
+				makeMapLayer($i);
+			}
+			?>
+			</div>
+		</div>			
+	</div>
+</div>
 <?php the_content(); ?>
 		</main><!-- #main -->
 	</div><!-- #primary -->
-
-	</div>
 </div>
 <?php get_footer(); ?>
 </div><!-- #page -->
@@ -175,9 +262,7 @@ jQuery(window).load(function() {
 
 function showLayer(layerId){
 jQuery(".layer").removeClass("active");
-jQuery(".chip" + layerId).addClass("active");
-jQuery(".process-layer" + layerId).addClass("active");
-jQuery(".gallery" + layerId).addClass("active");
+jQuery(".step" + layerId).addClass("active");
 }
 
 showLayer(1);
