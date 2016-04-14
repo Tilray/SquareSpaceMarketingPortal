@@ -579,6 +579,12 @@ img.grayscale {
 	-webkit-filter: grayscale(100%); /* Chrome 19+, Safari 6+, Safari 6+ iOS */
 }
 	
+div#slidebox.flexslider{
+	background-image: url(https://www.tilray.ca/wp-content/uploads/2015/10/bcs_best.jpg);
+	background-size: cover;
+	background-repeat: no-repeat;
+}
+
 .flex-caption{
 	margin: 0;
 	z-index: 120;

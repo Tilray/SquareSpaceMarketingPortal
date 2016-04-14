@@ -34,15 +34,16 @@
 	}
 
 
+$defaultHomepageBG = get_field('default_homepage_banner', 'option');
 ?>
-<div id="slidebox" class="flexslider">
+<div id="slidebox" class="flexslider" style="background-image:url(<?=$defaultHomepageBG?>)">
 
-		<ul class="slides">
+		<ul class="slides" style="display:none;">
 		    <?php 	
 				function RenderBanner($content, $imageurl, $width, $height, $linkURL){					
 					?>
 						<li>
-							<a href="<?= $linkURL ?>"><img width="<?=$width?>" height="<?=$height?>" src="<?= $imageurl ?>"></a>
+							<a href="<?= $linkURL ?>"><img width="<?=$width?>" height="<?=$height?>" data-src="<?= $imageurl ?>"></a>
 							<div class="flex-caption">
 								<?= $content ?>
 							</div>
@@ -55,8 +56,7 @@
 				{
 					RenderBanner($thisBanner->content, $thisBanner->image, $thisBanner->width, $thisBanner->height, $thisBanner->link);
 				}
-				?>
-					
+				?>					
 		</ul>
 <div class="doverlay"></div>
 </div>
@@ -73,4 +73,36 @@
 		<?php
 	}
 ?>
+<script>
+	function setAllBannerSrcs(){
+    	jQuery('div.flexslider ul.slides li img').each(function(){jQuery(this).attr('src', jQuery(this).attr('data-src')); console.log("setting src :" + jQuery(this).attr('data-src'));});	
+
+    	jQuery('div.flexslider ul.slides').css('display', 'block');
+		jQuery('#slidebox').flexslider({
+			animation: "fade",
+			directionNav:true,
+			controlNav:false
+		});    		
+	}
+
+	jQuery(window).load(function() {
+		var allBannerUrls = new Array();
+    	jQuery('div.flexslider ul.slides li img').each(function(){
+    		allBannerUrls.push(jQuery(this).attr('data-src'));
+    	});
+
+		var len = allBannerUrls.length;
+		var loadCounter = 0;
+		for(var i = 0; i < len; i++) {
+		    jQuery(document.createElement('img')).attr('src', allBannerUrls[i]).one("load", function() {
+		        loadCounter++;
+		        if(loadCounter === len) {
+		            setAllBannerSrcs();   
+		        }
+		    }).each(function() {
+		        if(this.complete) jQuery(this).trigger("load");
+		    });
+		}    	
+	});
+</script>
 

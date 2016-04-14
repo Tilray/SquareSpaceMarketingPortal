@@ -1,11 +1,4 @@
 jQuery(window).load(function() {
-
-  jQuery('#slidebox').flexslider({
-        animation: "fade",
-        directionNav:true,
-        controlNav:false
-      });
-    
   /* Navigation */
 
 	jQuery('#submenu ul.sfmenu').superfish({ 
