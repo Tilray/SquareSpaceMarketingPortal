@@ -1,6 +1,8 @@
 <?php
 /**
-  Template name:Wide
+ * The template for the Tilray Process page
+ *
+  Template name:Process  
  */
 
 get_header(); ?>
