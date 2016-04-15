@@ -7,6 +7,7 @@
  */
 
 
+
 include ('aq_resizer.php');
 include ( 'guide.php' );
 
