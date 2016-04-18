@@ -10,6 +10,10 @@
 
 include ('aq_resizer.php');
 include ( 'guide.php' );
+require_once 'inc/Mobile_Detect.php';
+$detect = new Mobile_Detect;
+$deviceType = ($detect->isMobile() ? ($detect->isTablet() ? 'tablet' : 'phone') : 'computer');
+
 
 $stickyFooterContent = false;
 
@@ -72,7 +76,8 @@ function web2feel_setup() {
 	register_nav_menus( array(
 		'login' => 'Login Menu',
 		'primary' => __( 'Primary Menu', 'web2feel' ),
-		'copyright-footer' => 'Copyright Footer Menu'
+		'copyright-footer' => 'Copyright Footer Menu',
+		'copyright-footer-mobile' => 'Copyright Footer Mobile Menu',		
 	) );
 
 	/**

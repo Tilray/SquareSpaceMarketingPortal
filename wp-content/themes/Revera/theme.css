@@ -1174,6 +1174,11 @@ h3.bothead{
 	bottom: 0;
 }
 
+.site-footer.mobile{
+	position: fixed;
+	text-align: center;
+}
+
 .site-footer .color-wrapper {
 	min-height: 60px;
 	width: 100%;
