@@ -656,6 +656,7 @@ class Product{
     public $actualthc;
 	public $thc;
 	public $thcRange;
+	public $cbd;
 	public $image;
 	public $hcpImage;
 	public $productUrl;
@@ -689,6 +690,7 @@ class Product{
         $this->producttype = get_post_meta($id, 'product_type', true);
         $this->actualthc = trim(get_post_meta($id, 'thc_level', true));
         $this->thc = getProductTHCRange($this->actualthc, $validTHCs);
+        $this->cbd = trim(get_post_meta($id, 'cbd_level', true));
 
         $thumbID = get_post_thumbnail_id($id);
         $img_attrs = wp_get_attachment_image_src( $thumbID,'product-thumb' ); 

@@ -41,6 +41,26 @@ $thisProduct = new Product($post, $productFilters);
 		<div class="col-sm-4">
 			<h1 class="mockH2"><?php the_title(); ?></h1>
 			<?php 
+				$thc = trim($thisProduct->actualthc);
+				$cbd = trim($thisProduct->cbd);
+				$sep = '.';
+				$percentage = '%';
+				if (get_current_language_code() == "fr"){
+					$sep = ',';
+					$percentage = ' %';
+				}
+				if (strlen($thc) > 0 || strlen($cbd) > 0){
+					echo '<p>';
+					if (strlen($thc) > 0)
+						echo _('THC: ') . number_format($thc, 1, $sep, $sep) . $percentage;
+
+					if (strlen($thc) > 0 && strlen($cbd) > 0)
+						echo '; ';
+
+					if (strlen($cbd) > 0)
+						echo _('CBD: ') . number_format($cbd, 1, $sep, $sep) . $percentage;
+					echo '</p>';
+				}
 				the_content();
 				
 				$itemPrice = 0;
