@@ -49,7 +49,7 @@ $thisProduct = new Product($post, $productFilters);
 					$sep = ',';
 					$percentage = ' %';
 				}
-				if (strlen($thc) > 0 || strlen($cbd) > 0){
+				if (strtolower($thisProduct->status) == "available" && (strlen($thc) > 0 || strlen($cbd) > 0)){
 					echo '<p>';
 					if (strlen($thc) > 0)
 						echo _('THC: ') . number_format($thc, 1, $sep, $sep) . $percentage;
