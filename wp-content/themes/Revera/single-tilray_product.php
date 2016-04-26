@@ -69,7 +69,7 @@ $thisProduct = new Product($post, $productFilters);
 					$value = get_field('price', get_the_ID());
 					$itemPrice = intval($value);
 					$label = $itemPriceObj['choices'][ $value ];	
-					if ($itemPrice > 0){
+					if (strtolower($thisProduct->status) == "available" && $itemPrice > 0){
 						$productType = trim(get_post_meta(get_the_ID(), 'product_type', true));
 						$priceText = format_price_for_current_locale($itemPrice);
 						if (strtolower($productType) != "accessory"){
