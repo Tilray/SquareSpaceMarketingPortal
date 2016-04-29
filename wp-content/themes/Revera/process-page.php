@@ -269,3 +269,7 @@ jQuery(".step" + layerId).addClass("active");
 
 showLayer(1);
 </script>
+
+<?php get_footer(); ?>
+</div> <!-- #page -->
+

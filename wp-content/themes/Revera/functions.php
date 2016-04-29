@@ -382,6 +382,7 @@ add_image_size( 'blog-preview', 360, 202, true );
 add_image_size( 'banner-image', 1200, 384, true );
 add_image_size( 'extracts-image', 1740 );
 add_image_size( 'mobile-banner', 1000 );
+add_image_size( 'page-width', 2340 );
 
 
 function blogroot_func( $atts ){
