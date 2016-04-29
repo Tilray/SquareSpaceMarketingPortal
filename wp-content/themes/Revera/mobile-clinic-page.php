@@ -162,11 +162,27 @@ div.fb-image{
 	display: inline-block;
 	width: 50%;
 	padding: 10px;
-	float: left;
 }
 div.fb-image img{
+	-webkit-box-shadow: 5px 5px 10px 1px rgba(0,0,0,0.13);
+	   -moz-box-shadow: 5px 5px 10px 1px rgba(0,0,0,0.13);
+	        box-shadow: 5px 5px 10px 1px rgba(0,0,0,0.13);
 }
 
+div#twitter-feed{
+	margin-top: 60px;
+}
+
+div.formstackContainer{
+	margin-top: 70px;
+	margin-bottom: 70px;
+}
+
+@media (min-width: 768px){
+	div#facebook-feed h2{
+		margin-left: 10px;
+	}
+}
 
 </style>
 
@@ -251,35 +267,38 @@ function makeMapLayer($stepNumber){
 								?>
 							</div>
 						</div><!-- row-->
+						<div class="row">
+							<div class="col-sm-12 formstackContainer">
+								<h2><?= _('Want more information?')?></h2>
+								<?php echo get_field('formcraft_embed_code'); ?>
+								<script>
+									var $formElement = jQuery('div.fsBody.fsEmbed');
+									if ($formElement)
+										jQuery($formElement).appendTo('div.formstackContainer');
+								</script>
+							</div>
+						</div>
 					</div><!-- sm-7 -->
 					<div class="col-sm-1">
 					</div>
 					<div class="col-sm-4">
 						<div id="facebook-feed">
+							<h2>Find us on Facebook</h2>
 							<?php
 								$galleryImages = get_field('facebook_gallery');
 								//useful elements: src, width, height, link 
-								for ($i = 0; $i < 8 || $i < count($galleryImages); $i++){
-									?><div class="fb-image"><a target="blank" href="<?=$galleryImages[$i]['link']?>"><img src='<?= $galleryImages[0]['src'] ?>' /></a></div><?php
+								for ($i = 0; $i < 6 && $i < count($galleryImages); $i++){
+									?><div class="fb-image"><a target="blank" href="<?=$galleryImages[$i]['link']?>"><img src='<?= $galleryImages[$i]['src'] ?>' /></a></div><?php
 								}
 							?>
 						</div>
-						<?php
-							echo get_field('twitter_widget');
-						?>
+						<div id='twitter-feed'>
+							<?php
+								echo get_field('twitter_widget');
+							?>
+						</div>
 					</div>
 				</div><!-- row -->
-				<div class="row">
-					<div class="col-sm-12 formstackContainer">
-						<h1><?= _('Want more information?')?></h1>
-						<?php echo get_field('formcraft_embed_code'); ?>
-						<script>
-							var $formElement = jQuery('div.fsBody.fsEmbed');
-							if ($formElement)
-								jQuery($formElement).appendTo('div.formstackContainer');
-						</script>
-					</div>
-				</div>
 			</main><!-- #main -->
 		</div><!-- #primary -->
 	</div><!-- row -->
