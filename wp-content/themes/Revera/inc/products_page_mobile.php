@@ -21,9 +21,9 @@
 		</div>
 	</div>
 	<div class="row noscript-hide">
-		<div class="col-12">
+		<div class="">
 		
-			<div id="primary" class="js-isotope" data-isotope-options='{ "columnWidth": 200, "itemSelector": ".product-item", "filter": ".active" }'>
+			<div id="mobile-primary" class="js-isotope" data-isotope-options='{ "columnWidth": 200, "itemSelector": ".product-item", "filter": ".active" }'>
 			<?php
 			
 			foreach($theProducts as $product){
