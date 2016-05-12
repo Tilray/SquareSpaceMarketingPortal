@@ -24,7 +24,7 @@ if ($paged > 1)
 <div class="page-head">
 	<div class="container">
 		<div class="row">
-			<div class="col-12">
+			<div class="col-lg-12">
                 <?php 
                     echo $headerOpenTag;
                 

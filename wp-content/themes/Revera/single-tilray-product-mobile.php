@@ -2,7 +2,7 @@
 <div class="page-head product-single-mobile">
 	<div class="container">
 		<div class="row">
-			<div class="col-12">
+			<div class="col-lg-12">
 				<?php
 					$useHCP = array_key_exists('hcp', $_GET);
 					$productsPageLink = getProductsPageLink($useHCP); 

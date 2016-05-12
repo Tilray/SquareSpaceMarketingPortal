@@ -29,12 +29,12 @@ get_header(); ?>
 ?>
 <div class="section-wide">
 	<div class="row">
-		<div class="col-12 homepage-main-content">
+		<div class="col-lg-12 homepage-main-content">
 			<?php echo $postContent; ?>
 		</div>
 	</div>
 	<div class="row">
-	<div class="boxitems col-12 homepage-blog-container">
+	<div class="boxitems col-lg-12 homepage-blog-container">
 		<a href="/<?=strtolower($langCode)?>/<?=$catName?>">
 		<h2 class="blog-section"><?=$newsCategory->name?></h2></a>
 		 <?php 	

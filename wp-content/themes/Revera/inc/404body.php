@@ -1,7 +1,7 @@
 <div class="page-head">
 	<div class="container">
 		<div class="row">
-			<div class="col-12 page-page">
+			<div class="col-lg-12 page-page">
 				<h1>404</h1>
 			</div>
 		</div>

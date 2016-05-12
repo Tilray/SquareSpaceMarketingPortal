@@ -1,7 +1,7 @@
 <div class="page-head">
 	<div class="container">
 		<div class="row">
-			<div class="col-12">
+			<div class="col-lg-12">
 				<h2 class="mockH1"><?=__('PRODUCTS')?></h2>
 				<p> </p>
 			</div>
@@ -12,7 +12,7 @@
 
 <div class="container">	
 	<div class="row">
-	<div id="primary" class="content-area col-12">
+	<div id="primary" class="content-area col-lg-12">
 		<div class="col-sm-6">
 			<?php
 			$thumbid = get_post_thumbnail_id();

@@ -692,12 +692,12 @@ a.frmore{
 	width: 230px;
 	height: 245px;
 }
-div.col-12.product-item-mobile{
+div.col-lg-12.product-item-mobile{
 	padding: 0;
 	margin: 0;
 }
 
-div.col-12.product-item-mobile .hthumb a img
+div.col-lg-12.product-item-mobile .hthumb a img
 {
 	margin:0;
 }
@@ -1589,7 +1589,6 @@ div.homepage-blog-list img{
 
 div.blog-post-preview{
 	margin-bottom: 50px;
-	width: 33.333333333333%;
 }
 
 

@@ -304,7 +304,7 @@ function render_news_section($args, $showPagination = false, $pageLinkNumber = 0
 	if ( $wp_query->have_posts() ) : ?>
 		<!-- the loop -->
 		<?php while ( $wp_query->have_posts() ) : $wp_query->the_post(); ?>
-			<div class="blog-post-preview col-4">
+			<div class="blog-post-preview col-sm-4">
 				<?php
 				$thumbID = get_post_thumbnail_id();
 				$img_attrs = wp_get_attachment_image_src( $thumbID,'blog-preview' ); 
@@ -322,7 +322,7 @@ function render_news_section($args, $showPagination = false, $pageLinkNumber = 0
 			$numRendered++;
 			if ($numRendered % 3 == 0){
 				?>
-				</div><div class="col-12">
+				<div class="clearfix"></div></div><div class="col-lg-12">
 				<?
 			}
 			?>
@@ -331,7 +331,7 @@ function render_news_section($args, $showPagination = false, $pageLinkNumber = 0
 
 		<!-- pagination here -->
 		<?php if ($showPagination){?>
-			</div><div class="col-12">
+			</div><div class="col-lg-12">
 			<div class="navigation pagination-buttons"><p><?php 
 				previous_posts_link("<i class='fa fa-arrow-left'></i>&nbsp;&nbsp;prev");
 				next_posts_link("next&nbsp;&nbsp;<i class='fa fa-arrow-right'></i>");
@@ -361,9 +361,9 @@ function render_news_section($args, $showPagination = false, $pageLinkNumber = 0
 
 
 
-function render_news_archive($postId){
+/*function render_news_archive($postId){
 ?>
-	<div class="blog-post-preview col-4">
+	<div class="blog-post-preview col-lg-4 col-sm-12">
 		<?php
 		$thumbID = get_post_thumbnail_id($postId);
 		$img_attrs = wp_get_attachment_image_src( $thumbID,'blog-preview' ); 
@@ -378,7 +378,7 @@ function render_news_archive($postId){
 		</p>
 	</div>
 <?php 
-}
+}*/
 
 remove_filter( 'the_content', 'wpautop' );
 
@@ -638,7 +638,7 @@ class ProductFilter
         $label = $this->getNameFromID($itemFilterValue);
         if (trim($label) == "")
         	return "";
-        
+
         $pageUrl = getProductsPageLink($hcp);
         $url = $pageUrl . "?" . $this->qsParamName . "=" . $itemFilterValue;
         if ($this->qsParamName == "thc")

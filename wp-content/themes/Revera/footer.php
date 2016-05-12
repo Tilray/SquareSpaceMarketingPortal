@@ -30,7 +30,7 @@ if ($deviceType === 'phone')
     	<div class="container primary">
             <div class="collapse-container">
                 <div class="site-info wrap row">
-                    <div id="copyright-footer-container device-type" class="fcred col-12">
+                    <div id="copyright-footer-container device-type" class="fcred col-lg-12">
                         &copy; <?=date("Y")?> <?php _e('Tilray, all rights reserved'); ?> <?php 
                             if ($deviceType === 'phone')
                             {
