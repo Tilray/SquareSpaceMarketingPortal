@@ -174,7 +174,7 @@ div#twitter-feed{
 }
 
 div.formstackContainer{
-	margin-top: 70px;
+	margin-top: 30px;
 	margin-bottom: 70px;
 }
 
@@ -237,33 +237,24 @@ function makeMapLayer($stepNumber){
 							<div class="col-sm-12 find-us-heading">
 								<h2><?=_('Find us in your area') ?></h2>
 								<h4><?=_('Select your province to see dates and locations')?></h4>
+								<h4 style="font-weight: normal"><?=_('All are subject to change without notice')?></h4>
 							</div>
 							<div class="col-sm-5 provinces-list">
 								<?php
-									makeProvinceSelector('Ontario', 1);
-									makeProvinceSelector('Quebec', 2);
-									makeProvinceSelector('Nova Scotia', 3);
-									makeProvinceSelector('New Brunswick', 4);
-									makeProvinceSelector('Manitoba', 5);
 									makeProvinceSelector('British Columbia', 6);
-									makeProvinceSelector('Prince Edward Island', 7);
-									makeProvinceSelector('Saskatchewan', 8);
 									makeProvinceSelector('Alberta', 9);
-									makeProvinceSelector('Newfoundland & Labrador', 10);
+									makeProvinceSelector('Saskatchewan', 8);
+									makeProvinceSelector('Manitoba', 5);
+									makeProvinceSelector('Ontario', 1);
 								?>
 							</div>
-							<div class="col-sm-7">
+							<div class="col-sm-7" style="min-height: 450px;">
 								<?php
-									makeProvinceDates('ontario', 1);
-									makeProvinceDates('quebec', 2);
-									makeProvinceDates('nova_scotia', 3);
-									makeProvinceDates('new_brunswick', 4);
-									makeProvinceDates('manitoba', 5);
 									makeProvinceDates('british_columbia', 6);
-									makeProvinceDates('prince_edward_island', 7);
-									makeProvinceDates('saskatchewan', 8);
 									makeProvinceDates('alberta', 9);
-									makeProvinceDates('newfoundland_and_labrador', 10);
+									makeProvinceDates('saskatchewan', 8);
+									makeProvinceDates('manitoba', 5);
+									makeProvinceDates('ontario', 1);
 								?>
 							</div>
 						</div><!-- row-->
@@ -282,6 +273,11 @@ function makeMapLayer($stepNumber){
 					<div class="col-sm-1">
 					</div>
 					<div class="col-sm-4">
+						<div id='twitter-feed'>
+							<?php
+								echo get_field('twitter_widget');
+							?>
+						</div>
 						<div id="facebook-feed">
 							<h2>Find us on Facebook</h2>
 							<?php
@@ -290,11 +286,6 @@ function makeMapLayer($stepNumber){
 								for ($i = 0; $i < 6 && $i < count($galleryImages); $i++){
 									?><div class="fb-image"><a target="blank" href="<?=$galleryImages[$i]['link']?>"><img src='<?= $galleryImages[$i]['src'] ?>' /></a></div><?php
 								}
-							?>
-						</div>
-						<div id='twitter-feed'>
-							<?php
-								echo get_field('twitter_widget');
 							?>
 						</div>
 					</div>
