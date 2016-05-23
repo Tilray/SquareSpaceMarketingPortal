@@ -2,26 +2,31 @@
 	function QueryBanners()
 	{
 		$theBanners = array();
-		$wp_query = new WP_Query(array('post_type' => 'tilray_banners', 'posts_per_page' => '100' ));
+		global $sitepress;
+
+		$wp_query = new WP_Query(array('post_type' => 'tilray_banners', 'posts_per_page' => '100', 'suppress_filters' => FALSE ));
         global $isMobile;
 		$imageSize = $isMobile ? 'mobile-banner' : 'full';
         
-		while ($wp_query->have_posts()) : $wp_query->the_post(); 
-			$thisBanner = new stdClass;
+		while ($wp_query->have_posts()) : $wp_query->the_post();
+			$langInfo = wpml_get_language_information(get_the_ID());
+			if ($langInfo['language_code'] == get_current_language_code()){
+				$thisBanner = new stdClass;
 
-			$thisBanner->id = get_the_ID();
+				$thisBanner->id = get_the_ID();
 
-			$thumbID = get_post_thumbnail_id();
-			$img_attrs = wp_get_attachment_image_src( $thumbID, $imageSize); 
-			$thisBanner->image = $img_attrs[0];
-			$thisBanner->width = $img_attrs[1];
-			$thisBanner->height = $img_attrs[2];
-			
-			$thisBanner->content = get_the_content();
-			$thisBanner->order = get_post_field('menu_order', get_the_ID());
-			$thisBanner->link = trim(get_post_meta(get_the_ID(), 'link_url', true));
-			
-			$theBanners[] = $thisBanner;
+				$thumbID = get_post_thumbnail_id();
+				$img_attrs = wp_get_attachment_image_src( $thumbID, $imageSize); 
+				$thisBanner->image = $img_attrs[0];
+				$thisBanner->width = $img_attrs[1];
+				$thisBanner->height = $img_attrs[2];
+				
+				$thisBanner->content = get_the_content();
+				$thisBanner->order = get_post_field('menu_order', get_the_ID());
+				$thisBanner->link = trim(get_post_meta(get_the_ID(), 'link_url', true));
+				
+				$theBanners[] = $thisBanner;
+			}
 		endwhile;
 		
 		wp_reset_query();
