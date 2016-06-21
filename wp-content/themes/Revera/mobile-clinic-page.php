@@ -215,12 +215,12 @@ function makeMapLayer($stepNumber){
 	<div class="container">
 		<div class="row">
 			<div class="col-12 page-page">
-				<h1> <?php the_title(); ?> </h1>
+				<h1><?php the_title(); ?></h1>
 				<?php
 					$thumb = get_post_thumbnail_id();
 					$img_url = wp_get_attachment_image_src( $thumb,'page-width' );
 					if($img_url) : ?>
-						<img class="img-responsive single-post-featured-image" src="<?php echo $img_url[0] ?>"/>
+						<img class="img-responsive single-post-featured-image" src="<?php echo $img_url[0] ?>" alt="<?php the_title(); ?>"/>
 				<?php endif; ?>						
 				<p><?php the_content(); ?></p>
 			</div>
@@ -284,7 +284,7 @@ function makeMapLayer($stepNumber){
 								$galleryImages = get_field('facebook_gallery');
 								//useful elements: src, width, height, link 
 								for ($i = 0; $i < 6 && $i < count($galleryImages); $i++){
-									?><div class="fb-image"><a target="blank" href="<?=$galleryImages[$i]['link']?>"><img src='<?= $galleryImages[$i]['src'] ?>' /></a></div><?php
+									?><div class="fb-image"><a target="blank" href="<?=$galleryImages[$i]['link']?>"><img src='<?= $galleryImages[$i]['src'] ?>' alt="Facebook"/></a></div><?php
 								}
 							?>
 						</div>

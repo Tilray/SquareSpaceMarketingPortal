@@ -40,7 +40,7 @@ get_header();
 							$image = get_bloginfo('stylesheet_directory') . '/images/defaultimage_360x202.png';
 						}
 						?>
-						<a href="<?php the_permalink(); ?>"><img class="blog-preview" src="<?= $image ?>"/></a>
+						<a href="<?php the_permalink(); ?>"><img class="blog-preview" src="<?= $image ?>" alt="<?php the_title();?>"/></a>
 					</div>
 					<div class="search-result-body col-6">
 						<h3><?php

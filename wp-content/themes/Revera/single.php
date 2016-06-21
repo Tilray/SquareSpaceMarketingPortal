@@ -20,7 +20,7 @@ get_header(); ?>
 							$thumb = get_post_thumbnail_id();
 							$img_url = wp_get_attachment_image_src( $thumb,'blog-featured-image' );
 							if($img_url) : ?>
-						<img class="img-responsive single-post-featured-image" src="<?php echo $img_url[0] ?>"/>
+						<img class="img-responsive single-post-featured-image" src="<?php echo $img_url[0] ?>" alt="<?php the_title(); ?>"/>
 						<?php endif; ?>		
 					</div>
 					<div id="primary" class="content-area col-sm-8">
