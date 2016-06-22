@@ -20,19 +20,19 @@
                                     <label>
                                     <?php 
                                         $url =  $this->append_site_key_to_download_url($download['url'], $site_key, $repository_id );
+
                                         $download_data = array(
                                             'url'           => $url, 
-                                            'basename'      => $download['basename'], 
+                                            'slug'          => $download['slug'],
                                             'nonce'         => wp_create_nonce('install_plugin_' . $url),
                                             'repository_id' => $repository_id
                                         );
 
                                         $disabled = $expired ||
                                                     (
-                                                        $this->plugin_is_installed($download['name'], $download['basename'], $download['version']) &&
-                                                        !$this->plugin_is_embedded_version($download['name'], $download['basename'])
-                                                    )||
-                                                    !WP_Installer()->is_uploading_allowed();
+                                                        $this->plugin_is_installed($download['name'], $download['slug'], $download['version']) &&
+                                                        !$this->plugin_is_embedded_version($download['name'], $download['slug'])
+                                                    ) || WP_Installer()->dependencies->cant_download( $repository_id );
 
                                     ?>
                                     <input type="checkbox" name="downloads[]" value="<?php echo base64_encode(json_encode($download_data)); ?>" <?php 
@@ -40,10 +40,11 @@
                                         
                                     </label>                                
                                 </td>
-                                <td><?php echo $download['name'] ?></td>
+                                <td class="installer_plugin_name"><?php echo $download['name'] ?></td>
                                 <td><?php echo $download['version'] ?></td>
-                                <td>
-                                    <?php if($v = $this->plugin_is_installed($download['name'], $download['basename'])): $class = version_compare($v, $download['version'], '>=') ? 'installer-green-text' : 'installer-red-text'; ?>
+                                <td class="installer_version_installed">
+                                    <?php if($v = $this->plugin_is_installed($download['name'], $download['slug'])):
+                                            $class = version_compare($v, $download['version'], '>=') ? 'installer-green-text' : 'installer-red-text'; ?>
                                     <span class="<?php echo $class ?>"><?php echo $v; ?></span>
                                     <?php endif; ?>
                                 </td>
@@ -60,8 +61,11 @@
                         </tbody>
                     </table>
 
-                    <?php if(!WP_Installer()->is_uploading_allowed()): ?>
-                        <p class="installer-error-box"><?php printf(__('Downloading is not possible because WordPress cannot write into the plugins folder. %sHow to fix%s.', 'installer'), '<a href="http://codex.wordpress.org/Changing_File_Permissions">', '</a>') ?></p>
+                    <?php if( !WP_Installer()->dependencies->is_uploading_allowed() ): ?>
+                        <p class="installer-error-box"><?php printf(__('Downloading is not possible because WordPress cannot write into the plugins folder. %sHow to fix%s.', 'installer'),
+                                '<a href="http://codex.wordpress.org/Changing_File_Permissions">', '</a>') ?></p>
+                    <?php elseif( WP_Installer()->dependencies->is_win_paths_exception($repository_id) ): ?>
+                        <p><?php echo WP_Installer()->dependencies->win_paths_exception_message() ?></p>
                     <?php endif;?>
 
                     <br />
@@ -69,7 +73,8 @@
                     &nbsp;
                     <label><input name="activate" type="checkbox" value="1" disabled="disabled" />&nbsp;<?php _e('Activate after download', 'installer') ?></label>
 
-                    <div class="installer-status-success"><p><?php _e('Operation complete!', 'installer') ?></p></div>
+                    <div class="installer-download-progress-status"></div>
+                    <div class="installer-status-success"><?php _e('Operation complete!', 'installer') ?></div>
 
                     <span class="installer-revalidate-message hidden"><?php _e("Download failed!\n\nClick OK to revalidate your subscription or CANCEL to try again.", 'installer') ?></span>
                     </form>         

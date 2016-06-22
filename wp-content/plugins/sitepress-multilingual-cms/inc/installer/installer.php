@@ -1,5 +1,5 @@
 <?php 
-define('WP_INSTALLER_VERSION', '1.5.5');
+define('WP_INSTALLER_VERSION', '1.7.6');
   
 include_once dirname(__FILE__) . '/includes/installer.class.php';
 
@@ -10,7 +10,9 @@ function WP_Installer() {
 
 WP_Installer();
 
-include_once dirname(__FILE__) . '/includes/installer-api.php';
+include_once WP_Installer()->plugin_path() . '/includes/installer-api.php';
+include_once WP_Installer()->plugin_path() . '/includes/translation-service-info.class.php';
+include_once WP_Installer()->plugin_path() . '/includes/class-installer-dependencies.php';
 
 // Ext function 
 function WP_Installer_Show_Products($args = array()){
@@ -18,5 +20,3 @@ function WP_Installer_Show_Products($args = array()){
     WP_Installer()->show_products($args);
     
 }
-
- 
