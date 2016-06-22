@@ -21,10 +21,12 @@
 				$thisBanner->width = $img_attrs[1];
 				$thisBanner->height = $img_attrs[2];
 				
+				$thisBanner->title = get_the_title();
 				$thisBanner->content = get_the_content();
 				$thisBanner->order = get_post_field('menu_order', get_the_ID());
 				$thisBanner->link = trim(get_post_meta(get_the_ID(), 'link_url', true));
-				
+
+
 				$theBanners[] = $thisBanner;
 			}
 		endwhile;
@@ -45,21 +47,17 @@ $defaultHomepageBG = get_field('default_homepage_banner', 'option');
 
 		<ul class="slides" style="display:none;">
 		    <?php 	
-				function RenderBanner($content, $imageurl, $width, $height, $linkURL){					
-					?>
-						<li>
-							<a href="<?= $linkURL ?>"><img width="<?=$width?>" height="<?=$height?>" data-src="<?= $imageurl ?>"></a>
-							<div class="flex-caption">
-								<?= $content ?>
-							</div>
-						</li>
-					<?php
-				}
-				
 				$theBanners = QueryBanners();
 				foreach($theBanners as $thisBanner)				
 				{
-					RenderBanner($thisBanner->content, $thisBanner->image, $thisBanner->width, $thisBanner->height, $thisBanner->link);
+					?>
+						<li>
+							<a href="<?= $thisBanner->link ?>"><img width="<?=$thisBanner->width?>" height="<?=$thisBanner->height?>" data-src="<?= $thisBanner->image ?>" alt="<?= $thisBanner->title; ?>"></a>
+							<div class="flex-caption">
+								<?= $thisBanner->content ?>
+							</div>
+						</li>
+					<?php
 				}
 				?>					
 		</ul>

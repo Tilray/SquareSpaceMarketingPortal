@@ -447,6 +447,8 @@ add_filter( 'wpseo_canonical', 'rel_canonical_with_custom_tag_override' );
 
 
 function getProductTHCRange($thc, $validTHCValues, $getDisplayValue = false){
+	global $productFilters;
+
 	if (trim($thc) == "")
 		return;
 	
@@ -458,9 +460,9 @@ function getProductTHCRange($thc, $validTHCValues, $getDisplayValue = false){
 			continue;
 			
 		$ends = explode("-", $thcRange);
-		$low = intval($ends[0]);
-		$high = intval($ends[1]);
-		if ($thcVal >= $low && $thcVal <= $high){
+		$low = $productFilters->preciseTHCRangesLow[$thcRange];
+		$high = $productFilters->preciseTHCRangesHigh[$thcRange];
+		if ($thcVal >= $low && $thcVal < $high){
 			if ($getDisplayValue)
 				return $display;
 				
@@ -730,6 +732,8 @@ class ProductFilters{
 	public $strainCategory;
 	public $productType;
 	public $thc;
+    public $preciseTHCRangesLow;
+    public $preciseTHCRangesHigh;
 	public $price;
     public $duration;
     public $sortOrder;
@@ -762,6 +766,19 @@ class ProductFilters{
 										"15-20" => "15% - 20%", 
 										"21-25" => "21% - 25%", 
 										"26-100" => "> 25%"));
+
+		$this->preciseTHCRangesLow = array(	"" => 0,
+											"0-14" => 0,
+											"15-20" => 15,
+											"21-25" => 21,
+											"26-100" => 25.00001
+											);
+		$this->preciseTHCRangesHigh = array(	"" => 0,
+											"0-14" => 14.99999,
+											"15-20" => 20.99999,
+											"21-25" => 25,
+											"26-100" => 100
+											);
 										
 		$this->price = new ProductFilter("price", "Price", 
 									array(	"" => "", 
