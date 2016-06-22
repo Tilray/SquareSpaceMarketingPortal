@@ -13,20 +13,25 @@
 get_header(); 
 $thisProduct = new Product($post, $productFilters);
 
-?>
+$itemPrice = 0;
+$itemPriceObj = get_field_object( 'price', get_the_ID() );
+if ($itemPriceObj){
+	$value = get_field('price', get_the_ID());
+	$itemPrice = intval($value);
+	$label = $itemPriceObj['choices'][ $value ];	
+	if ($itemPrice > 0){
+		$productType = trim(get_post_meta(get_the_ID(), 'product_type', true));
+		$priceText = format_price_for_current_locale($itemPrice);
+		if (strtolower($productType) != "accessory"){
+			$priceText .= " " . __('per gram');
+		}
+		
+		$itemStoreLink = trim(get_post_meta(get_the_ID(), 'store_link', true));
+	}
+}
 
-<div class="page-head">
-	<div class="container">
-		<div class="row">
-			<div class="col-12">
-				<h2 class="mockH1"><?=__('PRODUCTS')?></h2>
-				<p> </p>
-			</div>
-			
-		</div>
-	</div>
-</div>
 
+<<<<<<< HEAD
 <div class="container">	
 	<div class="row">
 	<div id="primary" class="content-area col-12">
@@ -144,3 +149,35 @@ $thisProduct = new Product($post, $productFilters);
 </div>
 <?php get_footer(); ?>
 </div><!-- #page -->
+=======
+$thc = trim($thisProduct->actualthc);
+$cbd = trim($thisProduct->cbd);
+$sep = '.';
+$percentage = '%';
+if (get_current_language_code() == "fr"){
+	$sep = ',';
+	$percentage = ' %';
+}
+
+$arrThcAndCbd = array();
+$thcAndCbdText = '';
+
+if (strtolower($thisProduct->status) == "available" && (strlen($thc) > 0 || strlen($cbd) > 0)){
+	if (strlen($thc) > 0)
+		$arrThcAndCbd[] = _('THC: ') . number_format($thc, 1, $sep, $sep) . $percentage;
+	if (strlen($cbd) > 0)
+		$arrThcAndCbd[] =  _('CBD: ') . number_format($cbd, 1, $sep, $sep) . $percentage;
+}
+
+$thcAndCbdText = implode('; ', $arrThcAndCbd);
+
+if ($deviceType === 'phone')
+{
+	require_once 'single-tilray-product-mobile.php';
+}
+else
+{
+	require_once 'single-tilray-product-desktop.php';
+}
+?>
+>>>>>>> MobileProductsPage

@@ -10,6 +10,10 @@
 
 include ('aq_resizer.php');
 include ( 'guide.php' );
+require_once 'inc/Mobile_Detect.php';
+$detect = new Mobile_Detect;
+$deviceType = ($detect->isMobile() ? ($detect->isTablet() ? 'tablet' : 'phone') : 'computer');
+
 
 $stickyFooterContent = false;
 
@@ -72,7 +76,8 @@ function web2feel_setup() {
 	register_nav_menus( array(
 		'login' => 'Login Menu',
 		'primary' => __( 'Primary Menu', 'web2feel' ),
-		'copyright-footer' => 'Copyright Footer Menu'
+		'copyright-footer' => 'Copyright Footer Menu',
+		'copyright-footer-mobile' => 'Copyright Footer Mobile Menu',		
 	) );
 
 	/**
@@ -299,7 +304,7 @@ function render_news_section($args, $showPagination = false, $pageLinkNumber = 0
 	if ( $wp_query->have_posts() ) : ?>
 		<!-- the loop -->
 		<?php while ( $wp_query->have_posts() ) : $wp_query->the_post(); ?>
-			<div class="blog-post-preview col-4">
+			<div class="blog-post-preview col-sm-4">
 				<?php
 				$thumbID = get_post_thumbnail_id();
 				$img_attrs = wp_get_attachment_image_src( $thumbID,'blog-preview' ); 
@@ -317,7 +322,7 @@ function render_news_section($args, $showPagination = false, $pageLinkNumber = 0
 			$numRendered++;
 			if ($numRendered % 3 == 0){
 				?>
-				</div><div class="col-12">
+				<div class="clearfix"></div></div><div class="col-lg-12">
 				<?
 			}
 			?>
@@ -326,7 +331,7 @@ function render_news_section($args, $showPagination = false, $pageLinkNumber = 0
 
 		<!-- pagination here -->
 		<?php if ($showPagination){?>
-			</div><div class="col-12">
+			</div><div class="col-lg-12">
 			<div class="navigation pagination-buttons"><p><?php 
 				previous_posts_link("<i class='fa fa-arrow-left'></i>&nbsp;&nbsp;prev");
 				next_posts_link("next&nbsp;&nbsp;<i class='fa fa-arrow-right'></i>");
@@ -356,9 +361,9 @@ function render_news_section($args, $showPagination = false, $pageLinkNumber = 0
 
 
 
-function render_news_archive($postId){
+/*function render_news_archive($postId){
 ?>
-	<div class="blog-post-preview col-4">
+	<div class="blog-post-preview col-lg-4 col-sm-12">
 		<?php
 		$thumbID = get_post_thumbnail_id($postId);
 		$img_attrs = wp_get_attachment_image_src( $thumbID,'blog-preview' ); 
@@ -373,7 +378,7 @@ function render_news_archive($postId){
 		</p>
 	</div>
 <?php 
-}
+}*/
 
 remove_filter( 'the_content', 'wpautop' );
 
@@ -382,7 +387,12 @@ add_image_size( 'blog-preview', 360, 202, true );
 add_image_size( 'banner-image', 1200, 384, true );
 add_image_size( 'extracts-image', 1740 );
 add_image_size( 'mobile-banner', 1000 );
+<<<<<<< HEAD
 add_image_size( 'page-width', 2340 );
+=======
+add_image_size( 'mobile-product-image', 240, 400, true);
+add_image_size( 'mobile-product-image-accessory', 400);
+>>>>>>> MobileProductsPage
 
 
 function blogroot_func( $atts ){
@@ -524,13 +534,12 @@ add_image_size( 'product-single', 555, 2000, false );
 
 					
 
-function get_products_page_link($paramName, $paramValue){
-	$pageName = "products";
-	if ($langCode == "fr"){
-		$pageName = "produits";
-	}
-	
-	return home_url("/") . $pageName . "/?" . $paramName . "=" . $paramValue;    
+function getProductsPageLink($hcp){
+	$pageId = get_field('consumer_products_page', 'option');
+	if ($hcp)
+		$pageId = get_field('hcp_products_page', 'option');
+
+	return get_permalink($pageId);
 }
 
 
@@ -632,13 +641,12 @@ class ProductFilter
             return "";
         }
 
-        $pageId = get_field('consumer_products_page', 'option');
-        if ($hcp)
-        	$pageId = get_field('hcp_products_page', 'option');
-        $pageUrl = get_permalink($pageId);
-        $langCode = get_current_language_code();
-        $url = $pageUrl . "?" . $this->qsParamName . "=" . $itemFilterValue;
         $label = $this->getNameFromID($itemFilterValue);
+        if (trim($label) == "")
+        	return "";
+
+        $pageUrl = getProductsPageLink($hcp);
+        $url = $pageUrl . "?" . $this->qsParamName . "=" . $itemFilterValue;
         if ($this->qsParamName == "thc")
             $label = 'THC ' . $label;
         ?>
@@ -683,6 +691,26 @@ class Product{
     	return $rawCategory;
     }
 
+	function getPrimaryStrainCategory($rawCategories)
+	{
+		$allCategories = explode('|', $rawCategories);
+		for ($i = 0; $i < count($allCategories); $i++)
+		{
+			if ($allCategories[$i] == 'high-cbd')
+			{
+				return $allCategories[$i];
+			}
+		}
+
+		return $allCategories[0];
+	}
+
+	function getPrimaryStrainCategoryName($rawCategories)
+	{
+		global $productFilters;
+		return $productFilters->strainCategory->getNameFromID($this->getPrimaryStrainCategory($rawCategories));
+	}
+
 
     function __construct($post, $productFilters){
         $id = $post->ID;
@@ -694,6 +722,11 @@ class Product{
         $this->actualthc = trim(get_post_meta($id, 'thc_level', true));
         $this->thc = getProductTHCRange($this->actualthc, $validTHCs);
         $this->cbd = trim(get_post_meta($id, 'cbd_level', true));
+<<<<<<< HEAD
+=======
+        $this->primaryStrainCategory = $this->getPrimaryStrainCategory($this->straincategory);
+        $this->primaryStrainCategoryName = $this->getPrimaryStrainCategoryName($this->straincategory);
+>>>>>>> MobileProductsPage
 
         $thumbID = get_post_thumbnail_id($id);
         $img_attrs = wp_get_attachment_image_src( $thumbID,'product-thumb' ); 
@@ -701,6 +734,14 @@ class Product{
         $hcpThumbID = get_post_meta($id, 'hcp_photo', true);
         $hcp_img_attrs = wp_get_attachment_image_src( $hcpThumbID,'product-thumb' ); 
         $this->hcpImage = $hcp_img_attrs[0];
+
+        $mobileImageID = get_post_meta($id, 'mobile_product_image', true);
+        $mobileImageAttrs = wp_get_attachment_image_src( $mobileImageID,'mobile-product-image' ); 
+        $this->mobileImage = $mobileImageAttrs[0];
+
+        $mobileAccessoryImageAttrs = wp_get_attachment_image_src( $mobileImageID,'mobile-product-image-accessory' ); 
+        $this->mobileAccessoryImage = $mobileAccessoryImageAttrs[0];
+
         $productUrl = get_the_permalink($id);
 
         $this->productUrl = $productUrl;
@@ -724,7 +765,9 @@ class Product{
             $this->initiallyActive = $this->initiallyActive && $thisPropActive;
         }
         
+
     }
+
 }
 
 class ProductFilters{

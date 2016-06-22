@@ -16,155 +16,67 @@
 get_header(); 
 
 $displayMode = get_post_meta($id, 'display_mode', true);
-?>
-<div class="page-head">
-	<div class="container">
-		<div class="row">
-			<div class="col-12">
-				<h2 class="mockH1"><?php the_title(); ?></h2>
-				<p> </p>
-			</div>
-			
-		</div>
-	</div>
-</div>
 
+function splitAndGetQueryStringParamIfValid($paramName, $allOfType)
+{
+	$arrParams = Array();
+	if (isset($_GET[$paramName]))
+	{
+		$validParam = strtolower($_GET[$paramName]);
+		$arrParams = explode(',', $validParam);
+		foreach ($arrParams as $item)
+		{
+			if (!array_key_exists($item, $allOfType) && !in_array($item, $allOfType)){
+				//invalidate strainTypes since it has something it shouldn't in it.
+				return Array();
+			}
+		}
+	}
+
+	return $arrParams;
+}
+
+$productFilters->loadFiltersFromQueryString($_GET);	
+
+
+
+function QueryProducts($productFilters)
+{
+	$theProducts = array();
+	
+	$wp_query = new WP_Query(array('post_type' => 'tilray_product', 'posts_per_page' => '100' ));
+	while ($wp_query->have_posts()) : $wp_query->the_post(); 
+		$thisProduct = new Product($wp_query->post, $productFilters);
+		$theProducts[] = $thisProduct;
+
+	endwhile;
+	
+	wp_reset_query();
+
+
+	function cmp($a, $b){
+        global $productFilters;
+        $aType = $a->producttype;
+        $bType = $b->producttype;
+
+        $aSortOrder = $productFilters->sortOrder[$aType];
+        $bSortOrder = $productFilters->sortOrder[$bType];
+		if ($aSortOrder == $bSortOrder)
+			return strcasecmp($a->productName, $b->productName);
+        return ($aSortOrder > $bSortOrder) ? 1 : -1;
+	}
+	usort($theProducts, "cmp");		
+	
+	return $theProducts;
+}
+
+$theProducts = QueryProducts($productFilters);	
+
+?>
 <script>
 	var pageBaseURL = "<?= the_permalink() ?>";
 	var pageTitle = "<?= the_title() ?>";
-</script>
 
-<?php
-	function splitAndGetQueryStringParamIfValid($paramName, $allOfType)
-	{
-		$arrParams = Array();
-		if (isset($_GET[$paramName]))
-		{
-			$validParam = strtolower($_GET[$paramName]);
-			$arrParams = explode(',', $validParam);
-			foreach ($arrParams as $item)
-			{
-				if (!array_key_exists($item, $allOfType) && !in_array($item, $allOfType)){
-					//invalidate strainTypes since it has something it shouldn't in it.
-					return Array();
-				}
-			}
-		}
-	
-		return $arrParams;
-	}
-	
-	$productFilters->loadFiltersFromQueryString($_GET);	
-
-	
-	
-	function QueryProducts($productFilters)
-	{
-		$theProducts = array();
-		
-		$wp_query = new WP_Query(array('post_type' => 'tilray_product', 'posts_per_page' => '100' ));
-		while ($wp_query->have_posts()) : $wp_query->the_post(); 
-			$thisProduct = new Product($wp_query->post, $productFilters);
-			$theProducts[] = $thisProduct;
-
-		endwhile;
-		
-		wp_reset_query();
-
-
-		function cmp($a, $b){
-            global $productFilters;
-            $aType = $a->producttype;
-            $bType = $b->producttype;
-
-            $aSortOrder = $productFilters->sortOrder[$aType];
-            $bSortOrder = $productFilters->sortOrder[$bType];
-			if ($aSortOrder == $bSortOrder)
-				return strcasecmp($a->productName, $b->productName);
-            return ($aSortOrder > $bSortOrder) ? 1 : -1;
-		}
-		usort($theProducts, "cmp");		
-		
-		return $theProducts;
-	}
-	
-	$theProducts = QueryProducts($productFilters);	
-?>
-
-<div class="container">	
-	<div class="row filters">
-		<div class="col-12">
-			<?php $productFilters->renderFilters();?>
-			<div class="product-filters-underline">
-				<div class="gray-underline"></div>
-			</div>
-		</div>
-	</div>
-	<div class="row noscript-hide">
-		<div class="col-12">
-		
-			<div id="primary" class="js-isotope" data-isotope-options='{ "columnWidth": 200, "itemSelector": ".product-item", "filter": ".active" }'>
-			<?php
-			
-			foreach($theProducts as $product){
-                
-                $activeClass = $product->initiallyActive ? "active" : "";
-				?>
-				<div class="col-2 portbox post product-item <?= $activeClass?>" 
-					data-id="<?=$product->id?>" 
-					data-straincategory="<?=$product->straincategory?>" 
-					data-status="<?=$product->status?>" 
-					data-producttype="<?=$product->producttype?>" 
-					data-thc="<?=$product->thc?>" 
-					data-price="<?=$product->price?>">
-					<div class="hthumb">
-						<?php 
-						$imageUrl = $product->image;
-						$hcpParam = "";
-						if ($displayMode == 'hcp'){
-							$imageUrl = $product->hcpImage;
-							$hcpParam = "?hcp=1";
-						}
-						?>
-						<a href="<?=$product->productUrl?><?=$hcpParam?>"><img src="<?=$imageUrl?>" alt="<?=$product->productName?>"/></a>
-					</div>
-				 </div>
-			<?php } ?>
-			</div>
-		</div>
-	</div>
-</div>
-<noscript>
-	<style>
-		.noscript-hide {
-			display: none;
-		}
-	</style>
-	<div class="row">
-		<div class="col-12">
-			<ul>
-			<?php
-			foreach($theProducts as $product){
-				if ($product->initiallyActive == FALSE)
-				{
-					continue;
-				}
-			?>			
-				<li>
-					<div class="hthumb">
-						<?php if($product->image) { 
-							?>
-							<a href="<?= $product->productUrl ?>"><img class="img-responsive" src="<?php echo $product->image ?>" alt="<?=$product->productName?>"/></a>
-						<?php } ?>
-					</div>
-				</li>
-			<?php } ?>
-			</ul>
-		</div>
-	</div>
-</noscript>
-
-<script>
 	function UpdateProducts($clicked)
 	{
 		//if it's a show-all, reset checkboxes for all others of same category-
@@ -278,8 +190,52 @@ $displayMode = get_post_meta($id, 'display_mode', true);
 		jQuery('ul.product-filters input[type=checkbox]').change(function() {
 			UpdateProducts(jQuery(this));
 		});
-	});
+	});	
 </script>
+
+
+<noscript>
+	<style>
+		.noscript-hide {
+			display: none;
+		}
+	</style>
+	<div class="row">
+		<div class="col-12">
+			<ul>
+			<?php
+			foreach($theProducts as $product){
+				if ($product->initiallyActive == FALSE)
+				{
+					continue;
+				}
+			?>			
+				<li>
+					<div class="hthumb">
+						<?php if($product->image) { 
+							?>
+							<a href="<?= $product->productUrl ?>"><img class="img-responsive" src="<?php echo $product->image ?>" alt="<?=$product->productName?>"/></a>
+						<?php } ?>
+					</div>
+				</li>
+			<?php } ?>
+			</ul>
+		</div>
+	</div>
+</noscript>
+
+
+<?
+if ($deviceType === 'phone')
+{
+	require_once 'inc/products_page_mobile.php';
+}
+else
+{
+	require_once 'inc/products_page_desktop.php';
+}
+?>
+
 
 <?php get_footer(); ?>
 </div> <!-- #page -->
