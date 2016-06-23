@@ -201,7 +201,7 @@ $theProducts = QueryProducts($productFilters);
 		}
 	</style>
 	<div class="row">
-		<div class="col-12">
+		<div class="col-lg-12 col-xs-12">
 			<ul>
 			<?php
 			foreach($theProducts as $product){
