@@ -387,12 +387,9 @@ add_image_size( 'blog-preview', 360, 202, true );
 add_image_size( 'banner-image', 1200, 384, true );
 add_image_size( 'extracts-image', 1740 );
 add_image_size( 'mobile-banner', 1000 );
-<<<<<<< HEAD
 add_image_size( 'page-width', 2340 );
-=======
 add_image_size( 'mobile-product-image', 240, 400, true);
 add_image_size( 'mobile-product-image-accessory', 400);
->>>>>>> MobileProductsPage
 
 
 function blogroot_func( $atts ){
@@ -722,11 +719,9 @@ class Product{
         $this->actualthc = trim(get_post_meta($id, 'thc_level', true));
         $this->thc = getProductTHCRange($this->actualthc, $validTHCs);
         $this->cbd = trim(get_post_meta($id, 'cbd_level', true));
-<<<<<<< HEAD
-=======
+
         $this->primaryStrainCategory = $this->getPrimaryStrainCategory($this->straincategory);
         $this->primaryStrainCategoryName = $this->getPrimaryStrainCategoryName($this->straincategory);
->>>>>>> MobileProductsPage
 
         $thumbID = get_post_thumbnail_id($id);
         $img_attrs = wp_get_attachment_image_src( $thumbID,'product-thumb' ); 
