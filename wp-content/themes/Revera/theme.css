@@ -1689,7 +1689,21 @@ div.blog-post-preview{
 	margin-bottom: 50px;
 }
 
+.prevent-reflow{
+	display:block;
+	position: relative;
+    padding-bottom: 56.1%;
+    height: 0;
+    overflow: hidden;
+}
 
+.prevent-reflow img{
+	position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
 
 div.blog-post-preview h2{
 	font-size: 22px;

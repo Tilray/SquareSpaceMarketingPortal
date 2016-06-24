@@ -310,7 +310,9 @@ function render_news_section($args, $showPagination = false, $pageLinkNumber = 0
 				$img_attrs = wp_get_attachment_image_src( $thumbID,'blog-preview' ); 
 				$image = $img_attrs[0];
 				if($image) {?>
-					<a href="<?php the_permalink(); ?>"><img class="blog-preview" src="<?= $image ?>" width="<?=$img_attrs[1]?>" alt="<?php the_title(); ?>" height="<?=$img_attrs[2]?>"/></a>
+					<a href="<?php the_permalink(); ?>" class="prevent-reflow">
+						<img class="blog-preview" src="<?= $image ?>" alt="<?php the_title(); ?>"/>
+					</a>				
 				<?php }?>
 				<a href="<?php the_permalink(); ?>"><h2><?php the_title(); ?></h2></a>
 				<p>
