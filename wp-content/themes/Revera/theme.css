@@ -33,6 +33,11 @@ h4 { font-size: 18px; }
 h5 { font-size: 16px; }
 h6 { font-size: 14px; }
 
+@media (max-width: 768px){
+	body h1, body h2.mockH1 { font-size: 26px; }
+	body h2, body h1.mockH2, body .page-head h1.mockH2 { font-size: 22px; }
+	body .page-head h1, body h2.mockH1{font-size: 26px;}
+}
 
 h1, h2, h3, h4, h5, h6 {
 	font-family: 'Proxima-Nova', serif;
@@ -42,7 +47,7 @@ h1, h2, h3, h4, h5, h6 {
 	font-style: normal;
 }
 
-.page-head H1, 
+.page-head h1, 
 h2.mockH1{
 	font-size: 30px;
 	text-transform: uppercase;
@@ -687,8 +692,54 @@ div.hthumb{
 	padding: 0;
 }
 
-.mobile-product-item{
+.mobile-product-item .hthumb{
+	float: left;
+	width: 17%;	
+}
+
+@media (max-width: 767px){
+	.page-template-product-page h2.mockH1
+	{
+		margin-top: 0;
+		border-bottom: none;
+	}
+}
+
+.mobile-product-item,
+.mobile-product-item .mobile-product-image,
+.mobile-product-item .mobile-product-description{
 	height: 27vw;
+}
+
+.mobile-product-item{
+	border-bottom: 1px solid #999999;
+}
+
+.mobile-product-item .mobile-product-description{
+	display: table;
+	padding-left: 15px;
+	padding-right: 15px;
+}
+
+.mobile-product-item .mobile-product-description .description-inner{
+	display: table-cell;
+	vertical-align: middle;
+}
+
+.mobile-product-item h3{
+	margin-top: 0;
+	margin-bottom: 1vw;
+	text-transform: uppercase;
+	font-size: 5.5vw;
+}
+
+.mobile-product-item h4{
+	color: #a7a9ac;
+	font-weight: normal;
+	font-size: 13px;
+	margin-top: 0;
+	margin-bottom: 0;
+	font-size: 4vw;
 }
 
 .mobile-product-item .hthumb a img{
@@ -715,6 +766,7 @@ div.hthumb{
 	background-color: #1aa250;	
 }
 
+.mobile-products-color-stripe.high-cbd,
 .mobile-products-color-stripe.indica_high-cbd,
 .mobile-products-color-stripe.sativa_high-cbd,
 .mobile-products-color-stripe.hybrid_high-cbd{
@@ -723,7 +775,6 @@ div.hthumb{
 
 .mobile-product-item .mobile-product-image{
 	width: 100%;
-    height: 27vw;
 	background-size: auto 160%;
     background-repeat: no-repeat;
     background-position-x: center;
@@ -1864,10 +1915,6 @@ div.search-result{
 		width: 100%;
 	}
 	
-	 div.left-nav-menu {
-		display: none;
-	 }
-	 
 	 div.blog-post-preview{
 		width: 100%;
 	 }
@@ -1910,6 +1957,15 @@ div.search-result{
 	div#page {
 		padding-bottom: 130px;
 	}
+
+	 div.left-nav-menu {
+		display: none;
+	 }	
+
+	 div.row{
+	 	margin-left: 0;
+	 	margin-right: 0;
+	 }
 }
 
 @media screen and (max-width: 768px) {
@@ -2005,7 +2061,6 @@ div.search-result{
 		width: 100%;
 		z-index: 300;
 		max-height: 100%;
-		overflow: scroll;
 	}
 
 	div.login-nav-wrapper,

@@ -615,6 +615,21 @@ class ProductFilter
 	<?php
 	}
 	
+	public function renderMobileFilterButton(){
+	?>
+		<div class="product-filters-container">
+			<h3 class="gray-underline"><?= _e($this->displayName) ?></h3>
+			<ul class="product-filters product-filters-<?=$this->qsParamName?>">
+				<?php
+				foreach($this->validFilterValues as $id=>$name){
+					$this->renderFilter("product-filters-" . $this->qsParamName, $this->qsParamName, $id, $name);
+				}
+				?>
+			</ul>
+		</div>
+	<?php
+	}
+	
 	public function getFirstActiveFilter(){
 		if (count($this->currentFilterValues) > 0)
 			return $this->currentFilterValues[0];
@@ -672,6 +687,8 @@ class Product{
 	public $price;
 	public $actualprice;
     public $initiallyActive;
+    public $primaryStrainCategory;
+    public $primaryStrainCategoryName;
 	
 	public function isActive($filters){
 		//loop through filters, check against active ones
@@ -847,6 +864,14 @@ class ProductFilters{
 		foreach($this->filters as $filter)
 		{
 			$filter->renderFilters();
+		}
+	}
+
+	public function renderMobileFilterButtons()
+	{
+		foreach($this->filters as $filter)
+		{
+			$filter->renderMobileFilterButton();
 		}
 	}
 	
