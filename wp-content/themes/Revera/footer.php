@@ -25,6 +25,15 @@ if ($deviceType === 'phone')
             <?=$stickyFooterContent?>
         </div><?php
     }
+
+    global $noHideStickyFooterContent;
+    if($noHideStickyFooterContent){
+        ?>
+        <div class="no-hide-sticky-footer-content">
+            <?=$noHideStickyFooterContent?>
+        </div><?php
+    }
+
     ?>
     <div class="color-wrapper">
     	<div class="container primary">

@@ -16,6 +16,7 @@ $deviceType = ($detect->isMobile() ? ($detect->isTablet() ? 'tablet' : 'phone') 
 
 
 $stickyFooterContent = false;
+$noHideStickyFooterContent = false;
 
 //due to our custom permalink structure, /en/[category name}/page/2 will try to find a page called "page" in the given category
 //this fixes it
@@ -363,24 +364,6 @@ function render_news_section($args, $showPagination = false, $pageLinkNumber = 0
 
 
 
-/*function render_news_archive($postId){
-?>
-	<div class="blog-post-preview col-lg-4 col-sm-12">
-		<?php
-		$thumbID = get_post_thumbnail_id($postId);
-		$img_attrs = wp_get_attachment_image_src( $thumbID,'blog-preview' ); 
-		$image = $img_attrs[0];
-		if($image) {?>
-			<a href="<?php the_permalink($postId); ?>"><img class="blog-preview" src="<?= $image ?>" alt="<?php the_title() ?>"/></a>
-		<?php }?>
-		<a href="<?php the_permalink($postId); ?>"><h2><?= get_the_title($postId); ?></h2></a>
-		<p>
-			<?php echo get_the_excerpt($postId); ?>
-			<a class="read-more-link" href="<?php the_permalink($postId); ?>"><?= __('Read more') ?> &raquo;</a>
-		</p>
-	</div>
-<?php 
-}*/
 
 remove_filter( 'the_content', 'wpautop' );
 
@@ -617,18 +600,41 @@ class ProductFilter
 	<?php
 	}
 	
+	private function renderMobileFilter($className, $name, $filter, $label){
+		$id = $name . '-' . $filter;
+		if ($filter == "")
+			$id = $name . '-show-all';
+	
+		if ($label == "")
+			$label = "Show All";
+		?>
+		<li class="product-filter mobile">
+			<span class="noscript-hide">
+				<input type="checkbox" class="<?= $className?>" name="<?=$name?>" id="<?=$id?>" data-filter="<?=$filter?>">
+				<label class="checkbox-label" for="<?=$id?>"><?php _e($label); ?></label>
+			</span>
+			<noscript>
+				<a href="<?= sprintf('%s?%s=%s', the_permalink(), $name, $filter)?>"><?php _e($label); ?></a>
+			</noscript>
+		</li>
+	<?php
+	}
+
+	public function renderMobileFilters(){
+	?>
+		<ul class="product-filters mobile product-filters-<?=$this->qsParamName?>">
+			<?php
+			foreach($this->validFilterValues as $id=>$name){
+				$this->renderMobileFilter("mobile product-filters-" . $this->qsParamName, $this->qsParamName, $id, $name);
+			}
+			?>
+		</ul>
+	<?php
+	}
+	
 	public function renderMobileFilterButton(){
 	?>
-		<div class="product-filters-container">
-			<h3 class="gray-underline"><?= _e($this->displayName) ?></h3>
-			<ul class="product-filters product-filters-<?=$this->qsParamName?>">
-				<?php
-				foreach($this->validFilterValues as $id=>$name){
-					$this->renderFilter("product-filters-" . $this->qsParamName, $this->qsParamName, $id, $name);
-				}
-				?>
-			</ul>
-		</div>
+		<div class="mobile-filter-button" data-filter-name="<?=$this->qsParamName?>"><?= _e($this->displayName) ?></div>
 	<?php
 	}
 	
@@ -642,7 +648,7 @@ class ProductFilter
 	public function getJSFiltersArray(){
 		$jsArray = "[";
 		foreach($this->currentFilterValues as $id=>$val){
-			$jsArray .= "'" . $val . "'";
+			$jsArray .= "'" . $val . "',";
 		}
 		$jsArray .= "]";
 		return $jsArray;

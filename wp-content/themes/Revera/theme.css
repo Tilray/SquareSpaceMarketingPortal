@@ -714,6 +714,20 @@ div.hthumb{
 	height: 27vw;
 }
 
+.page-head.mobile-products-page{
+	position: fixed;
+    width: 100%;
+    top: 45px;
+    background: #ffffff;
+    height: 225px;
+    z-index: 100;
+	border-bottom: 1px solid #999999;
+}
+
+.items.mobile-products-page{
+	padding-top: 220px;	
+}
+
 .mobile-product-item{
 	border-bottom: 1px solid #999999;
 }
@@ -784,6 +798,34 @@ div.hthumb{
     background-position-y: 10%;
 }
 
+.filter-panel-header{
+	font-size: 17px;
+    padding: 5px;
+    border-top: 1px solid #999999;
+}
+
+.filter-panel-header .fa{
+	float: right;
+	font-size: 22px;
+	margin-right: -10px;
+}
+
+.filter-panel.mobile.active .filter-panel-header .fa{
+}
+
+
+.filter-panel.mobile{
+	max-height: 0;
+	overflow: hidden;
+	background-color: rgba(255, 255, 255, .95);
+	transition: all .25s;
+}
+
+.filter-panel.mobile.active{
+	max-height: 1000px;
+	transition: all .5s;
+	transition-delay: .25s;
+}
 
 .product-item{
 	width: 230px;
@@ -1284,6 +1326,7 @@ h3.bothead{
 .site-footer.mobile{
 	position: fixed;
 	text-align: center;
+	z-index: 100;
 }
 
 .site-footer .color-wrapper {
@@ -1482,7 +1525,12 @@ ul.product-filters input[type=checkbox] {
 
 ul.product-filters input[type=checkbox] ~ label {
 	color: #a7a9ac;
+    font-size: 20px;
+    width: 100%;
+    padding: 10px;
+    border-top: 1px solid #cccccc;
 }
+
 ul.product-filters input[type=checkbox]:checked ~ label {
 	color: #084875;
    font-weight: bold;
@@ -1499,6 +1547,62 @@ ul.product-filters input[type=checkbox]:checked ~ label::after {
 	border: 4px solid #084875;
 	border-radius: 20px;
 }
+
+ul.product-filters.mobile input[type=checkbox]:checked ~ label::after {
+	content: "";
+	border: none;
+}
+
+.filters.mobile .divider{
+	width:6px;
+	display:table-cell;
+}
+
+.filters.mobile .mobile-filters-row{
+	display:table;
+	width:100%;
+	margin-bottom:6px;
+}
+
+.filters.mobile .filter-button {
+	display:table;
+	box-sizing: border-box; 
+	width:100%;
+	padding: 10px;
+	color: #084875;
+	font-size: 15px;
+}
+
+.filters.mobile .filter-button .fa{
+	float: right;
+	font-size: 23px;
+}
+.filters.mobile .filter-button .fa::after{
+	content: "";
+	clear: both;
+}
+
+.filters.mobile .filter-button-wrapper{
+	box-shadow:0px 0px 0px 2px grey inset;
+	display:table-cell;
+	width:49%;
+	background-color: #ffffff;
+}
+
+.filters.mobile .filter-button-content { 
+	display:table-cell;
+	vertical-align:middle;
+	height:40px;
+	font-size:10px;
+	padding-left:10px;
+}
+
+.filters.mobile .reset{
+	color: #ffffff;
+	text-transform: uppercase;
+	background-color:#fcb132;
+}
+
 
 
 img.single-product-image {
