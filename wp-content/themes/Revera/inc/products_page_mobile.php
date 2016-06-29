@@ -63,21 +63,20 @@ global $productFilters;
 								<div class="mobile-filter-button" data-filter-name="<?=$productFilters->strainCategory->qsParamName?>"><?= _e($productFilters->strainCategory->displayName) ?><i class="fa fa-chevron-circle-down" aria-hidden="true"></i></div>
 							</div>
 						</div>
-					</div>
-					<div class="mobile-filters-row">
+						<div class="divider"></div>
 						<div class="filter-button-wrapper">
 							<div class="filter-button mobile">
 								<div class="mobile-filter-button" data-filter-name="<?=$productFilters->productType->qsParamName?>"><?= _e($productFilters->productType->displayName) ?><i class="fa fa-chevron-circle-down" aria-hidden="true"></i></div>
 							</div>
-						</div>	
-						<div class="divider"></div>
+						</div>
+					</div>
+					<div class="mobile-filters-row">
 						<div class="filter-button-wrapper">
 							<div class="filter-button mobile">
 								<div class="mobile-filter-button" data-filter-name="<?=$productFilters->thc->qsParamName?>"><?= _e($productFilters->thc->displayName) ?><i class="fa fa-chevron-circle-down" aria-hidden="true"></i></div>
 							</div>
 						</div>
-					</div>
-					<div class="mobile-filters-row">
+						<div class="divider"></div>
 						<div class="filter-button-wrapper">
 							<div class="filter-button mobile">
 								<div class="mobile-filter-button" data-filter-name="<?=$productFilters->price->qsParamName?>"><?= _e($productFilters->price->displayName) ?><i class="fa fa-chevron-circle-down" aria-hidden="true"></i></div>
