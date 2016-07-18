@@ -77,11 +77,28 @@ $theProducts = QueryProducts($productFilters);
 	var pageBaseURL = "<?= the_permalink() ?>";
 	var pageTitle = "<?= the_title() ?>";
 
+	function ResetFilters(){
+		jQuery('ul input[type=checkbox]').attr('checked', false);		
+		jQuery('ul input[type=checkbox][id*="-show-all"').attr('checked', true);	
+		setProductsActive();	
+		setMobilePanelButtonColors();
+		jQuery('#primary').isotope({ filter: '.active' });
+		window.history.replaceState(
+			{}, 
+			pageTitle, 
+			pageBaseURL + <?= $productFilters->getQueryStringRenderingJS() ?>
+		);
+	}
+
 	function UpdateProducts($clicked)
 	{
 		//if it's a show-all, reset checkboxes for all others of same category-
 		//if it's not a show-all, reset show-all for this category-
+
+   		jQuery("body").animate({ scrollTop: 0 }, 400);
+
 		var thisFilterCategory = jQuery($clicked).attr('name');
+		console.log("Clicked filter " + thisFilterCategory);
 		var thisFilterCategorySelector = 'ul input[type=checkbox][name=' + thisFilterCategory + ']';
 		if (jQuery($clicked).attr('data-filter') == '')
 		{
@@ -101,6 +118,7 @@ $theProducts = QueryProducts($productFilters);
 		}
 		
 		setProductsActive();
+		setMobilePanelButtonColors();
 		
 		jQuery('#primary').isotope({ filter: '.active' });
 		window.history.replaceState(
@@ -108,6 +126,22 @@ $theProducts = QueryProducts($productFilters);
 			pageTitle, 
 			pageBaseURL + <?= $productFilters->getQueryStringRenderingJS() ?>
 		);
+	}
+
+	function setMobilePanelButtonColors(){
+		var $allPanels = jQuery(".filter-panel.mobile");
+		jQuery(".filter-button.mobile").removeClass("has-selections");
+		for (var i = 0; i < $allPanels.length; i++)
+		{
+			var filterName = jQuery($allPanels[i]).attr("data-filter");
+			console.log("Updating " + jQuery($allPanels[i]).attr("data-filter"));
+			console.log("Checking cb: " + jQuery("input#" + filterName + "-show-all"));
+			var showAllCheckboxChecked = jQuery("input#" + filterName + "-show-all").is(":checked");
+			console.log("Checked? " + showAllCheckboxChecked);
+
+			if (!showAllCheckboxChecked)
+				jQuery(".filter-button.mobile." + filterName).addClass("has-selections");
+		}
 	}
 	
 	//filterState: zero or more strings, joined and end-capped with |||
@@ -137,9 +171,10 @@ $theProducts = QueryProducts($productFilters);
 	function setProductsActive()
 	{
 		<?= $productFilters->renderProductsFilteringStatuses() ?>
-		var selector = 'div#primary div.product-item';
+		var selector = 'div.filterable-item';
 		
 		jQuery(selector).removeClass('active');
+				console.log("Removing all active classes from " + selector);
 		jQuery(selector).each(function( index ) {
 			if (
 				<?= $productFilters->renderProductsFilteringConditions() ?>
@@ -190,6 +225,8 @@ $theProducts = QueryProducts($productFilters);
 		jQuery('ul.product-filters input[type=checkbox]').change(function() {
 			UpdateProducts(jQuery(this));
 		});
+
+		setMobilePanelButtonColors();
 	});	
 </script>
 

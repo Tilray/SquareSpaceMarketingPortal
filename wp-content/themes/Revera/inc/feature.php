@@ -86,6 +86,10 @@ $defaultHomepageBG = get_field('default_homepage_banner', 'option');
 			directionNav:true,
 			controlNav:false
 		});    		
+
+		setTimeout(function(){
+			jQuery("div#slidebox").css("background-image", "none");
+		}, 1000);
 	}
 
 	jQuery(window).load(function() {

@@ -6,8 +6,6 @@ $noHideStickyFooterContent = "<div class='mobile-products-flyout'></div>";
 <script>
 	var pageBaseURL = "<?= the_permalink() ?>";
 	var pageTitle = "<?= the_title() ?>";
-
-
 </script>
 
 <?php
@@ -20,20 +18,18 @@ global $productFilters;
 foreach($productFilters->filters as $filter)
 {
 	?>
-	<div class="filter-panel mobile <?=$filter->qsParamName?>" style="display:none;">
+	<div class="filter-panel mobile <?=$filter->qsParamName?>" data-filter="<?=$filter->qsParamName?>" style="display:none;">
 		<div class="filter-panel-header">
 			<div class="col-xs-2"></div>
-			<div class="col-xs-8">
+			<div class="col-xs-8 filter-panel-title">
 				<?=_('Select ' . $filter->displayName)?>
 			</div>
 			<div class="col-xs-2"><i class="fa fa-close close-button" aria-hidden="true"></i></div>
 		</div>
 		<div class="filter-panel-options">
-			<ul class="product-filters product-filters-<?=$filter->qsParamName?>">
-				<?php
-					$filter->renderMobileFilters();
-				?>
-			</ul>
+			<?php
+				$filter->renderMobileFilters();
+			?>
 		</div>
 	</div> 
 	<?php
@@ -53,33 +49,33 @@ global $productFilters;
 				<div class="col-12">
 					<div class="mobile-filters-row">
 						<div class="filter-button-wrapper">
-							<div class="filter-button mobile">
-								<div class="mobile-filter-button" data-filter-name="<?=$productFilters->status->qsParamName?>"><?= _e($productFilters->status->displayName) ?><i class="fa fa-chevron-circle-down" aria-hidden="true"></i></div>
+							<div class="filter-button mobile <?=$productFilters->status->qsParamName?>">
+								<div class="mobile-filter-button <?=$productFilters->status->qsParamName?>" data-filter-name="<?=$productFilters->status->qsParamName?>"><?= _e($productFilters->status->displayName) ?><i class="fa fa-chevron-circle-down" aria-hidden="true"></i></div>
 							</div>
 						</div>	
 						<div class="divider"></div>
 						<div class="filter-button-wrapper">
-							<div class="filter-button mobile">
-								<div class="mobile-filter-button" data-filter-name="<?=$productFilters->strainCategory->qsParamName?>"><?= _e($productFilters->strainCategory->displayName) ?><i class="fa fa-chevron-circle-down" aria-hidden="true"></i></div>
+							<div class="filter-button mobile <?=$productFilters->strainCategory->qsParamName?>">
+								<div class="mobile-filter-button <?=$productFilters->strainCategory->qsParamName?>" data-filter-name="<?=$productFilters->strainCategory->qsParamName?>"><?= _e($productFilters->strainCategory->displayName) ?><i class="fa fa-chevron-circle-down" aria-hidden="true"></i></div>
 							</div>
 						</div>
 						<div class="divider"></div>
 						<div class="filter-button-wrapper">
-							<div class="filter-button mobile">
-								<div class="mobile-filter-button" data-filter-name="<?=$productFilters->productType->qsParamName?>"><?= _e($productFilters->productType->displayName) ?><i class="fa fa-chevron-circle-down" aria-hidden="true"></i></div>
+							<div class="filter-button mobile <?=$productFilters->productType->qsParamName?>">
+								<div class="mobile-filter-button <?=$productFilters->productType->qsParamName?>" data-filter-name="<?=$productFilters->productType->qsParamName?>"><?= _e($productFilters->productType->displayName) ?><i class="fa fa-chevron-circle-down" aria-hidden="true"></i></div>
 							</div>
 						</div>
 					</div>
 					<div class="mobile-filters-row">
 						<div class="filter-button-wrapper">
-							<div class="filter-button mobile">
-								<div class="mobile-filter-button" data-filter-name="<?=$productFilters->thc->qsParamName?>"><?= _e($productFilters->thc->displayName) ?><i class="fa fa-chevron-circle-down" aria-hidden="true"></i></div>
+							<div class="filter-button mobile <?=$productFilters->thc->qsParamName?>">
+								<div class="mobile-filter-button <?=$productFilters->thc->qsParamName?>" data-filter-name="<?=$productFilters->thc->qsParamName?>"><?= _e($productFilters->thc->displayName) ?><i class="fa fa-chevron-circle-down" aria-hidden="true"></i></div>
 							</div>
 						</div>
 						<div class="divider"></div>
 						<div class="filter-button-wrapper">
-							<div class="filter-button mobile">
-								<div class="mobile-filter-button" data-filter-name="<?=$productFilters->price->qsParamName?>"><?= _e($productFilters->price->displayName) ?><i class="fa fa-chevron-circle-down" aria-hidden="true"></i></div>
+							<div class="filter-button mobile <?=$productFilters->price->qsParamName?>">
+								<div class="mobile-filter-button <?=$productFilters->price->qsParamName?>" data-filter-name="<?=$productFilters->price->qsParamName?>"><?= _e($productFilters->price->displayName) ?><i class="fa fa-chevron-circle-down" aria-hidden="true"></i></div>
 							</div>
 						</div>	
 						<div class="divider"></div>
@@ -103,7 +99,7 @@ global $productFilters;
             
             $activeClass = $product->initiallyActive ? "active" : "";
 			?>
-			<div class="post mobile-product-item <?= $activeClass?>" 
+			<div class="post mobile-product-item filterable-item <?= $activeClass?>" 
 				data-id="<?=$product->id?>" 
 				data-straincategory="<?=$product->straincategory?>" 
 				data-status="<?=$product->status?>" 
@@ -128,8 +124,8 @@ global $productFilters;
 				</div>
 				<div class="mobile-product-description">
 					<div class="description-inner">
-						<h3><?=$product->productName ?></h3>
-						<h4><?=$product->primaryStrainCategoryName ?></h4>
+						<a href="<?=$product->productUrl?><?=$hcpParam?>"><h3><?=$product->productName ?></h3></a>
+						<a href="<?=$product->productUrl?><?=$hcpParam?>"><h4><?=$product->primaryStrainCategoryName ?></h4></a>
 					</div>
 				</div>
 			 </div>

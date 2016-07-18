@@ -75,10 +75,14 @@ jQuery(window).load(function() {
 	    		else{
 		    		jQuery('.filter-panel.mobile').removeClass('active');
 		    		jQuery('.filter-panel.mobile.' + filterName).addClass('active');
-		    		console.log(jQuery(this).attr('data-filter-name'));
 	    		}
 	    	});
 	    }
+
+	    jQuery('.filter-button.mobile.reset').click(function(){
+	    	console.log("Reset!");
+	    	ResetFilters();
+	    });
     }
 
 });

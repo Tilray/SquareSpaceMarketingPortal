@@ -26,14 +26,6 @@ if ($deviceType === 'phone')
         </div><?php
     }
 
-    global $noHideStickyFooterContent;
-    if($noHideStickyFooterContent){
-        ?>
-        <div class="no-hide-sticky-footer-content">
-            <?=$noHideStickyFooterContent?>
-        </div><?php
-    }
-
     ?>
     <div class="color-wrapper">
     	<div class="container primary">
@@ -58,7 +50,17 @@ if ($deviceType === 'phone')
 </footer>
 
 
-<?php wp_footer(); ?>
+<?php 
+
+global $noHideStickyFooterContent;
+if($noHideStickyFooterContent){
+    ?>
+    <div class="no-hide-sticky-footer-content">
+        <?=$noHideStickyFooterContent?>
+    </div><?php
+}
+
+wp_footer(); ?>
 
 </body>
 </html>

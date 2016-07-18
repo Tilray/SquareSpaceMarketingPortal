@@ -13,6 +13,19 @@
 		<main id="main" class="site-main" role="main">
 			The page you are looking for has moved or does not exist.  
 		</main><!-- #main -->
+        <form method="get" id="search-form" action="<?php bloginfo('url') . get_current_language_code(); ?>">
+            <label>
+                <span class="screen-reader-text">Search for:</span>
+                <input type="search" class="search-field" placeholder="" value="" name="s" title="Search for:">
+            </label>
+            <button type="submit" class="search-submit">
+                <span class="fa fa-search">
+                    
+                </span>
+            </button>
+            <input type="hidden" name="lang" value="en"></form>                            
+        </form>
+		
 	</div><!-- #primary -->
 
 	</div>

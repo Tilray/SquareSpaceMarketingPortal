@@ -34,7 +34,7 @@
                 
                 $activeClass = $product->initiallyActive ? "active" : "";
 				?>
-				<div class="col-2 portbox post product-item <?= $activeClass?>" 
+				<div class="col-2 portbox post product-item filterable-item <?= $activeClass?>" 
 					data-id="<?=$product->id?>" 
 					data-straincategory="<?=$product->straincategory?>" 
 					data-status="<?=$product->status?>" 
