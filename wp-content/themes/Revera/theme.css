@@ -1684,14 +1684,15 @@ p.price-text{
 }
 
 .filter-panel-header{
-	font-size: 17px;
+	font-size: 23px;
     padding: 5px;
     border-top: 1px solid #999999;
+    height: 40px;
 }
 
 .filter-panel-header .fa{
 	float: right;
-	font-size: 22px;
+	font-size: 28px;
 	margin-right: -10px;
 }
 

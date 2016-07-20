@@ -64,7 +64,7 @@ jQuery(window).load(function() {
 
     	jQuery('.filter-panel.mobile').appendTo(jQuery('.mobile-products-flyout'));	
 	    
-	    jQuery('.filter-panel.mobile .close-button').click(closeAllProductFilterPanels);
+	    jQuery('.filter-panel-header').click(closeAllProductFilterPanels);
 
 	    if (jQuery('.mobile-filter-button').length){
 	    	jQuery('.mobile-filter-button').click(function(){

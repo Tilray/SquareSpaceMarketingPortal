@@ -79,7 +79,7 @@ $theProducts = QueryProducts($productFilters);
 
 	function ResetFilters(){
 		jQuery('ul input[type=checkbox]').attr('checked', false);		
-		jQuery('ul input[type=checkbox][id*="-show-all"').attr('checked', true);	
+		jQuery('ul input[type=checkbox][id*="-show-all"]').attr('checked', true);	
 		setProductsActive();	
 		setMobilePanelButtonColors();
 		jQuery('#primary').isotope({ filter: '.active' });
