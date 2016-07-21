@@ -20,11 +20,11 @@ foreach($productFilters->filters as $filter)
 	?>
 	<div class="filter-panel mobile <?=$filter->qsParamName?>" data-filter="<?=$filter->qsParamName?>" style="display:none;">
 		<div class="filter-panel-header">
-			<div class="col-xs-1"></div>
+			<div class="col-xs-2"></div>
 			<div class="col-xs-8 filter-panel-title">
 				<?=_('Select ' . $filter->displayName)?>
 			</div>
-			<div class="col-xs-1"><i class="fa fa-close close-button" aria-hidden="true"></i></div>
+			<div class="col-xs-2"><i class="fa fa-close close-button" aria-hidden="true"></i></div>
 		</div>
 		<div class="filter-panel-options">
 			<?php

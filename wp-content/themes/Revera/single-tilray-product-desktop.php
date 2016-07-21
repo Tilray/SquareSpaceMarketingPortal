@@ -21,7 +21,7 @@
 			?>
 			<img class="single-product-image" src="<?=$image?>" alt="<?php the_title(); ?>"/>
 		</div>
-		<div class="col-sm-4">
+		<div class="col-md-4 col-sm-6">
 			<h1 class="mockH2"><?php the_title(); ?></h1>
 			<p><?=$thcAndCbdText?></p>
 			<?php 
@@ -90,7 +90,7 @@
 			<?php endif; // comments_open ?>						
 			
 		</div>
-		<div class="col-sm-2">
+		<div class="col-md-2 hidden-xs">
 		</div>
 	</div><!-- #primary -->
 	

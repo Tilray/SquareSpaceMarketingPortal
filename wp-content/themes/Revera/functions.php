@@ -325,7 +325,7 @@ function render_news_section($args, $showPagination = false, $pageLinkNumber = 0
 			$numRendered++;
 			if ($numRendered % 3 == 0){
 				?>
-				<div class="clearfix"></div></div><div class="col-lg-12">
+				<div class="clearfix"></div></div><div class="col-sm-12">
 				<?
 			}
 			?>
@@ -334,7 +334,7 @@ function render_news_section($args, $showPagination = false, $pageLinkNumber = 0
 
 		<!-- pagination here -->
 		<?php if ($showPagination){?>
-			</div><div class="col-lg-12">
+			</div><div class="col-sm-12">
 			<div class="navigation pagination-buttons"><p><?php 
 				previous_posts_link("<i class='fa fa-arrow-left'></i>&nbsp;&nbsp;prev");
 				next_posts_link("next&nbsp;&nbsp;<i class='fa fa-arrow-right'></i>");

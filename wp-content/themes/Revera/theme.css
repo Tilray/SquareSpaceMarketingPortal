@@ -907,6 +907,9 @@ li.rbanner{
 }
 
 
+div.clearfix{
+	height: 0;
+}
 
 /* Comments */
 
