@@ -298,6 +298,27 @@ function render_left_nav($parentID, $pageID)
 	}
 }
 
+function render_single_news_post($postID){
+?>
+	<div class="blog-post-preview col-sm-6 col-md-4">
+		<?php
+		$thumbID = get_post_thumbnail_id($postID);
+		$img_attrs = wp_get_attachment_image_src( $thumbID,'blog-preview' ); 
+		$image = $img_attrs[0];
+		if($image) {?>
+			<a href="<?= get_permalink($postID) ?>" class="prevent-reflow">
+				<img class="blog-preview" src="<?= $image ?>" alt="<?php the_title(); ?>"/>
+			</a>				
+		<?php }?>
+		<a href="<?= get_permalink($postID) ?>"><h2><?= get_the_title($postID) ?></h2></a>
+		<p>
+			<?= get_the_excerpt($postID) ?>
+			<a class="read-more-link" href="<?= get_permalink($postID) ?>"><?= __('Read more') ?> &raquo;</a>
+		</p>
+	</div>
+<?php
+}
+
 function render_news_section($args, $showPagination = false, $pageLinkNumber = 0){
 	global $wp_query, $paged;
 	$wp_query = new WP_Query( $args );
@@ -893,13 +914,15 @@ class ProductFilters{
 	//creates some js that creates the querystring on the fly
 	//we have to create the js so we're not hardcoding the filter names
 	public function getQueryStringRenderingJS(){
-		$output = "'?'"; 
+		$output = "'?"; 
+		$params = array();
+
 		foreach($this->filters as $filter)
 		{
-			$output .= "+'&" . $filter->qsParamName . "=' + GetFiltersArray('ul.product-filters-" . $filter->qsParamName . " input[type=checkbox]:checked').join(\",\")";
+			$params[] = $filter->qsParamName . "=' + GetFiltersArray('ul.product-filters-" . $filter->qsParamName . " input[type=checkbox]:checked').join(\",\")";
 		}
 		
-		return $output;
+		return $output . implode(" + '&", $params);
 	}
 	
 	public function renderProductsFilteringStatuses(){

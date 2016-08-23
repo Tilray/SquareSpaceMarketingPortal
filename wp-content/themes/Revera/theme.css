@@ -328,6 +328,25 @@ button.search-submit{
     color: #a7a9ac;
 }
 
+form.search-404{
+    border: 2px solid #a7a9ac;
+    display: inline-block;
+    padding: 5px;
+}
+
+form.search-404 label{
+	margin: 0;
+}
+
+form.search-404 input.search-field{
+	width: 300px;
+	font-size: 15px;
+}
+
+div.more-content{
+	margin-top: 120px;
+}
+
 	
 #loginmenucontainer{
 	width: 100%;
@@ -1278,6 +1297,10 @@ span.left-nav-selected-child h2::after{
 	cursor: pointer;
 }
 
+p.back-to-top{
+	margin-top: 30px;
+}
+
 a.call-to-action-button{
 	padding: 13px 25px;
 	border: solid 2px #ffb12f;
@@ -1342,7 +1365,6 @@ a.call-to-action-button:hover svg path{
 
 .switchpane
 {
-	display: none;
 }
 
 .switchpane.active{
@@ -1443,12 +1465,12 @@ ul.product-filters.mobile input[type=checkbox]:checked ~ label::after {
 	width:100%;
 	padding: 10px;
 	color: #084875;
-	font-size: 15px;
+	font-size: 13px;
 }
 
 .filters.mobile .filter-button .fa{
 	float: right;
-	font-size: 23px;
+	font-size: 19px;
 }
 .filters.mobile .filter-button .fa::after{
 	content: "";
@@ -1564,7 +1586,7 @@ p.price-text{
 .single-product-mobile-attributes a{
 	display: block;
 	font-size: 20px;
-	line-height: 22px;
+	line-height: 30px;
 	font-weight: bold;
 	color: #a7a9ac;
 }

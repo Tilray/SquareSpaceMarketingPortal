@@ -22,7 +22,7 @@ foreach($productFilters->filters as $filter)
 		<div class="filter-panel-header">
 			<div class="col-xs-2"></div>
 			<div class="col-xs-8 filter-panel-title">
-				<?=_('Select ' . $filter->displayName)?>
+				<?php _e('Select ' . $filter->displayName); ?>
 			</div>
 			<div class="col-xs-2"><i class="fa fa-close close-button" aria-hidden="true"></i></div>
 		</div>
@@ -81,7 +81,7 @@ global $productFilters;
 						<div class="divider"></div>
 						<div class="filter-button-wrapper">
 							<div class="filter-button mobile reset">
-								<div class="mobile-filter-button" data-filter-name="reset">Reset</div>
+								<div class="mobile-filter-button" data-filter-name="reset"><?php _e('Reset'); ?></div>
 							</div>
 						</div>
 					</div>

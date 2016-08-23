@@ -26,13 +26,42 @@ get_header(); ?>
 
 			<section class="error-404 not-found">
 				<header class="pages-header">
-					<h1 class="page-title"><?php _e( 'Oops! That page can&rsquo;t be found.', 'web2feel' ); ?></h1>
+					<h1 class="page-title"><?php _e( 'That page can&rsquo;t be found.', 'web2feel' ); ?></h1>
 				</header><!-- .page-header -->
 
 				<div class="page-content">
-					<p><?php _e( 'It looks like nothing was found at this location. Maybe try one of the links above?', 'web2feel' ); ?></p>
+					<p><?php echo get_field('the_404_page_content', 'options'); ?></p>
+					<p>
+						<form method="get" id="search-form" class="search-404" action="<?php bloginfo('url') . get_current_language_code(); ?>">
+							<label>
+								<span class="screen-reader-text">Search for:</span>
+								<input type="search" class="search-field" placeholder="" value="" name="s" title="Search for:">
+							</label>
+							<button type="submit" class="search-submit">
+								<span class="fa fa-search">
+								</span>
+							</button>
+							<input type="hidden" name="lang" value="en"></form>                            
+						</form>
+					</p>
 
-				
+					<div class="more-content">
+						<h3>More from Tilray</h3>
+						<div class="row">
+						<?php
+							$post1 = get_field('the_404_page_post_1', 'options');
+							$post2 = get_field('the_404_page_post_2', 'options');
+
+							if ($post1){
+								render_single_news_post($post1->ID);
+							}
+
+							if ($post2){
+								render_single_news_post($post2->ID);								
+							}
+						?>
+						</div>
+					</div>
 				</div><!-- .page-content -->
 			</section><!-- .error-404 -->
 

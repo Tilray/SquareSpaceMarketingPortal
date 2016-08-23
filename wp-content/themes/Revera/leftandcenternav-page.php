@@ -41,8 +41,12 @@ get_header(); ?>
 			var centerNavItemSelector = 'span.center-nav-item';
 			
 			function SelectPane(index){
-				jQuery(allPanes).removeClass('active');
-				jQuery(allPanes[index]).addClass('active');
+				var offset = jQuery('div[data-index="' + index + '"]').offset().top - 40;
+
+				//don't scroll to the first one, it just looks weird
+				if (index > 0)
+					jQuery('html, body').animate({scrollTop: offset}, 750);
+
 				jQuery(allCenterNavItems).removeClass('center-nav-selected-child');
 				jQuery(allCenterNavItems[index]).addClass('center-nav-selected-child');
 			};
@@ -50,6 +54,9 @@ get_header(); ?>
 			for(var i = 0; i < allPanes.length; i++)
 			{
 				var title = jQuery(allPanes[i]).attr('data-title');
+				jQuery(allPanes[i]).append("<p class='back-to-top'><a href='#' onclick='jQuery(\"html, body\").animate({scrollTop:0});'><i class='fa fa-arrow-up' aria-hidden='true'></i><?php _e('Back to Top')?></a></p><br/><br/>");
+
+				jQuery(allPanes[i]).attr('data-index', i);
 				var parentDiv = jQuery('#center-nav')[0];
 				
 				jQuery(parentDiv).append('<span data-index="'+ i +'" class="center-nav-item"><a><span class="left-nav-bullet"></span><h3>' + title + '</h3></a></span>');
