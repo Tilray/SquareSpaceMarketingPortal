@@ -17,7 +17,7 @@ $itemPrice = 0;
 $itemPriceObj = get_field_object( 'price', get_the_ID() );
 if ($itemPriceObj){
 	$value = get_field('price', get_the_ID());
-	$itemPrice = intval($value);
+	$itemPrice = floatval($value);
 	$label = $itemPriceObj['choices'][ $value ];	
 	if ($itemPrice > 0){
 		$productType = trim(get_post_meta(get_the_ID(), 'product_type', true));

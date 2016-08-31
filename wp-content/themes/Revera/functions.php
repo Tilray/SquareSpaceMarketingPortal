@@ -138,8 +138,8 @@ function web2feel_scripts() {
 	wp_enqueue_style( 'lightbox', get_template_directory_uri() . '/css/lightbox.css');
 	wp_enqueue_style( 'fontawesome', '//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css');
 
-	wp_enqueue_style( 'theme', get_template_directory_uri() . '/theme.css?v=1.004');
-	wp_enqueue_style( 'ie-overrides', get_template_directory_uri() . '/css/ie.css?v=1.003');
+	wp_enqueue_style( 'theme', get_template_directory_uri() . '/theme.css?v=1.005');
+	wp_enqueue_style( 'ie-overrides', get_template_directory_uri() . '/css/ie.css?v=1.005');
 	$wp_styles->add_data( 'ie-overrides', 'conditional', 'IE' );
 
 	wp_enqueue_script( 'bootstrap', get_template_directory_uri() . '/bootstrap/bootstrap.min.js', array( 'jquery' ), '20120206', true );
@@ -487,15 +487,14 @@ function getProductTHCRange($thc, $validTHCValues, $getDisplayValue = false){
 }
 
 function getProductPriceRange($price, $allPrices){
-	$priceVal = intval($price);
 	foreach ($allPrices as $priceRange => $display)
 	{
 		if ($priceRange == "")
 			continue;
 			
 		$ends = explode("-", $priceRange);
-		$low = intval($ends[0]);
-		$high = intval($ends[1]);
+		$low = floatval($ends[0]);
+		$high = floatval($ends[1]);
 		if ($priceVal >= $low && $priceVal <= $high){
 			return $priceRange;
 		}

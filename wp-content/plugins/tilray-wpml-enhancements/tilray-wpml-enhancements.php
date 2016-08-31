@@ -48,9 +48,9 @@ function get_current_locale(){
 
 function format_price_for_current_locale($price){
 	if (get_current_language_code() == "en")
-		return "$" . $price . ".00";
+		return "$" . number_format($price, 2);
 		
-	return $price . ",00 $";
+	return number_format($price, 2, ',', '') . " $";
 }
 
 function render_language_chooser($ul_class){
