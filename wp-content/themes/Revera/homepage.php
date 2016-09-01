@@ -10,6 +10,8 @@
  * @package web2feel
  */
 
+header("Vary: User-Agent, Accept"); 
+
 get_header(); ?>
 
 <?php

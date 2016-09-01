@@ -54,7 +54,7 @@ get_header(); ?>
 			for(var i = 0; i < allPanes.length; i++)
 			{
 				var title = jQuery(allPanes[i]).attr('data-title');
-				jQuery(allPanes[i]).append("<p class='back-to-top'><a href='#' onclick='jQuery(\"html, body\").animate({scrollTop:0});'><i class='fa fa-arrow-up' aria-hidden='true'></i><?php _e('Back to Top')?></a></p><br/><br/>");
+				jQuery(allPanes[i]).append("<p class='back-to-top'><a href='#' onclick='jQuery(\"html, body\").animate({scrollTop:0});'><i class='fa fa-arrow-up' aria-hidden='true'></i><?php _e('Back to Top')?></a></p>");
 
 				jQuery(allPanes[i]).attr('data-index', i);
 				var parentDiv = jQuery('#center-nav')[0];

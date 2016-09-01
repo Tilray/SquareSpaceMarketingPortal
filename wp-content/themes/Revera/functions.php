@@ -714,6 +714,7 @@ class Product{
 	public $productName;
 	public $price;
 	public $actualprice;
+	public $unitLabel;
     public $initiallyActive;
     public $primaryStrainCategory;
     public $primaryStrainCategoryName;
@@ -790,6 +791,9 @@ class Product{
         $productPrice = trim(get_post_meta($id, 'price', true));
         $this->actualprice = $productPrice;
         $this->price = getProductPriceRange($productPrice, $productFilters->price->validFilterValues);
+
+        $this->unitLabel = trim(get_post_meta($id, 'unit_label', true));
+
 
         $this->initiallyActive = TRUE;
         $prodAtts = get_object_vars($this);

@@ -10,6 +10,8 @@
  * @package web2feel
  */
 
+header("Vary: User-Agent, Accept");
+
 get_header(); 
 $thisProduct = new Product($post, $productFilters);
 
@@ -23,7 +25,7 @@ if ($itemPriceObj){
 		$productType = trim(get_post_meta(get_the_ID(), 'product_type', true));
 		$priceText = format_price_for_current_locale($itemPrice);
 		if (strtolower($productType) != "accessory"){
-			$priceText .= " " . __('per gram');
+			$priceText .= " " . __($thisProduct->unitLabel);
 		}
 		
 		$itemStoreLink = trim(get_post_meta(get_the_ID(), 'store_link', true));
