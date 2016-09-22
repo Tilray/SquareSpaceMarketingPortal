@@ -1612,6 +1612,7 @@ p.price-text{
 }
 
 @media (max-width: 767px){
+	.page-template-product-page h1, 
 	.page-template-product-page h2.mockH1
 	{
 		margin-top: 0;
@@ -2067,7 +2068,7 @@ div.search-result{
 }
 
 .search-result div.search-result-body h3{
-	margin: 0;
+	margin: 5px 0 0 0;
 	font-size: 16px;
 	color: #a7a9ac;
 	margin-bottom: 4px;

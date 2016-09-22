@@ -136,11 +136,9 @@ function web2feel_scripts() {
 	wp_enqueue_style( 'glyphicons', get_template_directory_uri() . '/css/bootstrap-glyphicons.css');
 	wp_enqueue_style( 'slicknav', get_template_directory_uri() . '/css/slicknav.css');
 	wp_enqueue_style( 'lightbox', get_template_directory_uri() . '/css/lightbox.css');
-	wp_enqueue_style( 'fontawesome', '//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css');
-
+	wp_enqueue_style( 'wpml-lang-switcher', get_template_directory() . '/css/copy-over-of-language-selector.css');
 	wp_enqueue_style( 'theme', get_template_directory_uri() . '/theme.css?v=1.005');
-	wp_enqueue_style( 'ie-overrides', get_template_directory_uri() . '/css/ie.css?v=1.005');
-	$wp_styles->add_data( 'ie-overrides', 'conditional', 'IE' );
+	wp_enqueue_style( 'fontawesome', '//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css');
 
 	wp_enqueue_script( 'bootstrap', get_template_directory_uri() . '/bootstrap/bootstrap.min.js', array( 'jquery' ), '20120206', true );
 	wp_enqueue_script( 'flexslider', get_template_directory_uri() . '/js/jquery.flexslider.js', array( 'jquery' ), '20120206', true );
@@ -281,6 +279,18 @@ function get_all_categories_for_post_from_set($postID, $validValues){
 function render_left_nav($parentID, $pageID)
 {
 	$childPages = get_child_pages($parentID);
+
+	if (get_field('show_in_left_nav', $parentID)){
+		$linkClass = "none";
+		if ($parentID == $pageID)
+		{
+			$linkClass = "left-nav-selected-child";
+		}		
+		?>
+		<span class="<?=$linkClass?>"><a href="<?php echo get_permalink( $parentID );?>"><h2><?=get_the_title($parentID)?></h2></a></span>
+		<?php
+	}
+
 	foreach ($childPages as $child)
 	{
 		$linkClass = "none";

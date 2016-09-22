@@ -20,8 +20,15 @@
 </head>
 
 <body <?php body_class(); ?>>
+
 <?php get_template_part( 'inc/googletagmanager' ); ?>
-<div id="page" class="hfeed site">
+<?php
+	$ieClass = "";
+	if(preg_match('/(?i)msie (.*?);/',$_SERVER['HTTP_USER_AGENT'])){
+		$ieClass = "ie";
+	} 
+?>
+<div id="page" class="hfeed site <?=$ieClass?>">
 	<?php do_action( 'before' ); ?>
 	<header id="masthead" class="site-header" role="banner">
 		<div id="mobile-nav">
@@ -111,7 +118,7 @@
 		<nav class="container">
 			<div class="row">
 				<div class="site-branding col-sm-3">
-				<h2 class="site-title logo"><a id="blogname" rel="home" href="<?=get_wpml_home_url()?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>"><?php bloginfo( 'name' ); ?></a></h2>
+				<h2 class="site-title logo"><a id="blogname" rel="home" href="<?=get_wpml_home_url()?>/" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>"><?php bloginfo( 'name' ); ?></a></h2>
 				</div>
 				<div class="col-sm-9 mainmenu">
                     <div id="primary-menu-container" class="topmenu">
