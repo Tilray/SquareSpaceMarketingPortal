@@ -73,6 +73,7 @@ function QueryProducts($productFilters)
 $theProducts = QueryProducts($productFilters);	
 
 ?>
+<script src="<?=get_template_directory_uri()?>/js/isotope-min.js"></script>
 <script>
 	var pageBaseURL = "<?= the_permalink() ?>";
 	var pageTitle = "<?= the_title() ?>";

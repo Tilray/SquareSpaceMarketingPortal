@@ -136,7 +136,7 @@ function web2feel_scripts() {
 	wp_enqueue_style( 'glyphicons', get_template_directory_uri() . '/css/bootstrap-glyphicons.css');
 	wp_enqueue_style( 'slicknav', get_template_directory_uri() . '/css/slicknav.css');
 	wp_enqueue_style( 'lightbox', get_template_directory_uri() . '/css/lightbox.css');
-	wp_enqueue_style( 'wpml-lang-switcher', get_template_directory() . '/css/copy-over-of-language-selector.css');
+//	wp_enqueue_style( 'wpml-lang-switcher', get_template_directory() . '/css/copy-over-of-language-selector.css');
 	wp_enqueue_style( 'theme', get_template_directory_uri() . '/theme.css?v=1.005');
 	wp_enqueue_style( 'fontawesome', '//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css');
 
@@ -145,7 +145,7 @@ function web2feel_scripts() {
 	wp_enqueue_script( 'superfish', get_template_directory_uri() . '/js/superfish.js', array( 'jquery' ), '20120206', true );	
 	wp_enqueue_script( 'custom', get_template_directory_uri() . '/js/custom.js', array( 'jquery' ), '20120206', true );
 	wp_enqueue_script( 'mobilemenu', get_template_directory_uri() . '/js/mobilemenu.js', array(), '20120206', true );
-	wp_enqueue_script( 'isotope', get_template_directory_uri() . '/js/isotope-min.js', array( 'jquery' ), '20120206', true );	
+//	wp_enqueue_script( 'isotope', get_template_directory_uri() . '/js/isotope-min.js', array( 'jquery' ), '20120206', true );	
 	wp_enqueue_script( 'slicknav', get_template_directory_uri() . '/js/jquery.slicknav.min.js', array( 'jquery' ), '20120206', true );	
 	wp_enqueue_script( 'lightbox', get_template_directory_uri() . '/js/lightbox.js', array( 'jquery' ), '20120206', true );	
 	wp_enqueue_script( 'web2feel-skip-link-focus-fix', get_template_directory_uri() . '/js/skip-link-focus-fix.js', array(), '20130115', true );
@@ -1005,3 +1005,8 @@ function custom_excerpt($new_length = 20, $new_more = '...') {
 if( function_exists('acf_add_options_page') ) {	
 	acf_add_options_page();
 }
+
+
+//totally do not need emojis on this site.  Let's shave off 5k and 3 file loads!
+remove_action( 'wp_head', 'print_emoji_detection_script', 7 );
+remove_action( 'wp_print_styles', 'print_emoji_styles' );
