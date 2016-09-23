@@ -118,7 +118,12 @@
 		<nav class="container">
 			<div class="row">
 				<div class="site-branding col-sm-3">
-				<h2 class="site-title logo"><a id="blogname" rel="home" href="<?=get_wpml_home_url()?>/" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>"><?php bloginfo( 'name' ); ?></a></h2>
+				<?php
+					$tag = "h2";
+					if ($_SERVER["REQUEST_URI"] == '/')
+						$tag = "h1";
+				?>
+				<<?=$tag?> class="site-title logo"><a id="blogname" rel="home" href="<?=get_wpml_home_url()?>/" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>"><?php bloginfo( 'name' ); ?></a></<?=$tag?>>
 				</div>
 				<div class="col-sm-9 mainmenu">
                     <div id="primary-menu-container" class="topmenu">

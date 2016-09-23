@@ -86,6 +86,7 @@ p a {
 .site-branding{
 	margin-bottom: 20px;
 }
+h1.site-title,
 h2.site-title{
 	text-transform: uppercase;
 	font-weight: 800;
@@ -93,6 +94,7 @@ h2.site-title{
 	margin-bottom: 25px;
 }
 
+h1.site-title a,
 h2.site-title a {
 	text-indent: -999em;
 	background-image: url('images/tilray-nav-logo.svg');
@@ -106,6 +108,7 @@ h2.site-title a {
 	background-size: contain;
 }
 
+html[lang='fr-CA'] h1.site-title a,
 html[lang='fr-CA'] h2.site-title a {
 	background-image: url('images/tilray-nav-logo-fr.svg');
 }
@@ -2186,6 +2189,7 @@ div.search-result{
 		font-size: 60%;
 	}
 
+	h1.site-title,
 	h2.site-title{
 		text-align: center;
 	}
@@ -2255,6 +2259,7 @@ div.search-result{
 		margin: 0;
 	}
 
+	h1.site-title,
 	h2.site-title{
 		margin-bottom: 0;
 	}
