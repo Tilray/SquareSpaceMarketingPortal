@@ -138,7 +138,7 @@
                                     
                                 </span>
                             </button>
-                            <input type="hidden" name="lang" value="en"></form>                            
+                            <input type="hidden" name="lang" value="en">                           
                         </form>
                     </div>
 				</div>		
