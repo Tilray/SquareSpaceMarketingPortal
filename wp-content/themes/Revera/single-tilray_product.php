@@ -23,14 +23,11 @@ if ($itemPriceObj){
 	$label = $itemPriceObj['choices'][ $value ];	
 	if ($itemPrice > 0){
 		$productType = trim(get_post_meta(get_the_ID(), 'product_type', true));
-		$priceText = format_price_for_current_locale($itemPrice);
-		if (strtolower($productType) != "accessory"){
-			$priceText .= " " . __($thisProduct->unitLabel);
-		}
-		
+		$priceText = format_price_for_current_locale($itemPrice) . ' ' . __($thisProduct->unitLabel);		
 		$itemStoreLink = trim(get_post_meta(get_the_ID(), 'store_link', true));
 	}
 }
+
 
 $thc = trim($thisProduct->actualthc);
 $cbd = trim($thisProduct->cbd);
