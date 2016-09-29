@@ -501,7 +501,7 @@ function getProductPriceRange($price, $allPrices){
 		$ends = explode("-", $priceRange);
 		$low = floatval($ends[0]);
 		$high = floatval($ends[1]);
-		if ($priceVal >= $low && $priceVal <= $high){
+		if ($price >= $low && $price <= $high){
 			return $priceRange;
 		}
 	}
@@ -855,10 +855,10 @@ class ProductFilters{
 													
 		$this->thc = new ProductFilter("thc", "THC Level",
 								array(	"" => "", 
-										"0-14" => "< 15%", 
+										"0-14" => "&lt; 15%", 
 										"15-20" => "15% - 20%", 
 										"21-25" => "21% - 25%", 
-										"26-100" => "> 25%"));
+										"26-100" => "&gt; 25%"));
 
 		$this->preciseTHCRangesLow = array(	"" => 0,
 											"0-14" => 0,
