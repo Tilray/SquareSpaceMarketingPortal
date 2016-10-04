@@ -48,5 +48,5 @@ get_header(); ?>
 		</div><!-- #primary -->
 
 	</div>
-<?php get_footer(); ?>
 </div>
+<?php get_footer(); ?>

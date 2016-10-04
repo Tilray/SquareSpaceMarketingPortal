@@ -107,5 +107,5 @@ if ($paged > 1)
 		</div><!-- #primary -->
 	</div>
 </div>
-<?php get_footer(); ?>
 </div> <!-- #page -->
+<?php get_footer(); ?>
