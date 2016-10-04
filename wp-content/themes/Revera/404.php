@@ -38,8 +38,7 @@ get_header(); ?>
 								<input type="search" class="search-field" placeholder="" value="" name="s" title="Search for:">
 							</label>
 							<button type="submit" class="search-submit">
-								<span class="fa fa-search">
-								</span>
+								<i class="icon-search"></i>
 							</button>
 							<input type="hidden" name="lang" value="en"></form>                            
 						</form>

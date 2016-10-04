@@ -19,9 +19,9 @@
                 <input type="search" class="search-field" placeholder="" value="" name="s" title="Search for:">
             </label>
             <button type="submit" class="search-submit">
-                <span class="fa fa-search">
+                <i class="icon-search">
                     
-                </span>
+                </i>
             </button>
             <input type="hidden" name="lang" value="en"></form>                            
         </form>

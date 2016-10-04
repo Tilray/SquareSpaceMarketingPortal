@@ -96,13 +96,13 @@
 				<?php wp_nav_menu( array( 'container' => '', 'theme_location' => 'login','container_class' => 'login-menu-container','menu_id'=>'login-menu' ,'menu_class'=>'login-menu' ) ); ?>
 				<span class="social-connections">
 					<a href="https://www.facebook.com/tilray" target="_blank">
-						<span class="fa fa-facebook"></span>
+						<i class="icon-facebook"></i>
 					</a>
 					<a href="https://twitter.com/@tilray" target="_blank">
-						<span class="fa fa-twitter"></span>
+						<i class="icon-twitter"></i>
 					</a>
 					<a href="https://www.instagram.com/tilray" target="_blank">
-						<span class="fa fa-instagram"></span>
+						<i class="icon-instagram"></i>
 					</a>
 				</span>		
             </div>
@@ -134,9 +134,9 @@
                                 <input type="search" class="search-field" placeholder="" value="" name="s" title="Search for:">
                             </label>
                             <button type="submit" class="search-submit">
-                                <span class="fa fa-search">
+                                <i class="icon-search">
                                     
-                                </span>
+                                </i>
                             </button>
                             <input type="hidden" name="lang" value="en">                           
                         </form>

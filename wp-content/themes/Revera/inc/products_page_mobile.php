@@ -24,7 +24,7 @@ foreach($productFilters->filters as $filter)
 			<div class="col-xs-8 filter-panel-title">
 				<?php _e('Select ' . $filter->displayName); ?>
 			</div>
-			<div class="col-xs-2"><i class="fa fa-close close-button" aria-hidden="true"></i></div>
+			<div class="col-xs-2"><i class="icon-cancel close-button" aria-hidden="true"></i></div>
 		</div>
 		<div class="filter-panel-options">
 			<?php
@@ -50,32 +50,32 @@ global $productFilters;
 					<div class="mobile-filters-row">
 						<div class="filter-button-wrapper">
 							<div class="filter-button mobile <?=$productFilters->status->qsParamName?>">
-								<div class="mobile-filter-button <?=$productFilters->status->qsParamName?>" data-filter-name="<?=$productFilters->status->qsParamName?>"><?= _e($productFilters->status->displayName) ?><i class="fa fa-chevron-circle-down" aria-hidden="true"></i></div>
+								<div class="mobile-filter-button <?=$productFilters->status->qsParamName?>" data-filter-name="<?=$productFilters->status->qsParamName?>"><?= _e($productFilters->status->displayName) ?><i class="icon-angle-circled-down" aria-hidden="true"></i></div>
 							</div>
 						</div>	
 						<div class="divider"></div>
 						<div class="filter-button-wrapper">
 							<div class="filter-button mobile <?=$productFilters->strainCategory->qsParamName?>">
-								<div class="mobile-filter-button <?=$productFilters->strainCategory->qsParamName?>" data-filter-name="<?=$productFilters->strainCategory->qsParamName?>"><?= _e($productFilters->strainCategory->displayName) ?><i class="fa fa-chevron-circle-down" aria-hidden="true"></i></div>
+								<div class="mobile-filter-button <?=$productFilters->strainCategory->qsParamName?>" data-filter-name="<?=$productFilters->strainCategory->qsParamName?>"><?= _e($productFilters->strainCategory->displayName) ?><i class="icon-angle-circled-down" aria-hidden="true"></i></div>
 							</div>
 						</div>
 						<div class="divider"></div>
 						<div class="filter-button-wrapper">
 							<div class="filter-button mobile <?=$productFilters->productType->qsParamName?>">
-								<div class="mobile-filter-button <?=$productFilters->productType->qsParamName?>" data-filter-name="<?=$productFilters->productType->qsParamName?>"><?= _e($productFilters->productType->displayName) ?><i class="fa fa-chevron-circle-down" aria-hidden="true"></i></div>
+								<div class="mobile-filter-button <?=$productFilters->productType->qsParamName?>" data-filter-name="<?=$productFilters->productType->qsParamName?>"><?= _e($productFilters->productType->displayName) ?><i class="icon-angle-circled-down" aria-hidden="true"></i></div>
 							</div>
 						</div>
 					</div>
 					<div class="mobile-filters-row">
 						<div class="filter-button-wrapper">
 							<div class="filter-button mobile <?=$productFilters->thc->qsParamName?>">
-								<div class="mobile-filter-button <?=$productFilters->thc->qsParamName?>" data-filter-name="<?=$productFilters->thc->qsParamName?>"><?= _e($productFilters->thc->displayName) ?><i class="fa fa-chevron-circle-down" aria-hidden="true"></i></div>
+								<div class="mobile-filter-button <?=$productFilters->thc->qsParamName?>" data-filter-name="<?=$productFilters->thc->qsParamName?>"><?= _e($productFilters->thc->displayName) ?><i class="icon-angle-circled-down" aria-hidden="true"></i></div>
 							</div>
 						</div>
 						<div class="divider"></div>
 						<div class="filter-button-wrapper">
 							<div class="filter-button mobile <?=$productFilters->price->qsParamName?>">
-								<div class="mobile-filter-button <?=$productFilters->price->qsParamName?>" data-filter-name="<?=$productFilters->price->qsParamName?>"><?= _e($productFilters->price->displayName) ?><i class="fa fa-chevron-circle-down" aria-hidden="true"></i></div>
+								<div class="mobile-filter-button <?=$productFilters->price->qsParamName?>" data-filter-name="<?=$productFilters->price->qsParamName?>"><?= _e($productFilters->price->displayName) ?><i class="icon-angle-circled-down" aria-hidden="true"></i></div>
 							</div>
 						</div>	
 						<div class="divider"></div>

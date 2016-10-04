@@ -135,8 +135,10 @@ function web2feel_scripts() {
 	wp_enqueue_style( 'flexslider', get_template_directory_uri() . '/css/flexslider.css');
 	wp_enqueue_style( 'glyphicons', get_template_directory_uri() . '/css/bootstrap-glyphicons.css');
 	wp_enqueue_style( 'slicknav', get_template_directory_uri() . '/css/slicknav.css');
+	wp_enqueue_style( 'fontello', get_template_directory_uri() . '/css/fontello.css');
 	wp_enqueue_style( 'theme', get_template_directory_uri() . '/theme.css?v=1.005');
-	wp_enqueue_style( 'fontawesome', '//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css');
+
+//	wp_enqueue_style( 'fontawesome', '//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css');
 
 	wp_enqueue_script( 'bootstrap', get_template_directory_uri() . '/bootstrap/bootstrap.min.js', array( 'jquery' ), '20120206', true );
 	wp_enqueue_script( 'flexslider', get_template_directory_uri() . '/js/jquery.flexslider.js', array( 'jquery' ), '20120206', true );
@@ -283,7 +285,7 @@ function render_left_nav($parentID, $pageID)
 			$linkClass = "left-nav-selected-child";
 		}		
 		?>
-		<span class="<?=$linkClass?>"><a href="<?php echo get_permalink( $parentID );?>"><h2><?=get_the_title($parentID)?></h2></a></span>
+		<span class="<?=$linkClass?>"><h2><a href="<?php echo get_permalink( $parentID );?>"><?=get_the_title($parentID)?></a></h2></span>
 		<?php
 	}
 
@@ -299,7 +301,7 @@ function render_left_nav($parentID, $pageID)
 		if (get_post_meta($child->ID, 'open_in_new_tab', true) == '1')
 			$newTab = "target='_blank'";
 		?>
-		<span class="<?=$linkClass?>"><a <?=$newTab?> href="<?php echo get_permalink( $child->ID );?>"><h2><?php echo $child->post_title; ?></h2></a></span>
+		<span class="<?=$linkClass?>"><h2><a <?=$newTab?> href="<?php echo get_permalink( $child->ID );?>"><?php echo $child->post_title; ?></a></h2></span>
 		<?php
 	}
 }
@@ -316,7 +318,7 @@ function render_single_news_post($postID){
 				<img class="blog-preview" src="<?= $image ?>" alt="<?php the_title(); ?>"/>
 			</a>				
 		<?php }?>
-		<a href="<?= get_permalink($postID) ?>"><h2><?= get_the_title($postID) ?></h2></a>
+		<h2><a href="<?= get_permalink($postID) ?>"><?= get_the_title($postID) ?></a></h2>
 		<p>
 			<?= get_the_excerpt($postID) ?>
 			<a class="read-more-link" href="<?= get_permalink($postID) ?>"><?= __('Read more') ?> &raquo;</a>
@@ -363,8 +365,8 @@ function render_news_section($args, $showPagination = false, $pageLinkNumber = 0
 		<?php if ($showPagination){?>
 			</div><div class="col-sm-12">
 			<div class="navigation pagination-buttons"><p><?php 
-				previous_posts_link("<i class='fa fa-arrow-left'></i>&nbsp;&nbsp;prev");
-				next_posts_link("next&nbsp;&nbsp;<i class='fa fa-arrow-right'></i>");
+				previous_posts_link("<i class='icon-arrow-left'></i>&nbsp;&nbsp;prev");
+				next_posts_link("next&nbsp;&nbsp;<i class='icon-arrow-right'></i>");
 			?></p></div>
 		<?php } 
 		else if ($pageLinkNumber > 0){
@@ -374,7 +376,7 @@ function render_news_section($args, $showPagination = false, $pageLinkNumber = 0
 			}
 		?>
 			
-			<div class="navigation pagination-buttons"><p><a href="<?=$pageLink?>"><?=__('next')?>&nbsp;&nbsp;<i class="fa fa-arrow-right"></i></a></p></div>
+			<div class="navigation pagination-buttons"><p><a href="<?=$pageLink?>"><?=__('next')?>&nbsp;&nbsp;<i class="icon-arrow-right"></i></a></p></div>
 		<?php
 		}
 		?>
@@ -437,7 +439,7 @@ function render_pinterest_button($url, $imgUrl, $title)
 function __render_social_button($label, $class, $sharingPrefix, $url)
 {
 	$canonical = strlen($url) > 0 ? rel_canonical_with_custom_tag_override($url) : $url;
-	?><a class="social-button-<?=$class?>" target="_blank" onclick="trackEvent('socialshare', '<?=$class?>', '<?=$canonical?>')" href="<?=$sharingPrefix?><?=urlencode($canonical)?>"><span class="fa fa-<?=$class?>"></span></a><?php
+	?><a class="social-button-<?=$class?>" target="_blank" onclick="trackEvent('socialshare', '<?=$class?>', '<?=$canonical?>')" href="<?=$sharingPrefix?><?=urlencode($canonical)?>"><span class="icon-<?=$class?>"></span></a><?php
 }
 
 // A copy of rel_canonical but to allow an override on a custom tag
