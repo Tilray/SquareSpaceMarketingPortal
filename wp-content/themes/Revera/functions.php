@@ -365,8 +365,8 @@ function render_news_section($args, $showPagination = false, $pageLinkNumber = 0
 		<?php if ($showPagination){?>
 			</div><div class="col-sm-12">
 			<div class="navigation pagination-buttons"><p><?php 
-				previous_posts_link("<i class='icon-arrow-left'></i>&nbsp;&nbsp;prev");
-				next_posts_link("next&nbsp;&nbsp;<i class='icon-arrow-right'></i>");
+				previous_posts_link("<i class='icon-left-big'></i>&nbsp;&nbsp;prev");
+				next_posts_link("next&nbsp;&nbsp;<i class='icon-right-big'></i>");
 			?></p></div>
 		<?php } 
 		else if ($pageLinkNumber > 0){
@@ -376,7 +376,7 @@ function render_news_section($args, $showPagination = false, $pageLinkNumber = 0
 			}
 		?>
 			
-			<div class="navigation pagination-buttons"><p><a href="<?=$pageLink?>"><?=__('next')?>&nbsp;&nbsp;<i class="icon-arrow-right"></i></a></p></div>
+			<div class="navigation pagination-buttons"><p><a href="<?=$pageLink?>"><?=__('next')?>&nbsp;&nbsp;<i class="icon-right-big"></i></a></p></div>
 		<?php
 		}
 		?>
@@ -433,13 +433,13 @@ function render_linkedin_button($url)
 function render_pinterest_button($url, $imgUrl, $title)
 {
 	$canonical = strlen($url) > 0 ? rel_canonical_with_custom_tag_override($url) : $url;
-	?><a class="social-button-pinterest" target="_blank" onclick="trackEvent('socialshare', 'pinterest', '<?=$canonical?>')" href="http://pinterest.com/pin/create/button/?url=<?=urlencode($canonical)?>&media=<?=$imgUrl?>&description=<?=$title?>"><span class="fa fa-pinterest"></span></a><?php
+	?><a class="social-button-pinterest" target="_blank" onclick="trackEvent('socialshare', 'pinterest', '<?=$canonical?>')" href="http://pinterest.com/pin/create/button/?url=<?=urlencode($canonical)?>&media=<?=$imgUrl?>&description=<?=$title?>"><i class="icon-pinterest-circled"></i></a><?php
 }
 
 function __render_social_button($label, $class, $sharingPrefix, $url)
 {
 	$canonical = strlen($url) > 0 ? rel_canonical_with_custom_tag_override($url) : $url;
-	?><a class="social-button-<?=$class?>" target="_blank" onclick="trackEvent('socialshare', '<?=$class?>', '<?=$canonical?>')" href="<?=$sharingPrefix?><?=urlencode($canonical)?>"><span class="icon-<?=$class?>"></span></a><?php
+	?><a class="social-button-<?=$class?>" target="_blank" onclick="trackEvent('socialshare', '<?=$class?>', '<?=$canonical?>')" href="<?=$sharingPrefix?><?=urlencode($canonical)?>"><i class="icon-<?=$class?>"></i></a><?php
 }
 
 // A copy of rel_canonical but to allow an override on a custom tag

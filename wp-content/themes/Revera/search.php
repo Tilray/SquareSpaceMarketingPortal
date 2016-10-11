@@ -78,8 +78,8 @@ get_header();
 
 			?><div class="col-12">
 			<div class="navigation pagination-buttons"><p><?php 
-				previous_posts_link("<i class='fa fa-arrow-left'></i>&nbsp;&nbsp;prev");
-				next_posts_link("next&nbsp;&nbsp;<i class='fa fa-arrow-right'></i>");
+				previous_posts_link("<i class='icon-big-left'></i>&nbsp;&nbsp;prev");
+				next_posts_link("next&nbsp;&nbsp;<i class='icon-big-right'></i>");
 			?></p></div>
 
 		<?php else : ?>
