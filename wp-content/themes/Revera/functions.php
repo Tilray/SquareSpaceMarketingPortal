@@ -877,7 +877,6 @@ class ProductFilters{
 										
 		$this->price = new ProductFilter("price", "Price", 
 									array(	"" => "", 
-											"4-6" => "$5-6", 
 											"7-9" => "$7-9", 
 											"10-12" => "$10-12", 
 											"13-1000" => "$13+"));
