@@ -1631,6 +1631,10 @@ p.price-text{
 	width: 17%;	
 }
 
+div.hthumb.init{
+	visibility: hidden;
+}
+
 @media (max-width: 767px){
 	.page-template-product-page h1, 
 	.page-template-product-page h2.mockH1

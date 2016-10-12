@@ -41,7 +41,7 @@
 					data-producttype="<?=$product->producttype?>" 
 					data-thc="<?=$product->thc?>" 
 					data-price="<?=$product->price?>">
-					<div class="hthumb">
+					<div class="hthumb init">
 						<?php 
 						$imageUrl = $product->image;
 						$hcpParam = "";

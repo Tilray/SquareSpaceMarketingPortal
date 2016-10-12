@@ -228,6 +228,7 @@ $theProducts = QueryProducts($productFilters);
 		});
 
 		setMobilePanelButtonColors();
+		jQuery('div.hthumb.init').removeClass('init');
 	});	
 </script>
 
