@@ -474,7 +474,7 @@ function getProductTHCRange($thc, $validTHCValues, $getDisplayValue = false){
 		return;
 	
     
-	$thcVal = intval($thc);
+	$thcVal = floatval($thc);
 	foreach ($validTHCValues as $thcRange => $display)
 	{
 		if ($thcRange == "")
