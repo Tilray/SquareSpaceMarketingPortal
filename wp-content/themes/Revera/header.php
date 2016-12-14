@@ -101,10 +101,7 @@
 					<a href="https://twitter.com/@tilray" target="_blank">
 						<i class="icon-twitter"></i>
 					</a>
-					<a href="https://www.instagram.com/tilray" target="_blank">
-						<i class="icon-instagram"></i>
-					</a>
-				</span>		
+				</span>
             </div>
 			<div id="languagedropdownwrapper">
 				<div id="languagedropdown" class="closed"><?php
