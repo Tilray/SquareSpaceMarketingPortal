@@ -1,14 +1,3 @@
-<div class="page-head">
-	<div class="container">
-		<div class="row">
-			<div class="col-12">
-				<h2 class="mockH1"><?php the_title(); ?></h2>
-				<p> </p>
-			</div>
-			
-		</div>
-	</div>
-</div>
 
 <script>
 	var pageBaseURL = "<?= the_permalink() ?>";
@@ -17,44 +6,142 @@
 
 <div class="container">	
 	<div class="row filters">
-		<div class="col-12">
-			<?php $productFilters->renderFilters();?>
-			<div class="product-filters-underline">
-				<div class="gray-underline"></div>
+		<div class="col-sm-7 col-xs-12 profiles-column">
+			<h1 class="products"><?php the_title(); ?></h1>
+			<div class="row">
+				<?php
+				$productFilters->renderChemicalFilters();
+				?>
+				<div class="col-xs-12">
+					<ul class="product-filters show-all">
+						<li class="product-filter product-filter-profile">
+							<span class="noscript-hide">
+								<input type="checkbox" class="other product-filters-profile" name="profile" id="profile-show-all" data-filter="">
+								<label class="checkbox-label show-all" for="profile-show-all">Show All</label>
+							</span>
+							<noscript>
+							</noscript>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="col-sm-5 col-xs-12">
+			<div class="row">
+				<?php
+				$productFilters->productType->renderFilters();
+				$productFilters->strainCategory->renderFilters();
+				$productFilters->status->renderFilters();
+				?>
 			</div>
 		</div>
 	</div>
+
+	<?php
+	function renderProductsSection($allProducts, $productType, $sectionTitle){
+		$sectionTitleActiveClass = "";
+		foreach($allProducts as $product) {
+			if ($product->producttype == $productType && $product->initiallyActive) {
+				$sectionTitleActiveClass = " active";
+			}
+		}
+		?>
+		<div class="section-title product-item section-title-<?=$productType?><?=$sectionTitleActiveClass?>">
+			<h3><?=$sectionTitle?></h3>
+			<hr/>
+		</div>
+		<?php
+		foreach($allProducts as $product) {
+			if ($product->producttype == $productType) {
+				$activeClass = $product->initiallyActive ? "active" : "";
+				?>
+				<div class="portbox post product-item filterable-item <?= $activeClass ?>"
+					 data-id="<?= $product->id ?>"
+					 data-straincategory="<?= $product->straincategory ?>"
+					 data-status="<?= $product->status ?>"
+					 data-producttype="<?= $product->producttype ?>"
+					 data-thc="<?= $product->thc ?>"
+					 data-price="<?= $product->price ?>"
+					 data-profilethc="<?= $product->profilethc ?>"
+					 data-profilecbd="<?= $product->profilecbd ?>"
+					 data-profilethccbd="<?= $product->profilethccbd ?>"
+				>
+					<div class="product-item-inner init <?= $product->profile ?>">
+						<div class="chem-type <?= $product->profile ?>">
+							<?= $product->profile ?>
+						</div>
+						<div class="strain-name">
+							<?= $product->name ?>
+						</div>
+						<div class="strain-category">
+							<?= $product->straincategory ?>
+						</div>
+					</div>
+				</div>
+				<div class="col-xs-12 product-details-row product-item portbox"
+					 data-id="<?=$product->id?>" data-straincategory="" data-status=""
+					 data-producttype="" data-thc="" data-price="">
+					<div class="details-panel-arrow"></div>
+					<div class="details-panel">
+						<div class="header-column">
+							<h3 class="name"></h3>
+							<h4 class="subtitle"></h4>
+						</div>
+						<div class="overview-column">
+							<div class="overview"></div>
+							<div class="product-link"><?=_("More information about this strain is available")?> <a href=""><?=_("here")?></a></div>
+						</div>
+						<div class="buy-column">
+							<h4 class="terpenes">Terpenes:</h4>
+							<div class="terpene-images"></div>
+							<div class="price">
+								<span class="price"></span>
+								<a class="buy">Buy Now</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			<?php
+			}
+		}
+	}
+
+	?>
+
 	<div class="row noscript-hide">
 		<div class="col-12">
 		
-			<div id="primary" class="js-isotope" data-isotope-options='{ "columnWidth": 200, "itemSelector": ".product-item", "filter": ".active" }'>
+			<div id="primary" class="js-isotope" data-isotope-options='{ "masonry" : {"columnWidth": 239}, "itemSelector": ".product-item", "filter": ".active" }'>
 			<?php
-			
-			foreach($theProducts as $product){
-                
-                $activeClass = $product->initiallyActive ? "active" : "";
-				?>
-				<div class="col-2 portbox post product-item filterable-item <?= $activeClass?>" 
-					data-id="<?=$product->id?>" 
-					data-straincategory="<?=$product->straincategory?>" 
-					data-status="<?=$product->status?>" 
-					data-producttype="<?=$product->producttype?>" 
-					data-thc="<?=$product->thc?>" 
-					data-price="<?=$product->price?>">
-					<div class="hthumb init">
-						<?php 
-						$imageUrl = $product->image;
-						$hcpParam = "";
-						if ($displayMode == 'hcp'){
-							$imageUrl = $product->hcpImage;
-							$hcpParam = "?hcp=1";
-						}
-						?>
-						<a href="<?=$product->productUrl?><?=$hcpParam?>"><img src="<?=$imageUrl?>" alt="<?=$product->productName?>"/></a>
-					</div>
-				 </div>
-			<?php } ?>
+				renderProductsSection($theProducts, "flower", "Whole Flower");
+			renderProductsSection($theProducts, "blend", "Flower Blends");
+			renderProductsSection($theProducts, "extract", "Oil Drops");
+			?>
 			</div>
 		</div>
 	</div>
 </div>
+
+<script>
+	function setFilterStates(filterSelector, statuses, turnWholeGroupOn)
+	{
+		if (turnWholeGroupOn === undefined)
+			turnWholeGroupOn = false;
+		console.log("SetFilterStates: " + filterSelector + "   " + turnWholeGroupOn);
+
+		if (turnWholeGroupOn){
+			//turn everything on
+			jQuery(filterSelector).prop('checked', true);
+			//but turn "show all" off
+			jQuery(filterSelector + '[data-filter=""]').prop('checked', false);
+		}
+		else
+		{
+			statuses.forEach(function(item)
+			{
+				jQuery(filterSelector + '[data-filter="' + item + '"]').prop('checked', true);
+			});
+		}
+
+	}
+</script>
