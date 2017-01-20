@@ -7,7 +7,7 @@
  * @package web2feel
  */
 ?><!DOCTYPE html>
-<html <?php language_attributes(); ?>>
+<html <?php language_attributes(); ?> data-useragent="<?=$_SERVER['HTTP_USER_AGENT']?>">
 <head>
 <meta charset="<?php bloginfo( 'charset' ); ?>">
 <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0">
@@ -100,6 +100,9 @@
 					</a>
 					<a href="https://twitter.com/@tilray" target="_blank">
 						<i class="icon-twitter"></i>
+					</a>
+					<a href="https://www.instagram.com/tilraycanada" target="_blank">
+						<i class="icon-instagram"></i>
 					</a>
 				</span>
             </div>

@@ -27,22 +27,35 @@ function renderMobileFilterPanel($qsParamName, $displayName, $filterNameValues, 
 			<ul class="product-filters mobile product-filters-<?=$qsParamName?>">
 			<?php
 			foreach($filterNameValues as $fnvId=>$fnvValue){
-				if ($fnvId == "") {
-					continue;
-				}
 				$id = $qsParamName . '-' . $fnvValue;
 				if ($fnvValue == "") {
 					$id = $qsParamName . '-show-all';
 				}
 
+				$label = $fnvId;
+				if ($label == "")
+					$label = "Show All";
+
+				$profile_filter_class = "";
+				$filterName = $qsParamName;
+				$checkboxClass = "";
+
+				if (strpos($qsParamName, "profile") === 0) {
+					$profile_filter_class = "product-filter-profile";
+					$filterName = "profile";
+
+					if ($fnvValue !== "")
+						$checkboxClass = "profile-filter-has-value";
+				}
+
 				?>
-				<li class="product-filter mobile">
+				<li class="product-filter mobile <?=$profile_filter_class?>">
 					<span class="noscript-hide">
-						<input type="checkbox" class="mobile product-filters-<?=$qsParamName?>" name="<?=$qsParamName?>" id="<?=$id?>" data-filter="<?=$fnvId?>">
-						<label class="checkbox-label" for="<?=$id?>"><?php _e($fnvId); ?></label>
+						<input type="checkbox" class="mobile product-filters-<?=$qsParamName?> <?=$checkboxClass?>" name="<?=$filterName?>" id="<?=$id?>" data-filter="<?=$fnvId?>">
+						<label class="checkbox-label" for="<?=$id?>"><?php _e($label); ?></label>
 					</span>
 					<noscript>
-						<a href="<?= sprintf('%s?%s=%s', the_permalink(), $qsParamName, $fnvValue)?>"><?php _e($fnvId); ?></a>
+						<a href="<?= sprintf('%s?%s=%s', the_permalink(), $qsParamName, $fnvValue)?>"><?php _e($label); ?></a>
 					</noscript>
 				</li>
 				<?php

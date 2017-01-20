@@ -28,7 +28,7 @@ if ($itemPriceObj){
 	}
 }
 
-
+$profile = $thisProduct->profile;
 $thc = trim($thisProduct->actualthc);
 $cbd = trim($thisProduct->cbd);
 $sep = '.';

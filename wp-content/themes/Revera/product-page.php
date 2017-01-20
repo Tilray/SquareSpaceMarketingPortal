@@ -133,22 +133,17 @@ $theProducts = QueryProducts($productFilters);
 
 	function ResetFilters(){
 		var isMobile = (jQuery('.filter-panel.mobile').length > 0);
-		if (isMobile) {
-			jQuery('ul input[type=checkbox]').attr('checked', true);
-			setProductsActive();
-			setMobilePanelButtonColors();
-			jQuery('#primary').isotope({ filter: '.active' });
+		jQuery('ul input[type=checkbox]').attr('checked', false);
+		jQuery('ul input[type=checkbox][id*="-show-all"]').attr('checked', true);
 
-		}else{
-			jQuery('ul input[type=checkbox]').attr('checked', false);
-			jQuery('ul input[type=checkbox][id*="-show-all"]').attr('checked', true);
+		if (isMobile) {
 			jQuery('ul li.profile-filter input[type=checkbox]').attr('checked', true);
 			jQuery('ul li.profile-filter').addClass('active')
-			setProductsActive();
-			setMobilePanelButtonColors();
-			jQuery('#primary').isotope({ filter: '.active' });
 		}
 
+		setProductsActive();
+		setMobilePanelButtonColors();
+		jQuery('#primary').isotope({ filter: '.active' });
 		updateURI();
 	}
 
@@ -164,6 +159,7 @@ $theProducts = QueryProducts($productFilters);
 
 		var isMobile = (jQuery('.filter-panel.mobile').length > 0);
 		var isProfileFilter = thisFilterCategory.indexOf("profile") === 0;
+		console.log("Is profile? " + isProfileFilter);
 		var allProfilesCurrentlyChecked = false;
 		var allProfilesWereCheckedUntilJustNow = false;
 		if (isProfileFilter){
@@ -178,12 +174,19 @@ $theProducts = QueryProducts($productFilters);
 
 		if (jQuery($clicked).attr('data-filter') == '')
 		{
-			//profile show-all (on desktop only) works differently than all the others, in that it turns all filters _on_ rather than off
-			var showAllChecked = jQuery($clicked).prop('checked');
-			var forceOn = isProfileFilter && !isMobile;
-			jQuery(thisFilterCategorySelector).each(function(index){
-				jQuery(this).prop('checked', forceOn || (jQuery(this).attr('data-filter') == '' ? showAllChecked : !showAllChecked));
-			});
+			if (isProfileFilter){
+				//for profile filters, just turn everything on that's not a show-all
+				jQuery(thisFilterCategorySelector).each(function(index){
+					jQuery(this).prop('checked', (jQuery(this).attr('data-filter') == '' ? false : true));
+				});
+			}
+			else {
+				//profile show-all (on desktop only) works differently than all the others, in that it turns all filters _on_ rather than off
+				var showAllChecked = jQuery($clicked).prop('checked');
+				jQuery(thisFilterCategorySelector).each(function (index) {
+					jQuery(this).prop('checked', (jQuery(this).attr('data-filter') == '' ? showAllChecked : !showAllChecked));
+				});
+			}
 		}
 		else
 		{
@@ -199,10 +202,11 @@ $theProducts = QueryProducts($productFilters);
 				jQuery(thisFilterCategorySelector + '[data-filter=""]').prop('checked', false);
 
 				//if nothing's checked, re-check "show all" on desktop, everything else on mobile
-				if (jQuery(thisFilterCategorySelector + ':checked').length == 0 && !isProfileFilter) {
-					if (isMobile) {
+				if (jQuery(thisFilterCategorySelector + ':checked').length == 0) {
+					if (isProfileFilter) {
 						jQuery(thisFilterCategorySelector).each(function (index) {
-							jQuery(this).prop('checked', true);
+							if (!isProfileFilter || jQuery(this).attr('data-filter') !== '')
+								jQuery(this).prop('checked', true);
 						});
 					}
 					else {
@@ -400,7 +404,7 @@ $theProducts = QueryProducts($productFilters);
 			echo "productDetailsById = " . json_encode($jsonProducts) . ";";
 
 			//check if thc, cbd, thc-cbd are all on Show All
-			$turnAllProfilesOn = true;
+			$turnAllProfilesOn = !isMobile;
 			foreach ($productFilters->profileFilters as $filter)
 			{
 				$turnAllProfilesOn = $turnAllProfilesOn && $filter->filterHasNoPreselectedValues();
@@ -414,7 +418,7 @@ $theProducts = QueryProducts($productFilters);
             foreach ($productFilters->nonProfileFilters as $filter)
             {
 				$turnSetOn = ($isMobile && $filter->filterHasNoPreselectedValues()) ? "true" : "false";
-                echo "setFilterStates('input.product-filters-" . $filter->qsParamName . "', arrpreselected" . $filter->qsParamName . ", " . $turnSetOn . ");\n";
+                echo "setFilterStates('input.product-filters-" . $filter->qsParamName . "', arrpreselected" . $filter->qsParamName . ");\n";	//", " . $turnSetOn .
             }
         ?>
 

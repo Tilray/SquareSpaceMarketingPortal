@@ -77,6 +77,7 @@ function web2feel_setup() {
 	register_nav_menus( array(
 		'login' => 'Login Menu',
 		'primary' => __( 'Primary Menu', 'web2feel' ),
+		'mobile-primary' => __( 'Mobile Primary Menu', 'web2feel' ),
 		'copyright-footer' => 'Copyright Footer Menu',
 		'copyright-footer-mobile' => 'Copyright Footer Mobile Menu',		
 	) );
@@ -544,10 +545,8 @@ add_image_size( 'product-single', 555, 2000, false );
 
 					
 
-function getProductsPageLink($hcp){
+function getProductsPageLink(){
 	$pageId = get_field('consumer_products_page', 'option');
-	if ($hcp)
-		$pageId = get_field('hcp_products_page', 'option');
 
 	return get_permalink($pageId);
 }
@@ -559,7 +558,7 @@ class ProductFilter
 	public $currentFilterValues;
 	public $qsParamName = "";
 	public $displayName = "";
-	
+
 	function __construct($paramName, $displayName, $values){
 		$this->qsParamName = $paramName;
 		$this->displayName = $displayName;
@@ -595,16 +594,18 @@ class ProductFilter
 	
 	private function renderFilter($className, $name, $filter, $label){
 		$id = $name . '-' . $filter;
-		if ($filter == "")
+		$showAllClass = "";
+		if ($filter == ""){
+			$showAllClass = " show-all";
 			$id = $name . '-show-all';
-	
-		if ($label == "")
 			$label = "Show All";
+		}
+
 		?>
 		<li class="product-filter">
 			<span class="noscript-hide">
-				<input type="checkbox" class="<?= $className?>" name="<?=$name?>" id="<?=$id?>" data-filter="<?=$filter?>">
-				<label class="checkbox-label" for="<?=$id?>"><?php _e($label); ?></label>
+				<input type="checkbox" class="other <?= $className?>" name="<?=$name?>" id="<?=$id?>" data-filter="<?=$filter?>">
+				<label class="checkbox-label<?=$showAllClass?>" for="<?=$id?>"><?php _e($label); ?></label>
 			</span>
 			<noscript>
 				<a href="<?= sprintf('%s?%s=%s', the_permalink(), $name, $filter)?>"><?php _e($label); ?></a>
@@ -612,11 +613,11 @@ class ProductFilter
 		</li>
 	<?php
 	}
-	
+
 	public function renderFilters(){
 	?>
-		<div class="product-filters-container">
-			<h3 class="gray-underline"><?= _e($this->displayName) ?></h3>
+		<div class="product-filters-container col-sm-4">
+			<h3 class="products gray-underline"><?= _e($this->displayName) ?></h3>
 			<ul class="product-filters product-filters-<?=$this->qsParamName?>">
 				<?php
 				foreach($this->validFilterValues as $id=>$name){
@@ -659,13 +660,18 @@ class ProductFilter
 		</ul>
 	<?php
 	}
-	
-	public function renderMobileFilterButton(){
-	?>
-		<div class="mobile-filter-button" data-filter-name="<?=$this->qsParamName?>"><?= _e($this->displayName) ?></div>
-	<?php
+
+	public function getFiterNamesValues(){
+		$namesValues = array();
+
+		foreach($this->validFilterValues as $id=>$name){
+			$namesValues[$id] = $name;
+		}
+
+		return $namesValues;
 	}
-	
+
+
 	public function getFirstActiveFilter(){
 		if (count($this->currentFilterValues) > 0)
 			return $this->currentFilterValues[0];
@@ -682,7 +688,7 @@ class ProductFilter
 		return $jsArray;
 	}
 
-    public function renderProductsPageLink($itemFilterValue, $hcp = false)
+    public function renderProductsPageLink($itemFilterValue)
     {
         if ($itemFilterValue == NULL || trim($itemFilterValue) == "")
         {
@@ -693,7 +699,7 @@ class ProductFilter
         if (trim($label) == "")
         	return "";
 
-        $pageUrl = getProductsPageLink($hcp);
+        $pageUrl = getProductsPageLink();
         $url = $pageUrl . "?" . $this->qsParamName . "=" . $itemFilterValue;
         if ($this->qsParamName == "thc")
             $label = 'THC ' . $label;
@@ -701,14 +707,17 @@ class ProductFilter
             <a href="<?=$url?>"><?=__($label)?></a>
         <?php
     }
-    
+
+    public function filterHasNoPreselectedValues(){
+
+    	return (count($this->currentFilterValues) == 0 || (count($this->currentFilterValues == 1) && $this->currentFilterValues[0] == ""));
+    }
     
 }
 
 class Product{
-    
-    
 	public $id;
+	public $name;
 	public $status;
 	public $straincategory;
 	public $producttype;
@@ -716,9 +725,10 @@ class Product{
 	public $thc;
 	public $thcRange;
 	public $cbd;
+	public $profile;
 	public $image;
-	public $hcpImage;
 	public $productUrl;
+	public $storelink;
 	public $productName;
 	public $price;
 	public $actualprice;
@@ -726,6 +736,12 @@ class Product{
     public $initiallyActive;
     public $primaryStrainCategory;
     public $primaryStrainCategoryName;
+    public $terpenes;
+	public $overview;
+	public $combinedProfile;
+	public $profilethc;
+	public $profilecbd;
+	public $profilethccbd;
 	
 	public function isActive($filters){
 		//loop through filters, check against active ones
@@ -762,17 +778,44 @@ class Product{
 		return $productFilters->strainCategory->getNameFromID($this->getPrimaryStrainCategory($rawCategories));
 	}
 
+	function getTerpeneImages(){
+		$terpene_images = "";
+		if ($this->terpenes){
+			foreach($this->terpenes as $terpene){
+				$terpene_post = get_field($terpene . "_post", "options");
+				$terpene_link = get_permalink($terpene_post->ID);
+				$terpene_images .= "<a href='$terpene_link'><img class='terpene' src='" . get_template_directory_uri() . "/images/terpenes/" . $terpene . ".png' alt='" . $terpene . "'/></a>";
+			}
+		}
+
+		return $terpene_images;
+	}
+
 
     function __construct($post, $productFilters){
         $id = $post->ID;
         $validTHCs = $productFilters->thc->validFilterValues;
         $this->id = $id;
+        $this->name = html_entity_decode(get_the_title($id));
         $this->status = trim(get_post_meta($id, 'status', true));
         $this->straincategory = $this->safe_get_strain_category(get_post_meta($id, 'strain_category', true));
         $this->producttype = get_post_meta($id, 'product_type', true);
         $this->actualthc = trim(get_post_meta($id, 'thc_level', true));
         $this->thc = getProductTHCRange($this->actualthc, $validTHCs);
         $this->cbd = trim(get_post_meta($id, 'cbd_level', true));
+//        $this->profile = trim(get_post_meta($id, 'chemical_type', true));
+        $this->profilethc = str_replace("none", "", trim(get_post_meta($id, 'thc_profile', true)));
+        $this->profilecbd = str_replace("none", "", trim(get_post_meta($id, 'cbd_profile', true)));
+        $this->profilethccbd = str_replace("none", "", trim(get_post_meta($id, 'thc_cbd_profile', true)));
+        $this->combinedProfile = $this->profilethc . $this->profilecbd . $this->profilethccbd;
+        $this->profile = $this->profilethc . $this->profilecbd . $this->profilethccbd;
+        $this->storelink = trim(get_post_meta($id, 'store_link', true));
+        $this->terpenes = get_field('terpenes', $id);
+
+        $this->overview = trim(get_post_meta($id, 'overview', true));
+        if (strlen($this->overview) == 0)
+	        $this->overview = get_the_content($post->ID);
+
 
         $this->primaryStrainCategory = $this->getPrimaryStrainCategory($this->straincategory);
         $this->primaryStrainCategoryName = $this->getPrimaryStrainCategoryName($this->straincategory);
@@ -780,9 +823,6 @@ class Product{
         $thumbID = get_post_thumbnail_id($id);
         $img_attrs = wp_get_attachment_image_src( $thumbID,'product-thumb' ); 
         $this->image = $img_attrs[0];
-        $hcpThumbID = get_post_meta($id, 'hcp_photo', true);
-        $hcp_img_attrs = wp_get_attachment_image_src( $hcpThumbID,'product-thumb' ); 
-        $this->hcpImage = $hcp_img_attrs[0];
 
         $mobileImageID = get_post_meta($id, 'mobile_product_image', true);
         $mobileImageAttrs = wp_get_attachment_image_src( $mobileImageID,'mobile-product-image' ); 
@@ -805,24 +845,37 @@ class Product{
 
         $this->initiallyActive = TRUE;
         $prodAtts = get_object_vars($this);
-        foreach ($productFilters->filters as $filter)
+		$nonProfileFiltersActive = true;
+		$profileFiltersActive = false;
+        foreach ($productFilters->nonProfileFilters as $filter)
         {
             $prodFilterState = $prodAtts[$filter->qsParamName];
-            //HERE
             $thisPropActive = ($filter->getFirstActiveFilter() == "");
             $filterPieces = explode('|', $prodFilterState);
             foreach ($filterPieces as $key => $value) {
 	            $thisPropActive = $thisPropActive || in_array($value, $filter->currentFilterValues);
             }
-            $this->initiallyActive = $this->initiallyActive && $thisPropActive;
+            $nonProfileFiltersActive = $nonProfileFiltersActive && $thisPropActive;
         }
-        
 
+        foreach ($productFilters->profileFilters as $filter)
+        {
+            $prodFilterState = $prodAtts[$filter->qsParamName];
+            $thisPropActive = ($filter->getFirstActiveFilter() == "");
+            $filterPieces = explode('|', $prodFilterState);
+            foreach ($filterPieces as $key => $value) {
+	            $thisPropActive = $thisPropActive || in_array($value, $filter->currentFilterValues);
+            }
+            $profileFiltersActive = $profileFiltersActive || $thisPropActive;
+        }
+
+		$this->initiallyActive = $nonProfileFiltersActive && $profileFiltersActive;
     }
 
 }
 
 class ProductFilters{
+	public $profile;
 	public $status;
 	public $strainCategory;
 	public $productType;
@@ -834,8 +887,28 @@ class ProductFilters{
     public $sortOrder;
 	
 	public $filters;
+	public $profileFilters;
+	public $nonProfileFilters;
 
 	function __construct(){
+		$this->profilethc = new ProductFilter("profilethc", "Profile",
+									array(	"" => "",
+											"t100" => "T100",
+											"t200" => "T200",
+											"t300" => "T300"));
+
+		$this->profilecbd = new ProductFilter("profilecbd", "Profile",
+									array(	"" => "",
+											"c100" => "C100",
+											"c200" => "C200",
+											"c300" => "C300"));
+
+		$this->profilethccbd = new ProductFilter("profilethccbd", "Profile",
+									array(	"" => "",
+											"tc100" => "TC100",
+											"tc200" => "TC200",
+											"tc300" => "TC300"));
+
 		$this->status = new ProductFilter("status", "Status",
 									array(	"" => "", 
 											"available" => "Available", 
@@ -845,22 +918,21 @@ class ProductFilters{
 											array(	"" => "", 
 													"indica" => "Indica", 
 													"sativa" => "Sativa", 
-													"hybrid" => "Hybrid", 
-													"high-cbd" => "+CBD"));
+													"hybrid" => "Hybrid"));
 													
 		$this->productType = new ProductFilter("producttype", "Category",
 											array(	"" => "", 
 													"flower" => "Flower", 
 													"blend" => "Blend", 
-													"extract" => "Extract",
-													"accessory" => "Accessories"));
+													"extract" => "Extract"));
 													
 		$this->thc = new ProductFilter("thc", "THC Level",
 								array(	"" => "", 
 										"0-14" => "&lt; 15%", 
 										"15-20" => "15% - 20%", 
 										"21-25" => "21% - 25%", 
-										"26-100" => "&gt; 25%"));
+										"26-100" => "&gt; 25%"),
+										false);
 
 		$this->preciseTHCRangesLow = array(	"" => 0,
 											"0-14" => 0,
@@ -874,21 +946,23 @@ class ProductFilters{
 											"21-25" => 25,
 											"26-100" => 100
 											);
-										
-		$this->price = new ProductFilter("price", "Price", 
-									array(	"" => "", 
-											"7-9" => "$7-9", 
-											"10-12" => "$10-12", 
+
+		$this->price = new ProductFilter("price", "Price",
+									array(	"" => "",
+											"7-9" => "$7-9",
+											"10-12" => "$10-12",
 											"13-1000" => "$13+"));
-        
+
 		$this->duration = new ProductFilter("duration", "Duration",
-									array(	"" => "", 
-											"core" => "Core", 
-											"seasonal" => "Seasonal", 
+									array(	"" => "",
+											"core" => "Core",
+											"seasonal" => "Seasonal",
 											"limited" => "Limited"));
-											
-		$this->filters = array($this->status, $this->strainCategory, $this->productType, $this->thc, $this->price);
-        $this->sortOrder = array("flower" => 0, "blend" => 1, "extract" => 2, "accessory" => 3);
+
+		$this->filters = array($this->productType, $this->strainCategory, $this->status, $this->profilethc, $this->profilecbd, $this->profilethccbd);
+		$this->profileFilters = array($this->profilethc, $this->profilecbd, $this->profilethccbd);
+		$this->nonProfileFilters = array($this->productType, $this->strainCategory, $this->status);
+        $this->sortOrder = array("flower" => 0, "blend" => 1, "extract" => 2);
 	}
 											
 	public function loadFiltersFromQueryString($querySring){
@@ -897,7 +971,63 @@ class ProductFilters{
 			$filter->loadFromQueryString($_GET);
 		}
 	}
-	
+
+	private function renderChemicalFilter($profile, $filter_class_suffix, $row_label = null){
+		$profile_lower = strtolower($profile);
+		?>
+		<li class="product-filter profile-filter profile-<?=strtolower($profile)?>">
+			<span class="noscript-hide">
+				<input type="checkbox" class="product-filters-profile profile-filter-has-value product-filters-<?=$filter_class_suffix?>" name="profile" id="profile-<?=$profile_lower?>" data-filter="<?=$profile_lower?>">
+				<label class="checkbox-label" for="profile-<?=$profile_lower?>"><?=$profile?></label>
+			</span>
+			<noscript>
+
+			</noscript>
+
+			<?php
+			if ($row_label){
+				echo "<span class='row-label'>" . $row_label . "</span>";
+			}
+			?>
+		</li>
+		<?php
+	}
+
+	public function renderChemicalFilters(){
+	?>
+		<div class="col-sm-4 col-xs-12">
+			<h3 class="profile-header">THC Products</h3>
+			<ul class="product-filters product-filters-profile product-filters-profilethc">
+			<?php
+			$this->renderChemicalFilter("T100", "profilethc", "low");
+			$this->renderChemicalFilter("T200", "profilethc", "medium");
+			$this->renderChemicalFilter("T300", "profilethc", "high");
+			?>
+			</ul>
+		</div>
+		<div class="col-sm-4 col-xs-12">
+			<h3 class="profile-header">CBD Products</h3>
+			<ul class="product-filters product-filters-profile product-filters-profilecbd">
+			<?php
+			$this->renderChemicalFilter("C100", "profilecbd");
+			$this->renderChemicalFilter("C200", "profilecbd");
+			$this->renderChemicalFilter("C300", "profilecbd");
+			?>
+			</ul>
+		</div>
+		<div class="col-sm-4 col-xs-12">
+			<h3 class="profile-header">THC / CBD Products</h3>
+			<ul class="product-filters product-filters-profile product-filters-profilethccbd">
+			<?php
+			$this->renderChemicalFilter("TC100", "profilethccbd");
+			$this->renderChemicalFilter("TC200", "profilethccbd");
+			$this->renderChemicalFilter("TC300", "profilethccbd");
+			?>
+			</ul>
+		</div>
+	<?php
+	}
+
 	public function renderFilters()
 	{
 		foreach($this->filters as $filter)
@@ -906,14 +1036,7 @@ class ProductFilters{
 		}
 	}
 
-	public function renderMobileFilterButtons()
-	{
-		foreach($this->filters as $filter)
-		{
-			$filter->renderMobileFilterButton();
-		}
-	}
-	
+
 	public function createPreselectedStatusJSArrays(){
 		foreach($this->filters as $filter)
 		{
@@ -947,13 +1070,17 @@ class ProductFilters{
 	
 	public function renderProductsFilteringConditions(){
 		$conditions = array();
-		foreach($this->filters as $filter)
+		$profileConditions = array();
+		foreach($this->nonProfileFilters as $filter)
 		{
 			$conditions[] = "testFilter(combined" . $filter->qsParamName . ", jQuery( this ).attr('data-" . $filter->qsParamName . "'))";
-//			$conditions[] = "(combined" . $filter->qsParamName . " == '||||||' || combined" . $filter->qsParamName . ".indexOf('|||' + jQuery( this ).attr('data-" . $filter->qsParamName . "') + '|||') > -1)";
 		}
-		
-		return implode(" && \n", $conditions);	
+		foreach($this->profileFilters as $filter)
+		{
+			$profileConditions[] = "testFilter(combined" . $filter->qsParamName . ", jQuery( this ).attr('data-" . $filter->qsParamName . "'), false)";
+		}
+
+		return implode(" && \n", $conditions) . " && (" . implode(" || \n", $profileConditions) . ")";
 	}
 }
 

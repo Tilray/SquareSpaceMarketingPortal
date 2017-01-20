@@ -1,5 +1,6 @@
 jQuery(window).load(function() {
   /* Navigation */
+	console.log("BEGIN!");
 
 	jQuery('#submenu ul.sfmenu').superfish({ 
 		delay:       500,								// 0.1 second delay on mouseout 
@@ -57,17 +58,18 @@ jQuery(window).load(function() {
     jQuery(window).scroll(updateFooter);
     updateFooter();
 
+	console.log("Checking for mobile products page");
 
     //if we're on the mobile products page
     if (jQuery('.filter-panel.mobile').length > 0){
     	jQuery('.filter-panel.mobile').css('display', 'block');
 
-    	jQuery('.filter-panel.mobile').appendTo(jQuery('.mobile-products-flyout'));	
+    	jQuery('.filter-panel.mobile').appendTo(jQuery('.mobile-products-flyout'));
 	    
 	    jQuery('.filter-panel-header').click(closeAllProductFilterPanels);
 
-	    if (jQuery('.mobile-filter-button').length){
-	    	jQuery('.mobile-filter-button').click(function(){
+	    if (jQuery('.filter-button-inner').length){
+	    	jQuery('.filter-button-inner').click(function(){
 	    		var filterName = jQuery(this).attr('data-filter-name');
 	    		if (jQuery('.filter-panel.mobile.' + filterName).hasClass('active')){
 		    		jQuery('.filter-panel.mobile').removeClass('active');
