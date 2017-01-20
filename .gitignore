@@ -7,6 +7,8 @@
 Thumbs.db
 
 wp-content/uploads/**
+wp-content/themes/Revera/.idea/**
+
 
 # wordpress specific
 production.wp-config.php
