@@ -1825,6 +1825,25 @@ ul.copyright-footer li {
 	margin-right: 40px;
 }
 
+div.home-shop-now-container{
+	padding-top: 40px;
+	padding-bottom: 40px;
+	background-color: #ffb12f;
+}
+
+div.home-shop-now-container div{
+	border-color: #ffffff;
+}
+
+div.home-shop-now-container a .home-register-button h2{
+	color: #ffffff;
+}
+
+div.home-shop-now-container a{
+	margin-left: auto;
+	margin-right: auto;
+}
+
 .big-register-button,
 .home-register-button
 {

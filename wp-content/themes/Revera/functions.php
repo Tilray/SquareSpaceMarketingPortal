@@ -137,7 +137,7 @@ function web2feel_scripts() {
 	wp_enqueue_style( 'glyphicons', get_template_directory_uri() . '/css/bootstrap-glyphicons.css');
 	wp_enqueue_style( 'slicknav', get_template_directory_uri() . '/css/slicknav.css');
 	wp_enqueue_style( 'fontello', get_template_directory_uri() . '/css/fontello.css');
-	wp_enqueue_style( 'theme', get_template_directory_uri() . '/theme.css?v=1.005');
+	wp_enqueue_style( 'theme', get_template_directory_uri() . '/theme.css?v=1.008');
 
 //	wp_enqueue_style( 'fontawesome', '//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css');
 

@@ -18,7 +18,23 @@ get_header(); ?>
 	$postContent = $post->post_content;
 ?>
 
-<?php get_template_part( 'inc/feature' ); ?>
+<?php
+	if ($isMobile){
+		?>
+		<div class="home-shop-now-container">
+			<a href="https://store.tilray.ca">
+				<div class="home-register-button">
+					<h2><?= _("Shop Now")?></h2>
+				</div>
+			</a>
+		</div>
+		<?php
+	}
+	else
+	{
+		get_template_part( 'inc/feature' );
+	}
+?>
 <div class="container ">
 
 <?php
