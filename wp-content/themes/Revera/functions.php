@@ -1064,6 +1064,11 @@ class ProductFilters{
 		{
 			$output .= "var combined" . $filter->qsParamName . " = '|||' + GetFiltersArray('ul.product-filters-" . $filter->qsParamName . " input[type=checkbox]:checked').join('|||') + '|||';";
 		}
+
+		$output .= "var combined_profile_filters = '|||'";
+		foreach($this->profileFilters as $pf){
+			$output .= " + GetFiltersArray('ul.product-filters-" . $pf->qsParamName . " input[type=checkbox]:checked').join('|||') + '|||';";
+		}
 		
 		return $output;	
 	}
@@ -1081,6 +1086,27 @@ class ProductFilters{
 		}
 
 		return implode(" && \n", $conditions) . " && (" . implode(" || \n", $profileConditions) . ")";
+	}
+
+	public function renderProductsFilteringConditionsMobile(){
+		$conditions = array();
+		$profileConditions = array();
+		foreach($this->nonProfileFilters as $filter)
+		{
+			$conditions[] = "testFilter(combined" . $filter->qsParamName . ", jQuery( this ).attr('data-" . $filter->qsParamName . "'))";
+		}
+
+		//treat these as one big group
+		foreach($this->profileFilters as $filter)
+		{
+			$profileConditions = "testFilter(combined_profile_filters, jQuery( this ).attr('data-" . $filter->qsParamName . "'), false)";
+		}
+
+		return implode(" && \n", $conditions) . " && (combined_profile_filters.replace(/[ \|]/g, '').length === 0 || " . $profileConditions . ")";
+	}
+
+	public function getJSON(){
+		echo json_encode(get_object_vars($this));
 	}
 }
 

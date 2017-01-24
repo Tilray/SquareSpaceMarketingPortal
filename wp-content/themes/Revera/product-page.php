@@ -102,6 +102,9 @@ $theProducts = QueryProducts($productFilters);
 ?>
 <script src="<?=get_template_directory_uri()?>/js/isotope-min.js"></script>
 <script>
+	var filters = <?= $productFilters->getJSON() ?>;
+	var products = <?= json_encode($theProducts) ?>;
+
 	var productDetailsById;
 
 	function removePx(dimension){
@@ -159,7 +162,6 @@ $theProducts = QueryProducts($productFilters);
 
 		var isMobile = (jQuery('.filter-panel.mobile').length > 0);
 		var isProfileFilter = thisFilterCategory.indexOf("profile") === 0;
-		console.log("Is profile? " + isProfileFilter);
 		var allProfilesCurrentlyChecked = false;
 		var allProfilesWereCheckedUntilJustNow = false;
 		if (isProfileFilter){
@@ -177,7 +179,11 @@ $theProducts = QueryProducts($productFilters);
 			if (isProfileFilter){
 				//for profile filters, just turn everything on that's not a show-all
 				jQuery(thisFilterCategorySelector).each(function(index){
-					jQuery(this).prop('checked', (jQuery(this).attr('data-filter') == '' ? false : true));
+					console.log("show all profile " + isMobile);
+					if (isMobile)
+						jQuery(this).prop('checked', (jQuery(this).attr('data-filter') == '' ? true : false));
+					else
+						jQuery(this).prop('checked', (jQuery(this).attr('data-filter') == '' ? false : true));
 				});
 			}
 			else {
@@ -245,7 +251,6 @@ $theProducts = QueryProducts($productFilters);
 				noneAreChecked = noneAreChecked && !jQuery(this).is(":checked");
 			});
 
-			console.log(filterName + " -> " + allAreChecked);
 			var $filterButton = jQuery(".filter-button.mobile." + filterName);
 			$filterButton.removeClass("has-selections");
 			if (($filterButton.hasClass("profile") && !noneAreChecked) ||
@@ -294,6 +299,7 @@ $theProducts = QueryProducts($productFilters);
 
 	function setProductsActive()
 	{
+		var isMobile = (jQuery('.filter-panel.mobile').length > 0);
 		<?= $productFilters->renderProductsFilteringStatuses() ?>
 		var selector = 'div.filterable-item';
 
@@ -301,9 +307,8 @@ $theProducts = QueryProducts($productFilters);
 		jQuery("div.section-title").removeClass('active');
 		jQuery(selector).removeClass('active');
 		jQuery(selector).each(function( index ) {
-			if (
-				<?= $productFilters->renderProductsFilteringConditions() ?>
-				)
+			if ((isMobile && <?= $productFilters->renderProductsFilteringConditionsMobile() ?>) ||
+				(!isMobile && <?= $productFilters->renderProductsFilteringConditions() ?>))
 			{
 				jQuery(this).addClass('active');
 			}
@@ -404,7 +409,7 @@ $theProducts = QueryProducts($productFilters);
 			echo "productDetailsById = " . json_encode($jsonProducts) . ";";
 
 			//check if thc, cbd, thc-cbd are all on Show All
-			$turnAllProfilesOn = !isMobile;
+			$turnAllProfilesOn = !$isMobile;
 			foreach ($productFilters->profileFilters as $filter)
 			{
 				$turnAllProfilesOn = $turnAllProfilesOn && $filter->filterHasNoPreselectedValues();
@@ -423,7 +428,6 @@ $theProducts = QueryProducts($productFilters);
         ?>
 
 		jQuery('ul.product-filters input[type=checkbox]').change(function() {
-			console.log("changed");
 			UpdateProducts(jQuery(this));
 		});
 
@@ -451,7 +455,6 @@ $theProducts = QueryProducts($productFilters);
 			var itemCenter = +removePx($this.css("left")) + +removePx($this.css("width")) / 2;
 			var arrowWidth = 40;
 			jQuery('div.details-panel-arrow').css('left', itemCenter - arrowWidth/2);
-//			console.log(jQuery(this).css("top"));
 
 			//postion the gray panel
 			var panelColumnWidth = 3;
@@ -460,7 +463,6 @@ $theProducts = QueryProducts($productFilters);
 			var idealLeftEdgeColumn = itemColumn - 1;
 			var constrainedColumn = Math.max(0, Math.min(idealLeftEdgeColumn, furthestLeft));
 			var leftPadding = 12;
-			console.log("constrainedColumn: " + idealLeftEdgeColumn + "  " + furthestLeft + "  " + constrainedColumn);
 			jQuery('div.details-panel').css('left', leftPadding + constrainedColumn * columnWidth);
 
 			populateDetailsPanel(id);

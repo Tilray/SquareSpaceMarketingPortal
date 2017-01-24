@@ -54,9 +54,6 @@ function renderMobileFilterPanel($qsParamName, $displayName, $filterNameValues, 
 						<input type="checkbox" class="mobile product-filters-<?=$qsParamName?> <?=$checkboxClass?>" name="<?=$filterName?>" id="<?=$id?>" data-filter="<?=$fnvId?>">
 						<label class="checkbox-label" for="<?=$id?>"><?php _e($label); ?></label>
 					</span>
-					<noscript>
-						<a href="<?= sprintf('%s?%s=%s', the_permalink(), $qsParamName, $fnvValue)?>"><?php _e($label); ?></a>
-					</noscript>
 				</li>
 				<?php
 			}
