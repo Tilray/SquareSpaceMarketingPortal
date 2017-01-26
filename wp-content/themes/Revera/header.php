@@ -47,7 +47,7 @@
 					?></ul></li><?
 				}
 					
-				$allNavItems = array_merge(wp_get_nav_menu_items("login"), wp_get_nav_menu_items("primary"));
+				$allNavItems = wp_get_nav_menu_items("mobile-primary-menu");
 				$childPagesByParentId = array();
 				$primaryNavItems = array();
 				//walk the array, looking for items with parent_id's
