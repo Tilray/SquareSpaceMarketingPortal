@@ -51,7 +51,7 @@ function renderMobileFilterPanel($qsParamName, $displayName, $filterNameValues, 
 				?>
 				<li class="product-filter mobile <?=$profile_filter_class?>">
 					<span class="noscript-hide">
-						<input type="checkbox" class="mobile product-filters-<?=$qsParamName?> <?=$checkboxClass?>" name="<?=$filterName?>" id="<?=$id?>" data-filter="<?=$fnvId?>">
+						<input type="checkbox" class="mobile product-filters-<?=$qsParamName?> <?=$checkboxClass?>" name="<?=$filterName?>" id="<?=$id?>" data-filter-name="<?=$qsParamName?>" data-filter="<?=$fnvId?>">
 						<label class="checkbox-label" for="<?=$id?>"><?php _e($label); ?></label>
 					</span>
 				</li>
@@ -289,11 +289,11 @@ function renderProductsSection($allProducts, $productType, $sectionTitle){
 			itemSelector: ".product-item",
 			filter: ".active"
 		});
-		console.log("Done setting up isotope");
 
+		/*
 		var $filterPanel = jQuery(".page-head.mobile-products-page");
 		var $filterSummaryPanel = jQuery(".page-head.mobile-products-page.summary");
-
+*/
 
 		jQuery(document).scroll(function(){
 			if (jQuery("body").scrollTop() > changePanelsPosition){
@@ -305,5 +305,32 @@ function renderProductsSection($allProducts, $productType, $sectionTitle){
 				$filterSummaryPanel.addClass("retracted");
 			}
 		});
+
+		if (jQuery('.filter-panel.mobile').length > 0){
+			jQuery('.filter-panel.mobile').css('display', 'block');
+
+			jQuery('.filter-panel.mobile').appendTo(jQuery('.mobile-products-flyout'));
+
+			jQuery('.filter-panel-header').click(closeAllProductFilterPanels);
+
+			if (jQuery('.filter-button-inner').length){
+				jQuery('.filter-button-inner').click(function(){
+					var filterName = jQuery(this).attr('data-filter-name');
+					if (jQuery('.filter-panel.mobile.' + filterName).hasClass('active')){
+						jQuery('.filter-panel.mobile').removeClass('active');
+					}
+					else{
+						jQuery('.filter-panel.mobile').removeClass('active');
+						jQuery('.filter-panel.mobile.' + filterName).addClass('active');
+					}
+				});
+			}
+
+			jQuery('.filter-button.mobile.reset').click(function(){
+				console.log("Reset!");
+				ResetFilters();
+			});
+		}
+
 	});
 </script>

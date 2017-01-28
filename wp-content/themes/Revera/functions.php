@@ -558,11 +558,15 @@ class ProductFilter
 	public $currentFilterValues;
 	public $qsParamName = "";
 	public $displayName = "";
+	public $isProfile = false;
+	public $jsTestFunction = "";
 
-	function __construct($paramName, $displayName, $values){
+	function __construct($paramName, $displayName, $values, $isProfile, $jsTestFunction){
 		$this->qsParamName = $paramName;
 		$this->displayName = $displayName;
 		$this->validFilterValues = $values;
+		$this->isProfile = $isProfile;
+		$this->jsTestFunction = $jsTestFunction;
 	}
 	
     public function getNameFromID($id)
@@ -604,7 +608,7 @@ class ProductFilter
 		?>
 		<li class="product-filter">
 			<span class="noscript-hide">
-				<input type="checkbox" class="other <?= $className?>" name="<?=$name?>" id="<?=$id?>" data-filter="<?=$filter?>">
+				<input type="checkbox" class="other <?= $className?>" name="<?=$name?>" id="<?=$id?>" data-filter-name="<?=$name?>"  data-filter="<?=$filter?>">
 				<label class="checkbox-label<?=$showAllClass?>" for="<?=$id?>"><?php _e($label); ?></label>
 			</span>
 			<noscript>
@@ -725,7 +729,6 @@ class Product{
 	public $thc;
 	public $thcRange;
 	public $cbd;
-	public $profile;
 	public $image;
 	public $productUrl;
 	public $storelink;
@@ -738,11 +741,11 @@ class Product{
     public $primaryStrainCategoryName;
     public $terpenes;
 	public $overview;
-	public $combinedProfile;
 	public $profilethc;
 	public $profilecbd;
 	public $profilethccbd;
-	
+	public $profile;	//value will be whichever of the last 3 profiles is set
+
 	public function isActive($filters){
 		//loop through filters, check against active ones
 		return true;
@@ -807,7 +810,6 @@ class Product{
         $this->profilethc = str_replace("none", "", trim(get_post_meta($id, 'thc_profile', true)));
         $this->profilecbd = str_replace("none", "", trim(get_post_meta($id, 'cbd_profile', true)));
         $this->profilethccbd = str_replace("none", "", trim(get_post_meta($id, 'thc_cbd_profile', true)));
-        $this->combinedProfile = $this->profilethc . $this->profilecbd . $this->profilethccbd;
         $this->profile = $this->profilethc . $this->profilecbd . $this->profilethccbd;
         $this->storelink = trim(get_post_meta($id, 'store_link', true));
         $this->terpenes = get_field('terpenes', $id);
@@ -895,36 +897,51 @@ class ProductFilters{
 									array(	"" => "",
 											"t100" => "T100",
 											"t200" => "T200",
-											"t300" => "T300"));
+											"t300" => "T300"),
+											true,
+											"");
 
 		$this->profilecbd = new ProductFilter("profilecbd", "Profile",
 									array(	"" => "",
 											"c100" => "C100",
 											"c200" => "C200",
-											"c300" => "C300"));
+											"c300" => "C300"),
+											true,
+											"");
 
 		$this->profilethccbd = new ProductFilter("profilethccbd", "Profile",
 									array(	"" => "",
 											"tc100" => "TC100",
 											"tc200" => "TC200",
-											"tc300" => "TC300"));
+											"tc300" => "TC300"),
+											true,
+											"");
 
 		$this->status = new ProductFilter("status", "Status",
 									array(	"" => "", 
 											"available" => "Available", 
-											"in-production" => "In Production"));
+											"in-production" => "In Production"),
+											false,
+											"this.test = function(product){ console.log('selected? ' + this.selected.length); return this.selected.length === 0 || this.selected.includes(product.status);}"
+											);
 											
 		$this->strainCategory = new ProductFilter("straincategory", "Product",
 											array(	"" => "", 
 													"indica" => "Indica", 
 													"sativa" => "Sativa", 
-													"hybrid" => "Hybrid"));
+													"hybrid" => "Hybrid"),
+											false,
+											"this.test = function(product){ return this.selected.length === 0 || this.selected.includes(product.straincategory);}"
+											);
 													
 		$this->productType = new ProductFilter("producttype", "Category",
 											array(	"" => "", 
 													"flower" => "Flower", 
 													"blend" => "Blend", 
-													"extract" => "Extract"));
+													"extract" => "Extract"),
+											false,
+											"this.test = function(product){ return this.selected.length === 0 || this.selected.includes(product.producttype);}"
+											);
 													
 		$this->thc = new ProductFilter("thc", "THC Level",
 								array(	"" => "", 
@@ -932,7 +949,8 @@ class ProductFilters{
 										"15-20" => "15% - 20%", 
 										"21-25" => "21% - 25%", 
 										"26-100" => "&gt; 25%"),
-										false);
+										false,
+											"");
 
 		$this->preciseTHCRangesLow = array(	"" => 0,
 											"0-14" => 0,
@@ -951,13 +969,17 @@ class ProductFilters{
 									array(	"" => "",
 											"7-9" => "$7-9",
 											"10-12" => "$10-12",
-											"13-1000" => "$13+"));
+											"13-1000" => "$13+"),
+											 false,
+											"");
 
 		$this->duration = new ProductFilter("duration", "Duration",
 									array(	"" => "",
 											"core" => "Core",
 											"seasonal" => "Seasonal",
-											"limited" => "Limited"));
+											"limited" => "Limited"),
+											false,
+											"");
 
 		$this->filters = array($this->productType, $this->strainCategory, $this->status, $this->profilethc, $this->profilecbd, $this->profilethccbd);
 		$this->profileFilters = array($this->profilethc, $this->profilecbd, $this->profilethccbd);
@@ -977,7 +999,7 @@ class ProductFilters{
 		?>
 		<li class="product-filter profile-filter profile-<?=strtolower($profile)?>">
 			<span class="noscript-hide">
-				<input type="checkbox" class="product-filters-profile profile-filter-has-value product-filters-<?=$filter_class_suffix?>" name="profile" id="profile-<?=$profile_lower?>" data-filter="<?=$profile_lower?>">
+				<input type="checkbox" class="product-filters-profile profile-filter-has-value product-filters-<?=$filter_class_suffix?>" name="profile" data-filter-name="<?=$filter_class_suffix?>"  id="profile-<?=$profile_lower?>" data-filter="<?=$profile_lower?>">
 				<label class="checkbox-label" for="profile-<?=$profile_lower?>"><?=$profile?></label>
 			</span>
 			<noscript>

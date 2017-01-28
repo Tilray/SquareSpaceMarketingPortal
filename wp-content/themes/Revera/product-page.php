@@ -43,7 +43,7 @@ function QueryProducts($productFilters)
         $bSortOrder = $productFilters->sortOrder[$bType];
 
 		if ($aSortOrder === $bSortOrder){
-			$profileSortResult = sortByProfile($a->combinedProfile, $b->combinedProfile);
+			$profileSortResult = sortByProfile($a->profile, $b->profile);
 			if ($profileSortResult === 0)
 				return strcasecmp($a->productName, $b->productName);
 
@@ -102,10 +102,366 @@ $theProducts = QueryProducts($productFilters);
 ?>
 <script src="<?=get_template_directory_uri()?>/js/isotope-min.js"></script>
 <script>
-	var filters = <?= $productFilters->getJSON() ?>;
-	var products = <?= json_encode($theProducts) ?>;
+	function ProductFilter(id, isProfile, strTestFunction){
+		this.groupName = "";
+		this.checkboxSelector = "ul li.product-filter input[type=checkbox][data-filter-name="+id+"]";
+		this.showAllCheckboxSelector = "ul li.product-filter input[type=checkbox][data-filter-name="+id+"][data-filter='']";
+		this.allCheckboxes = jQuery(this.checkboxSelector);
+		this.id = id;
+		this.selected = [];
+		this.isProfile = isProfile;
+
+		//creates this.test(product){...}
+		eval(strTestFunction);
+
+		this.reset = function(){};
+		this.allWereJustChecked = function($thisThingJustFlipped){
+			//either show-all needs to be checked, or all non-show-all's need to be checked
+			var allChecked = true;
+			for(var i = 0; i < this.allCheckboxes.length; i++){
+				var $cb = jQuery(this.allCheckboxes[i]);
+				var isShowAll = ($cb.attr("data-filter") == "");
+				var isChecked = (true === $cb.prop("checked"));
+
+				//this thing was different a moment ago, so check its reverse value
+				if ($cb.attr("id") === jQuery($thisThingJustFlipped).attr("id"))
+					isChecked = !isChecked;
+
+				if (isShowAll && isChecked)
+					return true;
+
+				allChecked = allChecked && (isShowAll || isChecked);
+			}
+
+			return allChecked;
+		};
+
+		this.allAreChecked = function(){
+			//either show-all needs to be checked, or all non-show-all's need to be checked
+			var allChecked = true;
+			for(var i = 0; i < this.allCheckboxes.length; i++){
+				var $cb = jQuery(this.allCheckboxes[i]);
+				var isShowAll = ($cb.attr("data-filter") == "");
+				var isChecked = (true === $cb.prop("checked"));
+
+				if (isShowAll && isChecked) {
+					console.log("Show all is checked " + $cb.attr("id") + "  " + $cb.attr("name") + "  " + this.allCheckboxes.length);
+					return true;
+				}
+				allChecked = allChecked && (isShowAll || isChecked);
+			}
+
+			return allChecked;
+		};
+
+		this.noneAreChecked = function(){
+			for(var i = 0; i < this.allCheckboxes.length; i++){
+				if (true === jQuery(this.allCheckboxes[i]).prop("checked"))
+					return false;
+			}
+
+			return true;
+		};
+
+		this.noneAreCheckedDontCountShowAll = function(){
+			for(var i = 0; i < this.allCheckboxes.length; i++){
+				var $cb = jQuery(this.allCheckboxes[i]);
+				if (true === $cb.prop("checked") && ($cb.attr("data-filter") != ""))
+					return false;
+			}
+
+			return true;
+		};
+
+		this.getSelectedValues = function(){
+			var selected = [];
+
+			for(var i = 0; i < this.allCheckboxes.length; i++) {
+				var $thisBox = jQuery(this.allCheckboxes[i]);
+				var isShowAll = ($thisBox.attr("data-filter") == "");
+				var isChecked = (true === $thisBox.prop("checked"));
+
+				if (isShowAll && isChecked)
+					return [];
+
+				if (isChecked) {
+					selected.push($thisBox.attr("data-filter"));
+				}
+			}
+
+			return selected;
+		};
+
+		this.cacheSelectedValues = function(){
+			this.selected = this.getSelectedValues();
+		};
+
+		this.getQueryStringParam = function(skipAllChecked){
+			if (this.noneAreCheckedDontCountShowAll())
+				return "";
+
+			if (skipAllChecked && this.allAreChecked())
+				return "";
+
+			var values = [];
+			for(var i = 0; i < this.allCheckboxes.length; i++) {
+				var thisValue = jQuery(this.allCheckboxes[i]).attr("data-filter");
+				if (jQuery(this.allCheckboxes[i]).prop("checked")) {
+					values.push(thisValue);
+				}
+			}
+
+			return this.id + "=" + values.join(',');
+		};
+	}
+
+	function ProductFilters(filtersJSON, isMobile){
+		var self = this;
+
+		this.onFilterChange = function($changedElement){
+			var thisFilterCategory = jQuery($changedElement).attr('name');
+			var thisFilterCategorySelector = 'ul input[type=checkbox][name=' + thisFilterCategory + ']';
+
+			var filterName = jQuery($changedElement).attr('data-filter-name');
+			var filter = self.filtersByName[filterName];
+
+			if ($changedElement.attr("id") == "profile-show-all" || filter.isProfile)
+				self.manageProfileFilterStates($changedElement);
+			else
+				self.manageNonProfileFilterState(filter, $changedElement);
+		};
+
+		this.testProductActive = function(product, selectedProfiles, nonProfileFilters){
+			if (selectedProfiles.length > 0 && !selectedProfiles.includes(product.profile)){
+				return false;
+			}
+
+			for (var npf in nonProfileFilters){
+				if (!nonProfileFilters[npf].test(product))
+					return false;
+			}
+
+			return true;
+		};
+
+		this.testProductsActive = function(products){
+			var selectedProfiles = [];
+			for (var pf in self.profileFilters){
+				selectedProfiles = selectedProfiles.concat(self.profileFilters[pf].getSelectedValues());
+			}
+
+			for (var pf in self.nonProfileFilters){
+				self.nonProfileFilters[pf].cacheSelectedValues();
+			}
+
+			for (var p in products){
+				var $item = jQuery("div.product-item.filterable-item[data-id='" + products[p].id + "']");
+				if (self.testProductActive(products[p], selectedProfiles, self.nonProfileFilters))
+				{
+					$item.addClass("active");
+				}
+				else{
+					$item.removeClass("active");
+				}
+			}
+		};
+
+		this.isMobile = isMobile;
+		this.filterData = filtersJSON.filters;
+		this.profileFilters = [];
+		this.nonProfileFilters = [];
+		this.allFilters = [];
+
+		this.filtersByName = {};
+		for (var f in this.filterData){
+			var filter = this.filterData[f];
+			var pf = new ProductFilter(filter.qsParamName, filter.isProfile, filter.jsTestFunction);
+			self.filtersByName[filter.qsParamName] = pf;
+
+			self.allFilters.push(pf);
+			if (filter.isProfile)
+				self.profileFilters.push(pf);
+			else
+				self.nonProfileFilters.push(pf);
+		}
+
+		this.manageProfileFilterStates = function(changedElement){
+			var isShowAll = (jQuery(changedElement).attr("data-filter") == "");
+			var $desktopShowAll = jQuery("input#profile-show-all");
+
+			if (isShowAll){
+				for (var pf in self.profileFilters) {
+					var thisFilter = self.profileFilters[pf];
+					//don't worry about checked or unchecked, re-check everything
+					jQuery(thisFilter.checkboxSelector).prop('checked', true);
+					//but then uncheck the show-all
+					jQuery(thisFilter.showAllCheckboxSelector).prop('checked', false);
+				}
+
+				if ($desktopShowAll != null)
+					$desktopShowAll.prop('checked', false);
+			}
+			else{
+				var allAreChecked = true;
+				var noneAreChecked = true;
+				for (var pf in self.profileFilters){
+					var thisFilter = self.profileFilters[pf];
+					allAreChecked = allAreChecked && thisFilter.allWereJustChecked(jQuery(changedElement));
+					noneAreChecked = noneAreChecked && thisFilter.noneAreChecked();
+				}
+
+				//one more loop through
+				for (var pf in self.profileFilters) {
+					if (allAreChecked){
+						//if all the rest are checked, uncheck everything, and re-check this one
+						jQuery(thisFilter.checkboxSelector).prop('checked', false);
+						jQuery(changedElement).prop('checked', true);
+					}
+					else if (noneAreChecked){
+						//if none are checked, check everything
+						jQuery(thisFilter.checkboxSelector).prop('checked', true);
+					}
+
+					//no matter what, uncheck show-all
+					var thisFilter = self.profileFilters[pf];
+					jQuery(thisFilter.showAllCheckboxSelector).prop('checked', false);
+				}
+
+				if ($desktopShowAll != null)
+					$desktopShowAll.prop('checked', false);			}
+		};
+
+
+		this.manageNonProfileFilterState = function(filter, changedElement){
+			var isShowAll = (jQuery(changedElement).attr("data-filter") == "");
+			var isChecked = (true === jQuery(changedElement).prop("checked"));
+			//four possible states:
+			//show all just got unchecked
+			//show all just got checked
+			//something else just got checked
+			//something else just got unchecked
+			if (isShowAll){
+				if (isChecked){
+					//uncheck everything else
+					jQuery(filter.checkboxSelector).prop('checked', false);
+					jQuery(filter.showAllCheckboxSelector).prop('checked', true);
+				}
+				else{
+					//check everything else
+					jQuery(filter.checkboxSelector).prop('checked', true);
+					jQuery(filter.showAllCheckboxSelector).prop('checked', false);
+				}
+			}
+			else{
+				if (isChecked){
+					//make sure show-all is unchecked
+					jQuery(filter.showAllCheckboxSelector).prop('checked', false);
+				}
+				else{
+					//if nothing's checked, re-check show-all
+					if (jQuery(filter.checkboxSelector + ":checked").length == 0)
+						jQuery(filter.showAllCheckboxSelector).prop('checked', true);
+				}
+			}
+		};
+
+	}
+
 
 	var productDetailsById;
+
+	function ProductLogic() {
+		var self = this;
+
+		var isMobile = (jQuery('.filter-panel.mobile').length > 0);
+		this.productsData = <?= json_encode($theProducts) ?>;
+		this.filtersData = <?= $productFilters->getJSON() ?>;
+		this.filters = new ProductFilters(this.filtersData, isMobile);
+
+		this.updateProductsAndSections = function(){
+			jQuery("div.section-title").removeClass('active');
+			this.showSectionTitles("flower");
+			this.showSectionTitles("blend");
+			this.showSectionTitles("extract");
+
+			jQuery('#primary').isotope({ filter: '.active' });
+		};
+
+		this.showSectionTitles = function(sectionName){
+			var numActiveItems = jQuery("div.product-item.active[data-producttype='" + sectionName + "']").length;
+			if (numActiveItems > 0){
+				jQuery("div.section-title-" + sectionName).addClass("active");
+			}
+		};
+
+		this.updateURI = function(){
+			if (typeof window.history.replaceState !== 'function')
+				return;
+
+			var params = [];
+			for (var i=0; i<this.filters.nonProfileFilters.length; i++){
+				var thisParam = this.filters.nonProfileFilters[i].getQueryStringParam(true);
+				if (thisParam.length > 0)
+					params.push(thisParam);
+			}
+
+			var profileParams = [];
+			var allProfilesChecked = true;
+			for (var i=0; i<this.filters.profileFilters.length; i++){
+				var thisParam = this.filters.profileFilters[i].getQueryStringParam(false);
+				console.log(thisParam);
+				if (thisParam.length > 0)
+					profileParams.push(thisParam);
+				allProfilesChecked = allProfilesChecked && this.filters.profileFilters[i].allAreChecked();
+			}
+
+			console.log("All checked? " + allProfilesChecked + "  length " + profileParams.length);
+
+			if (!allProfilesChecked && profileParams.length > 0)
+				params = params.concat(profileParams);
+
+			window.history.replaceState(
+				{},
+				pageTitle,
+				pageBaseURL + "?" + params.join("&")
+			);
+		};
+		this.setMobilePanelButtonColors = function(){
+			for (var i=0; i<this.filters.nonProfileFilters.length; i++){
+				var thisFilter = this.filters.nonProfileFilters[i];
+				var $button = jQuery("div.filter-button." + thisFilter.id);
+				if (thisFilter.allAreChecked() || thisFilter.noneAreChecked())
+					$button.removeClass("has-selections");
+				else
+					$button.addClass("has-selections");
+			}
+
+			for (var i=0; i<this.filters.profileFilters.length; i++){
+				var thisFilter = this.filters.profileFilters[i];
+				var $button = jQuery("div.filter-button." + thisFilter.id);
+				if (thisFilter.noneAreChecked())
+					$button.removeClass("has-selections");
+				else
+					$button.addClass("has-selections");
+			}
+		};
+
+		this.onFilterChange = function($changedElement){
+			self.filters.onFilterChange($changedElement);
+			self.filters.testProductsActive(self.productsData);
+			self.updateProductsAndSections();
+			self.updateURI();
+			self.setMobilePanelButtonColors();
+		};
+
+		jQuery('ul.product-filters input[type=checkbox]').change(function() {
+			self.onFilterChange(jQuery(this));
+		});
+
+		//set initial checkbox states
+	};
+
+	var productLogic = new ProductLogic();
 
 	function removePx(dimension){
 		return dimension.replace("px", "");
@@ -145,12 +501,12 @@ $theProducts = QueryProducts($productFilters);
 		}
 
 		setProductsActive();
-		setMobilePanelButtonColors();
+		//setMobilePanelButtonColors();
 		jQuery('#primary').isotope({ filter: '.active' });
 		updateURI();
 	}
 
-	function UpdateProducts($clicked)
+/*	function UpdateProducts($clicked)
 	{
 		//if it's a show-all, reset checkboxes for all others of same category-
 		//if it's not a show-all, reset show-all for this category-
@@ -179,7 +535,6 @@ $theProducts = QueryProducts($productFilters);
 			if (isProfileFilter){
 				//for profile filters, just turn everything on that's not a show-all
 				jQuery(thisFilterCategorySelector).each(function(index){
-					console.log("show all profile " + isMobile);
 					if (isMobile)
 						jQuery(this).prop('checked', (jQuery(this).attr('data-filter') == '' ? true : false));
 					else
@@ -268,7 +623,7 @@ $theProducts = QueryProducts($productFilters);
 		});
 
 	}
-	
+
 	//filterState: zero or more strings, joined and end-capped with |||
 	//itemFilter: one or more strings, joined by |
 	function testFilter(filterState, itemFilter, matchEmpty){
@@ -320,12 +675,14 @@ $theProducts = QueryProducts($productFilters);
 	}
 
 	function showSectionTitles(sectionName){
+		jQuery("div.section-title").removeClass('active');
 		var numActiveItems = jQuery("div.product-item.active[data-producttype='" + sectionName + "']").length;
 		if (numActiveItems > 0){
 			jQuery("div.section-title-" + sectionName).addClass("active");
 		}
 	}
-	
+	 */
+
 	function GetFiltersArray(query)
 	{
 		var filters = [];
@@ -417,21 +774,18 @@ $theProducts = QueryProducts($productFilters);
 
 			foreach ($productFilters->profileFilters as $filter)
 			{
-				echo "setFilterStates('input.product-filters-" . $filter->qsParamName . "', arrpreselected" . $filter->qsParamName . ", " . ($turnAllProfilesOn ? "true" : "false") . ");\n";
+				//echo "setFilterStates('input.product-filters-" . $filter->qsParamName . "', arrpreselected" . $filter->qsParamName . ", " . ($turnAllProfilesOn ? "true" : "false") . ");\n";
 			}
 
             foreach ($productFilters->nonProfileFilters as $filter)
             {
 				$turnSetOn = ($isMobile && $filter->filterHasNoPreselectedValues()) ? "true" : "false";
-                echo "setFilterStates('input.product-filters-" . $filter->qsParamName . "', arrpreselected" . $filter->qsParamName . ");\n";	//", " . $turnSetOn .
+                //echo "setFilterStates('input.product-filters-" . $filter->qsParamName . "', arrpreselected" . $filter->qsParamName . ");\n";	//", " . $turnSetOn .
             }
         ?>
 
-		jQuery('ul.product-filters input[type=checkbox]').change(function() {
-			UpdateProducts(jQuery(this));
-		});
 
-		setMobilePanelButtonColors();
+		//setMobilePanelButtonColors();
 		jQuery('div.hthumb.init').removeClass('init');
 
 		var allProducts = jQuery("div.product-item");
