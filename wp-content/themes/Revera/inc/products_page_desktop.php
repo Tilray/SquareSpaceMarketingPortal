@@ -92,8 +92,6 @@
 							<div class="product-link"><?=_("More information about this strain is available")?> <a href=""><?=_("here")?></a></div>
 						</div>
 						<div class="buy-column">
-							<h4 class="terpenes">Terpenes:</h4>
-							<div class="terpene-images"></div>
 							<div class="price">
 								<span class="price"></span>
 								<a class="buy">Buy Now</a>

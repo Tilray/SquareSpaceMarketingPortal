@@ -32,7 +32,7 @@ function renderMobileFilterPanel($qsParamName, $displayName, $filterNameValues, 
 					$id = $qsParamName . '-show-all';
 				}
 
-				$label = $fnvId;
+				$label = $fnvValue;
 				if ($label == "")
 					$label = "Show All";
 
@@ -209,29 +209,6 @@ function renderProductsSection($allProducts, $productType, $sectionTitle){
 					</div>
 				</div>
 			</div>
-			<div class="col-xs-12 product-details-row product-item portbox"
-				 data-id="<?=$product->id?>" data-straincategory="" data-status=""
-				 data-producttype="" data-thc="" data-price="">
-				<div class="details-panel-arrow"></div>
-				<div class="details-panel">
-					<div class="header-column">
-						<h3 class="name"></h3>
-						<h4 class="subtitle"></h4>
-					</div>
-					<div class="overview-column">
-						<div class="overview"></div>
-						<div class="product-link"><?=_("More information about this strain is available")?> <a href=""><?=_("here")?></a></div>
-					</div>
-					<div class="buy-column">
-						<h4 class="terpenes">Terpenes:</h4>
-						<div class="terpene-images"></div>
-						<div class="price">
-							<span class="price"></span>
-							<a class="buy">Buy Now</a>
-						</div>
-					</div>
-				</div>
-			</div>
 			<?php
 		}
 	}
@@ -290,10 +267,8 @@ function renderProductsSection($allProducts, $productType, $sectionTitle){
 			filter: ".active"
 		});
 
-		/*
 		var $filterPanel = jQuery(".page-head.mobile-products-page");
 		var $filterSummaryPanel = jQuery(".page-head.mobile-products-page.summary");
-*/
 
 		jQuery(document).scroll(function(){
 			if (jQuery("body").scrollTop() > changePanelsPosition){
@@ -325,12 +300,8 @@ function renderProductsSection($allProducts, $productType, $sectionTitle){
 					}
 				});
 			}
-
-			jQuery('.filter-button.mobile.reset').click(function(){
-				console.log("Reset!");
-				ResetFilters();
-			});
 		}
+
 
 	});
 </script>

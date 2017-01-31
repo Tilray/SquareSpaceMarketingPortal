@@ -1791,7 +1791,6 @@ div.product-details-row .details-panel .buy-column {
 }
 
 div.product-details-row .details-panel .buy-column div.price{
-	margin-top: 20px;
 }
 
 
@@ -2271,8 +2270,8 @@ div.back-to-results span.arrow{
 }
 
 .page-head.summary{
-	padding-top: 50px;
-	padding-bottom: 5px;
+	padding-top: 45px;
+	padding-bottom: 0px;
 }
 
 .summary-item{
@@ -2957,7 +2956,7 @@ div.search-result{
 		font-size: 26px;
 	}
 	.portbox, .postbox{
-		margin-bottom: 30px;
+		margin-bottom: 10px;
 	}
 
 	#bottom .col-6 {

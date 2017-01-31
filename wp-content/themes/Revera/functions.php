@@ -144,7 +144,7 @@ function web2feel_scripts() {
 	wp_enqueue_script( 'bootstrap', get_template_directory_uri() . '/bootstrap/bootstrap.min.js', array( 'jquery' ), '20120206', true );
 	wp_enqueue_script( 'flexslider', get_template_directory_uri() . '/js/jquery.flexslider.js', array( 'jquery' ), '20120206', true );
 	wp_enqueue_script( 'superfish', get_template_directory_uri() . '/js/superfish.js', array( 'jquery' ), '20120206', true );	
-	wp_enqueue_script( 'custom', get_template_directory_uri() . '/js/custom.js', array( 'jquery' ), '20120206', true );
+	wp_enqueue_script( 'custom', get_template_directory_uri() . '/js/custom.js', array( 'jquery' ), '20170130', true );
 	wp_enqueue_script( 'mobilemenu', get_template_directory_uri() . '/js/mobilemenu.js', array(), '20120206', true );
 	wp_enqueue_script( 'slicknav', get_template_directory_uri() . '/js/jquery.slicknav.min.js', array( 'jquery' ), '20120206', true );	
 	wp_enqueue_script( 'web2feel-skip-link-focus-fix', get_template_directory_uri() . '/js/skip-link-focus-fix.js', array(), '20130115', true );
@@ -920,7 +920,8 @@ class ProductFilters{
 		$this->status = new ProductFilter("status", "Status",
 									array(	"" => "", 
 											"available" => "Available", 
-											"in-production" => "In Production"),
+											"30-days" => "30 Days",
+											"90-days" => "90 Days"),
 											false,
 											"this.test = function(product){ console.log('selected? ' + this.selected.length); return this.selected.length === 0 || this.selected.includes(product.status);}"
 											);
@@ -1066,66 +1067,7 @@ class ProductFilters{
 		}
 	}
 	
-	//creates some js that creates the querystring on the fly
-	//we have to create the js so we're not hardcoding the filter names
-	public function getQueryStringRenderingJS(){
-		$output = "'?"; 
-		$params = array();
 
-		foreach($this->filters as $filter)
-		{
-			$params[] = $filter->qsParamName . "=' + GetFiltersArray('ul.product-filters-" . $filter->qsParamName . " input[type=checkbox]:checked').join(\",\")";
-		}
-		
-		return $output . implode(" + '&", $params);
-	}
-	
-	public function renderProductsFilteringStatuses(){
-		$output = ""; 
-		foreach($this->filters as $filter)
-		{
-			$output .= "var combined" . $filter->qsParamName . " = '|||' + GetFiltersArray('ul.product-filters-" . $filter->qsParamName . " input[type=checkbox]:checked').join('|||') + '|||';";
-		}
-
-		$output .= "var combined_profile_filters = '|||'";
-		foreach($this->profileFilters as $pf){
-			$output .= " + GetFiltersArray('ul.product-filters-" . $pf->qsParamName . " input[type=checkbox]:checked').join('|||') + '|||';";
-		}
-		
-		return $output;	
-	}
-	
-	public function renderProductsFilteringConditions(){
-		$conditions = array();
-		$profileConditions = array();
-		foreach($this->nonProfileFilters as $filter)
-		{
-			$conditions[] = "testFilter(combined" . $filter->qsParamName . ", jQuery( this ).attr('data-" . $filter->qsParamName . "'))";
-		}
-		foreach($this->profileFilters as $filter)
-		{
-			$profileConditions[] = "testFilter(combined" . $filter->qsParamName . ", jQuery( this ).attr('data-" . $filter->qsParamName . "'), false)";
-		}
-
-		return implode(" && \n", $conditions) . " && (" . implode(" || \n", $profileConditions) . ")";
-	}
-
-	public function renderProductsFilteringConditionsMobile(){
-		$conditions = array();
-		$profileConditions = array();
-		foreach($this->nonProfileFilters as $filter)
-		{
-			$conditions[] = "testFilter(combined" . $filter->qsParamName . ", jQuery( this ).attr('data-" . $filter->qsParamName . "'))";
-		}
-
-		//treat these as one big group
-		foreach($this->profileFilters as $filter)
-		{
-			$profileConditions = "testFilter(combined_profile_filters, jQuery( this ).attr('data-" . $filter->qsParamName . "'), false)";
-		}
-
-		return implode(" && \n", $conditions) . " && (combined_profile_filters.replace(/[ \|]/g, '').length === 0 || " . $profileConditions . ")";
-	}
 
 	public function getJSON(){
 		echo json_encode(get_object_vars($this));
