@@ -103,6 +103,15 @@ $theProducts = QueryProducts($productFilters);
 ?>
 <script src="<?=get_template_directory_uri()?>/js/isotope-min.js"></script>
 <script>
+	function arrayIncludes(arr, val){
+		for (var i=0; i<arr.length; i++){
+			if (arr[i] == val)
+				return true;
+		}
+
+		return false;
+	}
+
 	function ProductFilter(id, isProfile, strTestFunction, currentFilterValues, allProfilesAreBlank){
 		this.groupName = "";
 		this.checkboxSelector = "ul li.product-filter input[type=checkbox][data-filter-name="+id+"]";
@@ -260,12 +269,14 @@ $theProducts = QueryProducts($productFilters);
 				self.manageProfileFilterStates($changedElement);
 			else
 				self.manageNonProfileFilterState(filter, $changedElement);
+
+			self.updateMobileSummaryPanel();
 		};
 
 		this.testProductActive = function(product, selectedProfiles, nonProfileFilters){
-			if (selectedProfiles.length > 0 && !selectedProfiles.includes(product.profile)){
+			//if none are selected, then we "found" it
+			if(selectedProfiles.length > 0 && !arrayIncludes(selectedProfiles, product.profile))
 				return false;
-			}
 
 			for (var npf in nonProfileFilters){
 				if (!nonProfileFilters[npf].test(product))
@@ -297,6 +308,26 @@ $theProducts = QueryProducts($productFilters);
 			}
 		};
 
+		this.allProfilesChecked = function(){
+			var allAreChecked = true;
+			for (var pf in self.profileFilters){
+				var thisFilter = self.profileFilters[pf];
+				allAreChecked = allAreChecked && thisFilter.allAreChecked();
+			}
+
+			return allAreChecked;
+		};
+
+		this.noProfilesChecked = function(){
+			var noneAreChecked = true;
+			for (var pf in self.profileFilters){
+				var thisFilter = self.profileFilters[pf];
+				noneAreChecked = noneAreChecked && thisFilter.noneAreChecked();
+			}
+
+			return noneAreChecked;
+		};
+
 		this.manageProfileFilterStates = function(changedElement){
 			var isShowAll = (jQuery(changedElement).attr("data-filter") == "");
 			var $desktopShowAll = jQuery("input#profile-show-all");
@@ -321,7 +352,6 @@ $theProducts = QueryProducts($productFilters);
 					allAreChecked = allAreChecked && thisFilter.allWereJustChecked(jQuery(changedElement));
 					noneAreChecked = noneAreChecked && thisFilter.noneAreChecked();
 				}
-
 				//one more loop through
 				for (var pf in self.profileFilters) {
 					if (allAreChecked){
@@ -380,7 +410,35 @@ $theProducts = QueryProducts($productFilters);
 		this.resetFilters = function(){
 			for (var i=0; i<self.allFilters.length; i++)
 				self.allFilters[i].reset();
-		}
+		};
+
+		this.updateMobileSummaryPanel = function(){
+			if (!self.isMobile)
+				return;
+
+			jQuery(".summary-contents .summary-item").hide();
+
+			var allAreChecked = self.allProfilesChecked();
+			var noneAreChecked = self.noProfilesChecked();
+
+			if (!allAreChecked && !noneAreChecked){
+				for(var i=0; i<self.profileFilters.length; i++){
+					if (!self.profileFilters[i].noneAreChecked()){
+						console.log("Showing .summary-contents .summary-item." + self.profileFilters[i].id);
+						jQuery(".summary-contents .summary-item." + self.profileFilters[i].id).show();
+					}
+				}
+			}
+
+			for(var i=0; i<self.nonProfileFilters.length; i++){
+				var f = self.nonProfileFilters[i];
+				var selected = f.getSelectedValues();
+				for (var j=0; j<selected.length; j++){
+					console.log("Showing .summary-contents .summary-item." + f.id + selected[j]);
+					jQuery(".summary-contents .summary-item." + f.id + selected[j]).show();
+				}
+			}
+		};
 
 		//loop through and see if any profile filters have values
 		//we'll have to loop through again to create the filters :(
@@ -410,7 +468,10 @@ $theProducts = QueryProducts($productFilters);
 	function Products(productsJSON, isMobile){
 		var self = this;
 		this.isMobile = isMobile;
-		this.productsData = productsJSON;
+		this.productsById = [];
+		for(var i=0; i<productsJSON.length; i++){
+			this.productsById[productsJSON[i].id] = productsJSON[i];
+		}
 
 		this.removePx = function(dimension){
 			return dimension.replace("px", "");
@@ -482,15 +543,23 @@ $theProducts = QueryProducts($productFilters);
 		}
 
 		this.populateDetailsPanel = function(id){
-			var data = productDetailsById["id" + id];
+			var data = this.productsById[+id];
 			jQuery('div.details-panel .header-column .name').text(data.profile + " " + data.name);
-			jQuery('div.details-panel .header-column .subtitle').text(data.straincategory + " " + data.type);
+			jQuery('div.details-panel .header-column .subtitle').text(data.straincategory + " " + data.producttype);
 			jQuery('div.details-panel .overview-column .overview').html(data.overview);
-			jQuery('div.details-panel .product-link a').attr('href', data.pagelink);
+			jQuery('div.details-panel .product-link a').attr('href', data.productUrl);
+
+			if (data.terpenes.length > 0){
+				jQuery('div.details-panel .buy-column .terpenes').show();
+				jQuery('div.details-panel .buy-column .terpenes .content').html(data.terpenes);
+			}
+			else{
+				jQuery('div.details-panel .buy-column .terpenes').hides();
+			}
 
 			if (data.status == "available") {
 				jQuery('div.details-panel .buy-column .price').show();
-				jQuery('div.details-panel .buy-column .price .price').text(data.price);
+				jQuery('div.details-panel .buy-column .price .price').text(data.priceText);
 				jQuery('div.details-panel .buy-column .price .buy').attr('href', data.storelink);
 			}
 			else{
@@ -603,9 +672,6 @@ $theProducts = QueryProducts($productFilters);
 		this.setMobilePanelButtonColors();
 	};
 
-	var productDetailsById;
-
-
 	//disable positioning animations
 	Isotope.prototype._positionItem = function( item, x, y ) {
 		item.goTo( x, y );
@@ -616,34 +682,9 @@ $theProducts = QueryProducts($productFilters);
 
 
 	jQuery( document ).ready(function() {
-        <?php
-			$jsonProducts = array();
-			foreach($theProducts as $product){
-				$terpeneImages = $product->getTerpeneImages();
-
-				$jsonProducts["id" . $product->id] = array("id" => $product->id,
-										"profile" => $product->profile,
-										"name" => $product->name,
-										"overview" => $product->overview,
-										"terpenes" => $terpeneImages,
-										"type" => $product->producttype,
-										"straincategory" => $product->straincategory,
-										"price" => format_price_for_current_locale($product->actualprice),
-										"pagelink" => get_permalink($product->id),
-										"status" => $product->status,
-										"storelink" => $product->storelink,
-										"permalink" => $product->productUrl);
-			}
-
-			echo "productDetailsById = " . json_encode($jsonProducts) . ";";
-        ?>
-
 		var productLogic = new ProductLogic();
-
 		jQuery('div.hthumb.init').removeClass('init');
-
-
-	});	
+	});
 </script>
 
 

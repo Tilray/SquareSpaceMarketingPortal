@@ -62,10 +62,6 @@ jQuery(window).load(function() {
 });
 
 
-function closeAllProductFilterPanels()
-{
-	jQuery('.filter-panel.mobile').removeClass('active');
-}
 
 function trackEvent(category, action, label, value){
     if (label == undefined) label = "";

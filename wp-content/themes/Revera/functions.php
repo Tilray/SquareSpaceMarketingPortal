@@ -745,6 +745,7 @@ class Product{
 	public $profilecbd;
 	public $profilethccbd;
 	public $profile;	//value will be whichever of the last 3 profiles is set
+	public $priceText;
 
 	public function isActive($filters){
 		//loop through filters, check against active ones
@@ -781,18 +782,6 @@ class Product{
 		return $productFilters->strainCategory->getNameFromID($this->getPrimaryStrainCategory($rawCategories));
 	}
 
-	function getTerpeneImages(){
-		$terpene_images = "";
-		if ($this->terpenes){
-			foreach($this->terpenes as $terpene){
-				$terpene_post = get_field($terpene . "_post", "options");
-				$terpene_link = get_permalink($terpene_post->ID);
-				$terpene_images .= "<a href='$terpene_link'><img class='terpene' src='" . get_template_directory_uri() . "/images/terpenes/" . $terpene . ".png' alt='" . $terpene . "'/></a>";
-			}
-		}
-
-		return $terpene_images;
-	}
 
 
     function __construct($post, $productFilters){
@@ -812,7 +801,7 @@ class Product{
         $this->profilethccbd = str_replace("none", "", trim(get_post_meta($id, 'thc_cbd_profile', true)));
         $this->profile = $this->profilethc . $this->profilecbd . $this->profilethccbd;
         $this->storelink = trim(get_post_meta($id, 'store_link', true));
-        $this->terpenes = get_field('terpenes', $id);
+        $this->terpenes = get_field('terpenes_description', $id);
 
         $this->overview = trim(get_post_meta($id, 'overview', true));
         if (strlen($this->overview) == 0)
@@ -841,9 +830,8 @@ class Product{
         $productPrice = trim(get_post_meta($id, 'price', true));
         $this->actualprice = $productPrice;
         $this->price = getProductPriceRange($productPrice, $productFilters->price->validFilterValues);
-
         $this->unitLabel = trim(get_post_meta($id, 'unit_label', true));
-
+        $this->priceText = format_price_for_current_locale(floatval($this->actualprice)) . ' ' . __($this->unitLabel);
 
         $this->initiallyActive = TRUE;
         $prodAtts = get_object_vars($this);
@@ -891,6 +879,7 @@ class ProductFilters{
 	public $filters;
 	public $profileFilters;
 	public $nonProfileFilters;
+	public $combinedProfileFilterValues;
 
 	function __construct(){
 		$this->profilethc = new ProductFilter("profilethc", "Profile",
@@ -923,7 +912,7 @@ class ProductFilters{
 											"30-days" => "30 Days",
 											"90-days" => "90 Days"),
 											false,
-											"this.test = function(product){ console.log('selected? ' + this.selected.length); return this.selected.length === 0 || this.selected.includes(product.status);}"
+											"this.test = function(product){ console.log('selected? ' + this.selected.length); return this.selected.length === 0 || arrayIncludes(this.selected, product.status);}"
 											);
 											
 		$this->strainCategory = new ProductFilter("straincategory", "Product",
@@ -932,7 +921,7 @@ class ProductFilters{
 													"sativa" => "Sativa", 
 													"hybrid" => "Hybrid"),
 											false,
-											"this.test = function(product){ return this.selected.length === 0 || this.selected.includes(product.straincategory);}"
+											"this.test = function(product){ return this.selected.length === 0 || arrayIncludes(this.selected, product.straincategory);}"
 											);
 													
 		$this->productType = new ProductFilter("producttype", "Category",
@@ -941,7 +930,7 @@ class ProductFilters{
 													"blend" => "Blend", 
 													"extract" => "Extract"),
 											false,
-											"this.test = function(product){ return this.selected.length === 0 || this.selected.includes(product.producttype);}"
+											"this.test = function(product){ return this.selected.length === 0 || arrayIncludes(this.selected, product.producttype);}"
 											);
 													
 		$this->thc = new ProductFilter("thc", "THC Level",
@@ -1018,7 +1007,7 @@ class ProductFilters{
 
 	public function renderChemicalFilters(){
 	?>
-		<div class="col-sm-4 col-xs-12">
+		<div class="col-xs-4">
 			<h3 class="profile-header">THC Products</h3>
 			<ul class="product-filters product-filters-profile product-filters-profilethc">
 			<?php
@@ -1028,7 +1017,7 @@ class ProductFilters{
 			?>
 			</ul>
 		</div>
-		<div class="col-sm-4 col-xs-12">
+		<div class="col-xs-4">
 			<h3 class="profile-header">CBD Products</h3>
 			<ul class="product-filters product-filters-profile product-filters-profilecbd">
 			<?php
@@ -1038,7 +1027,7 @@ class ProductFilters{
 			?>
 			</ul>
 		</div>
-		<div class="col-sm-4 col-xs-12">
+		<div class="col-xs-4">
 			<h3 class="profile-header">THC / CBD Products</h3>
 			<ul class="product-filters product-filters-profile product-filters-profilethccbd">
 			<?php

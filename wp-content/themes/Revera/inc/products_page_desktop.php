@@ -6,7 +6,7 @@
 
 <div class="container">	
 	<div class="row filters">
-		<div class="col-sm-7 col-xs-12 profiles-column">
+		<div class="col-md-7 col-sm-12 profiles-column">
 			<h1 class="products"><?php the_title(); ?></h1>
 			<div class="row">
 				<?php
@@ -26,7 +26,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="col-sm-5 col-xs-12">
+		<div class="col-md-5 col-sm-12">
 			<div class="row">
 				<?php
 				$productFilters->productType->renderFilters();
@@ -92,6 +92,10 @@
 							<div class="product-link"><?=_("More information about this strain is available")?> <a href=""><?=_("here")?></a></div>
 						</div>
 						<div class="buy-column">
+							<div class="terpenes">
+								<h3><?= _("Terpenes:")?></h3>
+								<div class="content"></div>
+							</div>
 							<div class="price">
 								<span class="price"></span>
 								<a class="buy">Buy Now</a>
@@ -112,34 +116,11 @@
 			<div id="primary" class="js-isotope" data-isotope-options='{ "masonry" : {"columnWidth": 239}, "itemSelector": ".product-item", "filter": ".active" }'>
 			<?php
 				renderProductsSection($theProducts, "flower", "Whole Flower");
-			renderProductsSection($theProducts, "blend", "Flower Blends");
-			renderProductsSection($theProducts, "extract", "Oil Drops");
+				renderProductsSection($theProducts, "blend", "Flower Blends");
+				renderProductsSection($theProducts, "extract", "Extracts");
 			?>
 			</div>
 		</div>
 	</div>
 </div>
 
-<script>
-	function setFilterStates(filterSelector, statuses, turnWholeGroupOn)
-	{
-		if (turnWholeGroupOn === undefined)
-			turnWholeGroupOn = false;
-		console.log("SetFilterStates: " + filterSelector + "   " + turnWholeGroupOn);
-
-		if (turnWholeGroupOn){
-			//turn everything on
-			jQuery(filterSelector).prop('checked', true);
-			//but turn "show all" off
-			jQuery(filterSelector + '[data-filter=""]').prop('checked', false);
-		}
-		else
-		{
-			statuses.forEach(function(item)
-			{
-				jQuery(filterSelector + '[data-filter="' + item + '"]').prop('checked', true);
-			});
-		}
-
-	}
-</script>

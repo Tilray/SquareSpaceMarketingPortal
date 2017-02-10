@@ -2,7 +2,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-lg-12">
-				<h2 class="mockH1 products"><?=__('PRODUCTS')?></h2>
+				<h2 class="mockH1 products"><?=__('PROFILES')?></h2>
 			</div>
 		</div>
 	</div>
@@ -24,22 +24,27 @@
 					<div class="product-chip-spacer">
 					</div>
 					<div class="product-chip-lower">
-						<div class="text-centerer">
-							<div class="strain-name">
-								<?= $thisProduct->name ?>
-							</div>
+						<div class="strain-name">
+							<?= $thisProduct->name ?>
 						</div>
-					</div>
-					<div class="product-chip-lower">
-						<div class="text-centerer">
-							<div class="strain-category">
-								<?= $thisProduct->straincategory ?>
-							</div>
+						<div class="strain-category">
+							<?= $thisProduct->straincategory ?>
 						</div>
 					</div>
 					<div class="product-chip-spacer">
 					</div>
 				</div>
+
+				<?php
+				if (strlen($thisProduct->terpenes) > 0) {
+					?>
+					<div class="terpenes">
+					<h3><?= _("Terpenes:")?></h3>
+					<?= $thisProduct->terpenes ?>
+					</div>
+					<?php
+				}
+				?>
 				<p class="price-text">
 					<?php
 					if($itemPrice > 0)
@@ -57,24 +62,14 @@
 			</div>
 			<div class="col-sm-5">
 				<h1 class="mockH2"><?php the_title(); ?></h1>
-				<p><?=$thcAndCbdText?></p>
-				<?php
-
-					the_content();
-
-					$terpene_images = $thisProduct->getTerpeneImages();
-				?>
-				<div class="terpene-images">
+				<div class="single-product-desktop-content">
+					<p><?=$thcAndCbdText?></p>
 					<?php
-						if(strlen(trim($terpene_images))){
-						?>
-							<h3><?=_("Terpenes:")?></h3>
-							<?=$terpene_images?>
-						<?php
-						}
+
+						the_content();
+
 					?>
 				</div>
-
 				<?php
 					$disableDisqus = trim(ft_of_get_option('fabthemes_disable_disqus'));
 					if (comments_open() && $disableDisqus != "0") :

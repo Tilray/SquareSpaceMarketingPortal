@@ -71,6 +71,18 @@ renderMobileFilterPanel($productFilters->strainCategory->qsParamName, $productFi
 renderMobileFilterPanel($productFilters->productType->qsParamName, $productFilters->productType->displayName, $productFilters->productType->getFiterNamesValues());
 renderMobileFilterPanel($productFilters->status->qsParamName, $productFilters->status->displayName, $productFilters->status->getFiterNamesValues());
 
+
+function createSummaryItem($id, $label){
+	echo "<span class='summary-item $id' style='display:none'>$label</span>";
+}
+
+function createSummaryItemGroup($filter){
+	foreach($filter->validFilterValues as $key=>$value){
+		if (strlen($key) > 0){
+			echo "<span class='summary-item " . $filter->qsParamName . $key . "' style='display:none'>" . $value . "</span>";
+		}
+	}
+}
 ?>
 
 <h1 class="products-page-title"><?php the_title(); ?></h1>
@@ -85,15 +97,15 @@ renderMobileFilterPanel($productFilters->status->qsParamName, $productFilters->s
 				</div>
 			</div>
 			<div class="col-xs-12 summary-contents">
-				<span class="summary-item thc" style="display:none">THC Profiles</span>
-				<span class="summary-item cbd" style="display:none">CBD Profiles</span>
-				<span class="summary-item thc-cbd" style="display:none">THC/CBD Profiles</span>
-				<span class="summary-item flower" style="display:none">Flower</span>
-				<span class="summary-item blend" style="display:none">Blend</span>
-				<span class="summary-item extract" style="display:none">Extract</span>
-				<span class="summary-item indica" style="display:none">Indica</span>
-				<span class="summary-item sativa" style="display:none">Sativa</span>
-				<span class="summary-item hybrid" style="display:none">Hybrid</span>
+				<?php
+					createSummaryItem($productFilters->profilethc->qsParamName, _("THC Profiles"));
+					createSummaryItem($productFilters->profilecbd->qsParamName, _("CBD Profiles"));
+					createSummaryItem($productFilters->profilethccbd->qsParamName, _("THC/CBD Profiles"));
+
+					createSummaryItemGroup($productFilters->strainCategory);
+					createSummaryItemGroup($productFilters->productType);
+					createSummaryItemGroup($productFilters->status);
+				?>
 			</div>
 		</div>
 	</div>
@@ -197,17 +209,19 @@ function renderProductsSection($allProducts, $productType, $sectionTitle){
 				 data-profilecbd="<?= $product->profilecbd ?>"
 				 data-profilethccbd="<?= $product->profilethccbd ?>"
 			>
-				<div class="product-item-inner init <?= $product->profile ?>">
-					<div class="chem-type <?= $product->profile ?>">
-						<?= $product->profile ?>
+				<a href="<?=$product->productUrl?>">
+					<div class="product-item-inner init <?= $product->profile ?>">
+						<div class="chem-type <?= $product->profile ?>">
+							<?= $product->profile ?>
+						</div>
+						<div class="strain-name">
+							<?= $product->name ?>
+						</div>
+						<div class="strain-category">
+							<?= $product->straincategory ?>
+						</div>
 					</div>
-					<div class="strain-name">
-						<?= $product->name ?>
-					</div>
-					<div class="strain-category">
-						<?= $product->straincategory ?>
-					</div>
-				</div>
+				</a>
 			</div>
 			<?php
 		}
@@ -224,7 +238,7 @@ function renderProductsSection($allProducts, $productType, $sectionTitle){
 				<?php
 				renderProductsSection($theProducts, "flower", "Whole Flower");
 				renderProductsSection($theProducts, "blend", "Flower Blends");
-				renderProductsSection($theProducts, "extract", "Oil Drops");
+				renderProductsSection($theProducts, "extract", "Extracts");
 				?>
 			</div>
 		</div>
@@ -233,24 +247,6 @@ function renderProductsSection($allProducts, $productType, $sectionTitle){
 
 <script>
 	var changePanelsPosition = 100;
-
-	function setFilterStates(filterSelector, statuses, turnWholeGroupOn = false)
-	{
-		if (turnWholeGroupOn){
-			//turn everything on
-			jQuery(filterSelector).prop('checked', true);
-			//but turn "show all" off
-			jQuery(filterSelector + '[data-filter=""]').prop('checked', false);
-		}
-		else
-		{
-			statuses.forEach(function(item)
-			{
-				jQuery(filterSelector + '[data-filter="' + item + '"]').prop('checked', true);
-			});
-		}
-
-	}
 
 
 	jQuery(function() {
@@ -281,6 +277,7 @@ function renderProductsSection($allProducts, $productType, $sectionTitle){
 			}
 		});
 
+		//configure filter summary panel scrolling behavior
 		if (jQuery('.filter-panel.mobile').length > 0){
 			jQuery('.filter-panel.mobile').css('display', 'block');
 
@@ -302,6 +299,10 @@ function renderProductsSection($allProducts, $productType, $sectionTitle){
 			}
 		}
 
+		function closeAllProductFilterPanels()
+		{
+			jQuery('.filter-panel.mobile').removeClass('active');
+		}
 
 	});
 </script>

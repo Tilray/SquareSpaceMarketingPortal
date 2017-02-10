@@ -1569,7 +1569,7 @@ ul.product-filters.mobile input[type=checkbox]:checked ~ label::after {
 
 
 .filters.mobile .filter-button-wrapper{
-	box-shadow:0px 0px 0px 2px grey inset;
+	box-shadow:0px 0px 0px 1px #9f9f9f inset;
 	display:table-cell;
 	width:32%;
 	background-color: #ffffff;
@@ -1593,8 +1593,9 @@ ul.product-filters.mobile input[type=checkbox]:checked ~ label::after {
 
 .filter-button.mobile.reset .filter-button-inner{
 	padding: 0px 0;
-	border: solid 2px #666666;
+	border: solid 1px #9f9f9f;
 	color: #666666;
+	font-size: 11px;
 }
 
 .filter-button.mobile.has-selections,
@@ -1657,6 +1658,12 @@ ul.product-filters.mobile input[type=checkbox]:checked ~ label::after {
 div.profile div.filter-label{
 	font-weight: bold;
 	font-size: 18px;
+}
+
+@media (max-width: 400px){
+	div.profile div.filter-label{
+		font-size: 14px;
+	}
 }
 
 div.filter-label {
@@ -1790,6 +1797,14 @@ div.product-details-row .details-panel .buy-column {
 	display: inline-block;
 }
 
+div.product-details-row .details-panel .buy-column .terpenes h3{
+	text-align: left;
+	font-size: 20px;
+	margin-top: 0;
+	margin-bottom: 3px;
+	color: #084875;
+}
+
 div.product-details-row .details-panel .buy-column div.price{
 }
 
@@ -1814,10 +1829,14 @@ div.product-details-row .details-panel .buy-column a.buy{
 
 .post.product-item{
 	width: 239px;
-	height: 195px;
+	height: 170px;
 	padding-left: 12px;
 	padding-right: 13px;
 	cursor: pointer;
+}
+
+.product-item.mobile .post.product-item {
+	height: 160px;
 }
 
 ul.product-filters-profile li{
@@ -1839,9 +1858,10 @@ ul.product-filters li.profile-filter label{
 	width: 100%;
 	max-width: 200px;
 	border: 2px solid #ffd049;
-	padding: 8px 0 4px 70px;
+	padding: 8px 0 4px 30px;
 	display: table;
 	background-size: cover;
+	text-align: center;
 }
 
 html[data-useragent*='MSIE 9'] ul.product-filters li.profile-filter input[type=checkbox]:checked ~ label {
@@ -1956,6 +1976,12 @@ li.profile-filter .row-label{
 	cursor: auto;
 }
 
+@media (max-width:1300px){
+	li.profile-filter .row-label {
+		display: none;
+	}
+}
+
 li.profile-filter span label{
 	font-size: 27px;
 	font-family: Mittelschrift;
@@ -1965,16 +1991,21 @@ li.profile-filter span label{
 
 
 div.product-item-inner{
-	height: 175px;
+	height: 150px;
+}
+
+.product-item.mobile div.product-item-inner{
+	height: 140px;
 }
 
 div.product-item-inner .chem-type {
 	color: #ffffff;
 	font-family: Mittelschrift;
-	font-size: 54px;
+	font-size: 68px;
+	line-height: 83px;
 	text-align: center;
 	text-transform: uppercase;
-	padding: 10px 0;
+	padding-top: 8px;
 }
 
 .product-item.mobile div.product-item-inner .chem-type {
@@ -2111,11 +2142,34 @@ div.product-chip-wrapper .product-chip-upper{
 	padding-bottom: 35%;
 	padding-top: 0;
 	position: relative;
-	font-size: 110px;
+	font-size: 130px;
+	font-family: Mittelschrift;
 	color: #ffffff;
 	text-align: center;
 	text-transform: uppercase;
+	height: 191px;
 }
+
+@media (max-width: 1199px){
+	div.product-chip-wrapper .product-chip-upper {
+		font-size: 105px;
+		height: 160px;
+	}
+}
+
+@media (max-width: 991px){
+	div.product-chip-wrapper .product-chip-upper {
+		font-size: 85px;
+		height: 120px;
+	}
+}
+
+.single-tilray_product .single-product-mobile div.product-chip-wrapper .product-chip-upper {
+	font-size: 27vw;
+	padding-top: 7vw;
+	height: 0;
+}
+
 
 div.product-chip-wrapper .product-chip-spacer{
 	padding-bottom: 2%;
@@ -2123,18 +2177,19 @@ div.product-chip-wrapper .product-chip-spacer{
 	position: relative;
 }
 div.product-chip-wrapper .product-chip-lower{
-	padding-bottom: 7%;
-	padding-top: 0;
+	padding-bottom: 10px;
+	padding-top: 10px;
 	position: relative;
 	text-align: left;
 	font-size: 30px;
 	text-transform: uppercase;
+	line-height: 25px;
 }
 
 div.product-chip-wrapper .text-centerer{
 	position: absolute;
 	left: 0;
-	top: 50%;
+	top: 53%;
 	height: 100%;
 	width: 100%;
 	line-height: 0;
@@ -2146,30 +2201,64 @@ div.product-chip-lower .strain-category{
 	font-size: 25px;
 }
 
+.single-tilray_product .single-product-mobile div.product-chip-lower .strain-name,
+.single-tilray_product .single-product-mobile div.product-chip-lower .strain-category{
+	font-size: 6vw;
+}
+
+
 div.product-chip-lower .strain-name{
 	font-weight: bold;
 }
 
+div.product-chip-lower .strain-category{
+	margin-top: 5px;
+}
+
+.single-tilray_product h2{
+	font-size: 30px;
+}
+
+body.single-tilray_product .single-product-mobile h1.mockH2,
+body.single-tilray_product .single-product-mobile h3{
+	font-size: 6vw;
+}
+
+
+.single-product-desktop-content,
 p.price-text{
-	margin-top: 10px;
+	font-size: 20px;
+}
+
+p.price-text a.inline-btn.buy-btn {
+	font-size: 16px;
+	margin-top: 30px;
+}
+
+p.price-text{
+	margin-top: 35px;
 }
 
 div.back-to-results{
-	height: 35px;
+	margin-bottom: 6px;
 }
 div.back-to-results a{
 	position: absolute;
 	text-transform: uppercase;
 }
 div.back-to-results span.arrow{
-	position: absolute;
-	left: 6px;
+	margin-left: -6px;
+}
+
+.single-product-mobile h2.mockH1.products{
+	border: none;
+	margin-top: 0;
+	margin-bottom: 20px;
 }
 
 .page-head.mobile-products-page{
 	width: 100%;
 	background: #ffffff;
-	border-bottom: 1px solid #999999;
 	padding-top: 0;
 }
 
@@ -2215,15 +2304,15 @@ div.back-to-results span.arrow{
 	overflow: hidden;
 	background-color: #ffffff;
 	transition: all .25s;
-	-webkit-box-shadow: 0px 5px 10px 5px rgba(0,0,0,.3);
-	-moz-box-shadow: 0px 5px 10px 5px rgba(0,0,0,.3);
-	box-shadow: 0px 5px 10px 5px rgba(0,0,0,.3);
 }
 
 .filter-panel.mobile.active{
 	max-height: 1000px;
 	transition: all .5s;
 	transition-delay: .25s;
+	-webkit-box-shadow: 0px 5px 10px 5px rgba(0,0,0,.3);
+	-moz-box-shadow: 0px 5px 10px 5px rgba(0,0,0,.3);
+	box-shadow: 0px 5px 10px 5px rgba(0,0,0,.3);
 }
 
 .filter-panel-title{
@@ -2276,7 +2365,7 @@ div.back-to-results span.arrow{
 
 .summary-item{
 	padding: 2px 5px;
-	border: solid 2px #666666;
+	border: solid 1px #9f9f9f;
 	margin-right: 5px;
 	margin-bottom: 5px;
 	display: inline-block;
@@ -2291,8 +2380,8 @@ div.back-to-results span.arrow{
 	width: 17%;
 }
 
-.single-tilray_product .terpene-images {
-	margin-bottom: 25px;
+.single-tilray_product .terpenes h3 {
+	font-size: 26px;
 }
 
 .single-tilray_product .terpene-images a {
@@ -2428,19 +2517,25 @@ div.product-item-inner .chem-type.tc300{
 
 div.product-item-inner .strain-name{
 	font-weight: bold;
-	margin: 13px 13px 0 13px;
+	margin: 13px 11px 0 11px;
 	line-height: 100%;
 	text-transform: uppercase;
 }
 
 div.product-item-inner .strain-category{
-	margin: 0 13px 13px 13px;
+	margin: 0 11px 13px 11px;
 	text-transform: uppercase;
 }
 
+div.mobile-products-page div.product-item-inner .strain-name,
+div.mobile-products-page div.product-item-inner .strain-category{
+	font-size: 9px;
+}
+
+
 @media (max-width: 400px){
 	.page-head.mobile-products-page{
-	    height: 145px;
+
 	}
 	.items.mobile-products-page{
 		padding-top: 20px;
