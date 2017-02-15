@@ -915,7 +915,7 @@ class ProductFilters{
 											"this.test = function(product){ console.log('selected? ' + this.selected.length); return this.selected.length === 0 || arrayIncludes(this.selected, product.status);}"
 											);
 											
-		$this->strainCategory = new ProductFilter("straincategory", "Product",
+		$this->strainCategory = new ProductFilter("straincategory", "Category",
 											array(	"" => "", 
 													"indica" => "Indica", 
 													"sativa" => "Sativa", 
@@ -924,7 +924,7 @@ class ProductFilters{
 											"this.test = function(product){ return this.selected.length === 0 || arrayIncludes(this.selected, product.straincategory);}"
 											);
 													
-		$this->productType = new ProductFilter("producttype", "Category",
+		$this->productType = new ProductFilter("producttype", "Type",
 											array(	"" => "", 
 													"flower" => "Flower", 
 													"blend" => "Blend", 
@@ -1008,7 +1008,7 @@ class ProductFilters{
 	public function renderChemicalFilters(){
 	?>
 		<div class="col-xs-4">
-			<h3 class="profile-header">THC Products</h3>
+			<h3 class="profile-header"><?= _("THC Profiles") ?></h3>
 			<ul class="product-filters product-filters-profile product-filters-profilethc">
 			<?php
 			$this->renderChemicalFilter("T100", "profilethc", "low");
@@ -1018,7 +1018,7 @@ class ProductFilters{
 			</ul>
 		</div>
 		<div class="col-xs-4">
-			<h3 class="profile-header">CBD Products</h3>
+			<h3 class="profile-header"><?= _("CBD Profiles") ?></h3>
 			<ul class="product-filters product-filters-profile product-filters-profilecbd">
 			<?php
 			$this->renderChemicalFilter("C100", "profilecbd");
@@ -1028,7 +1028,7 @@ class ProductFilters{
 			</ul>
 		</div>
 		<div class="col-xs-4">
-			<h3 class="profile-header">THC / CBD Products</h3>
+			<h3 class="profile-header"><?= _("THC / CBD Profiles") ?></h3>
 			<ul class="product-filters product-filters-profile product-filters-profilethccbd">
 			<?php
 			$this->renderChemicalFilter("TC100", "profilethccbd");
