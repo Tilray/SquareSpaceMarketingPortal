@@ -87,7 +87,7 @@ function createSummaryItemGroup($filter){
 
 <h1 class="products-page-title"><?php the_title(); ?></h1>
 
-<div class="page-head mobile-products-page retractable retracted summary">
+<div class="page-head mobile mobile-products-page retractable retracted summary">
 	<div class="container no-padding">
 		<div class="row">
 			<div class="col-xs-12">
@@ -111,7 +111,7 @@ function createSummaryItemGroup($filter){
 	</div>
 </div>
 
-<div class="page-head mobile-products-page">
+<div class="page-head mobile mobile-products-page">
 	<div class="container no-padding">
 		<div class="row">
 			<div class="col-xs-8">
@@ -231,7 +231,7 @@ function renderProductsSection($allProducts, $productType, $sectionTitle){
 ?>
 
 
-<div class="items mobile-products-page">
+<div class="items mobile mobile-products-page">
 	<div class="row noscript-hide">
 		<div class="col-12">
 			<div id="primary">

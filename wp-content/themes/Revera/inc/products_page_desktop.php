@@ -4,7 +4,7 @@
 	var pageTitle = "<?= the_title() ?>";
 </script>
 
-<div class="container">	
+<div class="container desktop">
 	<div class="row filters">
 		<div class="col-md-7 col-sm-12 profiles-column">
 			<h1 class="products"><?php the_title(); ?></h1>
@@ -89,13 +89,9 @@
 						</div>
 						<div class="overview-column">
 							<div class="overview"></div>
-							<div class="product-link"><?=_("More information about this strain is available")?> <a href=""><?=_("here")?></a></div>
+							<div class="product-link"><?=_("For cannabinoid and terpene information about this strain,")?> <a href=""><?=_("here")?></a></div>
 						</div>
 						<div class="buy-column">
-							<div class="terpenes">
-								<h3><?= _("Terpenes:")?></h3>
-								<div class="content"></div>
-							</div>
 							<div class="price">
 								<span class="price"></span>
 								<a class="buy">Buy Now</a>

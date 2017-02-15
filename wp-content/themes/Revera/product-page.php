@@ -549,14 +549,6 @@ $theProducts = QueryProducts($productFilters);
 			jQuery('div.details-panel .overview-column .overview').html(data.overview);
 			jQuery('div.details-panel .product-link a').attr('href', data.productUrl);
 
-			if (data.terpenes.length > 0){
-				jQuery('div.details-panel .buy-column .terpenes').show();
-				jQuery('div.details-panel .buy-column .terpenes .content').html(data.terpenes);
-			}
-			else{
-				jQuery('div.details-panel .buy-column .terpenes').hides();
-			}
-
 			if (data.status == "available") {
 				jQuery('div.details-panel .buy-column .price').show();
 				jQuery('div.details-panel .buy-column .price .price').text(data.priceText);
