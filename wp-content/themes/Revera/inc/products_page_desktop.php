@@ -68,7 +68,9 @@
 				>
 					<div class="product-item-inner init <?= $product->profile ?>">
 						<div class="chem-type <?= $product->profile ?>">
-							<?= $product->profile ?>
+							<div class="text-align">
+								<span class="text-align-inner"><?= $product->profile ?></span>
+							</div>
 						</div>
 						<div class="strain-name">
 							<?= $product->name ?>

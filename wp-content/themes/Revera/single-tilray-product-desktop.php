@@ -14,7 +14,7 @@
 			<span class="arrow">&lt;</span><a href="<?=getProductsPageLink()?>"><?=_("Back to results")?></a>
 		</div>
 		<div class="row">
-			<div class="col-sm-5">
+			<div class="col-sm-5 col-xs-12">
 				<div class="product-chip-wrapper profile-border <?=$thisProduct->profile?>">
 					<div class="product-chip-upper profile-background chem-type <?=$thisProduct->profile?>">
 						<div class="text-centerer">
@@ -60,14 +60,18 @@
 					?>
 				</p>
 			</div>
-			<div class="col-sm-5">
+			<div class="col-sm-7 col-xs-12">
 				<h1 class="mockH2"><?php the_title(); ?></h1>
 				<div class="single-product-desktop-content">
 					<p><?=$thcAndCbdText?></p>
 					<?php
-
 						the_content();
-
+						if (strlen($thisProduct->cannabinoids) > 0) {
+							echo "<div class='cannabinoids'>";
+							echo "<h3>" . _("Cannabinoid Content:") . "</h3>";
+							echo $thisProduct->cannabinoids;
+							echo "</div>";
+						}
 					?>
 				</div>
 				<?php
@@ -96,14 +100,6 @@
 				<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 				<?php endif; // comments_open ?>
 
-			</div>
-			<div class="col-sm-2 hidden-xs">
-				<?php if (strlen(trim($thc)) > 0){?>
-					<h3 class="thc-level"><span class="thc-label"><?= _("THC")?>:&nbsp;</span><?=$thc?>%</h3>
-				<?php } ?>
-				<?php if (strlen(trim($cbd)) > 0){?>
-					<h3 class="thc-level"><span class="thc-label"><?= _("CBD")?>:&nbsp;</span><?=$cbd?>%</h3>
-				<?php } ?>
 			</div>
 		</div>
 	</div><!-- #primary -->

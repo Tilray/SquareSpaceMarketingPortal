@@ -740,6 +740,7 @@ class Product{
     public $primaryStrainCategory;
     public $primaryStrainCategoryName;
     public $terpenes;
+    public $cannabinoids;
 	public $overview;
 	public $profilethc;
 	public $profilecbd;
@@ -802,6 +803,7 @@ class Product{
         $this->profile = $this->profilethc . $this->profilecbd . $this->profilethccbd;
         $this->storelink = trim(get_post_meta($id, 'store_link', true));
         $this->terpenes = get_field('terpenes_description', $id);
+        $this->cannabinoids = get_field('cannabinoid_description', $id);
 
         $this->overview = trim(get_post_meta($id, 'overview', true));
         if (strlen($this->overview) == 0)
@@ -1113,3 +1115,21 @@ if( function_exists('acf_add_options_page') ) {
 //totally do not need emojis on this site.  Let's shave off 5k and 3 file loads!
 remove_action( 'wp_head', 'print_emoji_detection_script', 7 );
 remove_action( 'wp_print_styles', 'print_emoji_styles' );
+
+
+function wpb_set_post_views($postID) {
+    $count_key = 'wpb_post_views_count';
+    $count = get_post_meta($postID, $count_key, true);
+    if($count==''){
+        $count = 0;
+        delete_post_meta($postID, $count_key);
+        add_post_meta($postID, $count_key, '0');
+    }else{
+        $count++;
+        update_post_meta($postID, $count_key, $count);
+    }
+}
+//To keep the count accurate, lets get rid of prefetching
+remove_action( 'wp_head', 'adjacent_posts_rel_link_wp_head', 10, 0);
+
+

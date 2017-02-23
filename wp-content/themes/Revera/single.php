@@ -5,7 +5,28 @@
  * @package web2feel
  */
 
-get_header(); ?>
+get_header();
+
+$post_id = get_the_id();
+wpb_set_post_views($post_id);
+
+$count_key = 'wpb_post_views_count';
+$count = get_post_meta($post_id, $count_key, true);
+if($count==''){
+    delete_post_meta($post_id, $count_key);
+    add_post_meta($post_id, $count_key, '0');
+}
+
+function render_related_post($id){
+    ?>
+    <div id="post-<?= $id ?>">
+    <a href="<?php the_permalink($id); ?>"><?php echo get_the_post_thumbnail($id, 'blog-preview'); ?></a>
+    <h3><a href="<?php the_permalink($id); ?>"><?= get_the_title($id) ?></a></h3>
+    </div>
+    <?php
+}
+
+?>
 
 <div class="page-head">
 	<div class="container">
@@ -74,29 +95,63 @@ get_header(); ?>
 								<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 							<?php endif; // comments_open ?>
 						</div>
-						<div id="primary" class="col-sm-1 hidden-xs"></div>
-						<div id="primary" class="col-sm-3 col-xs-12 related">
+						<div class="col-sm-1 hidden-xs"></div>
+						<div class="col-sm-3 col-xs-12 related">
+                            <h2 class="related-posts"><?= _("You also may like") ?></h2>
 							<?php
 								$num_related_posts = 3;
+                                $num_rendered_related_posts = 0;
+                                $skip_post_ids = array($post_id);
+
 								$tag_ids = array();
 								$tags = wp_get_post_tags($post->ID);
+
+                                if( have_rows('related_posts') ):
+                                    // loop through the rows of data
+                                    while ( have_rows('related_posts') ) : the_row();
+                                        // display a sub field value
+                                        $pid = get_sub_field('related_post');
+                                        render_related_post($pid);
+                                        $skip_post_ids[] = $pid;
+                                        $num_rendered_related_posts++;
+                                    endwhile;
+                                endif;
 
 								for ($i = 0; $i < count($tags); $i++){
 									$tag_ids[] = $tags[$i]->term_id;
 								}
 
 								if (count($tag_ids) > 0){
-									$query = new WP_Query( array( 'tag__in' => $tag_ids, 'posts_per_page' => $num_related_posts ) );
-									while($query->have_posts()) : $query->the_post(); ?>
-
-										<div <?php post_class(); ?> id="post-<?php the_ID(); ?>">
-											<?php the_post_thumbnail('blog-preview'); ?>
-											<h3><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
-										</div>
-
-									<?php endwhile;
+									$query = new WP_Query( array( 'post__not_in' => $skip_post_ids, 'tag__in' => $tag_ids, 'posts_per_page' => $num_related_posts ) );
+									while($query->have_posts() && $num_rendered_related_posts < $num_related_posts) : $query->the_post();
+                                        $num_rendered_related_posts++;
+                                        $skip_post_ids[] = get_the_ID();
+                                        render_related_post(get_the_ID());
+									endwhile;
 								}
-							?>
+
+                                $args = array(
+                                    'post__not_in' => $skip_post_ids,
+                                    'post_type' => 'post',
+                                    'orderby'   => 'meta_value_num',
+                                    'meta_key'  => 'wpb_post_views_count',
+                                    'order'     => 'DESC',
+                                    'posts_per_page'    => '3',
+                                );
+                                $query = new WP_Query( $args );
+
+                                if ($query->have_posts()){
+                                    $posts = $query->get_posts();
+                                    foreach($posts as $post){
+                                        if ($num_rendered_related_posts >= $num_related_posts)
+                                            break;
+
+                                        $num_rendered_related_posts;
+                                        render_related_post($post->ID);
+                                    }
+                                }
+
+                            ?>
 						</div><!-- #primary   comments -->
 					</div>
 				</article><!-- #post-## -->
@@ -105,4 +160,7 @@ get_header(); ?>
 		</div>
 	</div>
 </div>
-<?php get_footer(); ?>
+<?php
+
+    get_footer();
+?>

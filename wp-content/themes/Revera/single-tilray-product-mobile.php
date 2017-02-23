@@ -48,13 +48,20 @@
 				?>
 
 				<?php
-				echo $thisProduct->terpenes;
-				if (true){
-				//if (strlen($thisProduct->terpenes) > 0) {
+				if (strlen($thisProduct->terpenes) > 0) {
 					?>
 					<div class="terpenes">
 						<h3><?= _("Terpenes:")?></h3>
 						<?= $thisProduct->terpenes ?>
+					</div>
+					<?php
+				}
+
+				if (strlen($thisProduct->cannabinoids) > 0) {
+					?>
+					<div class="terpenes">
+						<h3><?= _("Cannabinoid Content:")?></h3>
+						<?= $thisProduct->cannabinoids ?>
 					</div>
 					<?php
 				}

@@ -1726,6 +1726,8 @@ div.section-title.product-item {
 .mobile div.section-title.product-item {
 	padding-left: 15px;
 	padding-right: 15px;
+    padding-bottom: 0;
+    height: 65px;
 }
 
 @media (max-width: 1199px){
@@ -1856,11 +1858,10 @@ div.product-details-row .details-panel .buy-column a.buy{
 
 .post.product-item{
 	width: 239px;
-	height: 178px;
 	padding-left: 12px;
 	padding-right: 13px;
     padding-top: 8px;
-    padding-bottom: 8px;
+    padding-bottom: 18px;
 	cursor: pointer;
     -webkit-transition: all .25s;
     transition: all .25s;
@@ -1869,6 +1870,9 @@ div.product-details-row .details-panel .buy-column a.buy{
 .mobile .post.product-item{
 	padding-left: 15px;
 	padding-right: 15px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    margin: 0;
 }
 
 .desktop .post.product-item:hover{
@@ -1880,21 +1884,27 @@ div.product-details-row .details-panel .buy-column a.buy{
 }
 
 .desktop .post.product-item:hover div.product-item-inner{
-    height: 162px;
+/*    height: 162px;  */
     -webkit-transition: all .25s;
     transition: all .25s;
 }
 
 .desktop .post.product-item:hover div.product-item-inner div.chem-type{
-    line-height: 94px;
-    font-size: 72px;
     -webkit-transition: all .25s;
     transition: all .25s;
+}
+
+.desktop .post.product-item:hover div.product-item-inner div.chem-type .text-align-inner{
+	font-size: 75px;
+	-webkit-transition: all .25s;
+	transition: all .25s;
 }
 
 
 .post.product-item div.product-item-inner div.strain-name,
 .post.product-item div.product-item-inner div.strain-category {
+	overflow: hidden;
+	white-space: nowrap;
     -webkit-transition: all .25s;
     transition: all .25s;
 }
@@ -1906,8 +1916,23 @@ div.product-details-row .details-panel .buy-column a.buy{
     transition: all .25s;
 }
 
-.product-item.mobile .post.product-item {
-	height: 160px;
+.mobile .post.product-item div.product-item-inner div.strain-name,
+.mobile .post.product-item div.product-item-inner div.strain-category {
+    font-size: 2.8vw;
+}
+
+@media (max-width: 320px){
+    .mobile .post.product-item div.product-item-inner div.strain-name,
+    .mobile .post.product-item div.product-item-inner div.strain-category {
+        font-size: 2.5vw;
+    }
+}
+
+@media (max-width: 360px){
+    .mobile .post.product-item div.product-item-inner div.strain-name,
+    .mobile .post.product-item div.product-item-inner div.strain-category {
+        font-size: 2.6vw;
+    }
 }
 
 ul.product-filters-profile li{
@@ -2074,29 +2099,36 @@ li.profile-filter span label{
 
 
 div.product-item-inner{
-	height: 150px;
     -webkit-transition: all .25s;
     transition: all .25s;
-}
-
-.product-item.mobile div.product-item-inner{
-	height: 140px;
 }
 
 div.product-item-inner .chem-type {
 	color: #ffffff;
-	font-family: Mittelschrift;
-	font-size: 68px;
-	line-height: 83px;
 	text-align: center;
-	text-transform: uppercase;
-	padding-top: 8px;
     -webkit-transition: all .25s;
     transition: all .25s;
+	padding-top: 24%;
+	padding-bottom: 18%;
+	height: 0;
 }
 
-.product-item.mobile div.product-item-inner .chem-type {
-	font-size: 50px;
+div.product-item-inner .chem-type .text-align{
+	height: 1px;
+    font-size: 0;
+}
+
+div.product-item-inner .chem-type .text-align .text-align-inner{
+	line-height: 0;
+	font-family: Mittelschrift;
+	font-size: 68px;
+	text-transform: uppercase;
+	-webkit-transition: all .25s;
+	transition: all .25s;
+}
+
+.product-item.mobile div.product-item-inner .chem-type .text-align .text-align-inner{
+    font-size: 12vw;
 }
 
 .profile-border.t100{
@@ -2475,8 +2507,13 @@ div.back-to-results span.arrow{
 	margin-right: 6%;
 }
 
+.single-tilray_product .cannabinoids{
+    margin-top: 30px;
+}
 
-
+.single-tilray_product .cannabinoids h3{
+    font-size: 26px;
+}
 
 
 
@@ -3235,11 +3272,15 @@ div.search-result{
 * POST SINGLE
 ***************************************************/
 .single .single-post-featured-image{
-    border: 1px solid #a7a9ac;
 }
 
 .single .related img {
-    border: 1px solid #a7a9ac;
+}
+
+.single .related h2{
+	margin-top: 0px;
+	margin-bottom: 25px;
+	font-size: 20px;
 }
 
 .single .related h3{
@@ -3251,3 +3292,4 @@ div.search-result{
     color: #a7a9ac;
     font-size: 17px;
 }
+
