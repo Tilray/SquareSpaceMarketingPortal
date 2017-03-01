@@ -54,7 +54,7 @@
 
 					if ($itemStoreLink){
 						?>
-						<br><a href='<?=$itemStoreLink?>' class='inline-btn buy-btn'><?= __('Buy Now')?></a>
+						<br><a href='<?=$itemStoreLink?>' class='inline-btn buy-btn track-product-buy-button'><?= __('Buy Now')?></a>
 						<?php
 					}
 					?>

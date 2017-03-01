@@ -76,7 +76,7 @@
 
 					if ($itemStoreLink){
 						?>
-						<a href='<?=$itemStoreLink?>' class='call-to-action-button'><span><?= __('Buy Now')?></span></a>
+						<a href='<?=$itemStoreLink?>' class='call-to-action-button track-product-buy-button'><span><?= __('Buy Now')?></span></a>
 						<?php
 					}
 					?>
