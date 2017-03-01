@@ -3293,3 +3293,11 @@ div.search-result{
     font-size: 17px;
 }
 
+body.single h2.mockH1 {
+	margin-bottom: 20px;
+}
+
+body.single .content-area{
+	padding-top: 3px;
+}
+

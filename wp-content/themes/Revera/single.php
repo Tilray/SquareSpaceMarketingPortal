@@ -35,7 +35,6 @@ function render_related_post($id){
 				<?php while ( have_posts() ) : the_post(); ?>
 				<h2 class="mockH1"><?=__('News')?></h2>
 				<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-					<h1 class="mockH2"><?php the_title() ?></h1>
 					<div class="row">
 						<div class="content-area col-sm-8 col-xs-12">
 							<?php
@@ -44,6 +43,7 @@ function render_related_post($id){
 								if($img_url) : ?>
 									<img class="img-responsive single-post-featured-image" src="<?php echo $img_url[0] ?>" alt="<?php the_title(); ?>"/>
 							<?php endif; ?>
+							<h1 class="mockH2"><?php the_title() ?></h1>
 							<main id="main" class="site-main" role="main">
 								<div class="entry-content">
 									<?php the_content(); ?>
