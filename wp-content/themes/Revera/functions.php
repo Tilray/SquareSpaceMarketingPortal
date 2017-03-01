@@ -371,7 +371,7 @@ function render_news_section($args, $showPagination = false, $pageLinkNumber = 0
 			?></p></div>
 		<?php } 
 		else if ($pageLinkNumber > 0){
-			$pageLink = '/en/News/page/' . $pageLinkNumber;
+			$pageLink = '/en/news/page/' . $pageLinkNumber;
 			if (get_current_language_code() == "fr"){
 				$pageLink = '/fr/Nouvelles/page/' . $pageLinkNumber;
 			}
@@ -1132,4 +1132,5 @@ function wpb_set_post_views($postID) {
 //To keep the count accurate, lets get rid of prefetching
 remove_action( 'wp_head', 'adjacent_posts_rel_link_wp_head', 10, 0);
 
+remove_action('wp_head', 'wp_shortlink_wp_head', 10, 0);
 
