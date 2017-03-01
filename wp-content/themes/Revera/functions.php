@@ -373,7 +373,7 @@ function render_news_section($args, $showPagination = false, $pageLinkNumber = 0
 		else if ($pageLinkNumber > 0){
 			$pageLink = '/en/news/page/' . $pageLinkNumber;
 			if (get_current_language_code() == "fr"){
-				$pageLink = '/fr/Nouvelles/page/' . $pageLinkNumber;
+				$pageLink = '/fr/nouvelles/page/' . $pageLinkNumber;
 			}
 		?>
 			
@@ -1116,7 +1116,11 @@ if( function_exists('acf_add_options_page') ) {
 remove_action( 'wp_head', 'print_emoji_detection_script', 7 );
 remove_action( 'wp_print_styles', 'print_emoji_styles' );
 
+<<<<<<< HEAD
 
+=======
+//for collecting most popular posts data
+>>>>>>> master
 function wpb_set_post_views($postID) {
     $count_key = 'wpb_post_views_count';
     $count = get_post_meta($postID, $count_key, true);
@@ -1132,5 +1136,8 @@ function wpb_set_post_views($postID) {
 //To keep the count accurate, lets get rid of prefetching
 remove_action( 'wp_head', 'adjacent_posts_rel_link_wp_head', 10, 0);
 
+<<<<<<< HEAD
 remove_action('wp_head', 'wp_shortlink_wp_head', 10, 0);
 
+=======
+>>>>>>> master
