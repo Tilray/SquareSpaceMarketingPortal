@@ -371,9 +371,9 @@ function render_news_section($args, $showPagination = false, $pageLinkNumber = 0
 			?></p></div>
 		<?php } 
 		else if ($pageLinkNumber > 0){
-			$pageLink = '/en/News/page/' . $pageLinkNumber;
+			$pageLink = '/en/news/page/' . $pageLinkNumber;
 			if (get_current_language_code() == "fr"){
-				$pageLink = '/fr/Nouvelles/page/' . $pageLinkNumber;
+				$pageLink = '/fr/nouvelles/page/' . $pageLinkNumber;
 			}
 		?>
 			
