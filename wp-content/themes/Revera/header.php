@@ -18,7 +18,6 @@
 <meta name="msvalidate.01" content="8D1268D07946606791541B9681F5FBBE" />
 <meta name="p:domain_verify" content="f120c771cc01596bc34ee72616a99494"/>
 </head>
-
 <body <?php body_class(); ?>>
 
 <?php get_template_part( 'inc/googletagmanager' ); ?>
@@ -26,7 +25,17 @@
 	$ieClass = "";
 	if(preg_match('/(?i)msie (.*?);/',$_SERVER['HTTP_USER_AGENT'])){
 		$ieClass = "ie";
-	} 
+	}
+
+	if (strpos(strtolower($_SERVER['HTTP_USER_AGENT']), "msie 9") > 0){
+		$ieClass .= " ie9";
+	}
+	else if (strpos(strtolower($_SERVER['HTTP_USER_AGENT']), "msie 8") > 0){
+		$ieClass .= " ie8";
+	}
+	else if (strpos(strtolower($_SERVER['HTTP_USER_AGENT']), "msie 7") > 0){
+		$ieClass .= " ie7";
+	}
 ?>
 <div id="page" class="hfeed site <?=$ieClass?>">
 	<?php do_action( 'before' ); ?>

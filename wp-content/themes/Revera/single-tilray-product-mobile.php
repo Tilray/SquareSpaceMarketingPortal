@@ -6,7 +6,7 @@
 					<div class="back-to-results">
 						<span class="arrow">&lt;</span><a href="<?=getProductsPageLink()?>"><?=_("Back to results")?></a>
 					</div>
-					<h2 class="mockH1 products"><?=__('PROFILES')?></h2>
+					<h2 class="mockH1 products"><?=__('PRODUCTS')?></h2>
 				</div>
 			</div>
 		</div>

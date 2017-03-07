@@ -124,6 +124,16 @@ h3 > a, h3 > a:link, h3 > a:visited
 }
 
 
+.ie9-and-lower-only{
+	display: none;
+}
+
+div.hfeed.site.ie9 .ie9-and-lower-only,
+div.hfeed.site.ie8 .ie9-and-lower-only,
+div.hfeed.site.ie7 .ie9-and-lower-only{
+	display: inherit;
+}
+
 
 /* Menu */
 
@@ -1707,7 +1717,10 @@ h2.filters{
 	text-transform: uppercase;
 }
 
-div.row.filters{
+div.hfeed.site.ie9 div.row.filters,
+div.hfeed.site.ie8 div.row.filters,
+div.hfeed.site.ie7 div.row.filters{
+	display: none;
 }
 
 div#primary.js-isotope{
