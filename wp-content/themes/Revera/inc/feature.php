@@ -52,7 +52,7 @@ $defaultHomepageBG = get_field('default_homepage_banner', 'option');
 				{
 					?>
 						<li>
-							<a href="<?= $thisBanner->link ?>"><img width="<?=$thisBanner->width?>" height="<?=$thisBanner->height?>" data-src="<?= $thisBanner->image ?>" alt="<?= $thisBanner->title; ?>"></a>
+							<a class="homepage-banner" href="<?= $thisBanner->link ?>"><img width="<?=$thisBanner->width?>" height="<?=$thisBanner->height?>" data-src="<?= $thisBanner->image ?>" alt="<?= $thisBanner->title; ?>"></a>
 							<div class="flex-caption">
 								<?= $thisBanner->content ?>
 							</div>
