@@ -607,7 +607,7 @@ class ProductFilter
 
 		?>
 		<li class="product-filter">
-			<span class="noscript-hide">
+			<span class="noscript-hide label-holder">
 				<input type="checkbox" class="other <?= $className?>" name="<?=$name?>" id="<?=$id?>" data-filter-name="<?=$name?>"  data-filter="<?=$filter?>">
 				<label class="checkbox-label<?=$showAllClass?>" for="<?=$id?>"><?php _e($label); ?></label>
 			</span>
@@ -642,7 +642,7 @@ class ProductFilter
 			$label = "Show All";
 		?>
 		<li class="product-filter mobile">
-			<span class="noscript-hide">
+			<span class="noscript-hide label-holder">
 				<input type="checkbox" class="<?= $className?>" name="<?=$name?>" id="<?=$id?>" data-filter="<?=$filter?>">
 				<label class="checkbox-label" for="<?=$id?>"><?php _e($label); ?></label>
 			</span>
@@ -990,7 +990,7 @@ class ProductFilters{
 		$profile_lower = strtolower($profile);
 		?>
 		<li class="product-filter profile-filter profile-<?=strtolower($profile)?>">
-			<span class="noscript-hide">
+			<span class="noscript-hide label-holder">
 				<input type="checkbox" class="product-filters-profile profile-filter-has-value product-filters-<?=$filter_class_suffix?>" name="profile" data-filter-name="<?=$filter_class_suffix?>"  id="profile-<?=$profile_lower?>" data-filter="<?=$profile_lower?>">
 				<label class="checkbox-label" for="profile-<?=$profile_lower?>"><?=$profile?></label>
 			</span>
@@ -1116,11 +1116,7 @@ if( function_exists('acf_add_options_page') ) {
 remove_action( 'wp_head', 'print_emoji_detection_script', 7 );
 remove_action( 'wp_print_styles', 'print_emoji_styles' );
 
-<<<<<<< HEAD
-
-=======
 //for collecting most popular posts data
->>>>>>> master
 function wpb_set_post_views($postID) {
     $count_key = 'wpb_post_views_count';
     $count = get_post_meta($postID, $count_key, true);
@@ -1135,9 +1131,3 @@ function wpb_set_post_views($postID) {
 }
 //To keep the count accurate, lets get rid of prefetching
 remove_action( 'wp_head', 'adjacent_posts_rel_link_wp_head', 10, 0);
-
-<<<<<<< HEAD
-remove_action('wp_head', 'wp_shortlink_wp_head', 10, 0);
-
-=======
->>>>>>> master

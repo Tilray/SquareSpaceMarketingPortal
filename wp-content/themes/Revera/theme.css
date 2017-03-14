@@ -1977,16 +1977,17 @@ html[data-useragent*='MSIE 9'] ul.product-filters li.profile-filter input[type=c
 	color: #ffffff;
 }
 
-ul.product-filters li.profile-filter input[type=checkbox]:checked ~ label {
+ul.product-filters li.profile-filter input[type=checkbox] ~ label {
 	background-repeat: no-repeat;
-    -webkit-transition: background-position-x .25s;
-    transition: background-position-x .25s;
+	background-position-x: -1px;
+	-webkit-transition: background-position-x .25s;
+	transition: background-position-x .25s;
 }
 
-.desktop ul.product-filters li.profile-filter input[type=checkbox]:checked ~ label:hover {
-    background-position-x: -10px;
-    -webkit-transition: background-position-x .25s;
-    transition: background-position-x .25s;
+.desktop ul.product-filters li.profile-filter input[type=checkbox] ~ label:hover {
+	background-position-x: -10px;
+	-webkit-transition: background-position-x .25s;
+	transition: background-position-x .25s;
 }
 
 ul.product-filters li.profile-filter.profile-t100 label{
