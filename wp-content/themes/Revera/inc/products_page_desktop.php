@@ -17,18 +17,6 @@
 				<?php
 				$productFilters->renderChemicalFilters();
 				?>
-				<div class="col-xs-12">
-					<ul class="product-filters show-all">
-						<li class="product-filter product-filter-profile">
-							<span class="noscript-hide">
-								<input type="checkbox" class="other product-filters-profile" name="profile" id="profile-show-all" data-filter="">
-								<label class="checkbox-label show-all" for="profile-show-all">Show All</label>
-							</span>
-							<noscript>
-							</noscript>
-						</li>
-					</ul>
-				</div>
 			</div>
 		</div>
 		<div class="col-md-5 col-sm-12">
