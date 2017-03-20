@@ -570,6 +570,7 @@ $theProducts = QueryProducts($productFilters);
 
 		this.updateProductsAndSections = function(){
 			jQuery("div.section-title").removeClass('active');
+			jQuery("div.product-details-row").removeClass('active');
 			this.showSectionTitles("flower");
 			this.showSectionTitles("blend");
 			this.showSectionTitles("extract");
@@ -640,6 +641,7 @@ $theProducts = QueryProducts($productFilters);
 			if ($changedElement)
 				self.filters.onFilterChange($changedElement);
 
+			self.currentDetailsId = -1;
 			self.filters.testProductsActive(self.productsData);
 			self.updateProductsAndSections();
 			self.updateURI();
@@ -661,7 +663,7 @@ $theProducts = QueryProducts($productFilters);
 
 		this.filters = new ProductFilters(this.filtersData, isMobile);
 		this.products = new Products(this.productsData, isMobile);
-		this.setMobilePanelButtonColors();
+		this.onFilterChange();
 	};
 
 	//disable positioning animations
