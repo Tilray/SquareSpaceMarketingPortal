@@ -22,7 +22,7 @@ $noHideStickyFooterContent = false;
 //this fixes it
 function remove_page_from_query_string($query_string)
 { 
-    if ($query_string['name'] == 'page' && isset($query_string['page'])) {
+    if (isset($query_string['name']) && $query_string['name'] == 'page' && isset($query_string['page'])) {
         unset($query_string['name']);
         // 'page' in the query_string looks like '/2', so i'm spliting it out
         list($delim, $page_index) = split('/', $query_string['page']);
@@ -446,7 +446,7 @@ function __render_social_button($label, $class, $sharingPrefix, $url)
 // A copy of rel_canonical but to allow an override on a custom tag
 function rel_canonical_with_custom_tag_override($canonical)
 {
-	if (!function_exists(icl_get_languages))
+	if (!function_exists('icl_get_languages'))
 		return $canonical;
 		
 	$allTheLangs = icl_get_languages('skip_missing=0&orderby=id&order=asc');
