@@ -7,7 +7,7 @@ Author: Kyall Barrows
 Version: 1.0
 */
 function get_current_language(){
-	if (!function_exists(icl_get_languages))
+	if (!function_exists('icl_get_languages'))
 		return NULL;
 		
 	$allTheLangs = icl_get_languages('skip_missing=0&orderby=id&order=asc');
@@ -54,7 +54,7 @@ function format_price_for_current_locale($price){
 }
 
 function render_language_chooser($ul_class){
-	if (!function_exists(icl_get_languages))
+	if (!function_exists('icl_get_languages'))
 		return;
 		
 	?><ul class="<?=$ul_class; ?>"><?php
@@ -66,7 +66,7 @@ function render_language_chooser($ul_class){
 }
 
 function get_other_language(){
-	if (!function_exists(icl_get_languages))
+	if (!function_exists('icl_get_languages'))
 		return NULL;
 
 	$allTheLangs = icl_get_languages('skip_missing=0&orderby=id&order=asc');
