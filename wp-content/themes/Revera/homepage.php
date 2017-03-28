@@ -56,17 +56,50 @@ get_header(); ?>
 		<a href="/<?=strtolower($langCode)?>/<?=$catName?>">
 		<h2 class="blog-section"><?=$newsCategory->name?></h2></a>
 		 <?php 	
-		
-        $postsPerPage = $isMobile ? '3' : '6';
-		$args = array(
-			'category_name' => $catName,
-			'post_status' => 'publish',
-			'posts_per_page' => $postsPerPage
-		);
-           
-        $pageLinkNumber = $isMobile ? 1 : 2;
-		 render_news_section( $args, false, $pageLinkNumber );
-		 ?>
+		 $numRendered = 0;
+		if( have_rows('homepage_news_posts', 'options') ){
+			while( have_rows('homepage_news_posts', 'options')){
+				the_row();
+
+				$post_id = get_sub_field('news_posts');
+				?>
+				<div class="blog-post-preview col-sm-4">
+					<?php
+					$thumbID = get_post_thumbnail_id($post_id);
+					$img_attrs = wp_get_attachment_image_src( $thumbID,'blog-preview' ); 
+					$image = $img_attrs[0];
+					if($image) {?>
+						<a href="<?php the_permalink(); ?>" class="prevent-reflow">
+							<img class="blog-preview" src="<?= $image ?>" alt="<?= get_the_title($post_id); ?>"/>
+						</a>				
+					<?php }?>
+					<a href="<?php the_permalink($post_id); ?>"><h2><?= get_the_title($post_id); ?></h2></a>
+					<p>
+						<?php echo get_the_excerpt($post_id); ?>
+						<a class="read-more-link" href="<?php the_permalink($post_id); ?>"><?= __('Read more') ?> &raquo;</a>
+					</p>
+				</div>
+				<?php 
+				$numRendered++;
+				if ($numRendered % 3 == 0){
+					?>
+					<div class="clearfix"></div></div><div class="col-sm-12">
+					<?php
+				}
+			}
+
+			$pageLink = '/en/news/';
+			if (get_current_language_code() == "fr"){
+				$pageLink = '/fr/nouvelles/';
+			}
+			?>
+			<div class="navigation pagination-buttons"><p><a href="<?=$pageLink?>"><?=__('next')?>&nbsp;&nbsp;<i class="icon-right-big"></i></a></p></div>
+			<?php
+		}	
+		else{
+			?><h1>No news posts found</h1><?php
+		}	
+	?>
 		 
 	</div>
 	<div class="col-4">
