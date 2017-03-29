@@ -47,15 +47,34 @@
 				?>
 				<p class="price-text">
 					<?php
-					if($itemPrice > 0)
-					{
-						echo $priceText;
-					}
+					if ($thisProduct->status == 'available'){
+						if($itemPrice > 0)
+						{
+							echo $priceText;
+						}
 
-					if ($itemStoreLink){
-						?>
-						<br><a href='<?=$itemStoreLink?>' class='inline-btn buy-btn track-product-buy-button'><?= __('Buy Now')?></a>
-						<?php
+						if ($itemStoreLink){
+							?>
+							<br><a href='<?=$itemStoreLink?>' class='inline-btn buy-btn track-product-buy-button'><?= __('Buy Now')?></a>
+							<?php
+						}
+					}
+					else 
+					{
+						echo "<h4>";
+
+						if ($thisProduct->status == '30-days')
+							echo __("Available within 30 days.");
+						else if ($thisProduct->status == '90-days')
+							echo __("Available within 90 days.");
+
+						$notification_url = "/" . get_current_language_code() . "/";
+						if (strtolower(get_current_language_code()) == "fr")
+							$notification_url .= "le-notification-terms";
+						else
+							$notification_url .= "product-alerts-terms-of-service";
+						$notification_url .= "/?product_id=" . $post->ID;
+						echo "</h4><p><a href='$notification_url'>" . __("Notify me when this strain is available") . " &raquo;</a></p>";
 					}
 					?>
 				</p>

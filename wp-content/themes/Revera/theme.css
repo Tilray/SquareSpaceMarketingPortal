@@ -3317,3 +3317,24 @@ body.single .content-area{
 	padding-top: 3px;
 }
 
+
+form.normal label{
+	display: block;
+	margin-bottom: 0;
+}
+form.normal input[type="text"]{
+	display: inline-block;
+}
+
+form.normal input[type="submit"]{
+	color: #ffffff;
+    font-size: 13px;
+    font-weight: bold;
+    text-transform: uppercase;
+    text-decoration: none;
+    background-color: #084875;
+    padding: 8px 12px 8px 12px;
+    display: inline-block;
+    border: none;
+    margin-top: 5px;
+}

@@ -1,0 +1,8 @@
+[28-Mar-2017 22:27:55 UTC] purge_varnish_cache() failed for: (localhost) #^(tilray\.staging\.wpengine\.com)$# #(/en/news/strain-profile-gsc-girl-scout-cookies(.*)|/wp-json/wp/v2/posts)#
+[28-Mar-2017 22:27:55 UTC] purge_varnish_cache() failed for: (localhost) #^(tilray\.staging\.wpengine\.com)$# #(/en/news/strain-profile-gsc-girl-scout-cookies(.*)|/wp-json/wp/v2/posts)#
+[28-Mar-2017 22:27:55 UTC] purge_varnish_cache() failed for: (localhost) #^(tilray\.staging\.wpengine\.com)$# #(/en/news/strain-profile-gsc-girl-scout-cookies(.*)|/wp-json/wp/v2/posts)#
+[28-Mar-2017 22:27:55 UTC] SAVE EMAIL ALERTS
+[28-Mar-2017 22:27:55 UTC] PHP Notice:  Undefined index: processed_email in /nas/content/staging/tilray/wp-content/plugins/tilray-products/tilray-products.php on line 114
+[28-Mar-2017 22:27:55 UTC] 0
+[28-Mar-2017 22:27:55 UTC] PHP Notice:  Undefined index: processed_email in /nas/content/staging/tilray/wp-content/plugins/tilray-products/tilray-products.php on line 115
+[28-Mar-2017 22:27:55 UTC] 0
