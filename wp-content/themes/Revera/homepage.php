@@ -69,7 +69,7 @@ get_header(); ?>
 					$img_attrs = wp_get_attachment_image_src( $thumbID,'blog-preview' ); 
 					$image = $img_attrs[0];
 					if($image) {?>
-						<a href="<?php the_permalink(); ?>" class="prevent-reflow">
+						<a href="<?php the_permalink($post_id); ?>" class="prevent-reflow">
 							<img class="blog-preview" src="<?= $image ?>" alt="<?= get_the_title($post_id); ?>"/>
 						</a>				
 					<?php }?>
