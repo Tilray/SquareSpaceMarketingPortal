@@ -2127,6 +2127,10 @@ div.search-result{
 }
 
 
+.page-template-leftandcenternavselfandchildren-page #right-pane{
+    padding-top:16px;
+}
+
 
 .flexslider div.std-banner h2{
   padding-left: 4.1%; 
