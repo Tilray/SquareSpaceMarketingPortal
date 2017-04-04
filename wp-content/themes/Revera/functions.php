@@ -987,14 +987,21 @@ function sticky_footer_content_func( $atts, $content = null ) {
 add_shortcode( 'sticky_footer_content', 'sticky_footer_content_func' );
 
 
-function custom_excerpt($new_length = 20, $new_more = '...') {
+function custom_excerpt($new_length = 20, $new_more = '...', $post_id = NULL) {
   add_filter('excerpt_length', function () use ($new_length) {
     return $new_length;
   }, 999);
   add_filter('excerpt_more', function () use ($new_more) {
     return $new_more;
   });
-  $output = get_the_excerpt();
+  $output = ""; 
+  if (!is_null($post_id)){
+ 	$output = get_the_excerpt($post_id);
+  }
+  else
+  {
+  	$output = get_the_excerpt();
+  }
   $output = apply_filters('wptexturize', $output);
   $output = apply_filters('convert_chars', $output);
   return $output;
@@ -1025,3 +1032,15 @@ function wpb_set_post_views($postID) {
 //To keep the count accurate, lets get rid of prefetching
 remove_action( 'wp_head', 'adjacent_posts_rel_link_wp_head', 10, 0);
 
+
+
+function get_search_page_url(){
+	$url = bloginfo('url') . get_current_language_code();
+	if (get_current_language_code() == 'en'){
+		return $url . "/search-results";
+	}
+	else 
+	{
+		return $url . "/resultats";
+	}
+}
