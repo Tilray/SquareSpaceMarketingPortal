@@ -205,9 +205,6 @@ function renderProductsSection($allProducts, $productType, $sectionTitle){
 				 data-producttype="<?= $product->producttype ?>"
 				 data-thc="<?= $product->thc ?>"
 				 data-price="<?= $product->price ?>"
-				 data-profilethc="<?= $product->profilethc ?>"
-				 data-profilecbd="<?= $product->profilecbd ?>"
-				 data-profilethccbd="<?= $product->profilethccbd ?>"
 			>
 				<a href="<?=$product->productUrl?>">
 					<div class="product-item-inner init <?= $product->profile ?>">

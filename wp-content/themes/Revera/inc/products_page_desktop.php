@@ -55,9 +55,6 @@
 					 data-producttype="<?= $product->producttype ?>"
 					 data-thc="<?= $product->thc ?>"
 					 data-price="<?= $product->price ?>"
-					 data-profilethc="<?= $product->profilethc ?>"
-					 data-profilecbd="<?= $product->profilecbd ?>"
-					 data-profilethccbd="<?= $product->profilethccbd ?>"
 				>
 					<div class="product-item-inner init <?= $product->profile ?>">
 						<div class="chem-type <?= $product->profile ?>">

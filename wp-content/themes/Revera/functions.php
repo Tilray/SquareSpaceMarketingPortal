@@ -742,9 +742,6 @@ class Product{
     public $terpenes;
     public $cannabinoids;
 	public $overview;
-	public $profilethc;
-	public $profilecbd;
-	public $profilethccbd;
 	public $profile;	//value will be whichever of the last 3 profiles is set
 	public $priceText;
 
@@ -797,10 +794,9 @@ class Product{
         $this->thc = getProductTHCRange($this->actualthc, $validTHCs);
         $this->cbd = trim(get_post_meta($id, 'cbd_level', true));
 //        $this->profile = trim(get_post_meta($id, 'chemical_type', true));
-        $this->profilethc = str_replace("none", "", trim(get_post_meta($id, 'thc_profile', true)));
-        $this->profilecbd = str_replace("none", "", trim(get_post_meta($id, 'cbd_profile', true)));
-        $this->profilethccbd = str_replace("none", "", trim(get_post_meta($id, 'thc_cbd_profile', true)));
-        $this->profile = $this->profilethc . $this->profilecbd . $this->profilethccbd;
+        $this->profile = str_replace("none", "", trim(get_post_meta($id, 'thc_profile', true))) . 
+        				str_replace("none", "", trim(get_post_meta($id, 'cbd_profile', true))) . 
+        				str_replace("none", "", trim(get_post_meta($id, 'thc_cbd_profile', true)));
         $this->storelink = trim(get_post_meta($id, 'store_link', true));
         $this->terpenes = get_field('terpenes_description', $id);
         $this->cannabinoids = get_field('cannabinoid_description', $id);
@@ -838,7 +834,6 @@ class Product{
         $this->initiallyActive = TRUE;
         $prodAtts = get_object_vars($this);
 		$nonProfileFiltersActive = true;
-		$profileFiltersActive = false;
         foreach ($productFilters->nonProfileFilters as $filter)
         {
             $prodFilterState = $prodAtts[$filter->qsParamName];
@@ -850,17 +845,17 @@ class Product{
             $nonProfileFiltersActive = $nonProfileFiltersActive && $thisPropActive;
         }
 
+
+        $allProfileValues = "|||";
+        $totalSelectedProfiles = 0; 
         foreach ($productFilters->profileFilters as $filter)
         {
-            $prodFilterState = $prodAtts[$filter->qsParamName];
-            $thisPropActive = ($filter->getFirstActiveFilter() == "");
-            $filterPieces = explode('|', $prodFilterState);
-            foreach ($filterPieces as $key => $value) {
-	            $thisPropActive = $thisPropActive || in_array($value, $filter->currentFilterValues);
-            }
-            $profileFiltersActive = $profileFiltersActive || $thisPropActive;
+        	$allProfileValues .= implode("|||", $filter->currentFilterValues) . "|||";
+        	$totalSelectedProfiles += count($filter->currentFilterValues);
         }
 
+        //if there are not selected profiles, or we can find "|||somevalue|||" in the string of selected values, make it active
+        $profileFiltersActive = (($totalSelectedProfiles === 0) || (strpos($allProfileValues, "|||" . $this->profile . "|||") !== false));
 		$this->initiallyActive = $nonProfileFiltersActive && $profileFiltersActive;
     }
 
@@ -878,6 +873,9 @@ class ProductFilters{
     public $duration;
     public $sortOrder;
 	
+	public $profilethc;
+	public $profilecbd;
+	public $profilethccbd;
 	public $filters;
 	public $profileFilters;
 	public $nonProfileFilters;
@@ -1094,14 +1092,21 @@ function sticky_footer_content_func( $atts, $content = null ) {
 add_shortcode( 'sticky_footer_content', 'sticky_footer_content_func' );
 
 
-function custom_excerpt($new_length = 20, $new_more = '...') {
+function custom_excerpt($new_length = 20, $new_more = '...', $post_id = NULL) {
   add_filter('excerpt_length', function () use ($new_length) {
     return $new_length;
   }, 999);
   add_filter('excerpt_more', function () use ($new_more) {
     return $new_more;
   });
-  $output = get_the_excerpt();
+  $output = ""; 
+  if (!is_null($post_id)){
+ 	$output = get_the_excerpt($post_id);
+  }
+  else
+  {
+  	$output = get_the_excerpt();
+  }
   $output = apply_filters('wptexturize', $output);
   $output = apply_filters('convert_chars', $output);
   return $output;
@@ -1131,3 +1136,15 @@ function wpb_set_post_views($postID) {
 }
 //To keep the count accurate, lets get rid of prefetching
 remove_action( 'wp_head', 'adjacent_posts_rel_link_wp_head', 10, 0);
+
+
+function get_search_page_url(){
+	$url = bloginfo('url') . get_current_language_code();
+	if (get_current_language_code() == 'en'){
+		return $url . "/search-results";
+	}
+	else 
+	{
+		return $url . "/resultats";
+	}
+}
