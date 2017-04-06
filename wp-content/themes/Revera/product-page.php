@@ -716,11 +716,11 @@ $theProducts = QueryProducts($productFilters);
 <?
 if ($deviceType === 'phone')
 {
-	require_once 'inc/products_page_mobile.php';
+	require_once 'products_page_mobile.php';
 }
 else
 {
-	require_once 'inc/products_page_desktop.php';
+	require_once 'products_page_desktop.php';
 }
 ?>
 
