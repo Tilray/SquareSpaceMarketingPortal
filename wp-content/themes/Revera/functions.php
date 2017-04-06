@@ -1035,7 +1035,7 @@ remove_action( 'wp_head', 'adjacent_posts_rel_link_wp_head', 10, 0);
 
 
 function get_search_page_url(){
-	$url = bloginfo('url') . get_current_language_code();
+	$url = bloginfo('url');
 	if (get_current_language_code() == 'en'){
 		return $url . "/search-results";
 	}
