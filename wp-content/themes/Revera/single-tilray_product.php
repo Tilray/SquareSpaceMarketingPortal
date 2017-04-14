@@ -15,6 +15,7 @@ header("Vary: User-Agent, Accept");
 get_header(); 
 $thisProduct = new Product($post, $productFilters);
 
+$itemStoreLink = "";
 $itemPrice = 0;
 $itemPriceObj = get_field_object( 'price', get_the_ID() );
 if ($itemPriceObj){

@@ -606,7 +606,7 @@ class ProductFilter
 		}
 
 		?>
-		<li class="product-filter">
+		<li class="product-filter non-profile-filter">
 			<span class="noscript-hide label-holder">
 				<input type="checkbox" class="other <?= $className?>" name="<?=$name?>" id="<?=$id?>" data-filter-name="<?=$name?>"  data-filter="<?=$filter?>">
 				<label class="checkbox-label<?=$showAllClass?>" for="<?=$id?>"><?php _e($label); ?></label>
@@ -620,7 +620,7 @@ class ProductFilter
 
 	public function renderFilters(){
 	?>
-		<div class="product-filters-container col-sm-4">
+		<div class="product-filters-container col-sm-3">
 			<h3 class="products gray-underline"><?= _e($this->displayName) ?></h3>
 			<ul class="product-filters product-filters-<?=$this->qsParamName?>">
 				<?php
@@ -832,6 +832,7 @@ class Product{
         $this->priceText = format_price_for_current_locale(floatval($this->actualprice)) . ' ' . __($this->unitLabel);
 
         $this->initiallyActive = TRUE;
+
         $prodAtts = get_object_vars($this);
 		$nonProfileFiltersActive = true;
         foreach ($productFilters->nonProfileFilters as $filter)
@@ -850,8 +851,10 @@ class Product{
         $totalSelectedProfiles = 0; 
         foreach ($productFilters->profileFilters as $filter)
         {
-        	$allProfileValues .= implode("|||", $filter->currentFilterValues) . "|||";
-        	$totalSelectedProfiles += count($filter->currentFilterValues);
+        	if ($filter->currentFilterValues != NULL){
+	        	$allProfileValues .= implode("|||", $filter->currentFilterValues) . "|||";
+	        	$totalSelectedProfiles += count($filter->currentFilterValues);
+        	}
         }
 
         //if there are not selected profiles, or we can find "|||somevalue|||" in the string of selected values, make it active
@@ -961,7 +964,8 @@ class ProductFilters{
 											"10-12" => "$10-12",
 											"13-1000" => "$13+"),
 											 false,
-											"");
+											"this.test = function(product){ return this.selected.length === 0 || arrayIncludes(this.selected, product.price);}"
+											);
 
 		$this->duration = new ProductFilter("duration", "Duration",
 									array(	"" => "",
@@ -971,9 +975,9 @@ class ProductFilters{
 											false,
 											"");
 
-		$this->filters = array($this->productType, $this->strainCategory, $this->status, $this->profilethc, $this->profilecbd, $this->profilethccbd);
+		$this->filters = array($this->productType, $this->strainCategory, $this->status, $this->profilethc, $this->profilecbd, $this->profilethccbd, $this->price);
 		$this->profileFilters = array($this->profilethc, $this->profilecbd, $this->profilethccbd);
-		$this->nonProfileFilters = array($this->productType, $this->strainCategory, $this->status);
+		$this->nonProfileFilters = array($this->productType, $this->strainCategory, $this->status, $this->price);
         $this->sortOrder = array("flower" => 0, "blend" => 1, "extract" => 2);
 	}
 											
@@ -998,7 +1002,7 @@ class ProductFilters{
 
 			<?php
 			if ($row_label){
-				echo "<span class='row-label'>" . $row_label . "</span>";
+				echo "<span class='row-label'>" . _($row_label) . "</span>";
 			}
 			?>
 		</li>

@@ -11,7 +11,7 @@
 		</div>
 	</div>
 	<div class="row filters">
-		<div class="col-md-7 col-sm-12 profiles-column">
+		<div class="col-md-6 col-sm-12 profiles-column">
 			<h1 class="products"><?php the_title(); ?></h1>
 			<div class="row">
 				<?php
@@ -19,12 +19,13 @@
 				?>
 			</div>
 		</div>
-		<div class="col-md-5 col-sm-12">
+		<div class="col-md-6 col-sm-12">
 			<div class="row">
 				<?php
 				$productFilters->productType->renderFilters();
 				$productFilters->strainCategory->renderFilters();
 				$productFilters->status->renderFilters();
+				$productFilters->price->renderFilters();
 				?>
 			</div>
 		</div>
@@ -40,7 +41,7 @@
 		}
 		?>
 		<div class="section-title product-item section-title-<?=$productType?><?=$sectionTitleActiveClass?>">
-			<h3><?=$sectionTitle?></h3>
+			<h3><?=_($sectionTitle)?></h3>
 			<hr/>
 		</div>
 		<?php

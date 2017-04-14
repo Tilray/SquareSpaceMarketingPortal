@@ -13,9 +13,10 @@ $noHideStickyFooterContent = "<div class='mobile-products-flyout'></div>";
 global $productFilters;
 
 
-function renderMobileFilterPanel($qsParamName, $displayName, $filterNameValues, $panelName = ""){
+
+function renderMobileFilterPanel($qsParamName, $displayName, $filterNameValues, $filterNameValuesDict = null){
 	?>
-	<div class="filter-panel mobile <?=$qsParamName?> <?=$panelName?>" data-filter="<?=$qsParamName?>" style="display:none;">
+	<div class="filter-panel mobile <?=$qsParamName?>" data-filter="<?=$qsParamName?>" style="display:none;">
 		<div class="filter-panel-header">
 			<div class="col-xs-2"></div>
 			<div class="col-xs-8 filter-panel-title">
@@ -26,37 +27,13 @@ function renderMobileFilterPanel($qsParamName, $displayName, $filterNameValues, 
 		<div class="filter-panel-options">
 			<ul class="product-filters mobile product-filters-<?=$qsParamName?>">
 			<?php
-			foreach($filterNameValues as $fnvId=>$fnvValue){
-				$id = $qsParamName . '-' . $fnvValue;
-				if ($fnvValue == "") {
-					$id = $qsParamName . '-show-all';
+				addMobileFilterItems($filterNameValues, $qsParamName, false);
+
+				if (isset($filterNameValuesDict)){
+					foreach($filterNameValuesDict as $paramName => $nameValues){
+						addMobileFilterItems($nameValues, $paramName, true);
+					} 
 				}
-
-				$label = $fnvValue;
-				if ($label == "")
-					$label = "Show All";
-
-				$profile_filter_class = "";
-				$filterName = $qsParamName;
-				$checkboxClass = "";
-
-				if (strpos($qsParamName, "profile") === 0) {
-					$profile_filter_class = "product-filter-profile";
-					$filterName = "profile";
-
-					if ($fnvValue !== "")
-						$checkboxClass = "profile-filter-has-value";
-				}
-
-				?>
-				<li class="product-filter mobile <?=$profile_filter_class?>">
-					<span class="noscript-hide">
-						<input type="checkbox" class="mobile product-filters-<?=$qsParamName?> <?=$checkboxClass?>" name="<?=$filterName?>" id="<?=$id?>" data-filter-name="<?=$qsParamName?>" data-filter="<?=$fnvId?>">
-						<label class="checkbox-label" for="<?=$id?>"><?php _e($label); ?></label>
-					</span>
-				</li>
-				<?php
-			}
 			?>
 			</ul>
 		</div>
@@ -64,12 +41,52 @@ function renderMobileFilterPanel($qsParamName, $displayName, $filterNameValues, 
 	<?php
 }
 
-renderMobileFilterPanel($productFilters->profilethc->qsParamName, $productFilters->profilethc->displayName, $productFilters->profilethc->getFiterNamesValues());
-renderMobileFilterPanel($productFilters->profilecbd->qsParamName, $productFilters->profilecbd->displayName, $productFilters->profilecbd->getFiterNamesValues());
-renderMobileFilterPanel($productFilters->profilethccbd->qsParamName, $productFilters->profilethccbd->displayName, $productFilters->profilethccbd->getFiterNamesValues());
+function addMobileFilterItems($filterNameValues, $qsParamName, $removeBlanks){
+	foreach($filterNameValues as $fnvId=>$fnvValue){
+		$id = $qsParamName . '-' . $fnvValue;
+		if ($fnvValue == "") {
+			if ($removeBlanks)
+				continue;
+
+			$id = $qsParamName . '-show-all';
+		}
+
+		$label = $fnvValue;
+		if ($label == "")
+			$label = "Show All";
+
+		$profile_filter_class = "";
+		$filterName = $qsParamName;
+		$checkboxClass = "";
+
+		if (strpos($qsParamName, "profile") === 0) {
+			$profile_filter_class = "product-filter-profile";
+			$filterName = "profile";
+
+			if ($fnvValue !== "")
+				$checkboxClass = "profile-filter-has-value";
+		}
+
+		?>
+		<li class="product-filter mobile <?=$profile_filter_class?>">
+			<input type="checkbox" class="mobile product-filters-<?=$qsParamName?> <?=$checkboxClass?>" name="<?=$filterName?>" id="<?=$id?>" data-filter-name="<?=$qsParamName?>" data-filter="<?=$fnvId?>">
+			<label class="checkbox-label" for="<?=$id?>"><?php _e($label); ?></label>
+		</li>
+		<?php
+	}
+}
+
+renderMobileFilterPanel("profile", _("Profiles"), array("" => ""), 
+		array(
+			$productFilters->profilethc->qsParamName => $productFilters->profilethc->getFiterNamesValues(),
+			$productFilters->profilecbd->qsParamName => $productFilters->profilecbd->getFiterNamesValues(),
+			$productFilters->profilethccbd->qsParamName => $productFilters->profilethccbd->getFiterNamesValues()	
+		)
+	);
 renderMobileFilterPanel($productFilters->strainCategory->qsParamName, $productFilters->strainCategory->displayName, $productFilters->strainCategory->getFiterNamesValues());
 renderMobileFilterPanel($productFilters->productType->qsParamName, $productFilters->productType->displayName, $productFilters->productType->getFiterNamesValues());
 renderMobileFilterPanel($productFilters->status->qsParamName, $productFilters->status->displayName, $productFilters->status->getFiterNamesValues());
+renderMobileFilterPanel($productFilters->price->qsParamName, $productFilters->price->displayName, $productFilters->price->getFiterNamesValues());
 
 
 function createSummaryItem($id, $label){
@@ -105,6 +122,7 @@ function createSummaryItemGroup($filter){
 					createSummaryItemGroup($productFilters->strainCategory);
 					createSummaryItemGroup($productFilters->productType);
 					createSummaryItemGroup($productFilters->status);
+					createSummaryItemGroup($productFilters->price);
 				?>
 			</div>
 		</div>
@@ -114,46 +132,16 @@ function createSummaryItemGroup($filter){
 <div class="page-head mobile mobile-products-page">
 	<div class="container no-padding">
 		<div class="row">
-			<div class="col-xs-8">
+			<div class="col-xs-12">
 				<h2 class="filters"><?= _("Filters")?></h2>
-			</div>
-			<div class="col-xs-4 reset-section">
-				<div class="filter-button mobile reset">
-					<div class="filter-button-inner" data-filter-name="reset"><?php _e('Reset Filters'); ?></div>
-				</div>
 			</div>
 			<div class="filters mobile">	
 				<div class="col-xs-12">
 					<div class="mobile-filters-row">
 						<div class="filter-button-wrapper">
-							<div class="filter-button mobile profile profilethc">
-								<div class="filter-button-inner profilethc" data-filter-name="profilethc">
-									<div class="filter-label"><span>THC</span></div><div class="filter-corner-triangle"></div>
-								</div>
-							</div>
-						</div>
-						<div class="divider"></div>
-						<div class="filter-button-wrapper">
-							<div class="filter-button mobile profile profilecbd">
-								<div class="filter-button-inner profilecbd" data-filter-name="profilecbd">
-									<div class="filter-label"><span>CBD</span></div><div class="filter-corner-triangle"></div>
-								</div>
-							</div>
-						</div>
-						<div class="divider"></div>
-						<div class="filter-button-wrapper">
-							<div class="filter-button mobile profile profilethccbd">
-								<div class="filter-button-inner profilethccbd" data-filter-name="profilethccbd">
-									<div class="filter-label"><span>THC/CBD</span></div><div class="filter-corner-triangle"></div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="mobile-filters-row">
-						<div class="filter-button-wrapper">
-							<div class="filter-button non-profile mobile <?=$productFilters->strainCategory->qsParamName?>">
-								<div class="filter-button-inner <?=$productFilters->strainCategory->qsParamName?>" data-filter-name="<?=$productFilters->strainCategory->qsParamName?>">
-									<div class="filter-label"><span><?= _e($productFilters->strainCategory->displayName) ?></span></div><div class="filter-corner-triangle"></div>
+							<div class="filter-button mobile profiles">
+								<div class="filter-button-inner profiles" data-filter-name="profile">
+									<div class="filter-label"><span>Profiles</span></div><div class="filter-corner-triangle"></div>
 								</div>
 							</div>
 						</div>
@@ -167,9 +155,34 @@ function createSummaryItemGroup($filter){
 						</div>
 						<div class="divider"></div>
 						<div class="filter-button-wrapper">
+							<div class="filter-button non-profile mobile <?=$productFilters->strainCategory->qsParamName?>">
+								<div class="filter-button-inner <?=$productFilters->strainCategory->qsParamName?>" data-filter-name="<?=$productFilters->strainCategory->qsParamName?>">
+									<div class="filter-label"><span><?= _e($productFilters->strainCategory->displayName) ?></span></div><div class="filter-corner-triangle"></div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="mobile-filters-row">
+						<div class="filter-button-wrapper">
 							<div class="filter-button non-profile mobile <?=$productFilters->status->qsParamName?>">
 								<div class="filter-button-inner <?=$productFilters->status->qsParamName?>" data-filter-name="<?=$productFilters->status->qsParamName?>">
 									<div class="filter-label"><span><?= _e($productFilters->status->displayName) ?></span></div><div class="filter-corner-triangle"></div>
+								</div>
+							</div>
+						</div>
+						<div class="divider"></div>
+						<div class="filter-button-wrapper">
+							<div class="filter-button non-profile mobile <?=$productFilters->price->qsParamName?>">
+								<div class="filter-button-inner <?=$productFilters->price->qsParamName?>" data-filter-name="<?=$productFilters->price->qsParamName?>">
+									<div class="filter-label"><span><?= _e($productFilters->price->displayName) ?></span></div><div class="filter-corner-triangle"></div>
+								</div>
+							</div>
+						</div>
+						<div class="divider"></div>
+						<div class="filter-button-wrapper">
+							<div class="filter-button non-profile mobile has-selections reset">
+								<div class="filter-button-inner" data-filter-name="reset">
+									<div class="filter-label"><span><?= _e("RESET") ?></span></div>
 								</div>
 							</div>
 						</div>

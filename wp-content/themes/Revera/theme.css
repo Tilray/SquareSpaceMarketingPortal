@@ -1498,6 +1498,11 @@ ul.product-filters label {
 	font-weight: 400;
 }
 
+ul.product-filters li.non-profile-filter label {
+	line-height: 14px;
+	padding-bottom: 5px;
+}
+
 h3.profile-header,
 ul.product-filters label.show-all {
 	text-transform: uppercase;
@@ -1522,7 +1527,7 @@ ul.product-filters input[type=checkbox]:checked ~ label::after {
 	position: absolute;
 	display: list-item;
 	font-size: 30px;
-	top: 6px;
+	top: 3px;
 	left: -20px;
 	border-right: 8px solid #666666;
 	border-left: 8px solid transparent;
@@ -1542,10 +1547,11 @@ ul.product-filters.mobile input[type=checkbox] ~ label {
 	font-weight: bold;
 	font-size: 15px;
 	width: 92%;
-	padding: 15px 0;
+	padding: 9px 0;
 	margin-left: 4%;
 	border-top: 1px solid #cccccc;
 	text-transform: uppercase;
+	margin-bottom: 0;
 }
 
 ul.product-filters.mobile input[type=checkbox]:checked ~ label {
@@ -1591,21 +1597,9 @@ ul.product-filters.mobile input[type=checkbox]:checked ~ label::after {
 	height: 100%;
 }
 
-.filter-button.mobile.reset{
-	text-align: center;
-	margin-top: 20px;
-	text-transform: uppercase;
-}
 
 .reset-section{
 	padding-left: 0;
-}
-
-.filter-button.mobile.reset .filter-button-inner{
-	padding: 0px 0;
-	border: solid 1px #9f9f9f;
-	color: #666666;
-	font-size: 11px;
 }
 
 .filter-button.mobile.has-selections,
@@ -1886,6 +1880,7 @@ div.product-details-row .details-panel .buy-column a.buy{
     padding-top: 15px;
     padding-bottom: 15px;
     margin: 0;
+	height: 150px;
 }
 
 .desktop .post.product-item:hover{
@@ -1949,6 +1944,11 @@ div.product-details-row .details-panel .buy-column a.buy{
 ul.product-filters-profile li{
 	margin-bottom: 5px;
 }
+
+ul.product-filters-profile li.mobile{
+	margin-bottom: 0;
+}
+
 
 ul.product-filters-profile,
 ul.product-filters-profile li,

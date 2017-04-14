@@ -263,9 +263,10 @@ $theProducts = QueryProducts($productFilters);
 			var thisFilterCategorySelector = 'ul input[type=checkbox][name=' + thisFilterCategory + ']';
 
 			var filterName = jQuery($changedElement).attr('data-filter-name');
+			console.log("Clicked filter: " + filterName);
 			var filter = self.filtersByName[filterName];
 
-			if ($changedElement.attr("id") == "profile-show-all" || filter.isProfile)
+			if ($changedElement.attr("id") == "profile-show-all" || (filter != null && filter.isProfile))
 				self.manageProfileFilterStates($changedElement);
 			else
 				self.manageNonProfileFilterState(filter, $changedElement);
