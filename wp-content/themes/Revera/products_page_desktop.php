@@ -87,7 +87,7 @@
 						<div class="buy-column">
 							<div class="price">
 								<span class="price"></span>
-								<a class="buy">Buy Now</a>
+								<a class="buy call-to-action-button orange"><span><?= _("Buy Now") ?></span></a>
 							</div>
 						</div>
 					</div>
