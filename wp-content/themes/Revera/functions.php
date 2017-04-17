@@ -930,8 +930,9 @@ class ProductFilters{
 		$this->productType = new ProductFilter("producttype", "Type",
 											array(	"" => "", 
 													"flower" => "Flower", 
-													"blend" => "Blend", 
-													"extract" => "Extract"),
+													"blend" => "Blend",
+													"drops" => "Drops",
+													"capsule" => "Capsule"),
 											false,
 											"this.test = function(product){ return this.selected.length === 0 || arrayIncludes(this.selected, product.producttype);}"
 											);
