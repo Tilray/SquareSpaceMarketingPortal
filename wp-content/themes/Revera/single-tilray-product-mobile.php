@@ -39,13 +39,11 @@
 				<?php if (strlen(trim($cbd)) > 0){?>
 					<h3 class="thc-level"><span class="thc-label"><?= _("CBD")?>:&nbsp;</span><?=$cbd?>%</h3>
 				<?php } ?>
-				<h1 class="mockH2"><?php the_title(); ?></h1>
+				<h1 itemprop="name" class="mockH2"><?php the_title(); ?></h1>
 				<p><?=$thcAndCbdText?></p>
-				<?php
-
-				the_content();
-
-				?>
+				<span itemprop="description">
+					<?php the_content(); ?>
+				</span>
 
 				<?php
 				if (strlen($thisProduct->terpenes) > 0) {
@@ -67,7 +65,7 @@
 				}
 				?>
 
-				<p class="price-text text-text-text">
+				<p itemprop="offers" itemscope itemtype="http://schema.org/Offer" class="price-text text-text-text">
 					<?php
 					if($itemPrice > 0)
 					{

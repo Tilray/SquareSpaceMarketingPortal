@@ -45,7 +45,7 @@
 					<?php
 				}
 				?>
-				<p class="price-text">
+				<p itemprop="offers" itemscope itemtype="http://schema.org/Offer" class="price-text">
 					<?php
 					if ($thisProduct->status == 'available'){
 						if($itemPrice > 0)

@@ -12,6 +12,12 @@
 
 header("Vary: User-Agent, Accept");
 
+$extra_header_content = "<!--\n" . 
+"<PageMap><DataObject type='document'><Attribute name='title'>The Biomechanics of a Badminton Smash</Attribute></DataObject></PageMap>\n" . 
+"-->";
+
+$structured_data_itemscope = 'itemscope itemtype="http://schema.org/Product"';
+
 get_header(); 
 $thisProduct = new Product($post, $productFilters);
 
@@ -24,7 +30,7 @@ if ($itemPriceObj){
 	$label = $itemPriceObj['choices'][ $value ];	
 	if ($itemPrice > 0){
 		$productType = trim(get_post_meta(get_the_ID(), 'product_type', true));
-		$priceText = format_price_for_current_locale($itemPrice) . ' ' . __($thisProduct->unitLabel);		
+		$priceText = format_price_for_current_locale($itemPrice, true) . " " . __($thisProduct->unitLabel);
 		$itemStoreLink = trim(get_post_meta(get_the_ID(), 'store_link', true));
 	}
 }
