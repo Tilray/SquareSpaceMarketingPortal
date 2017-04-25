@@ -149,15 +149,13 @@
 				<div class="col-sm-9 mainmenu">
                     <div id="primary-menu-container" class="topmenu">
                         <?php wp_nav_menu( array( 'container' => '', 'theme_location' => 'primary','container_class' => '','menu_id'=>'primary-menu' ,'menu_class'=>'sfmenu' ) ); ?>
-                        <form method="get" id="search-form" action="<?php bloginfo('url') . get_current_language_code(); ?>">
+                        <form method="get" id="search-form" action="<?php echo get_search_page_url(); ?>">
                             <label>
                                 <span class="screen-reader-text">Search for:</span>
-                                <input type="search" class="search-field" placeholder="" value="" name="s" title="Search for:">
+                                <input type="search" class="search-field" placeholder="" value="" name="term" title="Search for:">
                             </label>
                             <button type="submit" class="search-submit">
-                                <i class="icon-search">
-                                    
-                                </i>
+                                <i class="icon-search"></i>
                             </button>
                             <input type="hidden" name="lang" value="en">                           
                         </form>

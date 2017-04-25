@@ -24,7 +24,7 @@ function call_to_action_button_func($atts){
 	if ($atts['target'] != "")
 		$newTab = "target='" . $atts['target'] . "'";
 		
-	return sprintf('<a href="%s" %s class="call-to-action-button">%s<span>%s</span></a>', 
+	return sprintf('<a href="%s" %s class="call-to-action-button ' . $atts['classes'] . '">%s<span>%s</span></a>', 
 					$atts['href'],
 					$newTab,
 					render_svg_icon($atts['icon_name']),

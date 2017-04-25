@@ -435,6 +435,10 @@ textarea {
 	}
 }
 
+.slicknav_nav{
+	max-height: 90vh;
+	overflow: scroll;
+}
 
 .slicknav_menu .slicknav_nav{
 	max-height: 85vh;

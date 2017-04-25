@@ -199,6 +199,7 @@ nav.main-navigation{
 }
 
 
+body.archive.category-news #primary-menu-container li.menu-item-news a,	/* page 2 and greater of news archive doesn't get current-menu-item, so have to fix manually */
 #primary-menu-container li.current_page_ancestor a,
 #primary-menu-container li.current-page-ancestor a,
 #primary-menu-container li.current-menu-item a {
@@ -3047,6 +3048,10 @@ div.search-result{
 	margin-bottom: 4px;
 }
 
+
+.page-template-leftandcenternavselfandchildren-page #right-pane{
+    padding-top:16px;
+}
 
 
 .flexslider div.std-banner h2{
