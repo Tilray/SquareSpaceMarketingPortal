@@ -25,7 +25,7 @@ function remove_page_from_query_string($query_string)
     if ($query_string['name'] == 'page' && isset($query_string['page'])) {
         unset($query_string['name']);
         // 'page' in the query_string looks like '/2', so i'm spliting it out
-        list($delim, $page_index) = split('/', $query_string['page']);
+        list($page_index) = explode('/', $query_string['page']);
         $query_string['paged'] = $page_index;
     }      
     return $query_string;
@@ -297,12 +297,17 @@ function render_left_nav($parentID, $pageID)
 		{
 			$linkClass = "left-nav-selected-child";
 		}
+
+		$link_url = get_permalink( $child->ID );
+		$override_url = get_field("left_nav_override_url", $child->ID);
+		if (strlen($override_url) > 0)
+			$link_url = $override_url;
 		
 		$newTab = "";
 		if (get_post_meta($child->ID, 'open_in_new_tab', true) == '1')
 			$newTab = "target='_blank'";
 		?>
-		<span class="<?=$linkClass?>"><h2><a <?=$newTab?> href="<?php echo get_permalink( $child->ID );?>"><?php echo $child->post_title; ?></a></h2></span>
+		<span class="<?=$linkClass?>"><h2><a <?=$newTab?> href="<?php echo $link_url;?>"><?php echo $child->post_title; ?></a></h2></span>
 		<?php
 	}
 }
