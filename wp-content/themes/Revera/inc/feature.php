@@ -4,7 +4,7 @@
 		$theBanners = array();
 		global $sitepress;
 
-		$wp_query = new WP_Query(array('post_type' => 'tilray_banners', 'posts_per_page' => '100', 'suppress_filters' => FALSE ));
+		$wp_query = new WP_Query(array('post_type' => 'tilray_banners', 'posts_per_page' => '100', 'suppress_filters' => FALSE, 'orderby' => 'menu_order', 'order' => 'ASC' ));
         global $isMobile;
 		$imageSize = $isMobile ? 'mobile-banner' : 'full';
         
@@ -32,10 +32,6 @@
 		endwhile;
 		
 		wp_reset_query();
-
-		//2 lines, but still better than messing with WP's query sorting
-		function cmp($a, $b){return strcasecmp($a->productName, $b->productName);}
-		usort($theBanners , "cmp");		
 		
 		return $theBanners;
 	}
