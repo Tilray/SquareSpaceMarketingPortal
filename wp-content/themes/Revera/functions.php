@@ -855,7 +855,8 @@ class ProductFilters{
 											array(	"" => "", 
 													"flower" => "Flower", 
 													"blend" => "Blend", 
-													"extract" => "Extract",
+													"drop" => "Drops",
+													"capsule" => "Capsule",
 													"accessory" => "Accessories"));
 													
 		$this->thc = new ProductFilter("thc", "THC Level",
