@@ -84,7 +84,6 @@ jQuery(window).load(function() {
 	    	ResetFilters();
 	    });
     }
-
 });
 
 
