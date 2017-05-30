@@ -668,30 +668,66 @@ a.frmore{
 	border-bottom:5px solid #f96b61;
 }
 
-.homewidget{
-	color: #fff;
-	text-align: center;
-}
-
-.homewidget span{
-	border: 5px solid #fff;
-	background: transparent;
-	width: 70px;
-	height: 70px;
-	border-radius: 35px;
-	display: block;
-	line-height: 65px;
-	text-align: center;
-	margin: 0px auto;
-	font-size: 20px;
-}
-
-.homewidget h3{
-	font-size: 24px;
-	font-weight: bold;
-}
 
 /* Homepage */
+.homepage-header-container{
+	height: 32vw;
+	background-size: cover;
+	background-position: center;
+}
+
+.homepage-header-container a{
+	display: block;
+	height: 100%;
+}
+
+.homepage-point{
+	margin-top: 100px;
+	text-align: center;
+}
+
+.homepage-point .round-image{
+	width: 130px;
+	height: 130px;
+	margin: 0 auto;
+	background-size: cover;
+	background-position: center;
+	border-radius: 65px;
+	border: 1px solid #666666;
+}
+
+.homepage-point .round-image a{
+	display: block;
+	height: 100%;
+}
+
+.homepage-feature-section {
+	margin: 70px 0;
+	display: table;
+}
+
+.homepage-feature-section > div{
+	display: table-cell;
+	height: 100%;
+	vertical-align: middle;
+}
+
+.homepage-feature-section > div.image{
+	width: 60%;
+}
+
+.homepage-feature-section > div.content{
+	width: 40%;
+}
+
+.homepage-feature-section.left > div.content{
+	padding-left: 50px;
+}
+
+.homepage-feature-section.right > div.content{
+	padding-right: 50px;
+}
+
 
 .section-wide{
 	margin-top:40px;
