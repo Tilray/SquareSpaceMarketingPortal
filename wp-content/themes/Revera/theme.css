@@ -20,8 +20,7 @@ select,
 textarea {
 	color: #666;
 	font-family: 'Proxima-Nova',serif;
-	font-size: 14px;
-	font-size: 1.4rem;
+	font-size: 17px;
 	line-height: 1.6;
 	font-weight: normal;
 	font-style: normal;
@@ -592,14 +591,13 @@ html, body {
 /* Slider */
 
 #slidebox{
-	height: 21vw;
-	width: 70%;
 	max-width: 1719px;
 	max-height: 550px;
 	margin-left: auto;
 	margin-right: auto;
 	position: relative;
 	background: #ffffff;
+	padding-bottom: 32%;
 }
 
 .doverlay{
@@ -669,6 +667,45 @@ a.frmore{
 }
 
 
+.flexslider .slides li{
+	position: relative;
+}
+
+.homepage-profile-banner{
+	width: 45%;
+	padding-left: 7%;
+	height: 100%;
+	display: table;
+}
+
+.homepage-profile-banner > div{
+	display: table-cell;
+	height: 100%;
+	vertical-align: middle;
+	text-align: left;
+}
+
+.homepage-profile-banner h1{
+	color: #818486;
+	font-size: 5vw;
+	margin-bottom: 8px;
+}
+
+@media (min-width: 1100px){
+	.homepage-profile-banner h1{
+		font-size: 55px;
+	}	
+}
+
+.homepage-profile-banner h1.lighter{
+	font-weight: 300;
+}
+
+.homepage-profile-banner .color-stripe{
+	height: 10px;
+	background-image: url(./images/home-color-bar.svg);
+}
+
 /* Homepage */
 .homepage-header-container{
 	height: 32vw;
@@ -681,24 +718,17 @@ a.frmore{
 	height: 100%;
 }
 
-.homepage-point{
+.row.homepage-points{
 	margin-top: 100px;
+}
+
+.homepage-point{
 	text-align: center;
+	padding: 0 40px;
 }
 
-.homepage-point .round-image{
-	width: 130px;
-	height: 130px;
-	margin: 0 auto;
-	background-size: cover;
-	background-position: center;
-	border-radius: 65px;
-	border: 1px solid #666666;
-}
-
-.homepage-point .round-image a{
-	display: block;
-	height: 100%;
+.homepage-point img{
+	height: 100px;
 }
 
 .homepage-feature-section {

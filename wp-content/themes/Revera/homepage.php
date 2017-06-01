@@ -18,33 +18,39 @@ get_header(); ?>
 	$postContent = $post->post_content;
 ?>
 
-<?php
-	$header_url = wp_get_attachment_image_src(get_field("header_image", get_the_ID()), "full");
-	$header_link = get_field("header_link", get_the_ID());
-?>
-<div class="homepage-header-container" style="background-image:url(<?=$header_url[0]?>)">
-	<a href="<?=$header_link?>"></a>
-</div>
 <div class="container ">
 <div class="row">
+<?php
+if (!$isMobile){
+	get_template_part( 'inc/feature' );
+}
+?>
+</div>
+<div class="row homepage-points">
 	<div class="col-sm-1 hidden-xs"></div>
 	<div class="col-sm-10 col-xs-12">
-	<?php
-	if( have_rows('point_sections', $post->ID) ){
-		while( have_rows('point_sections', $post->ID)){
-			the_row();
-			$img_attrs = wp_get_attachment_image_src( get_sub_field('image'), 'thumbnail' ); 
-			$image = $img_attrs[0];
-			?>
+		<?php
+			$link1 = "/link1";
+			$link2 = "/link2";
+			$link3 = "/link3";
+		?>
+		<div class="row">
 			<div class="col-sm-4 col-xs-12 homepage-point">
-				<div class="round-image" style="background-image:url(<?= $image ?>)"><a href="<?= get_sub_field('link') ?>"></a></div>
-				<a href="<?= get_sub_field('link') ?>"><h2><?=get_sub_field('title')?></h2></a>
-				<?=get_sub_field('content')?>
+				<a href="<?= $link1 ?>"><img src='<?=get_template_directory_uri()?>/images/homeicon1.svg'></a>
+				<a href="<?= $link1 ?>"><h2><?=_('GMP Certified')?></h2></a>
+				<p><?=_('Lorem ipsum dolor sit amet, consectituer.')?></p>
 			</div>
-			<?php
-		}
-	}
-	?>
+			<div class="col-sm-4 col-xs-12 homepage-point">
+				<a href="<?= $link1 ?>"><img src='<?=get_template_directory_uri()?>/images/homeicon2.svg'></a>
+				<a href="<?= $link1 ?>"><h2><?=_('Register')?></h2></a>
+				<p><?=_('Lorem ipsum dolor sit amet, consectituer dipiscing eli.')?></p>
+			</div>
+			<div class="col-sm-4 col-xs-12 homepage-point">
+				<a href="<?= $link1 ?>"><img src='<?=get_template_directory_uri()?>/images/homeicon3.svg'></a>
+				<a href="<?= $link1 ?>"><h2><?=_('Customer Service')?></h2></a>
+				<p><?=_('Lorem ipsum dolor sit amet, consectituer dipiscing.')?></p>
+			</div>
+		</div>
 	</div>
 	<div class="col-sm-1 hidden-xs"></div>
 </div>
