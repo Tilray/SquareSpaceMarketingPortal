@@ -13,8 +13,8 @@ wpb_set_post_views($post_id);
 $count_key = 'wpb_post_views_count';
 $count = get_post_meta($post_id, $count_key, true);
 if($count==''){
-	delete_post_meta($post_id, $count_key);
-	add_post_meta($post_id, $count_key, '0');
+    delete_post_meta($post_id, $count_key);
+    add_post_meta($post_id, $count_key, '0');
 }
 
 echo "<div data-count='" . $count . "'></div>";
@@ -70,8 +70,8 @@ echo "<div data-count='" . $count . "'></div>";
 									</div>
 								</div>
 								<?php
-								$disableDisqus = trim(ft_of_get_option('fabthemes_disable_disqus'));
-								if (comments_open() && $disableDisqus != "0") :
+								$disableDisqus = (trim(ft_of_get_option('fabthemes_disable_disqus')) == "0") || isset($_GET['nodisqus']);
+								if (comments_open() && !$disableDisqus) : 
 									?>
 									<div id="disqus_thread"></div>
 									<script>

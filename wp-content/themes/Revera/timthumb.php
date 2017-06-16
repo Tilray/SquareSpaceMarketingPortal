@@ -19,8 +19,11 @@
  * and define variables you want to customize in there. It will automatically be
  * loaded by timthumb. This will save you having to re-edit these variables
  * everytime you download a new version
+
+ * VERSION MODIFIED BY WP Engine
 */
-define ('VERSION', '2.8.13');																		// Version of this script 
+
+define ('VERSION', '2.8.13.1');														// Version of this script 
 //Load a config file if it exists. Otherwise, use the values below
 if( file_exists(dirname(__FILE__) . '/timthumb-config.php'))	require_once('timthumb-config.php');
 if(! defined('DEBUG_ON') )					define ('DEBUG_ON', false);								// Enable debug logging to web server error log (STDERR)
@@ -813,10 +816,9 @@ class timthumb {
 		if(! $fh){
 			return $this->error("Could not open the lockfile for writing an image.");
 		}
-		if(flock($fh, LOCK_EX)){
+		if( TRUE ){
 			@unlink($this->cachefile); //rename generally overwrites, but doing this in case of platform specific quirks. File might not exist yet.
 			rename($tempfile4, $this->cachefile);
-			flock($fh, LOCK_UN);
 			fclose($fh);
 			@unlink($lockFile);
 		} else {
@@ -962,12 +964,11 @@ class timthumb {
 		$url = preg_replace('/[^A-Za-z0-9\-\.\_\~:\/\?\#\[\]\@\!\$\&\'\(\)\*\+\,\;\=]+/', '', $url); //RFC 3986
 		//Very important we don't allow injection of shell commands here. URL is between quotes and we are only allowing through chars allowed by a the RFC 
 		// which AFAIKT can't be used for shell injection. 
-		// VaultPress HotFix 2.8.13 - 0-day RCE fix
 		if(WEBSHOT_XVFB_RUNNING){
 			putenv('DISPLAY=:100.0');
-			$command = "$cuty $proxy --max-wait=$timeout --user-agent=\"$ua\" --javascript=$jsOn --java=$javaOn --plugins=$pluginsOn --js-can-open-windows=off --url=" . escapeshellarg( $url ) . " --out-format=$format --out=$tempfile";
+			$command = "$cuty $proxy --max-wait=$timeout --user-agent=\"$ua\" --javascript=$jsOn --java=$javaOn --plugins=$pluginsOn --js-can-open-windows=off --url=\"$url\" --out-format=$format --out=$tempfile";
 		} else {
-			$command = "$xv --server-args=\"-screen 0, {$screenX}x{$screenY}x{$colDepth}\" $cuty $proxy --max-wait=$timeout --user-agent=\"$ua\" --javascript=$jsOn --java=$javaOn --plugins=$pluginsOn --js-can-open-windows=off --url=" . escapeshellarg( $url ) . " --out-format=$format --out=$tempfile";
+			$command = "$xv --server-args=\"-screen 0, {$screenX}x{$screenY}x{$colDepth}\" $cuty $proxy --max-wait=$timeout --user-agent=\"$ua\" --javascript=$jsOn --java=$javaOn --plugins=$pluginsOn --js-can-open-windows=off --url=\"$url\" --out-format=$format --out=$tempfile";
 		}
 		$this->debug(3, "Executing command: $command");
 		$out = `$command`;

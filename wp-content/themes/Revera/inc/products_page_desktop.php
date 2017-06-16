@@ -41,7 +41,7 @@
 					data-producttype="<?=$product->producttype?>" 
 					data-thc="<?=$product->thc?>" 
 					data-price="<?=$product->price?>">
-					<div class="hthumb init">
+					<div class="hthumb">
 						<?php 
 						$imageUrl = $product->image;
 						$hcpParam = "";
@@ -50,7 +50,7 @@
 							$hcpParam = "?hcp=1";
 						}
 						?>
-						<a href="<?=$product->productUrl?><?=$hcpParam?>"><img src="<?=$imageUrl?>" alt="<?=$product->productName?>"/></a>
+						<a class="track-product-buy-button" href="<?=$product->productUrl?><?=$hcpParam?>"><img src="<?=$imageUrl?>" alt="<?=$product->productName?>"/></a>
 					</div>
 				 </div>
 			<?php } ?>
