@@ -1008,3 +1008,9 @@ function get_search_page_url(){
 		return $url . "/resultats";
 	}
 }
+
+function get_image_url_from_image_id($id, $size){
+	$thumbID = get_post_thumbnail_id($id);
+	$img_attrs = wp_get_attachment_image_src( $thumbID, $size ); 
+	return $img_attrs[0];
+}

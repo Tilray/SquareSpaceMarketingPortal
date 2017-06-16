@@ -23,7 +23,7 @@ function create_tilray_banners() {
       'rewrite' => array('slug' => 'products/tilray-banners'),
 	  'capability_type' => 'post',
 	  'taxonomies' => array('post_tag'),
-	  'supports' => array('title', 'editor', 'thumbnail'),
+	  'supports' => array('title', 'editor', 'thumbnail', 'page-attributes'),
 	  'hierarchical' => false
     )
   );
