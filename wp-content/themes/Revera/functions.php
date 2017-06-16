@@ -759,10 +759,7 @@ class Product{
         $this->actualthc = trim(get_post_meta($id, 'thc_level', true));
         $this->thc = getProductTHCRange($this->actualthc, $validTHCs);
         $this->cbd = trim(get_post_meta($id, 'cbd_level', true));
-//        $this->profile = trim(get_post_meta($id, 'chemical_type', true));
-        $this->profile = str_replace("none", "", trim(get_post_meta($id, 'thc_profile', true))) . 
-        				str_replace("none", "", trim(get_post_meta($id, 'cbd_profile', true))) . 
-        				str_replace("none", "", trim(get_post_meta($id, 'thc_cbd_profile', true)));
+        $this->profile = trim(get_post_meta($id, 'chemical_type', true));
         $this->storelink = trim(get_post_meta($id, 'store_link', true));
         $this->terpenes = get_field('terpenes_description', $id);
         $this->cannabinoids = get_field('cannabinoid_description', $id);

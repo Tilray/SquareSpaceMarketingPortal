@@ -128,7 +128,7 @@ $theProducts = QueryProducts($productFilters);
 		}
 		else {
 			for (var i = 0; i < currentFilterValues.length; i++) {
-				console.log(this.checkboxSelector + "[data-filter='" + currentFilterValues[i] + "']");
+				//console.log(this.checkboxSelector + "[data-filter='" + currentFilterValues[i] + "']");
 				var element = jQuery(this.checkboxSelector + "[data-filter='" + currentFilterValues[i] + "']");
 				element.prop('checked', true);
 			}
@@ -179,7 +179,7 @@ $theProducts = QueryProducts($productFilters);
 				var isChecked = (true === $cb.prop("checked"));
 
 				if (isShowAll && isChecked) {
-					console.log("Show all is checked " + $cb.attr("id") + "  " + $cb.attr("name") + "  " + this.allCheckboxes.length);
+					//console.log("Show all is checked " + $cb.attr("id") + "  " + $cb.attr("name") + "  " + this.allCheckboxes.length);
 					return true;
 				}
 				allChecked = allChecked && (isShowAll || isChecked);
@@ -263,7 +263,7 @@ $theProducts = QueryProducts($productFilters);
 			var thisFilterCategorySelector = 'ul input[type=checkbox][name=' + thisFilterCategory + ']';
 
 			var filterName = jQuery($changedElement).attr('data-filter-name');
-			console.log("Clicked filter: " + filterName);
+			//console.log("Clicked filter: " + filterName);
 			var filter = self.filtersByName[filterName];
 
 			if ($changedElement.attr("id") == "profile-show-all" || (filter != null && filter.isProfile))
@@ -425,7 +425,7 @@ $theProducts = QueryProducts($productFilters);
 			if (!allAreChecked && !noneAreChecked){
 				for(var i=0; i<self.profileFilters.length; i++){
 					if (!self.profileFilters[i].noneAreChecked()){
-						console.log("Showing .summary-contents .summary-item." + self.profileFilters[i].id);
+						//console.log("Showing .summary-contents .summary-item." + self.profileFilters[i].id);
 						jQuery(".summary-contents .summary-item." + self.profileFilters[i].id).show();
 					}
 				}
@@ -435,7 +435,7 @@ $theProducts = QueryProducts($productFilters);
 				var f = self.nonProfileFilters[i];
 				var selected = f.getSelectedValues();
 				for (var j=0; j<selected.length; j++){
-					console.log("Showing .summary-contents .summary-item." + f.id + selected[j]);
+					//console.log("Showing .summary-contents .summary-item." + f.id + selected[j]);
 					jQuery(".summary-contents .summary-item." + f.id + selected[j]).show();
 				}
 			}
@@ -601,13 +601,13 @@ $theProducts = QueryProducts($productFilters);
 			var allProfilesChecked = true;
 			for (var i=0; i<this.filters.profileFilters.length; i++){
 				var thisParam = this.filters.profileFilters[i].getQueryStringParam(false);
-				console.log(thisParam);
+				//console.log(thisParam);
 				if (thisParam.length > 0)
 					profileParams.push(thisParam);
 				allProfilesChecked = allProfilesChecked && this.filters.profileFilters[i].allAreChecked();
 			}
 
-			console.log("All checked? " + allProfilesChecked + "  length " + profileParams.length);
+			//console.log("All checked? " + allProfilesChecked + "  length " + profileParams.length);
 
 			if (!allProfilesChecked && profileParams.length > 0)
 				params = params.concat(profileParams);
