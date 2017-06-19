@@ -4,7 +4,8 @@
 		$theBanners = array();
 		global $sitepress;
 
-		$wp_query = new WP_Query(array('post_type' => 'tilray_banners', 'posts_per_page' => '100', 'suppress_filters' => FALSE, 'orderby' => 'menu_order', 'order' => 'ASC' ));
+		$wp_query = new WP_Query(array('post_type' => 'tilray_banners', 'posts_per_page' => '100', 'suppress_filters' => FALSE, 'orderby'=>'menu_order' ));
+
         global $isMobile;
 		$imageSize = $isMobile ? 'mobile-banner' : 'full';
         
@@ -74,6 +75,7 @@ $defaultHomepageBG = get_field('default_homepage_banner', 'option');
 ?>
 <script>
 	function setAllBannerSrcs(){
+		jQuery("div#slidebox").css("padding-bottom", 0);
     	jQuery('div.flexslider ul.slides li img').each(function(){jQuery(this).attr('src', jQuery(this).attr('data-src')); console.log("setting src :" + jQuery(this).attr('data-src'));});	
 
     	jQuery('div.flexslider ul.slides').css('display', 'block');

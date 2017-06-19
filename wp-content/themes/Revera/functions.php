@@ -196,9 +196,6 @@ require get_template_directory() . '/inc/customizer.php';
 require get_template_directory() . '/inc/jetpack.php';
 
 
-/* Credits */
-
-
 function get_child_pages($postId)
 {
   return get_pages( array('parent' => $postId, 'hierarchical' => 0, 'sort_column' => 'menu_order',) );  
@@ -893,12 +890,10 @@ class ProductFilters{
 		$this->productType = new ProductFilter("producttype", "Type",
 											array(	"" => "", 
 													"flower" => "Flower", 
-													"blend" => "Blend",
-													"drops" => "Drops",
-													"capsule" => "Capsule"),
-											false,
-											"this.test = function(product){ return this.selected.length === 0 || arrayIncludes(this.selected, product.producttype);}"
-											);
+													"blend" => "Blend", 
+													"drop" => "Drops",
+													"capsule" => "Capsules",
+													"accessory" => "Accessories"));
 													
 		$this->thc = new ProductFilter("thc", "THC Level",
 								array(	"" => "", 
@@ -1115,4 +1110,10 @@ function get_search_page_url(){
 	{
 		return $url . "/resultats";
 	}
+}
+
+function get_image_url_from_image_id($id, $size){
+	$thumbID = get_post_thumbnail_id($id);
+	$img_attrs = wp_get_attachment_image_src( $thumbID, $size ); 
+	return $img_attrs[0];
 }

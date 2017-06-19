@@ -28,7 +28,12 @@ get_header();
 		<?php if ( have_posts() ) : ?>
 
 			<?php /* Start the Loop */ ?>
-			<?php while ( have_posts() ) : the_post(); ?>
+			<?php while ( have_posts() ) : the_post(); 
+			$hidden = get_field("hidden_from_search", get_the_ID());
+				if ($hidden){
+					continue;
+				}
+			?>
 
 				<div class="search-result col-sm-12">
 					<div class="search-image col-2">
