@@ -780,7 +780,7 @@ a.frmore{
 }
 
 .homepage-feature-section .video-container{
-	padding-bottom: 33.6%;
+	padding-bottom: 33.8%;
 }
 
 @media (max-width: 768px){
@@ -790,10 +790,6 @@ a.frmore{
 
 	.homepage-point{
 		margin-bottom: 30px;
-	}
-
-	.homepage-feature-section .video-container{
-		padding-bottom: 33.6%;
 	}
 
 	.homepage-feature-section .video-container{
