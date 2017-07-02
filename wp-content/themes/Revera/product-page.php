@@ -17,31 +17,51 @@ get_header();
 
 
 
-$productFilters->loadFiltersFromQueryString($_GET);	
+$is_accessories_page = ('accessories' === get_field('product_type', get_the_ID()));
+
+$filterSet = new ProductFilters();
+$sections = array(	"flower" => "Whole Flower", 
+					"blend" => "Ground Cannabis",
+					"drop" => "Drops",
+					"capsule" => "Capsules");
+
+if ($is_accessories_page){
+	$filterSet = new AccessoriesFilters();
+	$sections = array(	"accessory" => "Accessories");
+}
+
+$filterSet->loadFiltersFromQueryString($_GET);	
 
 
 
-function QueryProducts($productFilters)
+function QueryProducts($filters)
 {
+	global $is_accessories_page;
+
 	$theProducts = array();
 	
 	$wp_query = new WP_Query(array('post_type' => 'tilray_product', 'posts_per_page' => '100' ));
 	while ($wp_query->have_posts()) : $wp_query->the_post(); 
-		$thisProduct = new Product($wp_query->post, $productFilters);
+		$thisProduct = new Product($wp_query->post, $filters);
+
 		//filter out far future products, and products with no status
-		if (strlen($thisProduct->status) > 0 && strtolower($thisProduct->status != "future"))
-			$theProducts[] = $thisProduct;
+		if (strlen($thisProduct->status) > 0 && strtolower($thisProduct->status != "future")){
+			//if it's an accessory on the accessories page, or vice versa...
+			if (($thisProduct->producttype == "accessory") == $is_accessories_page){
+				$theProducts[] = $thisProduct;
+			}
+		}
 	endwhile;
 	
 	wp_reset_query();
 
 	function cmp($a, $b){
-        global $productFilters;
+        global $filterSet;
         $aType = $a->producttype;
         $bType = $b->producttype;
 
-        $aSortOrder = $productFilters->sortOrder[$aType];
-        $bSortOrder = $productFilters->sortOrder[$bType];
+        $aSortOrder = $filterSet->sortOrder[$aType];
+        $bSortOrder = $filterSet->sortOrder[$bType];
 
 		if ($aSortOrder === $bSortOrder){
 			$profileSortResult = sortByProfile($a->profile, $b->profile);
@@ -98,7 +118,7 @@ function getProfileValue($profile){
 	return $profileValue;
 }
 
-$theProducts = QueryProducts($productFilters);	
+$theProducts = QueryProducts($filterSet);	
 
 ?>
 <script src="<?=get_template_directory_uri()?>/js/isotope-min.js"></script>
@@ -466,6 +486,16 @@ $theProducts = QueryProducts($productFilters);
 		}
 	}
 
+	function FormatPercent(num, lang){
+		console.log("Formatting percent " + num + "  " + lang);
+		num = parseFloat(num);
+		if (lang == 'en'){
+			return num + "%";
+		}
+
+		return num.toLocaleString('fr-CA') + " %";
+	}
+
 	function Products(productsJSON, isMobile){
 		var self = this;
 		this.isMobile = isMobile;
@@ -539,15 +569,18 @@ $theProducts = QueryProducts($productFilters);
 				var constrainedColumn = Math.max(0, Math.min(idealLeftEdgeColumn, furthestLeft));
 				jQuery('div.details-panel').css('left', self.leftPadding + constrainedColumn * self.columnWidth);
 
-				self.populateDetailsPanel(id);
+				self.populateDetailsPanel(id, "<?=get_current_language_code()?>");
 			});
 		}
 
-		this.populateDetailsPanel = function(id){
+
+
+		this.populateDetailsPanel = function(id, lang){
 			var data = this.productsById[+id];
 			jQuery('div.details-panel .header-column .name').text(data.profile + " " + data.name);
-			jQuery('div.details-panel .header-column .subtitle').text(data.straincategory + " " + data.producttype);
-			jQuery('div.details-panel .overview-column .overview').html(data.overview);
+			jQuery('div.details-panel .header-column .subtitle').text(data.translatedstraincategoryproducttype);
+			jQuery('div.details-panel .overview-column .overview .thc').html(FormatPercent(data.actualthc, lang));
+			jQuery('div.details-panel .overview-column .overview .cbd').html(FormatPercent(data.cbd, lang));
 			jQuery('div.details-panel .product-link a').attr('href', data.productUrl);
 
 			if (data.status == "available") {
@@ -567,20 +600,22 @@ $theProducts = QueryProducts($productFilters);
 
 		var isMobile = (jQuery('.filter-panel.mobile').length > 0);
 		this.productsData = <?= json_encode($theProducts) ?>;
-		this.filtersData = <?= $productFilters->getJSON() ?>;
+		this.filtersData = <?= $filterSet->getJSON() ?>;
 
 		this.updateProductsAndSections = function(){
 			jQuery("div.section-title").removeClass('active');
 			jQuery("div.product-details-row").removeClass('active');
 			this.showSectionTitles("flower");
 			this.showSectionTitles("blend");
-			this.showSectionTitles("extract");
+			this.showSectionTitles("drop");
+			this.showSectionTitles("capsule");
 
 			jQuery('#primary').isotope({ filter: '.active' });
 		};
 
 		this.showSectionTitles = function(sectionName){
 			var numActiveItems = jQuery("div.product-item.active[data-producttype='" + sectionName + "']").length;
+			console.log("showSectionTitles: actives: " + numActiveItems + "  TYPE: " + sectionName);
 			if (numActiveItems > 0){
 				jQuery("div.section-title-" + sectionName).addClass("active");
 			}

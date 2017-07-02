@@ -9,9 +9,6 @@ $noHideStickyFooterContent = "<div class='mobile-products-flyout'></div>";
 </script>
 
 <?php
-//this block will get positioned in stickyfootercontent via js
-global $productFilters;
-
 
 
 function renderMobileFilterPanel($qsParamName, $displayName, $filterNameValues, $filterNameValuesDict = null){
@@ -76,18 +73,22 @@ function addMobileFilterItems($filterNameValues, $qsParamName, $removeBlanks){
 	}
 }
 
-renderMobileFilterPanel("profile", _("Profiles"), array("" => ""), 
-		array(
-			$productFilters->profilethc->qsParamName => $productFilters->profilethc->getFiterNamesValues(),
-			$productFilters->profilecbd->qsParamName => $productFilters->profilecbd->getFiterNamesValues(),
-			$productFilters->profilethccbd->qsParamName => $productFilters->profilethccbd->getFiterNamesValues()	
-		)
-	);
-renderMobileFilterPanel($productFilters->strainCategory->qsParamName, $productFilters->strainCategory->displayName, $productFilters->strainCategory->getFiterNamesValues());
-renderMobileFilterPanel($productFilters->productType->qsParamName, $productFilters->productType->displayName, $productFilters->productType->getFiterNamesValues());
-renderMobileFilterPanel($productFilters->status->qsParamName, $productFilters->status->displayName, $productFilters->status->getFiterNamesValues());
-renderMobileFilterPanel($productFilters->price->qsParamName, $productFilters->price->displayName, $productFilters->price->getFiterNamesValues());
-
+if ($is_accessories_page){
+	renderMobileFilterPanel($filterSet->status->qsParamName, $filterSet->status->displayName, $filterSet->status->getFiterNamesValues());
+}
+else{
+	renderMobileFilterPanel("profile", __("Profiles"), array("" => ""), 
+			array(
+				$filterSet->profilethc->qsParamName => $filterSet->profilethc->getFiterNamesValues(),
+				$filterSet->profilecbd->qsParamName => $filterSet->profilecbd->getFiterNamesValues(),
+				$filterSet->profilethccbd->qsParamName => $filterSet->profilethccbd->getFiterNamesValues()	
+			)
+		);
+	renderMobileFilterPanel($filterSet->strainCategory->qsParamName, $filterSet->strainCategory->displayName, $filterSet->strainCategory->getFiterNamesValues());
+	renderMobileFilterPanel($filterSet->productType->qsParamName, $filterSet->productType->displayName, $filterSet->productType->getFiterNamesValues());
+	renderMobileFilterPanel($filterSet->status->qsParamName, $filterSet->status->displayName, $filterSet->status->getFiterNamesValues());
+	renderMobileFilterPanel($filterSet->price->qsParamName, $filterSet->price->displayName, $filterSet->price->getFiterNamesValues());
+}
 
 function createSummaryItem($id, $label){
 	echo "<span class='summary-item $id' style='display:none'>$label</span>";
@@ -110,19 +111,24 @@ function createSummaryItemGroup($filter){
 			<div class="col-xs-12">
 				<div class="mobile products back-to-top">
 					<div class="arrow"></div>
-					<a id="back-to-top"><?= _("Back to Top")?></a>
+					<a id="back-to-top"><?= __("Back to Top")?></a>
 				</div>
 			</div>
 			<div class="col-xs-12 summary-contents">
 				<?php
-					createSummaryItem($productFilters->profilethc->qsParamName, _("THC Profiles"));
-					createSummaryItem($productFilters->profilecbd->qsParamName, _("CBD Profiles"));
-					createSummaryItem($productFilters->profilethccbd->qsParamName, _("THC/CBD Profiles"));
+				if ($is_accessories_page){
+					createSummaryItemGroup($filterSet->status);
+				}
+				else{
+					createSummaryItem($filterSet->profilethc->qsParamName, __("THC Profiles"));
+					createSummaryItem($filterSet->profilecbd->qsParamName, __("CBD Profiles"));
+					createSummaryItem($filterSet->profilethccbd->qsParamName, __("THC/CBD Profiles"));
 
-					createSummaryItemGroup($productFilters->strainCategory);
-					createSummaryItemGroup($productFilters->productType);
-					createSummaryItemGroup($productFilters->status);
-					createSummaryItemGroup($productFilters->price);
+					createSummaryItemGroup($filterSet->strainCategory);
+					createSummaryItemGroup($filterSet->productType);
+					createSummaryItemGroup($filterSet->status);
+					createSummaryItemGroup($filterSet->price);					
+				}
 				?>
 			</div>
 		</div>
@@ -133,60 +139,18 @@ function createSummaryItemGroup($filter){
 	<div class="container no-padding">
 		<div class="row">
 			<div class="col-xs-12">
-				<h2 class="filters"><?= _("Filters")?></h2>
+				<h2 class="filters"><?= __("Filters")?></h2>
 			</div>
 			<div class="filters mobile">	
 				<div class="col-xs-12">
-					<div class="mobile-filters-row">
-						<div class="filter-button-wrapper">
-							<div class="filter-button mobile profiles">
-								<div class="filter-button-inner profiles" data-filter-name="profile">
-									<div class="filter-label"><span>Profiles</span></div><div class="filter-corner-triangle"></div>
-								</div>
-							</div>
-						</div>
-						<div class="divider"></div>
-						<div class="filter-button-wrapper">
-							<div class="filter-button non-profile mobile <?=$productFilters->productType->qsParamName?>">
-								<div class="filter-button-inner <?=$productFilters->productType->qsParamName?>" data-filter-name="<?=$productFilters->productType->qsParamName?>">
-									<div class="filter-label"><span><?= _e($productFilters->productType->displayName) ?></span></div><div class="filter-corner-triangle"></div>
-								</div>
-							</div>
-						</div>
-						<div class="divider"></div>
-						<div class="filter-button-wrapper">
-							<div class="filter-button non-profile mobile <?=$productFilters->strainCategory->qsParamName?>">
-								<div class="filter-button-inner <?=$productFilters->strainCategory->qsParamName?>" data-filter-name="<?=$productFilters->strainCategory->qsParamName?>">
-									<div class="filter-label"><span><?= _e($productFilters->strainCategory->displayName) ?></span></div><div class="filter-corner-triangle"></div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="mobile-filters-row">
-						<div class="filter-button-wrapper">
-							<div class="filter-button non-profile mobile <?=$productFilters->status->qsParamName?>">
-								<div class="filter-button-inner <?=$productFilters->status->qsParamName?>" data-filter-name="<?=$productFilters->status->qsParamName?>">
-									<div class="filter-label"><span><?= _e($productFilters->status->displayName) ?></span></div><div class="filter-corner-triangle"></div>
-								</div>
-							</div>
-						</div>
-						<div class="divider"></div>
-						<div class="filter-button-wrapper">
-							<div class="filter-button non-profile mobile <?=$productFilters->price->qsParamName?>">
-								<div class="filter-button-inner <?=$productFilters->price->qsParamName?>" data-filter-name="<?=$productFilters->price->qsParamName?>">
-									<div class="filter-label"><span><?= _e($productFilters->price->displayName) ?></span></div><div class="filter-corner-triangle"></div>
-								</div>
-							</div>
-						</div>
-						<div class="divider"></div>
-						<div class="filter-button-wrapper">
-							<div class="filter-button non-profile mobile has-selections reset">
-								<div class="filter-button-inner" data-filter-name="reset">
-									<div class="filter-label"><span><?= _e("RESET") ?></span></div>
-								</div>
-							</div>
-						</div>
-					</div>
+				<?php
+				if ($is_accessories_page){
+					include "inc/accessories_page_mobile_selectors.php";
+				}
+				else{
+					include "inc/product_page_mobile_selectors.php";
+				}
+				?>
 				</div>
 			</div>
 		</div>
@@ -195,6 +159,8 @@ function createSummaryItemGroup($filter){
 
 <?php
 function renderProductsSection($allProducts, $productType, $sectionTitle){
+	global $is_accessories_page;
+
 	$sectionTitleActiveClass = "";
 	foreach($allProducts as $product) {
 		if ($product->producttype == $productType && $product->initiallyActive) {
@@ -203,15 +169,17 @@ function renderProductsSection($allProducts, $productType, $sectionTitle){
 	}
 	?>
 	<div class="section-title product-item section-title-<?=$productType?><?=$sectionTitleActiveClass?>">
-		<h3><?=$sectionTitle?></h3>
+		<h3><?=__($sectionTitle)?></h3>
 		<hr/>
 	</div>
 	<?php
 	foreach($allProducts as $product) {
 		if ($product->producttype == $productType) {
 			$activeClass = $product->initiallyActive ? "active" : "";
+			$accessories_class = $is_accessories_page ? "accessory" : "";
+			$profile = $is_accessories_page ? "accessory" : $product->profile;
 			?>
-			<div class="portbox post product-item mobile filterable-item <?= $activeClass ?>"
+			<div class="portbox post product-item mobile filterable-item <?= $activeClass ?> <?=$accessories_class?>"
 				 data-id="<?= $product->id ?>"
 				 data-straincategory="<?= $product->straincategory ?>"
 				 data-status="<?= $product->status ?>"
@@ -220,18 +188,25 @@ function renderProductsSection($allProducts, $productType, $sectionTitle){
 				 data-price="<?= $product->price ?>"
 			>
 				<a href="<?=$product->productUrl?>">
-					<div class="product-item-inner init <?= $product->profile ?>">
-						<div class="chem-type <?= $product->profile ?>">
-							<div class="text-align">
-								<span class="text-align-inner"><?= $product->profile ?></span>
+					<div class="product-item-inner init <?= $profile ?>">
+						<?php if ($is_accessories_page):?>
+							<img src="<?=$product->image?>" alt="<?= __($product->name) ?>">
+							<div class="strain-name">
+								<?= __($product->name) ?>
 							</div>
-						</div>
-						<div class="strain-name">
-							<?= $product->name ?>
-						</div>
-						<div class="strain-category">
-							<?= $product->straincategory ?>
-						</div>
+						<?php else: ?>
+							<div class="chem-type <?= $profile ?>">
+								<div class="text-align">
+									<span class="text-align-inner"><?= __($product->profile) ?></span>
+								</div>
+							</div>
+							<div class="strain-name">
+								<?= __($product->name) ?>
+							</div>
+							<div class="strain-category">
+								<?= __($product->straincategory) ?>
+							</div>
+						<?php endif; ?>
 					</div>
 				</a>
 			</div>
@@ -248,9 +223,15 @@ function renderProductsSection($allProducts, $productType, $sectionTitle){
 		<div class="col-12">
 			<div id="primary">
 				<?php
-				renderProductsSection($theProducts, "flower", "Whole Flower");
-				renderProductsSection($theProducts, "blend", "Flower Blends");
-				renderProductsSection($theProducts, "extract", "Extracts");
+				if ($is_accessories_page){
+					renderProductsSection($theProducts, "accessory", "Accessories");
+				}
+				else{
+					renderProductsSection($theProducts, "flower", "Whole Flower");
+					renderProductsSection($theProducts, "blend", "Ground Cannabis");
+					renderProductsSection($theProducts, "drop", "Drops");
+					renderProductsSection($theProducts, "capsule", "Capsules");
+				}
 				?>
 			</div>
 		</div>
@@ -260,6 +241,11 @@ function renderProductsSection($allProducts, $productType, $sectionTitle){
 <script>
 	var changePanelsPosition = 100;
 
+	function closeAllProductFilterPanels()
+	{
+		jQuery('.filter-panel.mobile').removeClass('active');
+	}
+
 
 	jQuery(function() {
 
@@ -267,7 +253,7 @@ function renderProductsSection($allProducts, $productType, $sectionTitle){
 			jQuery("html, body").animate({ scrollTop: 0 }, "fast");
 		});
 
-		var $container = jQuery('#primary')
+		var $container = jQuery('#primary');
 		$container.isotope({
 			resizable: false,
 			masonry: { columnWidth: $container.width() / 2 },
@@ -310,11 +296,5 @@ function renderProductsSection($allProducts, $productType, $sectionTitle){
 				});
 			}
 		}
-
-		function closeAllProductFilterPanels()
-		{
-			jQuery('.filter-panel.mobile').removeClass('active');
-		}
-
 	});
 </script>

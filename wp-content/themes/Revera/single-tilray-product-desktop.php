@@ -1,8 +1,13 @@
+<?php
+$title = $is_accessories_page ? "ACCESSORIES" : "PRODUCTS";
+$prev_page_link = $is_accessories_page ? getAccessoriesPageLink() : getProductsPageLink();
+?>
+
 <div class="page-head">
 	<div class="container">
 		<div class="row">
 			<div class="col-lg-12">
-				<h2 class="mockH1 products"><?=__('PRODUCTS')?></h2>
+				<h2 class="mockH1 products"><?=__($title)?></h2>
 			</div>
 		</div>
 	</div>
@@ -11,24 +16,31 @@
 	<div class="row">
 	<div id="primary" class="content-area col-lg-12">
 		<div class="back-to-results">
-			<span class="arrow">&lt;</span><a href="<?=getProductsPageLink()?>"><?=_("Back to results")?></a>
+			<span class="arrow">&lt;</span><a href="<?=$prev_page_link?>"><?=__("Back to results")?></a>
 		</div>
 		<div class="row">
 			<div class="col-sm-5 col-xs-12">
+				<?php
+				if ($is_accessories_page): 
+				?>
+				<img src="<?=$thisProduct->largeImage?>" alt="<?=$thisProduct->productName?>"/>
+				<?php
+				else: 
+				?>
 				<div class="product-chip-wrapper profile-border <?=$thisProduct->profile?>">
 					<div class="product-chip-upper profile-background chem-type <?=$thisProduct->profile?>">
 						<div class="text-centerer">
-							<?=$thisProduct->profile?>
+							<?=__($thisProduct->profile)?>
 						</div>
 					</div>
 					<div class="product-chip-spacer">
 					</div>
 					<div class="product-chip-lower">
 						<div class="strain-name">
-							<?= $thisProduct->name ?>
+							<?= __($thisProduct->name) ?>
 						</div>
 						<div class="strain-category">
-							<?= $thisProduct->straincategory ?>
+							<?= __($thisProduct->straincategory) ?>
 						</div>
 					</div>
 					<div class="product-chip-spacer">
@@ -36,14 +48,15 @@
 				</div>
 
 				<?php
-				if (strlen($thisProduct->terpenes) > 0) {
-					?>
-					<div class="terpenes">
-					<h3><?= _("Terpenes:")?></h3>
-					<?= $thisProduct->terpenes ?>
-					</div>
-					<?php
-				}
+					if (strlen($thisProduct->terpenes) > 0) {
+						?>
+						<div class="terpenes">
+						<h3><?= __("Terpenes:")?></h3>
+						<?= __($thisProduct->terpenes) ?>
+						</div>
+						<?php
+					}
+				endif;
 				?>
 				<p itemprop="offers" itemscope itemtype="http://schema.org/Offer" class="price-text">
 					<?php
@@ -87,8 +100,8 @@
 						the_content();
 						if (strlen($thisProduct->cannabinoids) > 0) {
 							echo "<div class='cannabinoids'>";
-							echo "<h3>" . _("Cannabinoid Content:") . "</h3>";
-							echo $thisProduct->cannabinoids;
+							echo "<h3>" . __("Cannabinoid Content:") . "</h3>";
+							echo __($thisProduct->cannabinoids);
 							echo "</div>";
 						}
 					?>

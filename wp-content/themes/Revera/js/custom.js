@@ -78,11 +78,6 @@ jQuery(window).load(function() {
 	    		}
 	    	});
 	    }
-
-	    jQuery('.filter-button.mobile.reset').click(function(){
-	    	console.log("Reset!");
-	    	ResetFilters();
-	    });
     }
 });
 

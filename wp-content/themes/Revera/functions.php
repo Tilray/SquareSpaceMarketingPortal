@@ -432,11 +432,10 @@ add_filter( 'wpseo_canonical', 'rel_canonical_with_custom_tag_override' );
 
 
 function getProductTHCRange($thc, $validTHCValues, $getDisplayValue = false){
-	global $productFilters;
+	global $filterSet;
 
 	if (trim($thc) == "")
 		return;
-	
     
 	$thcVal = floatval($thc);
 	foreach ($validTHCValues as $thcRange => $display)
@@ -445,8 +444,8 @@ function getProductTHCRange($thc, $validTHCValues, $getDisplayValue = false){
 			continue;
 			
 		$ends = explode("-", $thcRange);
-		$low = $productFilters->preciseTHCRangesLow[$thcRange];
-		$high = $productFilters->preciseTHCRangesHigh[$thcRange];
+		$low = $filterSet->preciseTHCRangesLow[$thcRange];
+		$high = $filterSet->preciseTHCRangesHigh[$thcRange];
 		if ($thcVal >= $low && $thcVal < $high){
 			if ($getDisplayValue)
 				return $display;
@@ -506,7 +505,13 @@ function create_posttype() {
 add_image_size( 'product-thumb', 180, 220, false );
 add_image_size( 'product-single', 555, 2000, false );
 
-					
+
+
+function getAccessoriesPageLink(){
+	$pageId = get_field('consumer_accessories_page', 'option');
+
+	return get_permalink($pageId);
+}					
 
 function getProductsPageLink(){
 	$pageId = get_field('consumer_products_page', 'option');
@@ -688,11 +693,14 @@ class Product{
 	public $status;
 	public $straincategory;
 	public $producttype;
+	public $accessorytype;
+	public $translatedstraincategoryproducttype;
     public $actualthc;
 	public $thc;
 	public $thcRange;
 	public $cbd;
 	public $image;
+	public $largeImage;
 	public $productUrl;
 	public $storelink;
 	public $productName;
@@ -739,22 +747,33 @@ class Product{
 
 	function getPrimaryStrainCategoryName($rawCategories)
 	{
-		global $productFilters;
-		return $productFilters->strainCategory->getNameFromID($this->getPrimaryStrainCategory($rawCategories));
+		global $filterSet;
+		if ($filterSet->strainCategory !== NULL)
+			return $filterSet->strainCategory->getNameFromID($this->getPrimaryStrainCategory($rawCategories));
+		else
+			return "";
 	}
 
 
 
     function __construct($post, $productFilters){
         $id = $post->ID;
-        $validTHCs = $productFilters->thc->validFilterValues;
         $this->id = $id;
+
+        $this->actualthc = trim(get_post_meta($id, 'thc_level', true));
+
+        if ($productFilters->thc !== NULL){
+	        $validTHCs = $productFilters->thc->validFilterValues;
+	        $this->thc = getProductTHCRange($this->actualthc, $validTHCs);
+	    }
         $this->name = html_entity_decode(get_the_title($id));
         $this->status = trim(get_post_meta($id, 'status', true));
         $this->straincategory = $this->safe_get_strain_category(get_post_meta($id, 'strain_category', true));
         $this->producttype = get_post_meta($id, 'product_type', true);
-        $this->actualthc = trim(get_post_meta($id, 'thc_level', true));
-        $this->thc = getProductTHCRange($this->actualthc, $validTHCs);
+        $this->accessorytype = get_post_meta($id, 'accessory_type', true);
+        $producttypefield = get_field_object('product_type', $id);
+        $producttypevalue = $producttypefield['choices'][$this->producttype];
+        $this->translatedstraincategoryproducttype = __($this->straincategory . " " . $producttypevalue);
         $this->cbd = trim(get_post_meta($id, 'cbd_level', true));
         $this->profile = trim(get_post_meta($id, 'chemical_type', true));
         $this->storelink = trim(get_post_meta($id, 'store_link', true));
@@ -772,6 +791,9 @@ class Product{
         $thumbID = get_post_thumbnail_id($id);
         $img_attrs = wp_get_attachment_image_src( $thumbID,'product-thumb' ); 
         $this->image = $img_attrs[0];
+
+        $img_attrs = wp_get_attachment_image_src( $thumbID,'large' ); 
+        $this->largeImage = $img_attrs[0];
 
         $mobileImageID = get_post_meta($id, 'mobile_product_image', true);
         $mobileImageAttrs = wp_get_attachment_image_src( $mobileImageID,'mobile-product-image' ); 
@@ -824,7 +846,9 @@ class Product{
 
 }
 
-class ProductFilters{
+
+class FiltersBase{
+	public $filters;
 	public $profile;
 	public $status;
 	public $strainCategory;
@@ -839,12 +863,87 @@ class ProductFilters{
 	public $profilethc;
 	public $profilecbd;
 	public $profilethccbd;
-	public $filters;
 	public $profileFilters;
 	public $nonProfileFilters;
 	public $combinedProfileFilterValues;
+	
+	public function loadFiltersFromQueryString($querySring){
+		foreach($this->filters as $filter)
+		{
+			$filter->loadFromQueryString($_GET);
+		}
+	}
+
+	public function renderFilters()
+	{
+		foreach($this->filters as $filter)
+		{
+			$filter->renderFilters();
+		}
+	}
+
+	public function getJSON(){
+		echo json_encode(get_object_vars($this));
+	}
+
+	public function createPreselectedStatusJSArrays(){
+		foreach($this->filters as $filter)
+		{
+			echo "var arrpreselected" . $filter->qsParamName . " = " . $filter->getJSFiltersArray() . ";\n";
+		}
+	}
 
 	function __construct(){
+		$this->profileFilters = array();
+		$this->nonProfileFilters = array();
+		$this->combinedProfileFilterValues = array();
+
+		$this->price = new ProductFilter("price", "Price",
+									array(	"" => "",
+											"7-9" => "$7-9",
+											"10-12" => "$10-12",
+											"13-1000" => "$13+"),
+											 false,
+											"this.test = function(product){ return this.selected.length === 0 || arrayIncludes(this.selected, product.price);}"
+											);
+
+	}
+}
+
+
+class AccessoriesFilters extends FiltersBase{
+	public $status;
+
+	function __construct(){
+		parent::__construct();
+
+		$this->status = new ProductFilter("status", "Status",
+									array(	"" => "", 
+											"available" => "Available", 
+											"out-of-stock" => "Out of Stock"),
+											false,
+											"this.test = function(product){ console.log('selected? ' + this.selected.length); return this.selected.length === 0 || arrayIncludes(this.selected, product.status);}"
+											);
+
+		$this->accessoryType = new ProductFilter("accessorytype", "Type",
+											array(	"" => "", 
+													"vaporizers" => "Vaporizers", 
+													"storage" => "Storage", 
+													"other" => "Other"),
+											false,
+											"this.test = function(product){ return this.selected.length === 0 || arrayIncludes(this.selected, product.accessorytype);}"
+											);
+													
+
+		$this->filters = array($this->status, $this->accessoryType);
+	}
+}
+
+class ProductFilters extends FiltersBase{
+
+	function __construct(){
+		parent::__construct();
+
 		$this->profilethc = new ProductFilter("profilethc", "Profile",
 									array(	"" => "",
 											"t100" => "T100",
@@ -890,11 +989,13 @@ class ProductFilters{
 		$this->productType = new ProductFilter("producttype", "Type",
 											array(	"" => "", 
 													"flower" => "Flower", 
-													"blend" => "Blend", 
+													"blend" => "Ground Cannabis", 
 													"drop" => "Drops",
-													"capsule" => "Capsules",
-													"accessory" => "Accessories"));
-													
+													"capsule" => "Capsules"),
+											false,
+											"this.test = function(product){ return this.selected.length === 0 || arrayIncludes(this.selected, product.producttype);}"
+											);
+
 		$this->thc = new ProductFilter("thc", "THC Level",
 								array(	"" => "", 
 										"0-14" => "&lt; 15%", 
@@ -917,15 +1018,6 @@ class ProductFilters{
 											"26-100" => 100
 											);
 
-		$this->price = new ProductFilter("price", "Price",
-									array(	"" => "",
-											"7-9" => "$7-9",
-											"10-12" => "$10-12",
-											"13-1000" => "$13+"),
-											 false,
-											"this.test = function(product){ return this.selected.length === 0 || arrayIncludes(this.selected, product.price);}"
-											);
-
 		$this->duration = new ProductFilter("duration", "Duration",
 									array(	"" => "",
 											"core" => "Core",
@@ -937,16 +1029,9 @@ class ProductFilters{
 		$this->filters = array($this->productType, $this->strainCategory, $this->status, $this->profilethc, $this->profilecbd, $this->profilethccbd, $this->price);
 		$this->profileFilters = array($this->profilethc, $this->profilecbd, $this->profilethccbd);
 		$this->nonProfileFilters = array($this->productType, $this->strainCategory, $this->status, $this->price);
-        $this->sortOrder = array("flower" => 0, "blend" => 1, "extract" => 2);
+        $this->sortOrder = array("flower" => 0, "blend" => 1, "drop" => 2, "capsule" => 3, "accessory" => 4);
 	}
 											
-	public function loadFiltersFromQueryString($querySring){
-		foreach($this->filters as $filter)
-		{
-			$filter->loadFromQueryString($_GET);
-		}
-	}
-
 	private function renderChemicalFilter($profile, $filter_class_suffix, $row_label = null){
 		$profile_lower = strtolower($profile);
 		?>
@@ -961,7 +1046,7 @@ class ProductFilters{
 
 			<?php
 			if ($row_label){
-				echo "<span class='row-label'>" . _($row_label) . "</span>";
+				echo "<span class='row-label'>" . __($row_label) . "</span>";
 			}
 			?>
 		</li>
@@ -971,7 +1056,7 @@ class ProductFilters{
 	public function renderChemicalFilters(){
 	?>
 		<div class="col-xs-4">
-			<h3 class="profile-header"><?= _("THC Profiles") ?></h3>
+			<h3 class="profile-header"><?= __("THC Profiles") ?></h3>
 			<ul class="product-filters product-filters-profile product-filters-profilethc">
 			<?php
 			$this->renderChemicalFilter("T100", "profilethc", "low");
@@ -981,7 +1066,7 @@ class ProductFilters{
 			</ul>
 		</div>
 		<div class="col-xs-4">
-			<h3 class="profile-header"><?= _("CBD Profiles") ?></h3>
+			<h3 class="profile-header"><?= __("CBD Profiles") ?></h3>
 			<ul class="product-filters product-filters-profile product-filters-profilecbd">
 			<?php
 			$this->renderChemicalFilter("C100", "profilecbd");
@@ -991,7 +1076,7 @@ class ProductFilters{
 			</ul>
 		</div>
 		<div class="col-xs-4">
-			<h3 class="profile-header"><?= _("THC / CBD Profiles") ?></h3>
+			<h3 class="profile-header"><?= __("THC / CBD Profiles") ?></h3>
 			<ul class="product-filters product-filters-profile product-filters-profilethccbd">
 			<?php
 			$this->renderChemicalFilter("TC100", "profilethccbd");
@@ -1002,31 +1087,7 @@ class ProductFilters{
 		</div>
 	<?php
 	}
-
-	public function renderFilters()
-	{
-		foreach($this->filters as $filter)
-		{
-			$filter->renderFilters();
-		}
-	}
-
-
-	public function createPreselectedStatusJSArrays(){
-		foreach($this->filters as $filter)
-		{
-			echo "var arrpreselected" . $filter->qsParamName . " = " . $filter->getJSFiltersArray() . ";\n";
-		}
-	}
-	
-
-
-	public function getJSON(){
-		echo json_encode(get_object_vars($this));
-	}
 }
-
-$productFilters = new ProductFilters();
 
 
 function additional_active_item_classes($classes = array(), $menu_item = false){
