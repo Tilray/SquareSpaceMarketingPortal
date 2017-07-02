@@ -33,11 +33,11 @@ get_header(); ?>
 				<?php
 					$link1 = "https://store.tilray.ca";
 					$link2 = "https://customer.tilray.ca/en/Signup";
-					$link3 = "/en/about/contact-us/";
+					$link3 = "/en/resources/ways-to-register/";
 
 					if ($langCode == "fr"){
 						$link2 = "https://customer.tilray.ca/fr/Signup";
-						$link3 = "/fr/a-propos/contactez-nous/";
+						$link3 = "/fr/ressources/comment-sinscrire/";
 					}
 				?>
 				<div class="row">

@@ -5,7 +5,6 @@
 		global $sitepress;
 
 		$wp_query = new WP_Query(array('post_type' => 'tilray_banners', 'posts_per_page' => '100', 'suppress_filters' => FALSE, 'orderby'=>'menu_order' ));
-
         global $isMobile;
 		$imageSize = $isMobile ? 'mobile-banner' : 'full';
         
