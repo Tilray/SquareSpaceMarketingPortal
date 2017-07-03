@@ -19,7 +19,7 @@ $prev_page_link = $is_accessories_page ? getAccessoriesPageLink() : getProductsP
 		<div class="row">
 			<div id="primary" class="content-area col-lg-12">
 				<?php
-				if ($thisProduct->producttype == "accessory"): 
+				if ($is_accessories_page): 
 				?>
 				<img src="<?=$thisProduct->largeImage?>" alt="<?=$thisProduct->productName?>"/>
 				<?php
@@ -85,7 +85,7 @@ $prev_page_link = $is_accessories_page ? getAccessoriesPageLink() : getProductsP
 						echo $priceText;
 					}
 
-					if ($itemStoreLink){
+					if ($itemStoreLink && ($is_accessories_page || $itemPrice > 0)){
 						?>
 						<a href='<?=$itemStoreLink?>' class='call-to-action-button track-product-buy-button'><span><?= __('Buy Now')?></span></a>
 						<?php

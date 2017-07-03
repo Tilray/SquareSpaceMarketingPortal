@@ -75,6 +75,7 @@ function addMobileFilterItems($filterNameValues, $qsParamName, $removeBlanks){
 
 if ($is_accessories_page){
 	renderMobileFilterPanel($filterSet->status->qsParamName, $filterSet->status->displayName, $filterSet->status->getFiterNamesValues());
+	renderMobileFilterPanel($filterSet->accessoryType->qsParamName, $filterSet->accessoryType->displayName, $filterSet->accessoryType->getFiterNamesValues());
 }
 else{
 	renderMobileFilterPanel("profile", __("Profiles"), array("" => ""), 
