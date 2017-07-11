@@ -53,7 +53,7 @@ if ($deviceType === 'phone')
 <?php 
 
 global $noHideStickyFooterContent;
-if($noHideStickyFooterContent){
+if(strlen($noHideStickyFooterContent) > 0){
     ?>
     <div class="no-hide-sticky-footer-content">
         <?=$noHideStickyFooterContent?>

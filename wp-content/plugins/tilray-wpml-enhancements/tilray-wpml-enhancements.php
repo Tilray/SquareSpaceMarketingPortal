@@ -7,7 +7,7 @@ Author: Kyall Barrows
 Version: 1.0
 */
 function get_current_language(){
-	if (!function_exists(icl_get_languages))
+	if (!function_exists('icl_get_languages'))
 		return NULL;
 		
 	$allTheLangs = icl_get_languages('skip_missing=0&orderby=id&order=asc');
@@ -46,15 +46,23 @@ function get_current_locale(){
 	return "-";
 }
 
-function format_price_for_current_locale($price){
+function format_price_for_current_locale($price, $include_structured_data_tags = false){
 	if (get_current_language_code() == "en")
-		return "$" . number_format($price, 2);
+	{
+		if ($include_structured_data_tags)
+			return "<span itemprop='priceCurrency' content='CAD'>$</span><span itemprop='price'>" . number_format($price, 2) . "</span>";
+		else
+			return "$" . number_format($price, 2);
+	}
 		
-	return number_format($price, 2, ',', '') . " $";
+	if ($include_structured_data_tags)
+		return "<span itemprop='price'>" . number_format($price, 2, ',', '') . "</span>&nbsp;<span itemprop='priceCurrency' content='CAD'>$</span>";
+	else
+		return number_format($price, 2, ',', '') . " $";
 }
 
 function render_language_chooser($ul_class){
-	if (!function_exists(icl_get_languages))
+	if (!function_exists('icl_get_languages'))
 		return;
 		
 	?><ul class="<?=$ul_class; ?>"><?php
@@ -66,7 +74,7 @@ function render_language_chooser($ul_class){
 }
 
 function get_other_language(){
-	if (!function_exists(icl_get_languages))
+	if (!function_exists('icl_get_languages'))
 		return NULL;
 
 	$allTheLangs = icl_get_languages('skip_missing=0&orderby=id&order=asc');

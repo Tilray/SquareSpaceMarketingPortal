@@ -7,7 +7,7 @@
  * @package web2feel
  */
 ?><!DOCTYPE html>
-<html <?php language_attributes(); ?>>
+<html <?php language_attributes(); ?> data-useragent="<?=$_SERVER['HTTP_USER_AGENT']?>">
 <head>
 <meta charset="<?php bloginfo( 'charset' ); ?>">
 <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0">
@@ -17,8 +17,19 @@
 <?php wp_head(); ?>
 <meta name="msvalidate.01" content="8D1268D07946606791541B9681F5FBBE" />
 <meta name="p:domain_verify" content="f120c771cc01596bc34ee72616a99494"/>
-</head>
+<?php
+	global $extra_header_content;
+	global $structured_data_itemscope;
 
+	if (isset($extra_header_content)){
+		echo $extra_header_content;
+	}
+
+	if (!isset($structured_data_itemscope)){
+		$structured_data_itemscope = "";
+	}
+?>
+</head>
 <body <?php body_class(); ?>>
 
 <?php get_template_part( 'inc/googletagmanager' ); ?>
@@ -26,9 +37,19 @@
 	$ieClass = "";
 	if(preg_match('/(?i)msie (.*?);/',$_SERVER['HTTP_USER_AGENT'])){
 		$ieClass = "ie";
-	} 
+	}
+
+	if (strpos(strtolower($_SERVER['HTTP_USER_AGENT']), "msie 9") > 0){
+		$ieClass .= " ie9";
+	}
+	else if (strpos(strtolower($_SERVER['HTTP_USER_AGENT']), "msie 8") > 0){
+		$ieClass .= " ie8";
+	}
+	else if (strpos(strtolower($_SERVER['HTTP_USER_AGENT']), "msie 7") > 0){
+		$ieClass .= " ie7";
+	}
 ?>
-<div id="page" class="hfeed site <?=$ieClass?>">
+<div id="page" <?=$structured_data_itemscope?> class="hfeed site <?=$ieClass?>">
 	<?php do_action( 'before' ); ?>
 	<header id="masthead" class="site-header" role="banner">
 		<div id="mobile-nav">
@@ -104,7 +125,7 @@
 					<a href="https://www.instagram.com/tilraycanada/" target="_blank">
 						<i class="icon-instagram"></i>
 					</a>
-				</span>		
+				</span>
             </div>
 			<div id="languagedropdownwrapper">
 				<div id="languagedropdown" class="closed"><?php
@@ -123,7 +144,7 @@
 					if ($_SERVER["REQUEST_URI"] == '/')
 						$tag = "h1";
 				?>
-				<<?=$tag?> class="site-title logo"><a id="blogname" rel="home" href="<?=get_wpml_home_url()?>/" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>"><?php bloginfo( 'name' ); ?></a></<?=$tag?>>
+				<<?=$tag?> class="site-title logo"><a id="blogname" rel="home" href="<?=get_wpml_home_url()?>/" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>"><meta itemprop="logo" content="http://tilray.staging.wpengine.com/wp-content/themes/Revera/images/tilray-nav-logo.svg"><?php bloginfo( 'name' ); ?></a></<?=$tag?>>
 				</div>
 				<div class="col-sm-9 mainmenu">
                     <div id="primary-menu-container" class="topmenu">
@@ -142,6 +163,7 @@
 				</div>		
 			</div> <!-- end row -->
 		</nav>	
+		<meta itemprop="name" content="Tilray">
 	</header><!-- #masthead -->
 	
 	

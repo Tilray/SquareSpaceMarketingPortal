@@ -1,5 +1,6 @@
 jQuery(window).load(function() {
   /* Navigation */
+	console.log("BEGIN!");
 
 	jQuery('#submenu ul.sfmenu').superfish({ 
 		delay:       500,								// 0.1 second delay on mouseout 
@@ -57,7 +58,6 @@ jQuery(window).load(function() {
     jQuery(window).scroll(updateFooter);
     updateFooter();
 
-
     //if we're on the mobile products page
     if (jQuery('.filter-panel.mobile').length > 0){
     	jQuery('.filter-panel.mobile').css('display', 'block');
@@ -78,19 +78,10 @@ jQuery(window).load(function() {
 	    		}
 	    	});
 	    }
-
-	    jQuery('.filter-button.mobile.reset').click(function(){
-	    	console.log("Reset!");
-	    	ResetFilters();
-	    });
     }
 });
 
 
-function closeAllProductFilterPanels()
-{
-	jQuery('.filter-panel.mobile').removeClass('active');
-}
 
 function trackEvent(category, action, label, value){
     if (label == undefined) label = "";

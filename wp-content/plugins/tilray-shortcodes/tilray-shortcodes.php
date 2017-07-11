@@ -21,10 +21,15 @@ function icon_ban_func(){	return render_svg_icon("icon_ban");}
 
 function call_to_action_button_func($atts){
 	$newTab = "target='_self'";
-	if ($atts['target'] != "")
+	if (isset($atts['target']) && $atts['target'] != "")
 		$newTab = "target='" . $atts['target'] . "'";
 		
-	return sprintf('<a href="%s" %s class="call-to-action-button ' . $atts['classes'] . '">%s<span>%s</span></a>', 
+	$classes = "";
+	if (isset($atts['classes'])){
+		$classes = $atts['classes'];
+	}
+
+	return sprintf('<a href="%s" %s class="call-to-action-button ' . $classes . '">%s<span>%s</span></a>', 
 					$atts['href'],
 					$newTab,
 					render_svg_icon($atts['icon_name']),
