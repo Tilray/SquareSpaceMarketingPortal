@@ -579,6 +579,7 @@ $theProducts = QueryProducts($filterSet);
 			var data = this.productsById[+id];
 			jQuery('div.details-panel .header-column .name').text(data.profile + " " + data.name);
 			jQuery('div.details-panel .header-column .subtitle').text(data.translatedstraincategoryproducttype);
+			jQuery('div.details-panel .overview-column .overview').css('display', data.actualthc.length > 0 && data.cbd > 0 ? "block" : "none");
 			jQuery('div.details-panel .overview-column .overview .thc').html(FormatPercent(data.actualthc, lang));
 			jQuery('div.details-panel .overview-column .overview .cbd').html(FormatPercent(data.cbd, lang));
 			jQuery('div.details-panel .product-link a').attr('href', data.productUrl);
