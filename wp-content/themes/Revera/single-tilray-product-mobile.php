@@ -92,33 +92,6 @@ $prev_page_link = $is_accessories_page ? getAccessoriesPageLink() : getProductsP
 					}
 					?>
 				</p>
-
-
-				<?php
-				$disableDisqus = trim(ft_of_get_option('fabthemes_disable_disqus'));
-				if (comments_open() && $disableDisqus != "0") :
-					?>
-					<div id="disqus_thread"></div>
-					<script>
-						/**
-						 *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-						 *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
-						 */
-						var disqus_config = function () {
-							this.page.url = "<?= get_permalink()?>";  // Replace PAGE_URL with your page's canonical URL variable
-							this.page.identifier = "<?=str_replace(" ", "_", get_the_title())?>"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-						};
-						(function() {  // DON'T EDIT BELOW THIS LINE
-							var d = document, s = d.createElement('script');
-
-							s.src = '//tilray.disqus.com/embed.js';
-
-							s.setAttribute('data-timestamp', +new Date());
-							(d.head || d.body).appendChild(s);
-						})();
-					</script>
-					<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-				<?php endif; // comments_open ?>
 			</div><!-- #primary -->
 
 		</div>
