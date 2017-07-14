@@ -664,13 +664,29 @@ $theProducts = QueryProducts($filterSet);
 					$button.addClass("has-selections");
 			}
 
-			for (var i=0; i<this.filters.profileFilters.length; i++){
-				var thisFilter = this.filters.profileFilters[i];
-				var $button = jQuery("div.filter-button." + thisFilter.id);
-				if (thisFilter.noneAreChecked())
-					$button.removeClass("has-selections");
+			console.log("Is mobile? " + isMobile);
+			if (isMobile){
+				var allProfilesChecked = true;
+				for (var i=0; i<this.filters.profileFilters.length; i++){
+					var thisFilter = this.filters.profileFilters[i];
+					allProfilesChecked = allProfilesChecked && thisFilter.allAreChecked();
+				}
+				var $profilesButton = jQuery("div.filter-button.profiles");
+				if (allProfilesChecked)
+					$profilesButton.removeClass("has-selections");
 				else
-					$button.addClass("has-selections");
+					$profilesButton.addClass("has-selections");
+			}
+			else
+			{
+				for (var i=0; i<this.filters.profileFilters.length; i++){
+					var thisFilter = this.filters.profileFilters[i];
+					var $button = jQuery("div.filter-button." + thisFilter.id);
+					if (thisFilter.noneAreChecked())
+						$button.removeClass("has-selections");
+					else
+						$button.addClass("has-selections");
+				}
 			}
 		};
 
