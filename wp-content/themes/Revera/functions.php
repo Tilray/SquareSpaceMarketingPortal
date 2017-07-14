@@ -692,6 +692,7 @@ class Product{
 	public $name;
 	public $status;
 	public $straincategory;
+	public $joinedstraincategories;
 	public $producttype;
 	public $accessorytype;
 	public $translatedstraincategoryproducttype;
@@ -725,10 +726,19 @@ class Product{
     {
     	if (is_array($rawCategory))
     	{
-    		return implode("|", $rawCategory);
+    		return implode(" | ", $rawCategory);
     	}
 
     	return $rawCategory;
+    }
+
+    function get_combined_strain_categories($rawCategory){
+    	if (is_array($rawCategory))
+    	{
+    		return "|||" . implode("|||", $rawCategory) . "|||";
+    	}
+
+   		return "|||" . $rawCategory . "|||";
     }
 
 	function getPrimaryStrainCategory($rawCategories)
@@ -769,6 +779,7 @@ class Product{
         $this->name = html_entity_decode(get_the_title($id));
         $this->status = trim(get_post_meta($id, 'status', true));
         $this->straincategory = $this->safe_get_strain_category(get_post_meta($id, 'strain_category', true));
+        $this->joinedstraincategories = $this->get_combined_strain_categories(get_post_meta($id, 'strain_category', true));
         $this->producttype = get_post_meta($id, 'product_type', true);
         $this->accessorytype = get_post_meta($id, 'accessory_type', true);
         $producttypefield = get_field_object('product_type', $id);
@@ -922,7 +933,7 @@ class AccessoriesFilters extends FiltersBase{
 											"available" => "Available", 
 											"out-of-stock" => "Out of Stock"),
 											false,
-											"this.test = function(product){ console.log('selected? ' + this.selected.length); return this.selected.length === 0 || arrayIncludes(this.selected, product.status);}"
+											"this.test = function(product){ return this.selected.length === 0 || arrayIncludes(this.selected, product.status);}"
 											);
 
 		$this->accessoryType = new ProductFilter("accessorytype", "Type",
@@ -974,7 +985,7 @@ class ProductFilters extends FiltersBase{
 											"30-days" => "30 Days",
 											"90-days" => "90 Days"),
 											false,
-											"this.test = function(product){ console.log('selected? ' + this.selected.length); return this.selected.length === 0 || arrayIncludes(this.selected, product.status);}"
+											"this.test = function(product){ return this.selected.length === 0 || arrayIncludes(this.selected, product.status);}"
 											);
 											
 		$this->strainCategory = new ProductFilter("straincategory", "Category",
@@ -983,12 +994,12 @@ class ProductFilters extends FiltersBase{
 													"sativa" => "Sativa", 
 													"hybrid" => "Hybrid"),
 											false,
-											"this.test = function(product){ return this.selected.length === 0 || arrayIncludes(this.selected, product.straincategory);}"
+											"this.test = function(product){ if (this.selected.length === 0) return true; for(var sel in this.selected){if(product.joinedstraincategories.includes('|||'+this.selected[sel]+'|||')){return true;} return false;}}"
 											);
 													
 		$this->productType = new ProductFilter("producttype", "Type",
 											array(	"" => "", 
-													"flower" => "Flower", 
+													"flower" => "Whole Flower", 
 													"blend" => "Ground Cannabis", 
 													"drop" => "Drops",
 													"capsule" => "Capsules"),
