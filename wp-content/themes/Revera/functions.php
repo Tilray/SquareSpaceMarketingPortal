@@ -329,8 +329,8 @@ function render_news_section($args, $showPagination = false, $pageLinkNumber = 0
 		<?php if ($showPagination){?>
 			</div><div class="col-sm-12">
 			<div class="navigation pagination-buttons"><p><?php 
-				previous_posts_link("<i class='icon-left-big'></i>&nbsp;&nbsp;prev");
-				next_posts_link("next&nbsp;&nbsp;<i class='icon-right-big'></i>");
+				previous_posts_link("<i class='icon-left-big'></i>&nbsp;&nbsp;".__("prev"));
+				next_posts_link(__("next")."&nbsp;&nbsp;<i class='icon-right-big'></i>");
 			?></p></div>
 		<?php } 
 		else if ($pageLinkNumber > 0){
