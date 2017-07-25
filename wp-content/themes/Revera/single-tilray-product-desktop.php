@@ -81,6 +81,7 @@ $prev_page_link = $is_accessories_page ? getAccessoriesPageLink() : getProductsP
 						else if ($thisProduct->status == '90-days')
 							echo __("Available within 90 days.");
 
+						echo "</h4>";
 /*						$notification_url = "/" . get_current_language_code() . "/";
 						if (strtolower(get_current_language_code()) == "fr")
 							$notification_url .= "le-notification-terms";

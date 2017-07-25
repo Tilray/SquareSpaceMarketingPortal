@@ -59,7 +59,7 @@ $prev_page_link = $is_accessories_page ? getAccessoriesPageLink() : getProductsP
 				</span>
 
 				<?php
-				if (strlen($thisProduct->terpenes) > 0) {
+				if ($thisProduct->status == 'available' && strlen($thisProduct->terpenes) > 0) {
 					?>
 					<div class="terpenes">
 						<h3><?= __("Terpenes:")?></h3>
@@ -68,7 +68,7 @@ $prev_page_link = $is_accessories_page ? getAccessoriesPageLink() : getProductsP
 					<?php
 				}
 
-				if (strlen($thisProduct->cannabinoids) > 0) {
+				if ($thisProduct->status == 'available' && strlen($thisProduct->cannabinoids) > 0) {
 					?>
 					<div class="terpenes">
 						<h3><?= __("Cannabinoid Content:")?></h3>
@@ -80,15 +80,27 @@ $prev_page_link = $is_accessories_page ? getAccessoriesPageLink() : getProductsP
 
 				<p itemprop="offers" itemscope itemtype="http://schema.org/Offer" class="price-text text-text-text">
 					<?php
-					if($itemPrice > 0)
-					{
-						echo $priceText;
-					}
+					if ($thisProduct->status == 'available'){
+						if($itemPrice > 0)
+						{
+							echo $priceText;
+						}
 
-					if ($itemStoreLink && ($is_accessories_page || $itemPrice > 0)){
-						?>
-						<a href='<?=$itemStoreLink?>' class='call-to-action-button track-product-buy-button'><span><?= __('Buy Now')?></span></a>
-						<?php
+						if ($itemStoreLink && ($is_accessories_page || $itemPrice > 0)){
+							?>
+							<a href='<?=$itemStoreLink?>' class='call-to-action-button track-product-buy-button'><span><?= __('Buy Now')?></span></a>
+							<?php
+						}
+					}
+					else{
+						echo "<h4>";
+
+						if ($thisProduct->status == '30-days')
+							echo __("Available within 30 days.");
+						else if ($thisProduct->status == '90-days')
+							echo __("Available within 90 days.");
+
+						echo "</h4>";
 					}
 					?>
 				</p>
