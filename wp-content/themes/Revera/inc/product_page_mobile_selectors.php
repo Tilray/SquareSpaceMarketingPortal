@@ -2,7 +2,7 @@
 						<div class="filter-button-wrapper">
 							<div class="filter-button mobile profiles">
 								<div class="filter-button-inner profiles" data-filter-name="profile">
-									<div class="filter-label"><span>Profiles</span></div><div class="filter-corner-triangle"></div>
+									<div class="filter-label"><span><?= __("Profiles")?></span></div><div class="filter-corner-triangle"></div>
 								</div>
 							</div>
 						</div>

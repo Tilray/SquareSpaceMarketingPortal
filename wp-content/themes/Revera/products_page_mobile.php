@@ -98,7 +98,7 @@ function createSummaryItem($id, $label){
 function createSummaryItemGroup($filter){
 	foreach($filter->validFilterValues as $key=>$value){
 		if (strlen($key) > 0){
-			echo "<span class='summary-item " . $filter->qsParamName . $key . "' style='display:none'>" . $value . "</span>";
+			echo "<span class='summary-item " . $filter->qsParamName . $key . "' style='display:none'>" . __($value) . "</span>";
 		}
 	}
 }
