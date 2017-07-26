@@ -87,9 +87,9 @@
 					}
 				}
 				
-				RenderMobileNavLI("Home", get_home_url() . "/");
+				RenderMobileNavLI(__("Home"), get_home_url() . "/");
 				$otherLang = get_other_language();
-				RenderMobileNavLI($otherLang["native_name"], $otherLang["url"]);
+				RenderMobileNavLI(ucwords($otherLang["native_name"]), $otherLang["url"]);
 				
 				foreach($primaryNavItems as $navItem){
 					if (array_key_exists($navItem->ID, $childPagesByParentId))
@@ -128,11 +128,11 @@
 				</span>
             </div>
 			<div id="languagedropdownwrapper">
-				<div id="languagedropdown" class="closed"><?php
-								if (function_exists("render_language_chooser")){
-									render_language_chooser("lang-chooser-dropdown");
-								}
-				?></div>				
+				<div id="languagedropdown" class="closed">
+				<?php
+					create_language_chooser("lang-chooser-dropdown");
+				?>	
+				</div>				
 			</div>
 		</div>
 			

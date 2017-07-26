@@ -32,6 +32,33 @@ function remove_page_from_query_string($query_string)
 add_filter('request', 'remove_page_from_query_string');
 
  
+function create_language_chooser($class_name){
+	if (is_category()){
+		$cat = get_the_category();
+		$slug = $cat[0]->slug;
+
+		if ($slug == "news" || $slug == "nouvelles"){
+			render_corrected_language_chooser(
+				"français", "/fr/nouvelles",
+				"english", "/en/news",
+				$class_name);
+
+			return;
+		}
+	}
+
+	//if we haven't rendered a chooser and bailed out in the above section, render the normal language chooser
+	if (function_exists("render_language_chooser")){
+		render_language_chooser($class_name);
+	}
+}
+
+function render_corrected_language_chooser($label1, $url1, $label2, $url2, $class_name){
+	echo "<ul class='" . $class_name . "'>";
+	echo "<li><a href='" . $url1 . "'>" . $label1 . "</a></li>";
+	echo "<li><a href='" . $url2 . "'>" . $label2 . "</a></li>";
+	echo "</ul>";
+}
 
 
 /**
@@ -1171,6 +1198,10 @@ function wpb_set_post_views($postID) {
 }
 //To keep the count accurate, lets get rid of prefetching
 remove_action( 'wp_head', 'adjacent_posts_rel_link_wp_head', 10, 0);
+
+//who adds crap like this?
+remove_action('wp_head', 'wp_shortlink_wp_head', 10, 0 );
+
 
 
 function get_search_page_url(){
