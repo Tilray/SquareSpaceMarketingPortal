@@ -1,5 +1,5 @@
 <?php
-$title = $is_accessories_page ? "ACCESSORIES" : "PRODUCTS";
+$title = $is_accessories_page ? __("ACCESSORIES") : __("PRODUCTS");
 $prev_page_link = $is_accessories_page ? getAccessoriesPageLink() : getProductsPageLink();
 ?>
 <div class="single-product-mobile">

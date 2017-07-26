@@ -12,7 +12,7 @@ get_header();
 	<div class="container">
 		<div class="row">
 			<div class="col-12">
-				<h1>Search</h1>
+				<h1><?= __("Search", 'Revera') ?></h1>
 				<p><?php printf( __( 'You searched for: %s', 'web2feel' ), '<span>' . get_search_query() . '</span>' ); ?> </p>
 			</div>
 			

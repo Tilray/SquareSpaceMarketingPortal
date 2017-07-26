@@ -60,7 +60,7 @@ if (count($rows) > $rows_per_page){
 	<div class="container">
 		<div class="row">
 			<div class="col-sm-12">
-				<h1>Search</h1>
+				<h1><?=__("Search")?></h1>
 				<p><?php printf( __( 'You searched for: %s', 'web2feel' ), '<span>' . urldecode($term) . '</span>' ); ?> </p>
 			</div>
 			
@@ -115,10 +115,10 @@ if (count($rows) > $rows_per_page){
 				<p>
 				<?php 
 				if ($has_prev_page){ ?>
-					<a href="<?=$prev_page_url?>"><i class='icon-left-big'></i>&nbsp;&nbsp;prev</a>
+					<a href="<?=$prev_page_url?>"><i class='icon-left-big'></i>&nbsp;&nbsp;<?=__("prev")?></a>
 				<?php } 
 				if ($has_next_page){ ?>
-					<a href="<?=$next_page_url?>">next&nbsp;&nbsp;<i class='icon-right-big'></i></a>
+					<a href="<?=$next_page_url?>"><?=__("next")?>&nbsp;&nbsp;<i class='icon-right-big'></i></a>
 				<?php } ?>
 				</p>
 			</div>
