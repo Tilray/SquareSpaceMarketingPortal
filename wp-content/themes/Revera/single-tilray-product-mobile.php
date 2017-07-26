@@ -44,10 +44,10 @@ $prev_page_link = $is_accessories_page ? getAccessoriesPageLink() : getProductsP
 						<div class="product-chip-spacer">
 						</div>
 					</div>
-					<?php if (strlen(trim($thc)) > 0){?>
+					<?php if ($thisProduct->status == 'available' && strlen(trim($thc)) > 0){?>
 						<h3 class="thc-level"><span class="thc-label"><?= __("THC")?>:&nbsp;</span><?=$thc?>%</h3>
 					<?php } ?>
-					<?php if (strlen(trim($cbd)) > 0){?>
+					<?php if ($thisProduct->status == 'available' && strlen(trim($cbd)) > 0){?>
 						<h3 class="thc-level"><span class="thc-label"><?= __("CBD")?>:&nbsp;</span><?=$cbd?>%</h3>
 					<?php } 
 				endif;
@@ -59,7 +59,7 @@ $prev_page_link = $is_accessories_page ? getAccessoriesPageLink() : getProductsP
 				</span>
 
 				<?php
-				if ($thisProduct->status == 'available' && strlen($thisProduct->terpenes) > 0) {
+				if (strlen($thisProduct->terpenes) > 0) {
 					?>
 					<div class="terpenes">
 						<h3><?= __("Terpenes:")?></h3>
@@ -68,7 +68,7 @@ $prev_page_link = $is_accessories_page ? getAccessoriesPageLink() : getProductsP
 					<?php
 				}
 
-				if ($thisProduct->status == 'available' && strlen($thisProduct->cannabinoids) > 0) {
+				if (strlen($thisProduct->cannabinoids) > 0) {
 					?>
 					<div class="terpenes">
 						<h3><?= __("Cannabinoid Content:")?></h3>
