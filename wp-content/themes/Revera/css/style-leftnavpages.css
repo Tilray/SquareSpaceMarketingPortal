@@ -1,0 +1,135 @@
+.left-nav-menu span a,
+span.left-nav-selected-child a,
+span.center-nav-selected-child a{
+	position: relative;	
+}
+
+span.center-nav-selected-child h3 a,
+span.left-nav-selected-child h2 a,
+span.center-nav-selected-child a h3,
+span.left-nav-selected-child a h2{
+	color: #084875;
+	position: relative;	
+}
+
+span.center-nav-selected-child h3 a::after,
+span.left-nav-selected-child h2 a::after{
+	content: "";
+	color: #084875;
+	position: absolute;
+	font-size: 30px;
+	top: 3px;
+	left: -13px;
+	border: 4px solid #084875;
+	border-radius: 20px;
+}
+
+.left-nav-menu{
+	padding-top: 15px;
+}
+
+.left-nav-menu.overlay-menu{
+	display: none;
+	position: fixed;
+	top: 45px;
+	left: 0;
+	background-color: #ffffff;
+	border-bottom: 1px solid #cccccc;
+	padding: 15px 30px;
+	width: 100%;
+	z-index: 100;
+}
+
+.left-nav-menu h2 a, 
+.center-nav-item h3 a,
+.left-nav-menu a h2, 
+.center-nav-item a h3
+{
+	font-size: 17px;
+	color: #a7a9ac;
+	cursor: pointer;
+}
+
+.left-nav-menu span h2{
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+
+.page-template-leftandcenternav-page #right-pane,
+.page-template-leftnavsiblings-page #primary,
+.page-template-leftnav-page #primary{
+	padding-left: 50px;
+}
+
+p.back-to-top{
+	margin-top: 20px;
+	margin-bottom: 40px;
+}
+
+p.back-to-top a i {
+	margin-right: 5px;
+}
+
+.page-head.show-nav{
+	display: none;
+}
+
+@media (max-width: 600px){
+	.page-template-leftandcenternav-page #right-pane,
+	.page-template-leftnavsiblings-page #primary,
+	.page-template-leftnav-page #primary{
+		padding: 0 15px;
+	}
+
+	.page-template-leftandcenternav-page div#center-nav{
+		display: none;
+	}
+	.page-template-leftandcenternav-page div#right-pane{
+		width: 100%;
+	}
+
+	.page-template-leftandcenternav-page div#right-pane h3{
+		cursor: pointer;
+	}
+
+	.page-template-leftandcenternav-page .switchpane {
+		display: block;
+	}
+
+	.page-template-leftandcenternav-page div#right-pane span.answer{
+		overflow: hidden;
+		max-height: 0;
+		display: block;
+		-webkit-transition: max-height .25s;
+		transition: max-height .25s;
+	}
+
+	.page-template-leftandcenternav-page div#right-pane .drawer-open span.answer{
+		max-height: 800px;
+		-webkit-transition: max-height .5s;
+		transition: max-height .5s;
+	}
+
+	.page-template-leftandcenternav-page div#right-pane h3{
+		cursor: pointer;
+	}	
+}
+
+@media (max-width: 767px){
+	p.back-to-top{
+		display: none;
+	}
+
+	div.left-nav-menu {
+		display: none;
+	}	
+
+	.show-nav div.left-nav-menu {
+		display: block;
+		margin-bottom: 20px;
+	}	
+	.left-nav-menu.overlay-menu{
+		display: block;
+	}
+
+}

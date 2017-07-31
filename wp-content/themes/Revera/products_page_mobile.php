@@ -106,7 +106,7 @@ function createSummaryItemGroup($filter){
 
 <h1 class="products-page-title"><?php the_title(); ?></h1>
 
-<div class="page-head mobile mobile-products-page retractable retracted summary">
+<div class="page-head mobile mobile-products-page retractable retracted summary overlay-shadow">
 	<div class="container no-padding">
 		<div class="row">
 			<div class="col-xs-12">
