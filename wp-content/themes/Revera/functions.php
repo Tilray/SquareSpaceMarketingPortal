@@ -127,42 +127,20 @@ endif; // web2feel_setup
 add_action( 'after_setup_theme', 'web2feel_setup' );
 
 /**
- * Register widgetized area and update sidebar with default widgets
- */
-function web2feel_widgets_init() {
-
-	register_sidebar( array(
-		'name' => __( 'Sidebar', 'web2feel' ),
-		'id' => 'sidebar-1',
-		'before_widget' => '<aside id="%1$s" class="widget %2$s">',
-		'after_widget' => '</aside>',
-		'before_title' => '<h1 class="widget-title">',
-		'after_title' => '</h1>',
-	));
-	
-	register_sidebar(array(
-		'name' => 'Footer',
-		'id' => 'sidebar-2',
-		'before_widget' => '<div class="botwid col-6 col-lg-3 %2$s">',
-		'after_widget' => '</div>',
-		'before_title' => '<h3 class="bothead">',
-		'after_title' => '</h3>',
-	));	
-}
-add_action( 'widgets_init', 'web2feel_widgets_init' );
-
-/**
  * Enqueue scripts and styles
  */
 function web2feel_scripts() {
 	global $wp_styles;
 	
-	wp_enqueue_style( 'web2feel-style', get_stylesheet_uri() );
 	wp_enqueue_style( 'bootstrap', get_template_directory_uri() . '/bootstrap/bootstrap.min.css');
+	wp_enqueue_style( 'theme-base', get_template_directory_uri() . '/css/style-base.css');
 	wp_enqueue_style( 'flexslider', get_template_directory_uri() . '/css/flexslider.css');
 	wp_enqueue_style( 'glyphicons', get_template_directory_uri() . '/css/bootstrap-glyphicons.css');
 	wp_enqueue_style( 'slicknav', get_template_directory_uri() . '/css/slicknav.css');
 	wp_enqueue_style( 'fontello', get_template_directory_uri() . '/css/fontello.css');
+	wp_enqueue_style( 'theme-menu', get_template_directory_uri() . '/css/style-menu.css');
+	wp_enqueue_style( 'theme-footer', get_template_directory_uri() . '/css/style-footer.css');
+	wp_enqueue_style( 'theme-home', get_template_directory_uri() . '/css/style-home.css');
 	wp_enqueue_style( 'theme', get_template_directory_uri() . '/theme.css?v=1.008');
 
 //	wp_enqueue_style( 'fontawesome', '//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css');

@@ -1,38 +1,98 @@
-/*
-Theme Name: Revera
-Theme URL: http://www.fabthemes.com/revera/
-Author: Fabthemes
-Author URI: www.fabthemes.com
-Version: 1.2
-License: GNU General Public License
-License URI: license.txt
-Text Domain: web2feel
-Domain Path: /languages/
-Tags:
-
-This theme, like WordPress, is licensed under the GPL.
-Use it to make something cool, have fun, and share what you've learned with others.
-
- web2feel is based on Underscores http://underscores.me/, (C) 2012-2013 Automattic, Inc.
-
-Resetting and rebuilding styles have been helped along thanks to the fine work of
-Eric Meyer http://meyerweb.com/eric/tools/css/reset/index.html
-along with Nicolas Gallagher and Jonathan Neal http://necolas.github.com/normalize.css/
-and Blueprint http://www.blueprintcss.org/
-*/
+@font-face {font-family: 'Proxima-Nova'; font-weight: bold; font-style: normal; src: url('../fonts/2FE7B5_8_0.eot');src: url('../fonts/2FE7B5_8_0.eot?#iefix') format('embedded-opentype'),url('../fonts/2FE7B5_8_0.woff2') format('woff2'),url('../fonts/2FE7B5_8_0.woff') format('woff'),url('../fonts/2FE7B5_8_0.ttf') format('truetype');}
+@font-face {font-family: 'Proxima-Nova'; font-weight: bold; font-style: italic; src: url('../fonts/2FE7B5_9_0.eot');src: url('../fonts/2FE7B5_9_0.eot?#iefix') format('embedded-opentype'),url('../fonts/2FE7B5_9_0.woff2') format('woff2'),url('../fonts/2FE7B5_9_0.woff') format('woff'),url('../fonts/2FE7B5_9_0.ttf') format('truetype');}
+@font-face {font-family: 'Proxima-Nova'; font-weight: normal; font-style: normal; src: url('../fonts/2FE7B5_A_0.eot');src: url('../fonts/2FE7B5_A_0.eot?#iefix') format('embedded-opentype'),url('../fonts/2FE7B5_A_0.woff2') format('woff2'),url('../fonts/2FE7B5_A_0.woff') format('woff'),url('../fonts/2FE7B5_A_0.ttf') format('truetype');}
+@font-face {font-family: 'Proxima-Nova'; font-weight: normal; font-style: italic; src: url('../fonts/2FE7B5_B_0.eot');src: url('../fonts/2FE7B5_B_0.eot?#iefix') format('embedded-opentype'),url('../fonts/2FE7B5_B_0.woff2') format('woff2'),url('../fonts/2FE7B5_B_0.woff') format('woff'),url('../fonts/2FE7B5_B_0.ttf') format('truetype');}
+@font-face {font-family: 'Proxima-Nova'; font-weight: normal; font-style: italic; src: url('../fonts/2FE7B5_B_0.eot');src: url('../fonts/2FE7B5_B_0.eot?#iefix') format('embedded-opentype'),url('../fonts/2FE7B5_B_0.woff2') format('woff2'),url('../fonts/2FE7B5_B_0.woff') format('woff'),url('../fonts/2FE7B5_B_0.ttf') format('truetype');}
+@font-face {font-family: 'Mittelschrift';src: url('../fonts/327BB5_0_0.eot');src: url('../fonts/327BB5_0_0.eot?#iefix') format('embedded-opentype'),url('../fonts/327BB5_0_0.woff2') format('woff2'),url('../fonts/327BB5_0_0.woff') format('woff'),url('../fonts/327BB5_0_0.ttf') format('truetype');}
 
 
-/* =Reset
--------------------------------------------------------------- */
 
-html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,
-del, dfn, em, font, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td {
+
+/*---- RESETS ----*/
+html{
+	border: 0;
+	font-style: inherit;
+	font-weight: inherit;
+	margin: 0;
+	outline: 0;
+	padding: 0;
+	vertical-align: baseline;
+}
+
+body{
+	border: 0;
+	font-style: inherit;
+	font-weight: inherit;
+	outline: 0;
+	padding: 0;
+	vertical-align: baseline;
+}
+
+h1, h2, h3, h4, h5, h6{
+	border: 0;
+	outline: 0;
+	padding: 0;
+	vertical-align: baseline;	
+}
+
+blockquote{
+	font-family: inherit;
+	font-style: inherit;
+	font-weight: inherit;
+	outline: 0;
+	vertical-align: baseline;
+}
+
+ol, ul{
+	border: 0;
+	font-family: inherit;
+	font-size: 100%;
+	font-style: inherit;
+	font-weight: inherit;
+	outline: 0;
+	padding: 0;
+	vertical-align: baseline;
+	margin: 0 0 10px 3em;
+}
+
+label{
+	border: 0;
+	font-family: inherit;
+	font-size: 100%;
+	font-style: inherit;
+	outline: 0;
+	padding: 0;
+	vertical-align: baseline;
+}
+
+table{
+	border: 0;
+	font-family: inherit;
+	font-size: 100%;
+	font-style: inherit;
+	font-weight: inherit;
+	outline: 0;
+	padding: 0;
+	vertical-align: baseline;	
+}
+
+p{
+	border: 0;
+	font-family: inherit;
+	font-size: 100%;
+	font-style: inherit;
+	font-weight: inherit;
+	outline: 0;
+	padding: 0;
+	vertical-align: baseline;
+}
+
+div, span, applet, object, iframe, 
+a, font, ins, q, s, samp,
+small, strike, tt, var,
+dl, dt, dd, li,
+fieldset, form,
+caption, tbody, tfoot, thead, tr, th, td {
 	border: 0;
 	font-family: inherit;
 	font-size: 100%;
@@ -66,20 +126,9 @@ section {
 ol, ul {
 	list-style: none;
 }
-table { /* tables still need 'cellspacing="0"' in the markup */
-	border-collapse: separate;
-	border-spacing: 0;
-}
 caption, th, td {
 	font-weight: normal;
 	text-align: left;
-}
-blockquote:before, blockquote:after,
-q:before, q:after {
-	content: "";
-}
-blockquote, q {
-	quotes: "" "";
 }
 a:focus {
 	outline: thin dotted;
@@ -119,13 +168,6 @@ hr {
 	margin-bottom: 1.5em;
 }
 
-/* Text elements */
-p {
-	margin-bottom: 1.5em;
-}
-ul, ol {
-	margin: 0 0 1.5em 3em;
-}
 ul {
 	list-style: disc;
 }
@@ -154,42 +196,6 @@ blockquote {
 }
 address {
 	margin: 0 0 1.5em;
-}
-pre {
-	background: #eee;
-	font-family: "Courier 10 Pitch", Courier, monospace;
-	font-size: 15px;
-	font-size: 1.5rem;
-	line-height: 1.6;
-	margin-bottom: 1.6em;
-	padding: 1.6em;
-	overflow: auto;
-	max-width: 100%;
-}
-code, kbd, tt, var {
-	font: 15px Monaco, Consolas, "Andale Mono", "DejaVu Sans Mono", monospace;
-}
-abbr, acronym {
-	border-bottom: 1px dotted #666;
-	cursor: help;
-}
-mark, ins {
-	background: #fff9c0;
-	text-decoration: none;
-}
-sup,
-sub {
-	font-size: 75%;
-	height: 0;
-	line-height: 0;
-	position: relative;
-	vertical-align: baseline;
-}
-sup {
-	bottom: 1ex;
-}
-sub {
-	top: .5ex;
 }
 small {
 	font-size: 75%;
@@ -261,9 +267,6 @@ input[type="radio"] {
 }
 input[type="search"] {
 	-webkit-appearance: textfield; /* Addresses appearance set to searchfield in S5, Chrome */
-	-webkit-box-sizing: content-box; /* Addresses box sizing set to border-box in S5, Chrome (include -moz to future-proof) */
-	-moz-box-sizing:    content-box;
-	box-sizing:         content-box;
 }
 input[type="search"]::-webkit-search-decoration { /* Corrects inner padding displayed oddly in S5, Chrome on OSX */
 	-webkit-appearance: none;
@@ -365,86 +368,9 @@ textarea {
 }
 
 
-/* =Menu
------------------------------------------------ */
-
-.main-navigation {
-	clear: both;
-	display: block;
-	float: left;
-	width: 100%;
-}
-.main-navigation ul {
-	list-style: none;
-	margin: 0;
-	padding-left: 0;
-}
-.main-navigation li {
-	float: left;
-	position: relative;
-}
-.main-navigation a {
-	display: block;
-	text-decoration: none;
-}
-.main-navigation ul ul {
-	box-shadow: 0 3px 3px rgba(0, 0, 0, 0.2);
-	display: none;
-	float: left;
-	position: absolute;
-		top: 1.5em;
-		left: 0;
-	z-index: 99999;
-}
-.main-navigation ul ul ul {
-	left: 100%;
-	top: 0;
-}
-.main-navigation ul ul a {
-	width: 200px;
-}
-.main-navigation ul ul li {
-}
-.main-navigation li:hover > a {
-}
-.main-navigation ul ul :hover > a {
-}
-.main-navigation ul ul a:hover {
-}
-.main-navigation ul li:hover > ul {
-	display: block;
-}
-.main-navigation li.current_page_item a,
-.main-navigation li.current-menu-item a {
-}
-
-/* Small menu */
-.menu-toggle {
-	display: none;
-	cursor: pointer;
-}
-
-@media screen and (max-width: 600px) {
-	.menu-toggle,
-	.main-navigation.toggled .nav-menu {
-		display: block;
-	}
-
-	.main-navigation ul {
-		display: none;
-	}
-}
 
 
-.slicknav_menu .slicknav_nav{
-	max-height: 85vh;
-	overflow: scroll;
-}
-
-
-/* =Content
------------------------------------------------ */
-
+/*---- PAGE CONTENT ----*/
 .byline,
 .updated {
 	display: none;
@@ -462,27 +388,6 @@ textarea {
 	margin: 0 0 1.5em;
 }
 
-
-/* =Asides
------------------------------------------------ */
-
-.blog .format-aside .entry-title,
-.archive .format-aside .entry-title {
-	display: none;
-}
-
-
-/* =Media
------------------------------------------------ */
-
-.page-content img.wp-smiley,
-.entry-content img.wp-smiley,
-.comment-content img.wp-smiley {
-	border: none;
-	margin-bottom: 0;
-	margin-top: 0;
-	padding: 0;
-}
 .wp-caption {
 	border: 1px solid #ccc;
 	margin-bottom: 1.5em;
@@ -524,10 +429,6 @@ object {
 	max-width: 100%;
 }
 
-
-/* =Navigation
------------------------------------------------ */
-
 .site-content [class*="navigation"] {
 	margin: 0 0 1.5em;
 	overflow: hidden;
@@ -540,44 +441,4 @@ object {
 	float: right;
 	text-align: right;
 	width: 50%;
-}
-
-/* =Comments
------------------------------------------------ */
-
-.comment-content a {
-	word-wrap: break-word;
-}
-.bypostauthor {
-}
-
-/* =Widgets
------------------------------------------------ */
-
-.widget {
-	margin: 0 0 1.5em;
-}
-
-/* Make sure select elements fit in widgets */
-.widget select {
-	max-width: 100%;
-}
-
-/* Search widget */
-.widget_search .search-submit {
-	display: none;
-}
-
-/* =Infinite Scroll
------------------------------------------------ */
-
-/* Globally hidden elements when Infinite Scroll is supported and in use. */
-.infinite-scroll .paging-navigation, /* Older / Newer Posts Navigation (always hidden) */
-.infinite-scroll.neverending .site-footer { /* Theme Footer (when set to scrolling) */
-	display: none;
-}
-
-/* When Infinite Scroll has reached its end we need to re-display elements that were hidden (via .neverending) before */
-.infinity-end.neverending .site-footer {
-	display: block;
 }

@@ -1,14 +1,3 @@
-@font-face {font-family: 'Proxima-Nova'; font-weight: bold; font-style: normal; src: url('fonts/2FE7B5_8_0.eot');src: url('fonts/2FE7B5_8_0.eot?#iefix') format('embedded-opentype'),url('fonts/2FE7B5_8_0.woff2') format('woff2'),url('fonts/2FE7B5_8_0.woff') format('woff'),url('fonts/2FE7B5_8_0.ttf') format('truetype');}
-   
-@font-face {font-family: 'Proxima-Nova'; font-weight: bold; font-style: italic; src: url('fonts/2FE7B5_9_0.eot');src: url('fonts/2FE7B5_9_0.eot?#iefix') format('embedded-opentype'),url('fonts/2FE7B5_9_0.woff2') format('woff2'),url('fonts/2FE7B5_9_0.woff') format('woff'),url('fonts/2FE7B5_9_0.ttf') format('truetype');}
-
-@font-face {font-family: 'Proxima-Nova'; font-weight: normal; font-style: normal; src: url('fonts/2FE7B5_A_0.eot');src: url('fonts/2FE7B5_A_0.eot?#iefix') format('embedded-opentype'),url('fonts/2FE7B5_A_0.woff2') format('woff2'),url('fonts/2FE7B5_A_0.woff') format('woff'),url('fonts/2FE7B5_A_0.ttf') format('truetype');}
-   
-@font-face {font-family: 'Proxima-Nova'; font-weight: normal; font-style: italic; src: url('fonts/2FE7B5_B_0.eot');src: url('fonts/2FE7B5_B_0.eot?#iefix') format('embedded-opentype'),url('fonts/2FE7B5_B_0.woff2') format('woff2'),url('fonts/2FE7B5_B_0.woff') format('woff'),url('fonts/2FE7B5_B_0.ttf') format('truetype');}
-
-@font-face {font-family: 'Proxima-Nova'; font-weight: normal; font-style: italic; src: url('fonts/2FE7B5_B_0.eot');src: url('fonts/2FE7B5_B_0.eot?#iefix') format('embedded-opentype'),url('fonts/2FE7B5_B_0.woff2') format('woff2'),url('fonts/2FE7B5_B_0.woff') format('woff'),url('fonts/2FE7B5_B_0.ttf') format('truetype');}
-
-@font-face {font-family: 'Mittelschrift';src: url('fonts/327BB5_0_0.eot');src: url('fonts/327BB5_0_0.eot?#iefix') format('embedded-opentype'),url('fonts/327BB5_0_0.woff2') format('woff2'),url('fonts/327BB5_0_0.woff') format('woff'),url('fonts/327BB5_0_0.ttf') format('truetype');}
 
 
 
@@ -350,6 +339,49 @@ button.search-submit{
     box-shadow: none;    
     padding: 0 3px 0 0;
     color: #a7a9ac;
+}
+
+
+form.mobile-search button[type=submit]{
+	display: inline-block;
+	color: #ffffff;
+	margin-left: 12px;
+}
+
+form.mobile-search input.search-field{
+	width: 80%;
+	color: #cccccc;
+	display: inline-block;
+	padding: 18px;
+	border: 2px solid white;
+	border-radius: 5px;
+	margin-top: 10px;
+	margin-bottom: 20px;
+}
+
+.slicknav_nav li.menu-item{
+	max-height: 80px;
+	transition: all .3s;
+}
+
+.slicknav_nav.search-selected li.menu-item{
+	max-height: 0;
+	overflow: hidden;
+	opacity: 0;
+	transition: all .3s;
+}
+
+div.search-close-button{
+	overflow: hidden;
+	max-height: 0;
+	margin: 0 0 0 15px;
+	transition: all .3s;
+}
+
+.slicknav_nav.search-selected div.search-close-button{
+	max-height: 100px;
+	margin: 20px 0 20px 15px;
+	transition: all .3s;
 }
 
 form.search-404{
