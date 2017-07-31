@@ -579,12 +579,12 @@ $theProducts = QueryProducts($filterSet);
 			var data = this.productsById[+id];
 			jQuery('div.details-panel .header-column .name').text(data.profile + " " + data.name);
 			jQuery('div.details-panel .header-column .subtitle').text(data.translatedstraincategoryproducttype);
-			jQuery('div.details-panel .overview-column .overview').css('display', data.actualthc.length > 0 && data.cbd > 0 ? "block" : "none");
-			jQuery('div.details-panel .overview-column .overview .thc').html(FormatPercent(data.actualthc, lang));
-			jQuery('div.details-panel .overview-column .overview .cbd').html(FormatPercent(data.cbd, lang));
+			jQuery('div.details-panel .overview-column .overview').css('display', data.status == "available" && data.actualthc.length > 0 && data.cbd > 0 ? "block" : "none");
 			jQuery('div.details-panel .product-link a').attr('href', data.productUrl);
 
 			if (data.status == "available") {
+				jQuery('div.details-panel .overview-column .overview .thc').html(FormatPercent(data.actualthc, lang));
+				jQuery('div.details-panel .overview-column .overview .cbd').html(FormatPercent(data.cbd, lang));
 				jQuery('div.details-panel .buy-column .price').show();
 				jQuery('div.details-panel .buy-column .price .price').text(data.priceText);
 				jQuery('div.details-panel .buy-column .price .buy').attr('href', data.storelink);
