@@ -30,11 +30,9 @@
 							<h4 class="subtitle"></h4>
 						</div>
 						<div class="overview-column">
-							<?php if ($product->status == "available"):?>
-								<div class="overview">
-									<?=__("THC:")?> <span class='thc percent'></span>&nbsp;&nbsp;<?=__('CBD:')?> <span class='cbd percent'>
-								</div>
-							<?php endif; ?>
+							<div class="overview">
+								<?=__("THC:")?> <span class='thc percent'></span>&nbsp;&nbsp;<?=__('CBD:')?> <span class='cbd percent'>
+							</div>
 							<?php if (get_current_language_code() == "en"): ?>
 								<div class="product-link">For more information about this product, click <a href="">here</a>.</div>
 							<?php else: ?>

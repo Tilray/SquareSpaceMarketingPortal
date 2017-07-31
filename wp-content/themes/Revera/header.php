@@ -56,12 +56,12 @@
 			<ul>
 			<?php 
 				function RenderMobileNavLI($text, $url){
-					?><li><a href="<?=$url?>"><?=$text?></a></li><?php
+					?><li class="menu-item"><a href="<?=$url?>"><?=$text?></a></li><?php
 				}
 				
 				function RenderMobileNavSubMenu($navItem, $items)
 				{
-					?><li><a href="<?=$navItem->url?>"><?=$navItem->title?></a><ul><?
+					?><li class="menu-item"><a href="<?=$navItem->url?>"><?=$navItem->title?></a><ul><?
 					foreach($items as $item){
 						?><li><a href="<?=$item->url?>"><?=$item->title?></a></li><?php
 					}
@@ -100,7 +100,15 @@
 						RenderMobileNavLI($navItem->title, $navItem->url);
 					}
 				}
-			?>
+
+				?><li>
+                    <div class="search-close-button">< BACK TO MENU</div>
+					<form method="get" class="mobile-search" id="search-form" action="https://www.tilray.ca/en/search-results">
+						<button type="submit" class="search-submit"><i class="icon-search"></i></button>
+						<input type="search" class="search-field" placeholder="Search Tilray" value="" name="term" title="Search for:">
+						<input type="hidden" name="lang" value="en">
+					</form>
+				</li>
 			</ul>
 		</div>
 		

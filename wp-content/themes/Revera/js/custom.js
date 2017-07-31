@@ -1,7 +1,5 @@
 jQuery(window).load(function() {
   /* Navigation */
-	console.log("BEGIN!");
-
 	jQuery('#submenu ul.sfmenu').superfish({ 
 		delay:       500,								// 0.1 second delay on mouseout 
 		animation:   { opacity:'show',height:'show'},	// fade-in and slide-down animation 
@@ -17,8 +15,7 @@ jQuery(window).load(function() {
 		animation:   { opacity:'show',height:'show'},	// fade-in and slide-down animation 
 		dropShadows: true,								// disable drop shadows 
 		cssArrows: false
-	});	  
-    
+	});	      
 	
 	jQuery(document).click(function(event) { 
 		if(jQuery(event.target).attr('id') === 'languagechooserbutton' && jQuery('#languagedropdown').hasClass('closed')) {
@@ -32,11 +29,20 @@ jQuery(window).load(function() {
 	});
 	
 	jQuery("#mobile-nav").slicknav({label:''});
+
+	jQuery('.slicknav_nav input[type=search]').click(function(){
+		jQuery('.slicknav_nav').addClass('search-selected');
+	});
+
+	jQuery('.slicknav_nav .search-close-button').click(function(){
+		jQuery('.slicknav_nav').removeClass('search-selected');
+	});
 	
 	
 	jQuery(".accordion").click(function(){
 		jQuery(this).toggleClass("open");
 	});
+
     
     function updateFooter(){
         var maxScroll = jQuery(document).height() - jQuery(window).height();
