@@ -701,6 +701,7 @@ class Product{
 	public $joinedstraincategories;
 	public $producttype;
 	public $accessorytype;
+	public $isaccessory;
 	public $translatedstraincategoryproducttype;
     public $actualthc;
 	public $thc;
@@ -722,6 +723,7 @@ class Product{
 	public $overview;
 	public $profile;	//value will be whichever of the last 3 profiles is set
 	public $priceText;
+	public $excerpt;
 
 	public function isActive($filters){
 		//loop through filters, check against active ones
@@ -788,14 +790,13 @@ class Product{
         $this->joinedstraincategories = $this->get_combined_strain_categories(get_post_meta($id, 'strain_category', true));
         $this->producttype = get_post_meta($id, 'product_type', true);
         $this->accessorytype = get_post_meta($id, 'accessory_type', true);
+        $this->isaccessory = ($this->producttype == 'accessory');
         $producttypefield = get_field_object('product_type', $id);
         $producttypevalue = $producttypefield['choices'][$this->producttype];
         $this->translatedstraincategoryproducttype = __($this->straincategory . " " . $producttypevalue);
         $this->cbd = trim(get_post_meta($id, 'cbd_level', true));
         $this->profile = trim(get_post_meta($id, 'chemical_type', true));
         $this->storelink = trim(get_post_meta($id, 'store_link', true));
-        $this->terpenes = get_field('terpenes_description', $id);
-        $this->cannabinoids = get_field('cannabinoid_description', $id);
 
         $this->overview = trim(get_post_meta($id, 'overview', true));
         if (strlen($this->overview) == 0)
@@ -812,13 +813,6 @@ class Product{
         $img_attrs = wp_get_attachment_image_src( $thumbID,'large' ); 
         $this->largeImage = $img_attrs[0];
 
-        $mobileImageID = get_post_meta($id, 'mobile_product_image', true);
-        $mobileImageAttrs = wp_get_attachment_image_src( $mobileImageID,'mobile-product-image' ); 
-        $this->mobileImage = $mobileImageAttrs[0];
-
-        $mobileAccessoryImageAttrs = wp_get_attachment_image_src( $mobileImageID,'mobile-product-image-accessory' ); 
-        $this->mobileAccessoryImage = $mobileAccessoryImageAttrs[0];
-
         $productUrl = get_the_permalink($id);
 
         $this->productUrl = $productUrl;
@@ -831,6 +825,8 @@ class Product{
         $this->priceText = format_price_for_current_locale(floatval($this->actualprice)) . ' ' . __($this->unitLabel);
 
         $this->initiallyActive = TRUE;
+
+        $this->excerpt = get_the_excerpt($this->id);
 
         $prodAtts = get_object_vars($this);
 		$nonProfileFiltersActive = true;
