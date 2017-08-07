@@ -316,7 +316,7 @@ body.archive.category-nouvelles #primary-menu-container li.menu-item-1174 a,
 }
 
 input.search-field{
-	height: 24px;
+	height: 28px;
     width: 70px;
 	padding: 5px 5%;
 	display: block;
@@ -341,53 +341,89 @@ button.search-submit{
     color: #a7a9ac;
 }
 
-
 form.mobile-search button[type=submit]{
 	display: inline-block;
 	color: #ffffff;
 	margin-left: 12px;
+	vertical-align: top;
+    margin-top: 20px;
 }
 
-form.mobile-search input.search-field{
+html body form.mobile-search input.search-field{
 	width: 80%;
 	color: #cccccc;
 	display: inline-block;
 	padding: 18px;
 	border: 2px solid white;
-	border-radius: 5px;
+	-webkit-appearance: none;
+	border-radius: 0px !important;
+	-webkit-border-radius:0px !important;
+	border-bottom-left-radius: 0px !important;
+	border-bottom-right-radius: 0px !important;
+	border-top-left-radius: 0px !important;
+	border-top-right-radius: 0px !important;
 	margin-top: 10px;
 	margin-bottom: 20px;
+	font-size: 16px;
 }
 
-.slicknav_nav li.menu-item{
-	max-height: 80px;
+.slicknav_nav ul.nav-items{
+	overflow: hidden;
+	max-height: 200vh;
 	transition: all .3s;
 }
 
+.slicknav_nav.search-selected ul.nav-items{
+	max-height: 0;
+	transition: all .3s;
+}
+
+.slicknav_nav li.menu-item{
+	transition: all .3s;
+}
+
+.slicknav_nav.search-selected,
 .slicknav_nav.search-selected li.menu-item{
+	opacity: 0;
+	transition: all .03s;
+	display: none;
+}
+
+.mobile-search-panel{
+	position: fixed;
+	top: 0;
+	left: 0;
 	max-height: 0;
 	overflow: hidden;
-	opacity: 0;
+	transition: all .3s;
+	z-index: 3000;
+    background: #4c4c4c;
+    width: 100%;
+    padding: 0 20px;
+}
+
+.mobile-search-panel.search-selected{
+	max-height: 100vh;
+    padding: 20px 20px;
 	transition: all .3s;
 }
 
 div.search-close-button{
-	overflow: hidden;
-	max-height: 0;
 	margin: 0 0 0 15px;
-	transition: all .3s;
-}
-
-.slicknav_nav.search-selected div.search-close-button{
-	max-height: 100px;
-	margin: 20px 0 20px 15px;
-	transition: all .3s;
+	color: #ffffff;
 }
 
 form.search-404{
     border: 2px solid #a7a9ac;
     display: inline-block;
     padding: 5px;
+    position: relative;
+}
+
+form.search-404 button.search-submit{
+    position: absolute;
+    top: 5px;
+    right: 5px;
 }
 
 form.search-404 label{
@@ -396,7 +432,7 @@ form.search-404 label{
 
 form.search-404 input.search-field{
 	width: 300px;
-	font-size: 15px;
+	font-size: 16px;
 }
 
 div.more-content{
@@ -2076,7 +2112,7 @@ div.product-details-row .details-panel .buy-column a.buy:hover{
 	font-size: 14px;
 	font-weight: bold;
 	text-transform: uppercase;
-	padding: 10px;
+	padding: 8px;
 	text-align: center;
     -webkit-transition: all .25s;
     transition: all .25s;
