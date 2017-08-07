@@ -28,13 +28,21 @@ jQuery(window).load(function() {
 		}        
 	});
 	
+
 	jQuery("#mobile-nav").slicknav({label:''});
 
 	jQuery('.slicknav_nav input[type=search]').click(function(){
 		jQuery('.slicknav_nav').addClass('search-selected');
+		jQuery('.mobile-search-panel').addClass('search-selected');
+		jQuery('.mobile-search-panel input[type=search]').focus();
+
+//		setTimeout(function(){ 
+//			jQuery('.mobile-search-panel').css('top', jQuery(window).scrollTop());
+//		}, 3000);
 	});
 
-	jQuery('.slicknav_nav .search-close-button').click(function(){
+	jQuery('.mobile-search-panel .search-close-button').click(function(){
+		jQuery('.mobile-search-panel').removeClass('search-selected');
 		jQuery('.slicknav_nav').removeClass('search-selected');
 	});
 	

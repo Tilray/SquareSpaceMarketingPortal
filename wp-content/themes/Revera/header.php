@@ -52,8 +52,16 @@
 <div id="page" <?=$structured_data_itemscope?> class="hfeed site <?=$ieClass?>">
 	<?php do_action( 'before' ); ?>
 	<header id="masthead" class="site-header" role="banner">
+		<div class="mobile-search-panel">
+			<div class="search-close-button">< BACK TO MENU</div>
+			<form method="get" class="mobile-search" id="search-form" action="https://www.tilray.ca/en/search-results">
+				<button type="submit" class="search-submit"><i class="icon-search"></i></button>
+				<input type="search" class="search-field" placeholder="Search Tilray" value="" name="term" title="Search for:">
+				<input type="hidden" name="lang" value="en">
+			</form>
+		</div>
 		<div id="mobile-nav">
-			<ul>
+			<ul class="nav-items">
 			<?php 
 				function RenderMobileNavLI($text, $url){
 					?><li class="menu-item"><a href="<?=$url?>"><?=$text?></a></li><?php
@@ -101,8 +109,8 @@
 					}
 				}
 
-				?><li>
-                    <div class="search-close-button">< BACK TO MENU</div>
+				?>
+				<li>
 					<form method="get" class="mobile-search" id="search-form" action="https://www.tilray.ca/en/search-results">
 						<button type="submit" class="search-submit"><i class="icon-search"></i></button>
 						<input type="search" class="search-field" placeholder="Search Tilray" value="" name="term" title="Search for:">
