@@ -583,11 +583,24 @@ $theProducts = QueryProducts($filterSet);
 			jQuery('div.details-panel .product-link a').attr('href', data.productUrl);
 
 			if (data.status == "available") {
-				jQuery('div.details-panel .overview-column .overview .thc').html(FormatPercent(data.actualthc, lang));
-				jQuery('div.details-panel .overview-column .overview .cbd').html(FormatPercent(data.cbd, lang));
+				if (data.isaccessory){
+					jQuery('div.details-panel .overview-column .overview .thc').html(data.excerpt);
+				}
+				else{
+					jQuery('div.details-panel .overview-column .overview .thc').html(FormatPercent(data.actualthc, lang));
+					jQuery('div.details-panel .overview-column .overview .cbd').html(FormatPercent(data.cbd, lang));
+				}
 				jQuery('div.details-panel .buy-column .price').show();
-				jQuery('div.details-panel .buy-column .price .price').text(data.priceText);
 				jQuery('div.details-panel .buy-column .price .buy').attr('href', data.storelink);
+
+				console.log(data.actualprice);
+				if(data.actualprice > 0 && !data.isaccessory){
+					jQuery('div.details-panel .buy-column .price .price').show();
+					jQuery('div.details-panel .buy-column .price .price').text(data.priceText);
+				}
+				else{
+					jQuery('div.details-panel .buy-column .price .price').hide();
+				}
 			}
 			else{
 				jQuery('div.details-panel .buy-column .price').hide();

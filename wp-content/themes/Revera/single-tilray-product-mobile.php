@@ -58,35 +58,15 @@ $prev_page_link = $is_accessories_page ? getAccessoriesPageLink() : getProductsP
 					<?php the_content(); ?>
 				</span>
 
-				<?php
-				if (strlen($thisProduct->terpenes) > 0) {
-					?>
-					<div class="terpenes">
-						<h3><?= __("Terpenes:")?></h3>
-						<?= __($thisProduct->terpenes) ?>
-					</div>
-					<?php
-				}
-
-				if (strlen($thisProduct->cannabinoids) > 0) {
-					?>
-					<div class="terpenes">
-						<h3><?= __("Cannabinoid Content:")?></h3>
-						<?= __($thisProduct->cannabinoids) ?>
-					</div>
-					<?php
-				}
-				?>
-
 				<p itemprop="offers" itemscope itemtype="http://schema.org/Offer" class="price-text text-text-text">
 					<?php
 					if ($thisProduct->status == 'available'){
-						if($itemPrice > 0)
+						if($itemPrice > 0 && !$is_accessories_page)
 						{
 							echo $priceText;
 						}
 
-						if ($itemStoreLink && ($is_accessories_page || $itemPrice > 0)){
+						if ($itemStoreLink){
 							?>
 							<a href='<?=$itemStoreLink?>' class='call-to-action-button track-product-buy-button'><span><?= __('Buy Now')?></span></a>
 							<?php
