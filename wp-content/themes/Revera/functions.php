@@ -238,6 +238,38 @@ function get_all_categories_for_post_from_set($postID, $validValues){
 	return $filteredCategories;
 }
 
+function get_random_related_posts($postID, $numPosts){
+	$allTheseTags = get_the_terms($postID, 'post_tag');
+	$filteredCategories = array();
+	$found_posts = array();
+	$dont_get_these_posts = array($postID);
+	
+	if ($allTheseTags){
+		foreach($allTheseTags as $thisTag)
+		{
+			$args=array('post_type'=>'post', 'posts_per_page'=>$numPosts, 'tag' => $thisTag->slug, 'post__not_in' => $dont_get_these_posts);
+			$tags_query = new WP_Query( $args );
+			$tagged_post_ids = wp_list_pluck( $tags_query->posts, 'ID' );
+			$found_posts = array_merge($found_posts, $tagged_post_ids);
+			$dont_get_these_posts = array_merge($dont_get_these_posts, $tagged_post_ids);
+		}
+	}
+
+	//remember, found_posts has one extra element because 
+	if (count($found_posts) < $numPosts){
+		$num_extra = $numPosts - count($found_posts);
+		$args=array('post_type'=>'post', 'posts_per_page'=>$num_extra, 'orderby' => 'post_date', 'order' => 'DESC', 'post__not_in' => $dont_get_these_posts);
+		$extra_query = new WP_Query( $args );
+		$tagged_post_ids = wp_list_pluck( $extra_query->posts, 'ID' );
+		$found_posts = array_merge($found_posts, $tagged_post_ids);
+	}
+
+	shuffle($found_posts);
+	$return_posts = array_slice($found_posts, 0, $numPosts);
+		
+	return $return_posts;
+}
+
 
 function render_left_nav($parentID, $pageID)
 {
