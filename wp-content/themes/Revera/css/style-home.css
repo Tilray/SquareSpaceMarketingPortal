@@ -1,0 +1,284 @@
+#slidebox{
+	max-width: 1719px;
+	max-height: 550px;
+	margin-left: auto;
+	margin-right: auto;
+	position: relative;
+	background: #ffffff;
+	padding-bottom: 32%;
+}
+
+.section-banner-slides{
+	width: 100%;
+	padding-bottom: 32%;
+	height: 0;
+}
+
+
+div#slidebox.flexslider{
+	background-image: url(https://www.tilray.ca/wp-content/uploads/2015/10/bcs_best.jpg);
+	background-size: cover;
+	background-repeat: no-repeat;
+}
+
+.flex-caption{
+	margin: 0;
+	z-index: 120;
+	width: 100%;
+	text-align: center;
+	top:0; 
+	position: absolute;
+	height: 100%;
+	pointer-events: none;
+}	
+	
+.flex-caption h1,
+.flex-caption h2,
+.flex-caption h3{
+	width: 100%;
+	margin: 0;
+	padding: 0;
+}
+
+.flexslider .slides li{
+	position: relative;
+}
+
+.homepage-profile-banner{
+	width: 45%;
+	padding-left: 7%;
+	height: 100%;
+	display: table;
+}
+
+.homepage-profile-banner > div{
+	display: table-cell;
+	height: 100%;
+	vertical-align: middle;
+	text-align: left;
+}
+
+.homepage-profile-banner h1{
+	color: #818486;
+	font-size: 5vw;
+	margin-bottom: 8px;
+}
+
+.homepage-profile-banner.french h1{
+	font-size: 4.0vw;
+}
+
+
+@media (min-width: 1100px){
+	.homepage-profile-banner h1{
+		font-size: 52px;
+	}	
+
+	.homepage-profile-banner.french h1{
+		font-size: 44px;
+	}	
+}
+
+.homepage-profile-banner h1.lighter{
+	font-weight: 300;
+}
+
+.homepage-profile-banner .color-stripe{
+	height: 10px;
+	background-image: url(./images/homepagestripes.png);
+	background-size: cover;
+}
+
+/* Homepage */
+.homepage-header-container{
+	height: 32vw;
+	background-size: cover;
+	background-position: center;
+}
+
+.homepage-header-container a{
+	display: block;
+	height: 100%;
+}
+
+.row.homepage-points{
+	margin-top: 100px;
+}
+
+.homepage-point{
+	text-align: center;
+	padding: 0 40px;
+}
+
+.homepage-point img{
+	height: 100px;
+	padding: 7px;
+	-webkit-transition: all .1s;
+	transition: all .1s;
+}
+.homepage-point:hover img{
+	padding: 0;
+	-webkit-transition: all .25s;
+	transition: all .25s;
+}
+
+.homepage-feature-section {
+	margin: 70px 0;
+	display: table;
+}
+
+.homepage-feature-section > div{
+	display: table-cell;
+	height: 100%;
+	vertical-align: middle;
+}
+
+.homepage-feature-section > div.image{
+	width: 60%;
+}
+
+.homepage-feature-section > div.content{
+	width: 40%;
+}
+
+.homepage-feature-section .video-container{
+	padding-bottom: 33.8%;
+}
+
+@media (max-width: 768px){
+	.row.homepage-points{
+		margin-top: 30px;
+	}
+
+	.homepage-point{
+		margin-bottom: 30px;
+	}
+
+	.homepage-feature-section .video-container{
+		padding-bottom: 56.25%;
+	}
+
+	.homepage-feature-section {
+		margin: 0 0 30px 0;
+		display: block;
+	}
+
+	.homepage-feature-section > div{
+		display: block;
+		height: inherit;
+	}
+
+	.homepage-feature-section > div.image,
+	.homepage-feature-section > div.content{
+		width: 100%;
+	}
+}
+
+
+.homepage-feature-section.left > div.content{
+	padding-left: 50px;
+}
+
+.homepage-feature-section.right > div.content{
+	padding-right: 50px;
+}
+
+div.homepage-blog-container {
+	border-top: 1px solid #cccccc;
+}
+
+div.homepage-blog-container h2{
+	margin-top: 10px;
+	margin-bottom: 20px;
+}
+
+@media (max-width: 768px){
+	div.homepage-blog-container h2{
+		margin-top: 25px;
+		margin-bottom: 5px;
+	}
+}
+
+div.homepage-blog-list {
+	display: inline-block;
+	width: 360px;
+	height: 280px;
+	margin-right: 27px;
+	vertical-align: top;
+}
+
+div.homepage-blog-list img{
+	outline: solid 1px #a7a9ac;
+}
+
+.homepage-blog-list h3{
+	padding-top: 6px;
+	width: -moz-max-content;
+	width: -webkit-max-content;
+	width: max-content;	
+	margin: 0;
+	font-size: 15px;
+}
+
+.homepage-blog-list h4 {
+	margin: 0;
+	font-size: 12px;
+	color: #a7a9ac;
+	padding-top: 5px;
+	padding-bottom: 15px;
+}
+
+.section-wide{
+	margin-top:40px;
+}
+
+.flexslider div.std-banner h2{
+  padding-left: 4.1%; 
+  font-size: 2.3vw; 
+  color: #ABABAB; 
+  text-transform: none; 
+  text-align: left; 
+  letter-spacing: 0; 
+  position: absolute; 
+}
+.flexslider div.std-banner h2.line1 {
+  top:1.85vw; 
+  font-weight:bold;
+}
+.flexslider div.std-banner h2.line2 {
+  top:5vw;
+  font-weight:inherit;
+}
+.flexslider div.std-banner h2.line3 {
+  bottom: 2.25vw;
+  font-weight:inherit;
+  font-size: 1vw;
+  width: 35%;
+  letter-spacing: 0; 
+}
+
+
+@media screen and (min-width: 1719px) {
+	.flexslider div.std-banner h2{
+	  font-size: 53px; 
+	  letter-spacing: -1.8px; 
+	}
+	.flexslider div.std-banner h2.line1 {
+	  top:33.3px; 
+	}
+	.flexslider div.std-banner h2.line2 {
+	  top:110px; 
+	}
+	.flexslider div.std-banner h2.line3 {
+	  bottom: 30px;
+	  font-size: 17.18px;
+	}
+}
+
+
+
+@media screen and (max-width: 500px) {		
+	.flex-caption h2{
+		font-size: 18px;
+	}
+}

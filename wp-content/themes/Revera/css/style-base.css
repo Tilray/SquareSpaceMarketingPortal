@@ -28,12 +28,65 @@ body{
 	vertical-align: baseline;
 }
 
-h1, h2, h3, h4, h5, h6{
+h1, h2, h3, h4, h5, h6 {
+	font-family: 'Proxima-Nova', serif;
+	color: #084875;
+	max-width: 100%;
+	font-weight: bold;
+	font-style: normal;
 	border: 0;
 	outline: 0;
 	padding: 0;
 	vertical-align: baseline;	
 }
+
+h1 { font-size: 32px; }
+
+h1.entry-title{
+	margin-top:10px;
+	margin-bottom: 20px;
+	font-weight: bold;
+	font-size: 36px;
+	color: #000;
+}
+
+h1.entry-title a:link, h1.entry-title a:visited{
+	color: #000;
+}
+
+.page-head h1, 
+h2.mockH1{
+	font-size: 30px;
+	text-transform: uppercase;
+	font-weight: bold;
+	border-bottom:1px solid #cccccc;
+}
+
+.page-head h1.mockH2{
+    text-transform: none;
+    border-bottom: none;
+}
+
+h2, h1.mockH2, .page-head h1.mockH2 { font-size: 26px; }
+h3 { font-size: 20px; }
+h4 { font-size: 18px; }
+h5 { font-size: 18px; }
+h6 { font-size: 14px; }
+
+@media (max-width: 768px){
+	body h1, body h2.mockH1 { font-size: 26px; }
+	body h2, body h1.mockH2, body .page-head h1.mockH2 { font-size: 22px; }
+	body .page-head h1, body h2.mockH1{font-size: 26px;}
+
+	body,
+	button,
+	input,
+	select,
+	textarea {
+		font-size: 14px;
+	}
+}
+
 
 blockquote{
 	font-family: inherit;
@@ -144,18 +197,26 @@ a img {
 
 /* =Global
 ----------------------------------------------- */
+code{
+	white-space: normal;
+}
+
 
 body,
 button,
 input,
 select,
 textarea {
-	color: #404040;
-	font-family: sans-serif;
-	font-size: 16px;
-	font-size: 1.6rem;
-	line-height: 1.5;
+	color: #666;
+	font-family: 'Proxima-Nova',serif;
+	font-size: 17px;
+	line-height: 1.6;
+	font-weight: normal;
+	font-style: normal;
 }
+
+
+
 
 /* Headings */
 h1,h2,h3,h4,h5,h6 {
@@ -305,6 +366,10 @@ textarea {
 	width: 98%;
 }
 
+#masthead{
+	position: relative;
+}
+
 
 /* Alignment */
 .alignleft {
@@ -321,6 +386,10 @@ textarea {
 	clear: both;
 	display: block;
 	margin: 0 auto;
+}
+
+div.clearfix{
+	height: 0;
 }
 
 /* Text meant only for screen readers */
@@ -447,4 +516,15 @@ object {
 	-webkit-box-shadow: 0px -5px 15px 5px rgba(0,0,0,.3);
 	-moz-box-shadow: 0px -5px 15px 5px rgba(0,0,0,.3);
 	box-shadow: 0px -5px 15px 5px rgba(0,0,0,.3);
+}
+
+body a:focus {
+  outline: 5px auto -webkit-focus-ring-color;
+  outline-offset: 0;
+}
+
+.entry-meta{
+	font-weight: bold;
+	text-transform: uppercase;
+	font-size: 12px;
 }

@@ -1,0 +1,168 @@
+#bottom{
+	padding: 20px 0px 40px 0px;
+	background: #3b3b3b;
+	border-top:5px solid #3caefb;
+}
+
+#bottom ul{
+	margin:0px 0px;
+	padding:0px;
+}
+
+h3.bothead{
+    font-size: 16px;
+    margin-bottom: 10px;
+    padding: 10px 0px;
+	color:#fff;
+	text-transform: uppercase;
+	}
+	
+.botwid{
+	color: #aaa;
+	}
+	
+.botwid ul {
+	list-style-type: none;
+	margin:  0px;
+	padding: 0px 0px 0px 0px ;
+
+
+	}
+.botwid li{
+	list-style-type: none;
+	margin: 0 ;
+	padding: 0px 0px;
+    border-bottom: 1px dotted rgba(255,255,255,.2);
+	}
+.botwid ul ul  {
+	list-style-type: none;
+	margin: 0;
+	padding: 0px 0px 0px 0px;
+	background-repeat:no-repeat;
+		}
+
+.botwid ul ul ul{
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	border:0;
+	}
+
+.botwid ul ul ul ul{
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	border:0;
+
+	}
+
+.botwid ul li {
+	height:100%;
+	line-height:18px;
+	clear: left;	
+	list-style-type: none;
+	color: #aaa;
+	}
+	
+.botwid ul li a:link, .botwid ul li a:visited  {
+	color: #aaa;
+	text-decoration: none;
+	padding: 7px 0px 7px 0px;
+	display:block;
+	}
+
+.botwid ul li a:hover{
+	color: #fff;
+	}
+
+.botwid p{
+	padding: 5px 0px;
+	margin:0;
+	line-height:150%;
+	
+	}
+
+.botwid table {
+	width:100%;
+	text-align:center;
+	color: #818181;
+	}		
+		
+.botwid ul#recentcomments li.recentcomments {
+    padding:7px 0;
+}
+
+
+
+/* Footer */
+.site-footer{
+	width: 100%;
+	font-size: 12px;
+	position: absolute;
+	bottom: 0;
+}
+
+.site-footer.mobile{
+	text-align: center;
+}
+
+.site-footer .color-wrapper {
+	min-height: 60px;
+	width: 100%;
+	background:#444444;	
+}
+
+.site-footer .social-icons-container{
+	padding: 10px 0px;
+    display:none;
+}
+
+
+.site-footer .row {
+    margin: 0;
+}
+
+footer ul li.mobile-menu-line-break{
+    display:none;
+}
+
+.site-footer li a {
+	white-space: nowrap;
+}
+
+.fcred{
+	padding: 10px;
+	color: #eee;
+}
+
+.fcred a:link, .fcred a:visited{
+	color:#eee;
+}
+
+.sticky-footer-content{
+	position: fixed;
+	bottom: 0;
+	width: 100%;
+}
+
+footer.expanded .sticky-footer-content
+{
+	position: relative;
+}
+
+
+.no-hide-sticky-footer-content{
+	position: fixed;
+	bottom: 0;
+	width: 100%;
+}
+
+ul.copyright-footer{
+	display: inline;
+}
+
+ul.copyright-footer li {
+	list-style-type: none;
+	display: inline-block;
+	margin-right: 40px;
+}

@@ -133,3 +133,7 @@ p.back-to-top a i {
 	}
 
 }
+
+.page-template-leftandcenternavselfandchildren-page #right-pane{
+    padding-top:16px;
+}

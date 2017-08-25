@@ -143,6 +143,8 @@ function web2feel_scripts() {
 	wp_enqueue_style( 'theme-footer', get_template_directory_uri() . '/css/style-footer.css');
 	wp_enqueue_style( 'theme-home', get_template_directory_uri() . '/css/style-home.css');
 	wp_enqueue_style( 'theme-leftnavpages', get_template_directory_uri() . '/css/style-leftnavpages.css');
+	wp_enqueue_style( 'theme-comments', get_template_directory_uri() . '/css/style-comments.css');
+	wp_enqueue_style( 'theme-products', get_template_directory_uri() . '/css/style-products.css');
 
 //	wp_enqueue_style( 'fontawesome', '//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css');
 
@@ -236,38 +238,6 @@ function get_all_categories_for_post_from_set($postID, $validValues){
 	}
 		
 	return $filteredCategories;
-}
-
-function get_random_related_posts($postID, $numPosts){
-	$allTheseTags = get_the_terms($postID, 'post_tag');
-	$filteredCategories = array();
-	$found_posts = array();
-	$dont_get_these_posts = array($postID);
-	
-	if ($allTheseTags){
-		foreach($allTheseTags as $thisTag)
-		{
-			$args=array('post_type'=>'post', 'posts_per_page'=>$numPosts, 'tag' => $thisTag->slug, 'post__not_in' => $dont_get_these_posts);
-			$tags_query = new WP_Query( $args );
-			$tagged_post_ids = wp_list_pluck( $tags_query->posts, 'ID' );
-			$found_posts = array_merge($found_posts, $tagged_post_ids);
-			$dont_get_these_posts = array_merge($dont_get_these_posts, $tagged_post_ids);
-		}
-	}
-
-	//remember, found_posts has one extra element because 
-	if (count($found_posts) < $numPosts){
-		$num_extra = $numPosts - count($found_posts);
-		$args=array('post_type'=>'post', 'posts_per_page'=>$num_extra, 'orderby' => 'post_date', 'order' => 'DESC', 'post__not_in' => $dont_get_these_posts);
-		$extra_query = new WP_Query( $args );
-		$tagged_post_ids = wp_list_pluck( $extra_query->posts, 'ID' );
-		$found_posts = array_merge($found_posts, $tagged_post_ids);
-	}
-
-	shuffle($found_posts);
-	$return_posts = array_slice($found_posts, 0, $numPosts);
-		
-	return $return_posts;
 }
 
 
@@ -750,8 +720,6 @@ class Product{
     public $initiallyActive;
     public $primaryStrainCategory;
     public $primaryStrainCategoryName;
-    public $terpenes;
-    public $cannabinoids;
 	public $overview;
 	public $profile;	//value will be whichever of the last 3 profiles is set
 	public $priceText;
