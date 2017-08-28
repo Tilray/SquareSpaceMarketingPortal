@@ -633,93 +633,93 @@ ul.product-filters li.profile-filter input[type=checkbox] ~ label {
 ul.product-filters li.profile-filter.profile-t100 label{
 	border-color: #ffc42f;
 	color: #ffc42f;
-	background-image: url(./images/filterbackground_t100_empty.svg);
+	background-image: url(../images/filterbackground_t100_empty.svg);
 }
 
 ul.product-filters li.profile-filter.profile-t100 input[type=checkbox]:checked ~ label {
-	background-image: url(./images/filterbackground_t100.svg);
+	background-image: url(../images/filterbackground_t100.svg);
 }
 
 ul.product-filters li.profile-filter.profile-t200 label{
 	border-color: #f68c28;
 	color: #f68c28;
-	background-image: url(./images/filterbackground_t200_empty.svg);
+	background-image: url(../images/filterbackground_t200_empty.svg);
 }
 
 ul.product-filters li.profile-filter.profile-t200 input[type=checkbox]:checked ~ label {
-	background-image: url(./images/filterbackground_t200.svg);
+	background-image: url(../images/filterbackground_t200.svg);
 }
 
 ul.product-filters li.profile-filter.profile-t300 label{
 	border-color: #ee4023;
 	color: #ee4023;
-	background-image: url(./images/filterbackground_t300_empty.svg);
+	background-image: url(../images/filterbackground_t300_empty.svg);
 }
 
 ul.product-filters li.profile-filter.profile-t300 input[type=checkbox]:checked ~ label {
-	background-image: url(./images/filterbackground_t300.svg);
+	background-image: url(../images/filterbackground_t300.svg);
 }
 
 
 ul.product-filters li.profile-filter.profile-c100 label{
 	border-color: #b0e2f9;
 	color: #b0e2f9;
-	background-image: url(./images/filterbackground_c100_empty.svg);
+	background-image: url(../images/filterbackground_c100_empty.svg);
 }
 
 ul.product-filters li.profile-filter.profile-c100 input[type=checkbox]:checked ~ label {
-	background-image: url(./images/filterbackground_c100.svg);
+	background-image: url(../images/filterbackground_c100.svg);
 }
 
 ul.product-filters li.profile-filter.profile-c200 label{
 	border-color: #48c6ec;
 	color: #48c6ec;
-	background-image: url(./images/filterbackground_c200_empty.svg);
+	background-image: url(../images/filterbackground_c200_empty.svg);
 }
 
 ul.product-filters li.profile-filter.profile-c200 input[type=checkbox]:checked ~ label {
-	background-image: url(./images/filterbackground_c200.svg);
+	background-image: url(../images/filterbackground_c200.svg);
 }
 
 ul.product-filters li.profile-filter.profile-c300 label{
 	border-color: #2992d0;
 	color: #2992d0;
-	background-image: url(./images/filterbackground_c300_empty.svg);
+	background-image: url(../images/filterbackground_c300_empty.svg);
 }
 
 ul.product-filters li.profile-filter.profile-c300 input[type=checkbox]:checked ~ label {
-	background-image: url(./images/filterbackground_c300.svg);
+	background-image: url(../images/filterbackground_c300.svg);
 }
 
 
 ul.product-filters li.profile-filter.profile-tc100 label{
 	border-color: #94d1b6;
 	color: #94d1b6;
-	background-image: url(./images/filterbackground_tc100_empty.svg);
+	background-image: url(../images/filterbackground_tc100_empty.svg);
 }
 
 ul.product-filters li.profile-filter.profile-tc100 input[type=checkbox]:checked ~ label {
-	background-image: url(./images/filterbackground_tc100.svg);
+	background-image: url(../images/filterbackground_tc100.svg);
 }
 
 ul.product-filters li.profile-filter.profile-tc200 label{
 	border-color: #5bae6d;
 	color: #5bae6d;
-	background-image: url(./images/filterbackground_tc200_empty.svg);
+	background-image: url(../images/filterbackground_tc200_empty.svg);
 }
 
 ul.product-filters li.profile-filter.profile-tc200 input[type=checkbox]:checked ~ label {
-	background-image: url(./images/filterbackground_tc200.svg);
+	background-image: url(../images/filterbackground_tc200.svg);
 }
 
 ul.product-filters li.profile-filter.profile-tc300 label{
 	border-color: #0b897b;
 	color: #0b897b;
-	background-image: url(./images/filterbackground_tc300_empty.svg);
+	background-image: url(../images/filterbackground_tc300_empty.svg);
 }
 
 ul.product-filters li.profile-filter.profile-tc300 input[type=checkbox]:checked ~ label {
-	background-image: url(./images/filterbackground_tc300.svg);
+	background-image: url(../images/filterbackground_tc300.svg);
 }
 
 li.profile-filter span{
