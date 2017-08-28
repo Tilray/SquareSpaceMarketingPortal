@@ -600,7 +600,7 @@ h2.site-title{
 h1.site-title a,
 h2.site-title a {
 	text-indent: -999em;
-	background-image: url('images/tilray-nav-logo.svg');
+	background-image: url('../images/tilray-nav-logo.svg');
 	display: block;
 	width: 211px;
 	height: 37px;
@@ -613,5 +613,18 @@ h2.site-title a {
 
 html[lang='fr-CA'] h1.site-title a,
 html[lang='fr-CA'] h2.site-title a {
-	background-image: url('images/tilray-nav-logo-fr.svg');
+	background-image: url('../images/tilray-nav-logo-fr.svg');
+}
+
+a.skip-to-content{
+	position: absolute;
+	left: -10000px;
+	top: 20px;
+	background: #ffffff;
+	z-index: 10000;
+	padding: 10px;
+}
+
+a.skip-to-content:focus{
+	left: 20px;
 }

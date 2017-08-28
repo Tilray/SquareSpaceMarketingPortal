@@ -50,6 +50,7 @@
 	}
 ?>
 <div id="page" <?=$structured_data_itemscope?> class="hfeed site <?=$ieClass?>">
+	<a href="#content" class="skip-to-content">Skip to content</a>
 	<?php do_action( 'before' ); ?>
 	<header id="masthead" class="site-header" role="banner">
 		<div class="mobile-search-panel">
