@@ -115,17 +115,8 @@ get_header(); ?>
 					<div class="blog-post-preview col-sm-4 col-xs-12">
 						<?php
 						$post_id = get_sub_field('news_posts');
-						$image = get_image_url_from_image_id(get_sub_field('news_posts'), 'blog-preview');
-						if($image) {?>
-							<a href="<?php the_permalink($post_id); ?>" class="prevent-reflow">
-								<img class="blog-preview" src="<?= $image ?>" alt="<?= get_the_title($post_id); ?>"/>
-							</a>				
-						<?php }?>
-						<a href="<?php the_permalink($post_id); ?>"><h2><?= get_the_title($post_id); ?></h2></a>
-						<p>
-							<?php echo get_the_excerpt($post_id); ?>
-							<a class="read-more-link" href="<?php the_permalink($post_id); ?>"><?= __('Read more') ?> &raquo;</a>
-						</p>
+						render_single_news_post($post_id);
+						?>
 					</div>
 					<?php 
 					$numRendered++;

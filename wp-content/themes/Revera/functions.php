@@ -279,23 +279,21 @@ function render_left_nav($parentID, $pageID)
 }
 
 function render_single_news_post($postID){
-?>
-	<div class="blog-post-preview col-sm-6 col-md-4">
-		<?php
-		$thumbID = get_post_thumbnail_id($postID);
-		$img_attrs = wp_get_attachment_image_src( $thumbID,'blog-preview' ); 
-		$image = $img_attrs[0];
-		if($image) {?>
-			<a href="<?= get_permalink($postID) ?>" class="prevent-reflow">
-				<img class="blog-preview" src="<?= $image ?>" alt="<?php the_title(); ?>"/>
-			</a>				
-		<?php }?>
+	$image = get_image_url_from_image_id($postID, 'blog-preview');
+	if($image) {?>
+		<a href="<?= get_permalink($postID); ?>">
+			<div class="prevent-reflow">
+				<img class="blog-preview" src="<?= $image ?>" alt="<?= get_the_title($postID); ?>"/>
+			</div>
+			<h2><?= get_the_title($postID); ?></h2>
+		</a>				
+	<?php } else {?>
 		<h2><a href="<?= get_permalink($postID) ?>"><?= get_the_title($postID) ?></a></h2>
-		<p>
-			<?= get_the_excerpt($postID) ?>
-			<a class="read-more-link" href="<?= get_permalink($postID) ?>"><?= __('Read more') ?> &raquo;</a>
-		</p>
-	</div>
+	<?php } ?>
+	<p>
+		<?= get_the_excerpt($postID) ?>
+		<a class="read-more-link" href="<?= get_permalink($postID) ?>"><?= __('Read more') ?> &raquo;</a>
+	</p>
 <?php
 }
 
@@ -307,20 +305,9 @@ function render_news_section($args, $showPagination = false, $pageLinkNumber = 0
 		<!-- the loop -->
 		<?php while ( $wp_query->have_posts() ) : $wp_query->the_post(); ?>
 			<div class="blog-post-preview col-sm-4">
-				<?php
-				$thumbID = get_post_thumbnail_id();
-				$img_attrs = wp_get_attachment_image_src( $thumbID,'blog-preview' ); 
-				$image = $img_attrs[0];
-				if($image) {?>
-					<a href="<?php the_permalink(); ?>" class="prevent-reflow">
-						<img class="blog-preview" src="<?= $image ?>" alt="<?php the_title(); ?>"/>
-					</a>				
-				<?php }?>
-				<a href="<?php the_permalink(); ?>"><h2><?php the_title(); ?></h2></a>
-				<p>
-					<?php echo get_the_excerpt(); ?>
-					<a class="read-more-link" href="<?php the_permalink(); ?>"><?= __('Read more') ?> &raquo;</a>
-				</p>
+			<?php
+				render_single_news_post(get_the_ID());
+			?>
 			</div>
 			<?php 
 			$numRendered++;

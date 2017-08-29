@@ -74,11 +74,13 @@
 div.slicknav_menu,
 #mobile-nav {
 	display: none;
+	visibility: hidden;
 }
 
 @media screen and (max-width: 991px){
 	div.slicknav_menu {
 		display: block;
+		visibility: visible;
 		position: fixed;
 		width: 100%;
 		z-index: 300;
@@ -182,6 +184,8 @@ nav.main-navigation{
 
 body.archive.category-news #primary-menu-container li.menu-item-news a,	/* page 2 and greater of news archive doesn't get current-menu-item, so have to fix manually */
 body.archive.category-nouvelles #primary-menu-container li.menu-item-1174 a,	
+body.single-post #primary-menu-container li.menu-item-news a,	/* page 2 and greater of news archive doesn't get current-menu-item, so have to fix manually */
+body.single-post #primary-menu-container li.menu-item-1174 a,	
 #primary-menu-container li.current_page_ancestor a,
 #primary-menu-container li.current-page-ancestor a,
 #primary-menu-container li.current-menu-item a {
@@ -294,8 +298,7 @@ body.archive.category-nouvelles #primary-menu-container li.menu-item-1174 a,
 }
 
 #primary-menu-container form{
-    display: inline;
-    float: right;
+    display: inline-block;
     margin: 15px 0 15px 30px;    
     border: 1px solid #a7a9ac;
 }
@@ -368,6 +371,13 @@ html body form.mobile-search input.search-field{
     background: #4c4c4c;
     width: 100%;
     padding: 0 20px;
+    visibility: hidden;
+}
+
+@media screen and (max-width: 991px){
+	.mobile-search-panel{
+		visibility: visible;
+	}
 }
 
 .mobile-search-panel.search-selected{
@@ -392,12 +402,12 @@ div.search-close-button{
 	height:25px;
 	font-size: 12px;
 	line-height: 25px;
+	text-align: right;
 }
 
 span.social-connections{
-	display: block;
-	float: right;
-	padding-top: 2px;
+	display: inline-block;
+	line-height: 0;
 }
 
 span.social-connections a{
@@ -407,20 +417,24 @@ span.social-connections a{
 	padding-right: 0;
 }
 
+span.social-connections a i{
+	position: relative;
+	top: 4px;
+}
+
 ul#login-menu li
 {
-	display: inline;
+	display: inline-block;
 	list-style-type: none;
-	float: right;
 	text-align: center;
 	height: 100%;
 }
 
 ul#login-menu {
 	height: 100%;
-	float: right;
 	width: 400px;
 	margin: 0;
+	display: inline-block;
 }
 
 ul#login-menu li a {
@@ -439,15 +453,15 @@ ul#login-menu li a,
 #language-chooser {
 	background-color: #3caefb;
 	width: 110px;
-	float: right;
 	text-align: center;
 	height: 100%;
 	margin-left: 5px;
+	display: inline-block;
 	text-transform: uppercase;
 }
 
 
-ul#login-menu li:last-child a{
+ul#login-menu li:first-child a{
 	background-color: #ffb12f;
 	width: 150px;
 }
@@ -462,7 +476,7 @@ ul#login-menu li:last-child a{
 .language-chooser a:hover
 {
 	position: relative;
-	display: inline;
+	display: inline-block;
 	color: #fff;
 }
 
@@ -495,6 +509,7 @@ ul#login-menu li:last-child a{
 }	
 #languagedropdown.closed{
 	display: none;
+	visibility: hidden;
 }	
 
 #languagedropdownwrapper{
@@ -524,20 +539,18 @@ ul.lang-chooser-dropdown li a:visited{
 	padding:0px 0px;
 	margin: 0px 0px;
 	height:30px;
-	float: right;
-	display: inline;
+	display: inline-block;
 	}
 	
 #loginmenu ul {
 	width: auto;
-	float:right;
+	display: inline-block;
 	list-style: none;
 	margin: 0;
 	padding: 0 0px;
 	}
 	
 #loginmenu li {
-	float: left;
 	list-style: none;
 	margin: 0;
 	padding: 0;

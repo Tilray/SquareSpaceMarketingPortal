@@ -515,9 +515,10 @@ object {
 	box-shadow: 0px -5px 15px 5px rgba(0,0,0,.3);
 }
 
-body a:focus {
-  outline: 5px auto -webkit-focus-ring-color;
-  outline-offset: 0;
+a:focus {
+	outline: 2px solid blue;
+	outline: auto 2px Highlight;
+	outline: auto 5px -webkit-focus-ring-color;
 }
 
 .entry-meta{

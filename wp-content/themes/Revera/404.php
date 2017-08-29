@@ -51,11 +51,15 @@ get_header(); ?>
 							$post2 = get_field('the_404_page_post_2', 'options');
 
 							if ($post1){
-								render_single_news_post($post1->ID);
+								?><div class="blog-post-preview col-sm-6 col-md-4"><?php
+									render_single_news_post($post1->ID);
+								?></div><?php
 							}
 
 							if ($post2){
-								render_single_news_post($post2->ID);								
+								?><div class="blog-post-preview col-sm-6 col-md-4"><?php
+									render_single_news_post($post2->ID);								
+								?></div><?php
 							}
 						?>
 						</div>
