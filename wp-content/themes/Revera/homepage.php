@@ -42,18 +42,15 @@ get_header(); ?>
 				?>
 				<div class="row">
 					<div class="col-sm-4 col-xs-12 homepage-point">
-						<a href="<?= $link1 ?>"><img src='<?=get_template_directory_uri()?>/images/homeicon1.svg'></a>
-						<a href="<?= $link1 ?>"><h2><?=__('Shop Now')?></h2></a>
+						<a href="<?= $link1 ?>"><img src='<?=get_template_directory_uri()?>/images/homeicon1.svg'><h2><?=__('Shop Now')?></h2></a>
 						<p><?=__('Shop from our collection of GMP-certified medical cannabis')?></p>
 					</div>
 					<div class="col-sm-4 col-xs-12 homepage-point">
-						<a href="<?= $link2 ?>"><img src='<?=get_template_directory_uri()?>/images/homeicon2.svg'></a>
-						<a href="<?= $link2 ?>"><h2><?=__('Register')?></h2></a>
+						<a href="<?= $link2 ?>"><img src='<?=get_template_directory_uri()?>/images/homeicon2.svg'><h2><?=__('Register')?></h2></a>
 						<p><?=__('Become a Tilray customer')?></p>
 					</div>
 					<div class="col-sm-4 col-xs-12 homepage-point">
-						<a href="<?= $link3 ?>"><img src='<?=get_template_directory_uri()?>/images/homeicon3.svg'></a>
-						<a href="<?= $link3 ?>"><h2><?=__('Questions?')?></h2></a>
+						<a href="<?= $link3 ?>"><img src='<?=get_template_directory_uri()?>/images/homeicon3.svg'><h2><?=__('Questions?')?></h2></a>
 						<p><?=__('Contact our Patient Services team at 1-844-845-7291, available 24 hours a day, 7 days a week.')?></p>
 					</div>
 				</div>
