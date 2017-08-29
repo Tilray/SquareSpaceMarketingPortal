@@ -123,15 +123,6 @@
 		
 		<div class="container">
 			<div class="login-nav-wrapper">
-				<?php 
-				if (function_exists("get_current_language_name")){
-					?><div id="language-chooser" class="language-chooser"><a id="languagechooserbutton"><?php 
-						echo get_current_language_name();
-						?><span class="caret"></span></a></div>
-				<?php
-				}
-				?>
-				<?php wp_nav_menu( array( 'container' => '', 'theme_location' => 'login','container_class' => 'login-menu-container','menu_id'=>'login-menu' ,'menu_class'=>'login-menu' ) ); ?>
 				<span class="social-connections">
 					<a href="https://www.facebook.com/tilray" target="_blank">
 						<i class="icon-facebook"></i>
@@ -142,7 +133,15 @@
 					<a href="https://www.instagram.com/tilraycanada/" target="_blank">
 						<i class="icon-instagram"></i>
 					</a>
-				</span>
+				</span><?php wp_nav_menu( array( 'container' => '', 'theme_location' => 'login','container_class' => 'login-menu-container','menu_id'=>'login-menu' ,'menu_class'=>'login-menu' ) ); ?>
+				<?php 
+				if (function_exists("get_current_language_name")) :
+					?><div id="language-chooser" class="language-chooser"><a id="languagechooserbutton" href><?php 
+						echo get_current_language_name();
+						?><span class="caret"></span></a></div>
+				<?php
+				endif;
+				?>
             </div>
 			<div id="languagedropdownwrapper">
 				<div id="languagedropdown" class="closed">
