@@ -255,8 +255,10 @@ body.archive.category-nouvelles #primary-menu-container li.menu-item-1174 a,
 	padding: 0;
 	background:#eeeeee;
 	opacity: 0;
+	visibility: hidden;
     -webkit-transition: opacity .25s;
     transition: opacity .25s;
+    transition: visibility 0s;
 	}
 
 #primary-menu-container li ul a { 
@@ -277,8 +279,10 @@ body.archive.category-nouvelles #primary-menu-container li.menu-item-1174 a,
 #primary-menu-container li:hover ul, #primary-menu-container li li:hover ul, #primary-menu-container li li li:hover ul, #primary-menu-container li.sfHover ul, #primary-menu-container li li.sfHover ul, #primary-menu-container li li li.sfHover ul {
 	left: auto;
 	opacity: 1;
+	visibility: visible;
     -webkit-transition: opacity .5s;
     transition: opacity .5s;
+    transition: visibility 0s;
 }
 
 #primary-menu-container li:hover, #primary-menu-container li.sfHover { 
