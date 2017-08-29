@@ -72,50 +72,52 @@ echo "<div data-count='" . $count . "'></div>";
 								<?php
 								$global_disqus_enabled = (get_field('use_disqus', 'options')[0] == "enabled");
 
-								if (comments_open() && !isset($_GET['nodisqus']) && $global_disqus_enabled) : 
-								?>
-									<div id="disqus_thread"></div>
-									<script>
-										var disqus_config = function () {
-											this.page.url = "<?= get_permalink()?>";
-											this.page.identifier = "<?=str_replace(" ", "_", get_the_title())?>";
-										};
-										(function() {
-											var d = document, s = d.createElement('script');
-											s.src = '//tilray.disqus.com/embed.js';
-											s.setAttribute('data-timestamp', +new Date());
-											(d.head || d.body).appendChild(s);
-										})();
-									</script>
-									<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-								<?php 
-
-								else : 
-									$related_posts = get_random_related_posts($post_id, 3);
+								if (!isset($_GET['nodisqus'])) :
+									if (comments_open() && $global_disqus_enabled) : 
 									?>
-									<div class="row">
-										<?php
-										for ($i = 0; $i < count($related_posts); $i++) {
-											?>
-											<div class="blog-post-preview col-sm-6 col-md-4">
-												<?php
-												$related_id = $related_posts[$i];
-												$thumbID = get_post_thumbnail_id($related_id);
-												$img_attrs = wp_get_attachment_image_src( $thumbID,'blog-preview' ); 
-												$image = $img_attrs[0];
-												if($image) {?>
-													<a href="<?= get_permalink($related_id) ?>" class="prevent-reflow">
-														<img class="blog-preview" src="<?= $image ?>" alt="<?php the_title(); ?>"/>
-													</a>				
-												<?php }?>
-												<h2><a href="<?= get_permalink($related_id) ?>"><?= get_the_title($related_id) ?></a></h2>
-											</div>
-											<?php 
-										}
-										?>
-									</div>
+										<div id="disqus_thread"></div>
+										<script>
+											var disqus_config = function () {
+												this.page.url = "<?= get_permalink()?>";
+												this.page.identifier = "<?=str_replace(" ", "_", get_the_title())?>";
+											};
+											(function() {
+												var d = document, s = d.createElement('script');
+												s.src = '//tilray.disqus.com/embed.js';
+												s.setAttribute('data-timestamp', +new Date());
+												(d.head || d.body).appendChild(s);
+											})();
+										</script>
+										<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 									<?php 
-								endif; 
+
+									else : 
+										$related_posts = get_random_related_posts($post_id, 3);
+										?>
+										<div class="row">
+											<?php
+											for ($i = 0; $i < count($related_posts); $i++) {
+												?>
+												<div class="blog-post-preview col-sm-6 col-md-4">
+													<?php
+													$related_id = $related_posts[$i];
+													$thumbID = get_post_thumbnail_id($related_id);
+													$img_attrs = wp_get_attachment_image_src( $thumbID,'blog-preview' ); 
+													$image = $img_attrs[0];
+													if($image) {?>
+														<a href="<?= get_permalink($related_id) ?>" class="prevent-reflow">
+															<img class="blog-preview" src="<?= $image ?>" alt="<?php the_title(); ?>"/>
+														</a>				
+													<?php }?>
+													<h2><a href="<?= get_permalink($related_id) ?>"><?= get_the_title($related_id) ?></a></h2>
+												</div>
+												<?php 
+											}
+											?>
+										</div>
+										<?php 
+									endif; 
+								endif;	//!isset disqus 
 								?>
 							</div><!-- #primary   comments -->
 						</article><!-- #post-## -->
