@@ -318,7 +318,7 @@ $theProducts = QueryProducts($filterSet);
 			}
 
 			for (var p in products){
-				var $item = jQuery("div.product-item.filterable-item[data-id='" + products[p].id + "']");
+				var $item = jQuery(".product-item.filterable-item[data-id='" + products[p].id + "']");
 				if (self.testProductActive(products[p], selectedProfiles, self.nonProfileFilters))
 				{
 					$item.addClass("active");
@@ -538,9 +538,9 @@ $theProducts = QueryProducts($filterSet);
 			return $lastInRow;
 		};
 
-		this.allProducts = jQuery("div.product-item");
+		this.allProducts = jQuery(".product-item");
 		if (!isMobile) {
-			jQuery("div.product-item.filterable-item").click(function () {
+			jQuery(".product-item.filterable-item").click(function () {
 				var $this = jQuery(this);
 				var id = $this.attr("data-id");
 				var $lastInRow = self.getItemAtEndOfRow($this, self.allProducts);
@@ -570,6 +570,8 @@ $theProducts = QueryProducts($filterSet);
 				jQuery('div.details-panel').css('left', self.leftPadding + constrainedColumn * self.columnWidth);
 
 				self.populateDetailsPanel(id, "<?=get_current_language_code()?>");
+
+				return false;
 			});
 		}
 
@@ -628,7 +630,7 @@ $theProducts = QueryProducts($filterSet);
 		};
 
 		this.showSectionTitles = function(sectionName){
-			var numActiveItems = jQuery("div.product-item.active[data-producttype='" + sectionName + "']").length;
+			var numActiveItems = jQuery(".product-item.active[data-producttype='" + sectionName + "']").length;
 			console.log("showSectionTitles: actives: " + numActiveItems + "  TYPE: " + sectionName);
 			if (numActiveItems > 0){
 				jQuery("div.section-title-" + sectionName).addClass("active");

@@ -11,19 +11,23 @@
 	else
 		include "inc/product_page_desktop_selectors.php";
 
-	function renderProductsSection($allProducts, $productType, $sectionTitle){
+	function renderProductsSection($allProducts, $productType, $sectionTitle, $skipSectionTitle){
 		$sectionTitleActiveClass = "";
 		foreach($allProducts as $product) {
 			if ($product->producttype == $productType && $product->initiallyActive) {
 				$sectionTitleActiveClass = " active";
 			}
 		}
-		?>
-		<div class="section-title product-item section-title-<?=$productType?><?=$sectionTitleActiveClass?>">
-			<h3><?=__($sectionTitle)?></h3>
-			<hr/>
-		</div>
-		<?php
+
+		if (!$skipSectionTitle){
+			?>
+			<div class="section-title product-item section-title-<?=$productType?><?=$sectionTitleActiveClass?>">
+				<h3><?=__($sectionTitle)?></h3>
+				<hr/>
+			</div>
+			<?php
+		}
+		
 		foreach($allProducts as $product) {
 			if ($product->producttype == $productType) {
 				$activeClass = $product->initiallyActive ? "active" : "";
@@ -45,8 +49,9 @@
 		
 			<div id="primary" class="js-isotope" data-isotope-options='{ "masonry" : {"columnWidth": 239}, "itemSelector": ".product-item", "filter": ".active" }'>
 			<?php
+				$skipSectionTitle = (count($sections) < 2);
 				foreach ($sections as $sectionid => $sectionlabel) {
-					renderProductsSection($theProducts, $sectionid, $sectionlabel);
+					renderProductsSection($theProducts, $sectionid, $sectionlabel, $skipSectionTitle);
 				}
 			?>
 			</div>

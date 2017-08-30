@@ -722,6 +722,18 @@ ul.product-filters li.profile-filter.profile-tc300 input[type=checkbox]:checked 
 	background-image: url(../images/filterbackground_tc300.svg);
 }
 
+a.product-item{
+	outline: none;
+}
+
+body.desktop .product-item:focus .product-item-inner,
+body.desktop .product-item:focus .accessory-item-inner,
+body.desktop ul.product-filters input[type=checkbox]:focus ~ label {
+	outline: 2px solid blue;
+	outline: auto 2px Highlight;
+	outline: auto 5px -webkit-focus-ring-color;
+}
+
 li.profile-filter span{
 	display: table-cell;
 	vertical-align: middle;

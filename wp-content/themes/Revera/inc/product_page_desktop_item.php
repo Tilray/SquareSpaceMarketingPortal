@@ -1,4 +1,4 @@
-				<div class="portbox post product-item filterable-item <?= $activeClass ?>"
+				<a href="#" class="portbox post product-item filterable-item <?= $activeClass ?>"
 					 data-id="<?= $product->id ?>"
 					 data-straincategory="<?= $product->straincategory ?>"
 					 data-status="<?= $product->status ?>"
@@ -19,7 +19,7 @@
 							<?= __($product->straincategory) ?>
 						</div>
 					</div>
-				</div>
+				</a>
 				<div class="col-xs-12 product-details-row product-item portbox"
 					 data-id="<?=$product->id?>" data-straincategory="" data-status=""
 					 data-producttype="" data-thc="" data-price="">
