@@ -31,7 +31,7 @@ get_header(); ?>
 				<div class="page-content">
 					<p><?php echo get_field('the_404_page_content', 'options'); ?></p>
 					<p>
-						<form method="get" id="search-form" class="search-404" action="<?php echo get_search_page_url(); ?>">
+						<form method="get" class="search-404 search-form" action="<?php echo get_search_page_url(); ?>">
 							<label>
 								<span class="screen-reader-text">Search for:</span>
 								<input type="search" class="search-field" placeholder="" value="" name="term" title="Search for:">

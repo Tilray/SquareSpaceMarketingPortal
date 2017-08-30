@@ -54,8 +54,8 @@
 	<?php do_action( 'before' ); ?>
 	<header id="masthead" class="site-header" role="banner">
 		<div class="mobile-search-panel">
-			<div class="search-close-button">< BACK TO MENU</div>
-			<form method="get" class="mobile-search" id="search-form" action="https://www.tilray.ca/en/search-results">
+			<div class="search-close-button">&lt; BACK TO MENU</div>
+			<form method="get" class="mobile-search search-form" action="https://www.tilray.ca/en/search-results">
 				<button type="submit" class="search-submit"><i class="icon-search"></i></button>
 				<input type="search" class="search-field" placeholder="Search Tilray" value="" name="term" title="Search for:">
 				<input type="hidden" name="lang" value="en">
@@ -112,7 +112,7 @@
 
 				?>
 				<li>
-					<form method="get" class="mobile-search" id="search-form" action="https://www.tilray.ca/en/search-results">
+					<form method="get" class="mobile-search search-form" action="https://www.tilray.ca/en/search-results">
 						<button type="submit" class="search-submit"><i class="icon-search"></i></button>
 						<input type="search" class="search-field" placeholder="Search Tilray" value="" name="term" title="Search for:">
 						<input type="hidden" name="lang" value="en">
@@ -165,7 +165,7 @@
 				<div class="col-sm-9 mainmenu">
                     <div id="primary-menu-container" class="topmenu">
                         <?php wp_nav_menu( array( 'container' => '', 'theme_location' => 'primary','container_class' => '','menu_id'=>'primary-menu' ,'menu_class'=>'sfmenu' ) ); ?>
-                        <form method="get" id="search-form" action="<?php echo get_search_page_url(); ?>">
+                        <form method="get" class="search-form" action="<?php echo get_search_page_url(); ?>">
                             <label>
                                 <span class="screen-reader-text">Search for:</span>
                                 <input type="search" class="search-field" placeholder="" value="" name="term" title="Search for:">

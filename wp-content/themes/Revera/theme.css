@@ -769,7 +769,7 @@ div.search-result{
 		width: 100%;
 	}
 
-	form#search-form, 
+	form.search-form, 
 	div#primary-menu-container{
 		margin: 0;
 	}

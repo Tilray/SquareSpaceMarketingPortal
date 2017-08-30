@@ -127,7 +127,7 @@ if (count($rows) > $rows_per_page){
 
 			<h2>No results found</h2>
 			<p>Search again:
-            <form method="get" id="search-form" action="<?php echo get_search_page_url(); ?>">
+            <form method="get" class="search-form" action="<?php echo get_search_page_url(); ?>">
                 <label>
                     <span class="screen-reader-text">Search for:</span>
                     <input type="search" class="search-field" style="width: 200px; border: solid gray 1px;" placeholder="" value="" name="term" title="Search for:">
