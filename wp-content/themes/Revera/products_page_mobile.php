@@ -119,6 +119,7 @@ function createSummaryItemGroup($filter){
 				<?php
 				if ($is_accessories_page){
 					createSummaryItemGroup($filterSet->status);
+					createSummaryItemGroup($filterSet->accessoryType);
 				}
 				else{
 					createSummaryItem($filterSet->profilethc->qsParamName, __("THC Profiles"));
