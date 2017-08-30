@@ -30,7 +30,11 @@
 	}
 ?>
 </head>
-<body <?php body_class(); ?>>
+<?php 
+global $isMobile;
+$mobileBodyClass = ($isMobile ? "mobile" : "desktop");
+?>
+<body <?php body_class($mobileBodyClass); ?>>
 
 <?php get_template_part( 'inc/googletagmanager' ); ?>
 <?php

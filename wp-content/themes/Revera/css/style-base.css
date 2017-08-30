@@ -521,6 +521,10 @@ a:focus {
 	outline: auto 5px -webkit-focus-ring-color;
 }
 
+body.mobile a:focus{
+  outline: none;
+}
+
 .entry-meta{
 	font-weight: bold;
 	text-transform: uppercase;
