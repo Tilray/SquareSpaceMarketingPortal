@@ -148,7 +148,6 @@ $theProducts = QueryProducts($filterSet);
 		}
 		else {
 			for (var i = 0; i < currentFilterValues.length; i++) {
-				//console.log(this.checkboxSelector + "[data-filter='" + currentFilterValues[i] + "']");
 				var element = jQuery(this.checkboxSelector + "[data-filter='" + currentFilterValues[i] + "']");
 				element.prop('checked', true);
 			}
@@ -199,7 +198,6 @@ $theProducts = QueryProducts($filterSet);
 				var isChecked = (true === $cb.prop("checked"));
 
 				if (isShowAll && isChecked) {
-					//console.log("Show all is checked " + $cb.attr("id") + "  " + $cb.attr("name") + "  " + this.allCheckboxes.length);
 					return true;
 				}
 				allChecked = allChecked && (isShowAll || isChecked);
@@ -283,7 +281,6 @@ $theProducts = QueryProducts($filterSet);
 			var thisFilterCategorySelector = 'ul input[type=checkbox][name=' + thisFilterCategory + ']';
 
 			var filterName = jQuery($changedElement).attr('data-filter-name');
-			//console.log("Clicked filter: " + filterName);
 			var filter = self.filtersByName[filterName];
 
 			if ($changedElement.attr("id") == "profile-show-all" || (filter != null && filter.isProfile))
@@ -445,7 +442,6 @@ $theProducts = QueryProducts($filterSet);
 			if (!allAreChecked && !noneAreChecked){
 				for(var i=0; i<self.profileFilters.length; i++){
 					if (!self.profileFilters[i].noneAreChecked()){
-						//console.log("Showing .summary-contents .summary-item." + self.profileFilters[i].id);
 						jQuery(".summary-contents .summary-item." + self.profileFilters[i].id).show();
 					}
 				}
@@ -455,7 +451,6 @@ $theProducts = QueryProducts($filterSet);
 				var f = self.nonProfileFilters[i];
 				var selected = f.getSelectedValues();
 				for (var j=0; j<selected.length; j++){
-					//console.log("Showing .summary-contents .summary-item." + f.id + selected[j]);
 					jQuery(".summary-contents .summary-item." + f.id + selected[j]).show();
 				}
 			}
@@ -487,7 +482,6 @@ $theProducts = QueryProducts($filterSet);
 	}
 
 	function FormatPercent(num, lang){
-		console.log("Formatting percent " + num + "  " + lang);
 		num = parseFloat(num);
 		if (lang == 'en'){
 			return num + "%";
@@ -559,7 +553,8 @@ $theProducts = QueryProducts($filterSet);
 				//position the little arrow on top of the gray panel
 				var itemCenter = +self.removePx($this.css("left")) + +self.removePx($this.css("width")) / 2;
 				var arrowWidth = 40;
-				jQuery('div.details-panel-arrow').css('left', itemCenter - arrowWidth / 2);
+                var panelRowSelector = 'div.product-details-row[data-id="' + dataId + '"] ';
+				jQuery(panelRowSelector + 'div.details-panel-arrow').css('left', itemCenter - arrowWidth / 2);
 
 				//postion the gray panel
 				var panelColumnWidth = 3;
@@ -567,15 +562,27 @@ $theProducts = QueryProducts($filterSet);
 				var itemColumn = self.getColumnIndex($this.css('left'));
 				var idealLeftEdgeColumn = itemColumn - 1;
 				var constrainedColumn = Math.max(0, Math.min(idealLeftEdgeColumn, furthestLeft));
-				jQuery('div.details-panel').css('left', self.leftPadding + constrainedColumn * self.columnWidth);
-
+				jQuery(panelRowSelector + 'div.details-panel').css('left', self.leftPadding + constrainedColumn * self.columnWidth);
+                jQuery(panelRowSelector + 'div.details-panel a').first().focus();
+                
 				self.populateDetailsPanel(id, "<?=get_current_language_code()?>");
 
 				return false;
 			});
 		}
 
-
+        jQuery(document).keyup(function(e) {
+            if (e.keyCode == 27) {
+                console.log("ESCAPEEEEEEEEEEE");
+                jQuery("div.product-details-row").removeClass('active');
+                jQuery('#primary').isotope({filter: '.active'});
+            }
+        });
+        
+        this.closeAllDetailsPanels = function(){
+            jQuery("div.product-details-row").removeClass('active');
+            jQuery('#primary').isotope({filter: '.active'});
+        }
 
 		this.populateDetailsPanel = function(id, lang){
 			var data = this.productsById[+id];
@@ -595,7 +602,6 @@ $theProducts = QueryProducts($filterSet);
 				jQuery('div.details-panel .buy-column .price').show();
 				jQuery('div.details-panel .buy-column .price .buy').attr('href', data.storelink);
 
-				console.log(data.actualprice);
 				if(data.actualprice > 0 && !data.isaccessory){
 					jQuery('div.details-panel .buy-column .price .price').show();
 					jQuery('div.details-panel .buy-column .price .price').text(data.priceText);
@@ -631,7 +637,6 @@ $theProducts = QueryProducts($filterSet);
 
 		this.showSectionTitles = function(sectionName){
 			var numActiveItems = jQuery(".product-item.active[data-producttype='" + sectionName + "']").length;
-			console.log("showSectionTitles: actives: " + numActiveItems + "  TYPE: " + sectionName);
 			if (numActiveItems > 0){
 				jQuery("div.section-title-" + sectionName).addClass("active");
 			}
@@ -652,13 +657,11 @@ $theProducts = QueryProducts($filterSet);
 			var allProfilesChecked = true;
 			for (var i=0; i<this.filters.profileFilters.length; i++){
 				var thisParam = this.filters.profileFilters[i].getQueryStringParam(false);
-				//console.log(thisParam);
-				if (thisParam.length > 0)
+
+                if (thisParam.length > 0)
 					profileParams.push(thisParam);
 				allProfilesChecked = allProfilesChecked && this.filters.profileFilters[i].allAreChecked();
 			}
-
-			//console.log("All checked? " + allProfilesChecked + "  length " + profileParams.length);
 
 			if (!allProfilesChecked && profileParams.length > 0)
 				params = params.concat(profileParams);
@@ -679,7 +682,6 @@ $theProducts = QueryProducts($filterSet);
 					$button.addClass("has-selections");
 			}
 
-			console.log("Is mobile? " + isMobile);
 			if (isMobile){
 				var allProfilesChecked = true;
 				for (var i=0; i<this.filters.profileFilters.length; i++){
@@ -727,6 +729,10 @@ $theProducts = QueryProducts($filterSet);
 
 		jQuery('ul.product-filters input[type=checkbox]').change(function() {
 			self.onFilterChange(jQuery(this));
+		});
+
+		jQuery('label.checkbox-label').click(function(){
+			jQuery(this).addClass("dont-show-focus");
 		});
 
 		this.filters = new ProductFilters(this.filtersData, isMobile);

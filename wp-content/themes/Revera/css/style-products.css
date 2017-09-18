@@ -734,6 +734,11 @@ body.desktop ul.product-filters input[type=checkbox]:focus ~ label {
 	outline: auto 5px -webkit-focus-ring-color;
 }
 
+body.desktop ul.product-filters input[type=checkbox]:focus ~ label.dont-show-focus {
+	outline: none;
+}
+
+
 li.profile-filter span{
 	display: table-cell;
 	vertical-align: middle;

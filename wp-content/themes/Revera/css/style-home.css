@@ -6,6 +6,9 @@
 	position: relative;
 	background: #ffffff;
 	padding-bottom: 32%;
+	background-image: url(https://www.tilray.ca/wp-content/uploads/2015/10/bcs_best.jpg);
+	background-size: cover;
+	background-repeat: no-repeat;
 }
 
 .section-banner-slides{
@@ -14,12 +17,6 @@
 	height: 0;
 }
 
-
-div#slidebox.flexslider{
-	background-image: url(https://www.tilray.ca/wp-content/uploads/2015/10/bcs_best.jpg);
-	background-size: cover;
-	background-repeat: no-repeat;
-}
 
 .flex-caption{
 	margin: 0;
@@ -40,7 +37,7 @@ div#slidebox.flexslider{
 	padding: 0;
 }
 
-.flexslider .slides li{
+#slidebox .slides li{
 	position: relative;
 }
 
@@ -58,28 +55,33 @@ div#slidebox.flexslider{
 	text-align: left;
 }
 
-.homepage-profile-banner h1{
+.homepage-profile-banner h1,
+.homepage-profile-banner h2{
 	color: #818486;
 	font-size: 5vw;
 	margin-bottom: 8px;
 }
 
-.homepage-profile-banner.french h1{
+.homepage-profile-banner.french h1,
+.homepage-profile-banner.french h2{
 	font-size: 4.0vw;
 }
 
 
 @media (min-width: 1100px){
-	.homepage-profile-banner h1{
+	.homepage-profile-banner h1,
+	.homepage-profile-banner h2{
 		font-size: 52px;
 	}	
 
-	.homepage-profile-banner.french h1{
+	.homepage-profile-banner.french h1,
+	.homepage-profile-banner.french h2{
 		font-size: 44px;
 	}	
 }
 
-.homepage-profile-banner h1.lighter{
+.homepage-profile-banner h1.lighter,
+.homepage-profile-banner h2.lighter{
 	font-weight: 300;
 }
 
@@ -232,7 +234,7 @@ div.homepage-blog-list img{
 	margin-top:40px;
 }
 
-.flexslider div.std-banner h2{
+#slidebox div.std-banner h2{
   padding-left: 4.1%; 
   font-size: 2.3vw; 
   color: #ABABAB; 
@@ -241,15 +243,15 @@ div.homepage-blog-list img{
   letter-spacing: 0; 
   position: absolute; 
 }
-.flexslider div.std-banner h2.line1 {
+#slidebox div.std-banner h2.line1 {
   top:1.85vw; 
   font-weight:bold;
 }
-.flexslider div.std-banner h2.line2 {
+#slidebox div.std-banner h2.line2 {
   top:5vw;
   font-weight:inherit;
 }
-.flexslider div.std-banner h2.line3 {
+#slidebox div.std-banner h2.line3 {
   bottom: 2.25vw;
   font-weight:inherit;
   font-size: 1vw;
@@ -259,17 +261,17 @@ div.homepage-blog-list img{
 
 
 @media screen and (min-width: 1719px) {
-	.flexslider div.std-banner h2{
+	#slidebox div.std-banner h2{
 	  font-size: 53px; 
 	  letter-spacing: -1.8px; 
 	}
-	.flexslider div.std-banner h2.line1 {
+	#slidebox div.std-banner h2.line1 {
 	  top:33.3px; 
 	}
-	.flexslider div.std-banner h2.line2 {
+	#slidebox div.std-banner h2.line2 {
 	  top:110px; 
 	}
-	.flexslider div.std-banner h2.line3 {
+	#slidebox div.std-banner h2.line3 {
 	  bottom: 30px;
 	  font-size: 17.18px;
 	}

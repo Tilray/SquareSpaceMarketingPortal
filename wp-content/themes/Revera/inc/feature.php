@@ -39,26 +39,25 @@
 
 $defaultHomepageBG = get_field('default_homepage_banner', 'option');
 ?>
-<div id="slidebox" class="flexslider" style="background-image:url(<?=$defaultHomepageBG?>)">
-
-		<ul class="slides" style="display:none;">
-		    <?php 	
-				$theBanners = QueryBanners();
-				foreach($theBanners as $thisBanner)				
-				{
-					?>
-						<li>
-							<a class="homepage-banner" href="<?= $thisBanner->link ?>"><img width="<?=$thisBanner->width?>" height="<?=$thisBanner->height?>" data-src="<?= $thisBanner->image ?>" alt="<?= $thisBanner->title; ?>"></a>
-							<div class="flex-caption">
-								<?= $thisBanner->content ?>
-							</div>
-						</li>
-					<?php
-				}
-				?>					
-		</ul>
+<banner id="slidebox" class="flexslider" style="background-image:url(<?=$defaultHomepageBG?>)">
+	<ul class="slides" style="display:none;">
+	    <?php 	
+			$theBanners = QueryBanners();
+			foreach($theBanners as $thisBanner)				
+			{
+				?>
+					<li>
+						<a class="homepage-banner" href="<?= $thisBanner->link ?>"><img width="<?=$thisBanner->width?>" height="<?=$thisBanner->height?>" data-src="<?= $thisBanner->image ?>" alt="<?= $thisBanner->title; ?>"></a>
+						<div class="flex-caption">
+							<?= $thisBanner->content ?>
+						</div>
+					</li>
+				<?php
+			}
+			?>					
+	</ul>
 <div class="doverlay"></div>
-</div>
+</banner>
 <?php
 	if (strpos($_SERVER["HTTP_USER_AGENT"], 'Safari') > 0 && !strpos($_SERVER["HTTP_USER_AGENT"], 'Chrome'))
 	{
@@ -74,24 +73,26 @@ $defaultHomepageBG = get_field('default_homepage_banner', 'option');
 ?>
 <script>
 	function setAllBannerSrcs(){
-		jQuery("div#slidebox").css("padding-bottom", 0);
-    	jQuery('div.flexslider ul.slides li img').each(function(){jQuery(this).attr('src', jQuery(this).attr('data-src')); console.log("setting src :" + jQuery(this).attr('data-src'));});	
+		jQuery("#slidebox").css("padding-bottom", 0);
+    	jQuery('#slidebox ul.slides li img').each(function(){jQuery(this).attr('src', jQuery(this).attr('data-src')); console.log("setting src :" + jQuery(this).attr('data-src'));});	
 
-    	jQuery('div.flexslider ul.slides').css('display', 'block');
+    	jQuery('#slidebox ul.slides').css('display', 'block');
 		jQuery('#slidebox').flexslider({
 			animation: "fade",
 			directionNav:true,
-			controlNav:false
+			controlNav:false,
+			nextText:"Next Slide",
+			prevText:"Previous Slide"
 		});    		
 
 		setTimeout(function(){
-			jQuery("div#slidebox").css("background-image", "none");
+			jQuery("#slidebox").css("background-image", "none");
 		}, 1000);
 	}
 
 	jQuery(window).load(function() {
 		var allBannerUrls = new Array();
-    	jQuery('div.flexslider ul.slides li img').each(function(){
+    	jQuery('#slidebox ul.slides li img').each(function(){
     		allBannerUrls.push(jQuery(this).attr('data-src'));
     	});
 
