@@ -555,6 +555,7 @@ div.product-details-row .details-panel .buy-column a.buy:hover{
 	white-space: nowrap;
     -webkit-transition: all .25s;
     transition: all .25s;
+    color: #666666;
 }
 
 .desktop .post.product-item:hover div.product-item-inner div.strain-name,
