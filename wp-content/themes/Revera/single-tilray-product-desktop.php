@@ -50,6 +50,15 @@ $prev_page_link = $is_accessories_page ? getAccessoriesPageLink() : getProductsP
 				<?php
 				endif;
 				?>
+			</div>
+			<div class="col-sm-7 col-xs-12">
+				<h1 class="mockH2"><?php the_title(); ?></h1>
+				<div class="single-product-desktop-content">
+					<p><?=$thcAndCbdText?></p>
+					<?php
+						the_content();
+					?>
+				</div>
 				<p itemprop="offers" itemscope itemtype="http://schema.org/Offer" class="price-text">
 					<?php
 					if ($thisProduct->status == 'available'){
@@ -84,15 +93,7 @@ $prev_page_link = $is_accessories_page ? getAccessoriesPageLink() : getProductsP
 					}
 					?>
 				</p>
-			</div>
-			<div class="col-sm-7 col-xs-12">
-				<h1 class="mockH2"><?php the_title(); ?></h1>
-				<div class="single-product-desktop-content">
-					<p><?=$thcAndCbdText?></p>
-					<?php
-						the_content();
-					?>
-				</div>
+                
 			</div>
 		</div>
 	</div><!-- #primary -->
