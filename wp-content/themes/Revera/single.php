@@ -94,6 +94,7 @@ echo "<div data-count='" . $count . "'></div>";
 									else : 
 										$related_posts = get_random_related_posts($post_id, 3);
 										?>
+                                        <h2><?=__('Featured Stories')?></h2>
 										<div class="row">
 											<?php
 											for ($i = 0; $i < count($related_posts); $i++) {
