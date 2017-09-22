@@ -503,6 +503,7 @@ div.product-details-row .details-panel .buy-column a.buy:hover{
 	text-align: center;
     -webkit-transition: all .25s;
     transition: all .25s;
+    color: #666666;
 }
 
 .post.product-item.accessory:hover .accessory-name{
