@@ -125,7 +125,7 @@ $mobileBodyClass = ($isMobile ? "mobile" : "desktop");
 			</ul>
 		</div>
 		
-		<div class="container">
+		<div class="container desktop-nav">
 			<nav class="login-nav-wrapper">
 				<span class="social-connections">
 					<a href="https://www.facebook.com/tilray" target="_blank">
@@ -156,7 +156,7 @@ $mobileBodyClass = ($isMobile ? "mobile" : "desktop");
 			</div>
 		</div>
 			
-		<nav class="container">
+		<nav class="container desktop-nav">
 			<div class="row">
 				<div class="site-branding col-sm-3">
 				<?php
