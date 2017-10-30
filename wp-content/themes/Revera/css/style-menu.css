@@ -35,12 +35,6 @@
 }
 .main-navigation ul ul li {
 }
-.main-navigation li:hover > a {
-}
-.main-navigation ul ul :hover > a {
-}
-.main-navigation ul ul a:hover {
-}
 .main-navigation ul li:hover > ul {
 	display: block;
 }
@@ -630,11 +624,6 @@ h2.site-title a {
 	position: relative;
 	top: -4px;
 	background-size: contain;
-}
-
-html[lang='fr-CA'] h1.site-title a,
-html[lang='fr-CA'] h2.site-title a {
-	background-image: url('../images/tilray-nav-logo-fr.svg');
 }
 
 a.skip-to-content{
