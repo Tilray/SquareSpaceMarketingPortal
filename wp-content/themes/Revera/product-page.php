@@ -25,9 +25,12 @@ $sections = array(	"flower" => "Whole Flower",
 					"drop" => "Drops",
 					"capsule" => "Capsules");
 
+$alternate_page_id = get_field('consumer_accessories_page', 'options');
+
 if ($is_accessories_page){
 	$filterSet = new AccessoriesFilters();
 	$sections = array(	"accessory" => "Accessories");
+    $alternate_page_id = get_field('consumer_products_page', 'options');
 }
 
 $filterSet->loadFiltersFromQueryString($_GET);	

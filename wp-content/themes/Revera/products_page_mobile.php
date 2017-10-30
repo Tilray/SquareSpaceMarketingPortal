@@ -142,6 +142,7 @@ function createSummaryItemGroup($filter){
 		<div class="row">
 			<div class="col-xs-12">
 				<h2 class="filters"><?= __("Filters")?></h2>
+                <h3 class="products-mobile-alternate-link"><a href="<?=get_permalink($alternate_page_id)?>">View <?=get_the_title($alternate_page_id)?> &raquo;</a></h3>
 			</div>
 			<div class="filters mobile">	
 				<div class="col-xs-12">

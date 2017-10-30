@@ -618,7 +618,9 @@ class ProductFilter
 	public function renderFilters(){
 	?>
 		<div class="product-filters-container col-sm-3">
-			<h3 class="products gray-underline"><?= _e($this->displayName) ?></h3>
+            <div class="product-filters-title-container gray-underline dark">
+                <h3 class="products"><?= _e($this->displayName) ?></h3>
+            </div>
 			<ul class="product-filters product-filters-<?=$this->qsParamName?>">
 				<?php
 				foreach($this->validFilterValues as $id=>$name){
@@ -1090,7 +1092,9 @@ class ProductFilters extends FiltersBase{
 	public function renderChemicalFilters(){
 	?>
 		<div class="col-xs-4">
-			<h3 class="profile-header"><?= __("THC Profiles") ?></h3>
+            <div class="product-filters-title-container profile-filters">
+                <h3 class="products"><?= __("THC Profiles") ?></h3>
+            </div>
 			<ul class="product-filters product-filters-profile product-filters-profilethc">
 			<?php
 			$this->renderChemicalFilter("T100", "profilethc", "low");
@@ -1100,7 +1104,9 @@ class ProductFilters extends FiltersBase{
 			</ul>
 		</div>
 		<div class="col-xs-4">
-			<h3 class="profile-header"><?= __("CBD Profiles") ?></h3>
+            <div class="product-filters-title-container profile-filters">
+                <h3 class="products"><?= __("CBD Profiles") ?></h3>
+            </div>
 			<ul class="product-filters product-filters-profile product-filters-profilecbd">
 			<?php
 			$this->renderChemicalFilter("C100", "profilecbd");
@@ -1110,7 +1116,9 @@ class ProductFilters extends FiltersBase{
 			</ul>
 		</div>
 		<div class="col-xs-4">
-			<h3 class="profile-header"><?= __("THC / CBD Profiles") ?></h3>
+            <div class="product-filters-title-container profile-filters">
+                <h3 class="products"><?= __("THC / CBD Profiles") ?></h3>
+            </div>
 			<ul class="product-filters product-filters-profile product-filters-profilethccbd">
 			<?php
 			$this->renderChemicalFilter("TC100", "profilethccbd");
