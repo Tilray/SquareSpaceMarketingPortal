@@ -536,3 +536,32 @@ body.mobile a:focus{
 	height: 0;
 	overflow: hidden;
 }
+
+.switchpane h3{
+    cursor: pointer;
+}
+
+.switchpane span.arrow{
+  display: inline-block;
+  width: 0; 
+  height: 0; 
+  border-top: 6px solid transparent;
+  border-bottom: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-left: 6px solid #084875;
+}
+
+.switchpane.active span.arrow{
+  border-top: 6px solid #084875;
+  border-left: 6px solid transparent;
+}
+
+
+.liveswitcher .answer{
+    max-height: 0;
+    overflow: hidden;
+}
+
+.liveswitcher .switchpane.active .answer{
+    max-height: 10000px;
+}

@@ -1,4 +1,8 @@
 jQuery(window).load(function() {
+    
+    jQuery('.switchpane h3').click(function(event){
+        jQuery(event.target.parentElement).toggleClass('active');
+    });
   /* Navigation */
 	jQuery('#submenu ul.sfmenu').superfish({ 
 		delay:       500,								// 0.1 second delay on mouseout 
