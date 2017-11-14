@@ -95,6 +95,11 @@ h1.products-page-title{
 	}
 }
 
+.profile-filters h3.products{
+    font-size: 14px;
+    font-weight: 400;
+}
+
 div.product-filters-container{
 	display: inline-block;
 	vertical-align: top;
