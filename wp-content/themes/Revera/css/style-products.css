@@ -2,30 +2,77 @@
 * PRODCUTS - MAIN AND SINGLE
 ******************************************/
 
-h1.products{
+.product-page-title{
+	border-bottom: 1px solid #999999;
+}
+
+.product-page-title h1{
 	line-height: 40px;
 }
-h3.products{
-	line-height: 34px;
-	position: relative;
-	top: 6px;
-	margin-bottom: 12px;
+
+.product-page-title h1, 
+.product-page-title h3{
+    display: inline-block;
+    margin-bottom: 0;
+    color: #666666;
+    text-transform: uppercase;
 }
-h1.products,
-h2.mockH1.products,
-h3.products{
-	border-bottom: 1px solid #999999;
+
+.product-page-title h3 a{
+    margin-left: 40px;
+    font-size: 15px;
+    font-weight: normal;
+    color: #999999;
+}
+
+.mobile-products-page h2.filters{
+    float: left;
+}
+
+h3.products-mobile-alternate-link{
+    clear: none;
+    float: right;
+    font-size: 12px;
+    line-height: 25px;
+}
+
+h3.products-mobile-alternate-link a{
+    color: #999999;
+}
+
+.product-filters-title-container{
 	text-transform: uppercase;
 	color: #666666;
+}
+
+.product-filters-title-container.profile-filters{
+    border-bottom-color: rgba(255, 255, 255, 0);
+}
+
+.product-filters-title-container{
+    position: relative;
+    height: 60px;
+}
+
+h3.products{
+    color:#666666;
+    position: absolute;
+    bottom: 10px;
+    margin: 0;
 }
 
 h2.mockH1.products{
 	margin-bottom: 0;
 }
 
+
 .gray-underline{
 	width: 100%;
 	border-bottom: 1px solid #cccccc;
+}
+
+.gray-underline.dark{
+    border-bottom-color: #666666;
 }
 
 .terpene-images h3{
@@ -46,6 +93,11 @@ h1.products-page-title{
 	div.profiles-column {
 		padding-left: 0;
 	}
+}
+
+.profile-filters h3.products{
+    font-size: 14px;
+    font-weight: 400;
 }
 
 div.product-filters-container{
