@@ -939,7 +939,7 @@ class FiltersBase{
 
 		$this->price = new ProductFilter("price", "Price",
 									array(	"" => "",
-											"7-9" => "$7-9",
+											"5-9" => "$5-9",
 											"10-12" => "$10-12",
 											"13-1000" => "$13+"),
 											 false,
