@@ -241,10 +241,11 @@ function get_all_categories_for_post_from_set($postID, $validValues){
 }
 
 
-function render_left_nav($parentID, $pageID)
+function render_left_nav($parentID, $pageID, $showParent = true)
 {
 	$childPages = get_child_pages($parentID);
-    array_unshift($childPages, get_page($parentID));
+    if ($showParent)
+        array_unshift($childPages, get_page($parentID));
     
 
 	if (get_field('show_in_left_nav', $parentID)){
@@ -257,7 +258,7 @@ function render_left_nav($parentID, $pageID)
 		<span class="<?=$linkClass?>"><h2><a href="<?php echo get_permalink( $parentID );?>"><?=get_the_title($parentID)?></a></h2></span>
 		<?php
 	}
-
+    
 	foreach ($childPages as $child)
 	{
 		$linkClass = "none";
